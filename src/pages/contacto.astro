@@ -1,27 +1,271 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Contacto" description="Contacta con Aromatik Apartments en Girona.">
-  <section class="max-w-3xl mx-auto px-4 py-20">
-    <h1 class="text-4xl font-light text-center mb-4">Contacto</h1>
-    <p class="text-center text-stone-600 mb-12">¿Tienes alguna pregunta? Escríbenos, te respondemos en menos de 1h.</p>
-    <div class="grid md:grid-cols-2 gap-12">
-      <div>
-        <h2 class="font-semibold mb-4">Datos de contacto</h2>
-        <ul class="space-y-3 text-stone-600">
-          <li>📞 <a href="tel:+34682636848" class="hover:text-green-700">+34 682 636 848</a></li>
-          <li>✉️ <a href="mailto:calderers16sl@gmail.com" class="hover:text-green-700">calderers16sl@gmail.com</a></li>
-          <li>📍 Girona, casco antiguo</li>
-        </ul>
+<BaseLayout
+  title="Contacto — Aromatik Apartments Girona"
+  description="Contacta con Aromatik Apartments. Te respondemos en menos de 1 hora. Alojamientos boutique en el Barri Vell de Girona."
+>
+
+  <!-- HERO PEQUEÑO -->
+  <section class="contact-hero">
+    <span class="eyebrow">¿En qué podemos ayudarte?</span>
+    <h1>Contacto</h1>
+    <p>Tratas directamente con el equipo de Aromatik Apartments. Sin centralitas, sin bots.</p>
+  </section>
+
+  <!-- GRID CONTACTO -->
+  <section class="section">
+    <div class="container contact-grid">
+
+      <!-- INFO -->
+      <div class="contact-info">
+        <h2>Habla con nosotros</h2>
+        <p class="contact-intro">
+          Escríbenos por WhatsApp o correo electrónico. Respondemos en menos de 1 hora en horario de 9h a 22h.
+        </p>
+
+        <div class="contact-methods">
+          <a href="https://wa.me/34682636848" class="contact-method" target="_blank" rel="noopener">
+            <span class="contact-method-icon">💬</span>
+            <div>
+              <strong>WhatsApp</strong>
+              <span>+34 682 636 848</span>
+            </div>
+          </a>
+          <a href="mailto:hola@aromatik.apartments" class="contact-method">
+            <span class="contact-method-icon">✉️</span>
+            <div>
+              <strong>Email</strong>
+              <span>hola@aromatik.apartments</span>
+            </div>
+          </a>
+          <div class="contact-method">
+            <span class="contact-method-icon">📍</span>
+            <div>
+              <strong>Ubicación</strong>
+              <span>Barri Vell, Girona, Catalunya</span>
+            </div>
+          </div>
+          <div class="contact-method">
+            <span class="contact-method-icon">🕐</span>
+            <div>
+              <strong>Horario de atención</strong>
+              <span>Lunes – Domingo, 9h – 22h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-note">
+          <p><strong>¿Urgencia?</strong> El WhatsApp es la forma más rápida de contactarnos. Respuesta en minutos.</p>
+        </div>
       </div>
-      <form class="space-y-4" action="https://formspree.io/f/XXXXXXXX" method="POST">
-        <input type="text" name="name" placeholder="Tu nombre" required class="w-full border border-stone-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-700" />
-        <input type="email" name="email" placeholder="Tu email" required class="w-full border border-stone-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-700" />
-        <textarea name="message" rows="5" placeholder="Tu mensaje" required class="w-full border border-stone-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-700"></textarea>
-        <button type="submit" class="w-full bg-green-800 text-white py-3 rounded-full font-medium hover:bg-green-700 transition-colors">
-          Enviar mensaje
-        </button>
-      </form>
+
+      <!-- FORMULARIO -->
+      <div class="contact-form-wrap">
+        <h2>Envíanos un mensaje</h2>
+        <form
+          class="contact-form"
+          action="https://formspree.io/f/xkgjrwno"
+          method="POST"
+          id="contactForm"
+        >
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" placeholder="Tu nombre completo" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Teléfono (opcional)</label>
+            <input type="tel" id="phone" name="phone" placeholder="+34 000 000 000" />
+          </div>
+          <div class="form-group">
+            <label for="subject">Asunto</label>
+            <select id="subject" name="subject">
+              <option value="">Selecciona un motivo</option>
+              <option value="reserva">Información sobre reserva</option>
+              <option value="disponibilidad">Consulta de disponibilidad</option>
+              <option value="grupos">Reserva para grupos</option>
+              <option value="estancia-larga">Estancia larga</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="5" placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-green" style="width:100%">Enviar mensaje</button>
+          <p class="form-disclaimer">Al enviar este formulario aceptas nuestra <a href="/privacy">política de privacidad</a>.</p>
+        </form>
+        <div class="form-success" id="formSuccess" style="display:none">
+          <span class="success-icon">✓</span>
+          <h3>¡Mensaje recibido!</h3>
+          <p>Te responderemos en menos de 1 hora en horario de atención.</p>
+        </div>
+      </div>
+
     </div>
   </section>
+
 </BaseLayout>
+
+<style is:global>
+.contact-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  background: var(--cream);
+}
+.contact-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  margin: 0.5rem 0 1rem;
+}
+.contact-hero p {
+  color: var(--stone-500);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.contact-info h2,
+.contact-form-wrap h2 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.contact-intro {
+  color: var(--stone-500);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--stone-200);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--black);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+a.contact-method:hover {
+  border-color: var(--green);
+  box-shadow: 0 2px 12px rgba(44,95,46,0.08);
+}
+.contact-method-icon { font-size: 1.4rem; flex-shrink: 0; }
+.contact-method strong { display: block; font-size: 0.85rem; font-weight: 600; }
+.contact-method span { font-size: 0.9rem; color: var(--stone-500); }
+.contact-note {
+  background: var(--cream);
+  border-left: 3px solid var(--green);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+  color: var(--stone-600);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--stone-700);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--stone-300);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: var(--sans);
+  color: var(--black);
+  background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(44,95,46,0.1);
+}
+.form-group textarea { resize: vertical; }
+.form-disclaimer {
+  font-size: 0.75rem;
+  color: var(--stone-400);
+  text-align: center;
+  margin-top: 0.75rem;
+}
+.form-disclaimer a { color: var(--stone-500); }
+
+.form-success {
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 2px solid var(--green);
+  border-radius: 16px;
+}
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--green);
+  color: white;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.form-success h3 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const success = document.getElementById('formSuccess');
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      }
+    });
+  }
+</script>

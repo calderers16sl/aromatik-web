@@ -8,25 +8,35 @@ const customerId = "333907";
 const iframeUrl = smoobuId
   ? `https://login.smoobu.com/${lang}/booking-tool/iframe/${customerId}/${smoobuId}`
   : `https://login.smoobu.com/${lang}/booking-tool/iframe/${customerId}`;
-const targetId = smoobuId ? `apartmentIframe${smoobuId}` : "apartmentIframeAll";
+const targetId = smoobuId ? `smoobuFrame${smoobuId}` : "smoobuFrameAll";
 ---
-<div id={targetId} class="w-full min-h-[600px]">
+<div id={targetId} class="smoobu-widget-wrap">
   <script type="text/javascript" src="https://login.smoobu.com/js/Settings/BookingToolIframe.js"></script>
   <script define:vars={{ iframeUrl, targetId }}>
-    if (typeof BookingToolIframe !== 'undefined') {
-      BookingToolIframe.initialize({
-        url: iframeUrl,
-        baseUrl: "https://login.smoobu.com",
-        target: "#" + targetId
-      });
-    } else {
-      document.addEventListener('DOMContentLoaded', function() {
+    function initSmoobu() {
+      if (typeof BookingToolIframe !== 'undefined') {
         BookingToolIframe.initialize({
           url: iframeUrl,
           baseUrl: "https://login.smoobu.com",
           target: "#" + targetId
         });
-      });
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSmoobu);
+    } else {
+      initSmoobu();
     }
   </script>
 </div>
+
+<style is:global>
+.smoobu-widget-wrap {
+  width: 100%;
+  min-height: 600px;
+}
+.smoobu-widget-wrap iframe {
+  width: 100%;
+  border: none;
+}
+</style>

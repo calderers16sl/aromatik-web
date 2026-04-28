@@ -2,10 +2,63 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingWidget from '../components/BookingWidget.astro';
 ---
-<BaseLayout title="Reservar" description="Reserva tu apartamento en Girona directamente. Mejor precio garantizado.">
-  <section class="max-w-5xl mx-auto px-4 py-16">
-    <h1 class="text-4xl font-light text-center mb-4">Reserva tu estancia</h1>
-    <p class="text-center text-stone-600 mb-12">Selecciona las fechas y el apartamento que prefieras.</p>
-    <BookingWidget />
+<BaseLayout
+  title="Reservar apartamento en Girona — Aromatik Apartments"
+  description="Reserva directa tu apartamento boutique en el Barri Vell de Girona. Mejor precio garantizado, sin comisiones. Motor de reservas Aromatik Apartments."
+>
+
+  <section class="reservar-hero">
+    <span class="eyebrow">Reserva directa · Sin intermediarios</span>
+    <h1>Reserva tu estancia</h1>
+    <p>Selecciona fechas y apartamento. Mejor precio garantizado al reservar directamente con nosotros.</p>
   </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="booking-benefits">
+        <div class="benefit-item"><span>✓</span> Mejor precio garantizado</div>
+        <div class="benefit-item"><span>✓</span> Pago seguro</div>
+        <div class="benefit-item"><span>✓</span> Atención local directa</div>
+        <div class="benefit-item"><span>✓</span> Sin comisiones de plataformas</div>
+      </div>
+      <BookingWidget />
+    </div>
+  </section>
+
 </BaseLayout>
+
+<style is:global>
+.reservar-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  background: var(--cream);
+}
+.reservar-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  margin: 0.5rem 0 1rem;
+}
+.reservar-hero p { color: var(--stone-500); max-width: 500px; margin: 0 auto; }
+
+.booking-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2rem;
+  margin-bottom: 2.5rem;
+  padding: 1.25rem;
+  background: var(--cream);
+  border-radius: 12px;
+}
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.benefit-item span { color: var(--green); font-weight: 700; }
+
+#apartmentIframeAll { width: 100%; min-height: 700px; }
+</style>
