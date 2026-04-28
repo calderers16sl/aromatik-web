@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingWidget from '../../components/BookingWidget.astro';
 
-// ⚠️ En Astro, getStaticPaths debe tener sus propios datos (sin acceso al scope)
 export function getStaticPaths() {
   const apartments = [
     { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576, emoji: "🌸",
@@ -36,58 +35,70 @@ export function getStaticPaths() {
 const { apt, allApartments } = Astro.props;
 ---
 <BaseLayout title={apt.name} description={apt.description}>
-  <section class="h-72 md:h-96 bg-stone-100 flex items-center justify-center text-8xl">
-    {apt.emoji}
+
+  <!-- HERO EMOJI -->
+  <div class="apt-hero-emoji">{apt.emoji}</div>
+
+  <!-- MAIN CONTENT -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="apt-detail-grid">
+
+        <!-- LEFT: info -->
+        <div>
+          <h1 class="section-title">Apartamento {apt.name}</h1>
+          <p style="color:var(--stone-500); margin-bottom:1.5rem">{apt.guests} personas · {apt.bedrooms} dorm. · {apt.bathrooms} baño · {apt.size} m²</p>
+          <p style="font-size:1.05rem; color:var(--stone-700); line-height:1.8; margin-bottom:2rem">{apt.description}</p>
+
+          <h2 class="font-semibold text-lg mb-4">Servicios incluidos</h2>
+          <ul class="amenities-list">
+            {apt.amenities.map((a: string) => (
+              <li><span class="check">✓</span> {a}</li>
+            ))}
+          </ul>
+
+          <div class="location-note">
+            <strong>📍 Ubicación:</strong> Casco antiguo de Girona · Aparcament La Copa (gratuito, 10 min a pie)
+          </div>
+        </div>
+
+        <!-- RIGHT: sticky booking card -->
+        <div>
+          <div class="sticky-card">
+            <h3 class="font-semibold text-lg mb-2">¿Te gusta?</h3>
+            <p class="text-sm mb-6" style="color:var(--stone-600)">Consulta disponibilidad y reserva directamente.</p>
+            <a href="/reservar" class="btn-primary block w-full text-center mb-4" style="padding:0.875rem 1.5rem">
+              Ver disponibilidad
+            </a>
+            <a href="/contacto" class="block w-full text-center text-sm" style="padding:0.75rem; border:1px solid var(--stone-300); border-radius:9999px; text-decoration:none; transition:background 0.2s; color:inherit">
+              Hacer una pregunta
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOOKING WIDGET -->
+      <div class="mt-16">
+        <h2 class="section-title text-center mb-8">Reservar {apt.name}</h2>
+        <BookingWidget smoobuId={apt.smoobuId} />
+      </div>
+
+      <!-- OTHER APARTMENTS -->
+      <div class="mt-16">
+        <h2 class="section-title text-center mb-8">Otros apartamentos</h2>
+        <div class="other-apts">
+          {allApartments.filter((a: any) => a.slug !== apt.slug).slice(0, 4).map((a: any) => (
+            <a href={`/apartamentos/${a.slug}`} class="other-apt-card">
+              <div style="font-size:2.5rem; margin-bottom:0.5rem">{a.emoji}</div>
+              <div class="font-semibold text-sm">{a.name}</div>
+              <div style="font-size:0.75rem; color:var(--stone-500)">{a.guests} pers.</div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+    </div>
   </section>
 
-  <div class="max-w-5xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-12">
-      <div class="md:col-span-2">
-        <h1 class="text-4xl font-light mb-2">Apartamento {apt.name}</h1>
-        <p class="text-stone-500 mb-6">{apt.guests} personas · {apt.bedrooms} dorm. · {apt.bathrooms} baño · {apt.size} m²</p>
-        <p class="text-lg text-stone-700 leading-relaxed mb-8">{apt.description}</p>
-        <h2 class="font-semibold text-lg mb-4">Servicios incluidos</h2>
-        <ul class="grid grid-cols-2 gap-2">
-          {apt.amenities.map((a: string) => (
-            <li class="flex items-center gap-2 text-stone-600 text-sm">
-              <span class="text-green-600">✓</span> {a}
-            </li>
-          ))}
-        </ul>
-        <div class="mt-8 p-4 bg-stone-50 rounded-xl text-sm text-stone-600">
-          <strong>📍 Ubicación:</strong> Casco antiguo de Girona · Aparcament La Copa (gratuito, 10 min a pie)
-        </div>
-      </div>
-      <div>
-        <div class="sticky top-24 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-lg mb-2">¿Te gusta?</h3>
-          <p class="text-sm text-stone-600 mb-6">Consulta disponibilidad y reserva directamente.</p>
-          <a href="/reservar" class="block w-full text-center bg-green-800 text-white py-3 rounded-full font-medium hover:bg-green-700 transition-colors mb-3">
-            Ver disponibilidad
-          </a>
-          <a href="/contacto" class="block w-full text-center border border-stone-300 py-3 rounded-full text-sm hover:bg-stone-50 transition-colors">
-            Hacer una pregunta
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-16">
-      <h2 class="text-2xl font-light text-center mb-8">Reservar {apt.name}</h2>
-      <BookingWidget smoobuId={apt.smoobuId} />
-    </div>
-
-    <div class="mt-16">
-      <h2 class="text-2xl font-light text-center mb-8">Otros apartamentos</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {allApartments.filter((a: any) => a.slug !== apt.slug).slice(0, 4).map((a: any) => (
-          <a href={`/apartamentos/${a.slug}`} class="group text-center p-4 rounded-xl border border-stone-200 hover:shadow-md transition-all">
-            <div class="text-4xl mb-2">{a.emoji}</div>
-            <div class="text-sm font-medium">{a.name}</div>
-            <div class="text-xs text-stone-500">{a.guests} pers.</div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </div>
 </BaseLayout>

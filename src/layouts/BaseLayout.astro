@@ -29,72 +29,186 @@ const canonicalURL = `${siteUrl}${Astro.url.pathname}`;
   <meta property="og:url" content={canonicalURL} />
   {ogImage && <meta property="og:image" content={ogImage} />}
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-primary: #2D6A4F;
-      --color-secondary: #74C69D;
-      --color-accent: #D4A574;
+      --green-dark: #166534;
+      --green-mid: #2D6A4F;
+      --green-light: #74C69D;
+      --stone-50: #FAFAF8;
+      --stone-100: #f5f5f4;
+      --stone-200: #e7e5e4;
+      --stone-300: #d6d3d1;
+      --stone-500: #78716c;
+      --stone-600: #57534e;
+      --stone-700: #44403c;
+      --stone-900: #1c1917;
+      --text: #1B1B1B;
     }
-    html { scroll-behavior: smooth; }
-    body { background-color: #FAFAF8; color: #1B1B1B; font-family: Georgia, serif; margin: 0; }
-    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--stone-50); color: var(--text); font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* NAV */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--stone-200); }
+    .nav-inner { max-width: 72rem; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; font-size: 1.25rem; font-weight: 600; letter-spacing: 0.03em; color: var(--green-mid); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a { text-decoration: none; color: var(--text); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--green-dark); }
+    .btn-primary { background: var(--green-dark); color: white !important; padding: 0.5rem 1.4rem; border-radius: 9999px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--green-mid) !important; }
+
+    /* HERO */
+    .hero { position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #1a3a2a 0%, #2D6A4F 50%, #1a3a2a 100%); color: white; overflow: hidden; }
+    .hero-content { position: relative; z-index: 1; padding: 2rem 1.5rem; max-width: 48rem; }
+    .hero-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+    .hero h1 em { font-style: italic; color: var(--green-light); }
+    .hero-desc { font-size: 1.1rem; color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: white; color: var(--stone-900) !important; padding: 0.75rem 2rem; border-radius: 9999px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
+    .btn-white:hover { background: var(--stone-100) !important; }
+    .btn-outline { border: 2px solid white; color: white !important; padding: 0.75rem 2rem; border-radius: 9999px; text-decoration: none; font-weight: 500; transition: background 0.2s; }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+    /* SECTIONS */
+    .section { padding: 5rem 1.5rem; }
+    .section-inner { max-width: 72rem; margin: 0 auto; }
+    .section-sm { max-width: 48rem; margin: 0 auto; }
+    .text-center { text-align: center; }
+    .section-title { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 300; color: var(--green-mid); margin-bottom: 1rem; }
+    .section-subtitle { font-size: 1.05rem; color: var(--stone-600); line-height: 1.7; margin-bottom: 3rem; }
+
+    /* GRID DE APARTAMENTOS */
+    .apartments-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    .apt-card { border: 1px solid var(--stone-200); border-radius: 1rem; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow 0.3s, transform 0.3s; display: block; }
+    .apt-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.12); transform: translateY(-3px); }
+    .apt-card-img { height: 180px; background: var(--stone-100); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .apt-card-body { padding: 1.25rem; }
+    .apt-card-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .apt-card-body p { font-size: 0.85rem; color: var(--stone-500); }
+    .apt-card-body .link { display: inline-block; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 500; color: var(--green-mid); }
+
+    /* PERKS */
+    .perks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .perk-card { background: white; border-radius: 1.25rem; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center; }
+    .perk-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .perk-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .perk-card p { font-size: 0.9rem; color: var(--stone-600); }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--stone-200); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+    .faq-item h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .faq-item p { color: var(--stone-600); }
+
+    /* BG STONE */
+    .bg-stone { background: var(--stone-100); }
+
+    /* FOOTER */
+    .site-footer { background: var(--stone-900); color: var(--stone-300); padding: 5rem 1.5rem 2rem; margin-top: 0; }
+    .footer-inner { max-width: 72rem; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2.5rem; }
+    .footer-inner h3 { color: white; font-weight: 600; margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; }
+    .footer-links a { color: var(--stone-300); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+    .footer-contact { font-size: 0.875rem; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.25rem; }
+    .footer-contact a { color: var(--stone-300); text-decoration: none; }
+    .footer-bottom { max-width: 72rem; margin: 2.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--stone-700); font-size: 0.75rem; color: var(--stone-500); }
+
+    /* APARTMENT DETAIL */
+    .apt-detail-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+    @media (min-width: 768px) { .apt-detail-grid { grid-template-columns: 2fr 1fr; } }
+    .apt-hero-emoji { height: 280px; background: var(--stone-100); display: flex; align-items: center; justify-content: center; font-size: 8rem; }
+    .sticky-card { position: sticky; top: 6rem; background: white; border: 1px solid var(--stone-200); border-radius: 1.25rem; padding: 1.75rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .amenities-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; list-style: none; }
+    .amenities-list li { font-size: 0.875rem; color: var(--stone-600); display: flex; gap: 0.5rem; align-items: center; }
+    .check { color: var(--green-mid); font-weight: bold; }
+    .location-note { background: var(--stone-100); border-radius: 0.75rem; padding: 1rem 1.25rem; font-size: 0.875rem; color: var(--stone-600); margin-top: 2rem; }
+
+    /* OTROS APTS GRID */
+    .other-apts { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+    .other-apt-card { text-align: center; padding: 1rem; border: 1px solid var(--stone-200); border-radius: 0.75rem; text-decoration: none; color: inherit; transition: box-shadow 0.2s; }
+    .other-apt-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+
+    /* FORM */
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .form-input { width: 100%; border: 1px solid var(--stone-300); border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    .form-input:focus { border-color: var(--green-dark); }
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; color: var(--stone-600); }
+    .contact-list a { color: var(--green-mid); }
+
+    /* UTILS */
+    .mt-4 { margin-top: 1rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-12 { margin-top: 3rem; }
+    .mt-16 { margin-top: 4rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .w-full { width: 100%; }
+    .block { display: block; }
+    .font-semibold { font-weight: 600; }
+    .text-sm { font-size: 0.875rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-stone-500 { color: var(--stone-500); }
+    .text-stone-600 { color: var(--stone-600); }
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3/base.css" />
 </head>
 <body>
-  <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid #e7e5e4;">
-    <nav style="max-width:72rem;margin:0 auto;padding:1rem;display:flex;align-items:center;justify-content:space-between;">
-      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
-        <span style="font-size:1.25rem;font-weight:600;letter-spacing:0.05em;color:var(--color-primary)">🌿 Aromatik</span>
-      </a>
-      <div style="display:flex;align-items:center;gap:2rem;font-size:0.875rem;font-weight:500;">
-        <a href="/#apartamentos" style="color:#1B1B1B;text-decoration:none;">Apartamentos</a>
-        <a href="/reservar" style="color:#1B1B1B;text-decoration:none;">Reservar</a>
-        <a href="/contacto" style="color:#1B1B1B;text-decoration:none;">Contacto</a>
-        <a href="/reservar" style="background:#166534;color:white;padding:0.5rem 1.25rem;border-radius:9999px;text-decoration:none;font-weight:500;">
-          Reservar ahora
-        </a>
+  <header class="site-header">
+    <nav class="nav-inner">
+      <a href="/" class="nav-logo">🌿 Aromatik</a>
+      <div class="nav-links">
+        <a href="/#apartamentos">Apartamentos</a>
+        <a href="/reservar">Reservar</a>
+        <a href="/contacto">Contacto</a>
+        <a href="/reservar" class="btn-primary">Reservar ahora</a>
       </div>
     </nav>
   </header>
   <main>
     <slot />
   </main>
-  <footer style="background:#1c1917;color:#d6d3d1;padding:4rem 1rem;margin-top:6rem;">
-    <div style="max-width:72rem;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;">
+  <footer class="site-footer">
+    <div class="footer-inner">
       <div>
-        <h3 style="color:white;font-weight:600;margin-bottom:1rem;">Aromatik Apartments</h3>
+        <h3>Aromatik Apartments</h3>
         <p style="font-size:0.875rem;line-height:1.6;">8 apartamentos de diseño en el casco antiguo de Girona. Reserva directa, mejor precio garantizado.</p>
       </div>
       <div>
-        <h3 style="color:white;font-weight:600;margin-bottom:1rem;">Apartamentos</h3>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.875rem;display:flex;flex-direction:column;gap:0.5rem;">
-          <li><a href="/apartamentos/ylang-ylang" style="color:#d6d3d1;text-decoration:none;">Ylang-Ylang</a></li>
-          <li><a href="/apartamentos/romani" style="color:#d6d3d1;text-decoration:none;">Romaní</a></li>
-          <li><a href="/apartamentos/cipres" style="color:#d6d3d1;text-decoration:none;">Ciprés</a></li>
-          <li><a href="/apartamentos/lavanda" style="color:#d6d3d1;text-decoration:none;">Lavanda</a></li>
-          <li><a href="/apartamentos/limon" style="color:#d6d3d1;text-decoration:none;">Limón</a></li>
-          <li><a href="/apartamentos/bergamota" style="color:#d6d3d1;text-decoration:none;">Bergamota</a></li>
-          <li><a href="/apartamentos/arbol-de-te" style="color:#d6d3d1;text-decoration:none;">Árbol de té</a></li>
-          <li><a href="/apartamentos/geranio" style="color:#d6d3d1;text-decoration:none;">Geranio</a></li>
+        <h3>Apartamentos</h3>
+        <ul class="footer-links">
+          <li><a href="/apartamentos/ylang-ylang">Ylang-Ylang</a></li>
+          <li><a href="/apartamentos/romani">Romaní</a></li>
+          <li><a href="/apartamentos/cipres">Ciprés</a></li>
+          <li><a href="/apartamentos/lavanda">Lavanda</a></li>
+          <li><a href="/apartamentos/limon">Limón</a></li>
+          <li><a href="/apartamentos/bergamota">Bergamota</a></li>
+          <li><a href="/apartamentos/arbol-de-te">Árbol de té</a></li>
+          <li><a href="/apartamentos/geranio">Geranio</a></li>
         </ul>
       </div>
       <div>
-        <h3 style="color:white;font-weight:600;margin-bottom:1rem;">Información</h3>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.875rem;display:flex;flex-direction:column;gap:0.5rem;">
-          <li><a href="/house-rules" style="color:#d6d3d1;text-decoration:none;">House Rules</a></li>
-          <li><a href="/terms" style="color:#d6d3d1;text-decoration:none;">Terms & Conditions</a></li>
-          <li><a href="/privacy" style="color:#d6d3d1;text-decoration:none;">Privacy Policy</a></li>
-          <li><a href="/cancellation-policy" style="color:#d6d3d1;text-decoration:none;">Cancellation Policy</a></li>
-          <li><a href="/contacto" style="color:#d6d3d1;text-decoration:none;">Contacto</a></li>
+        <h3>Información</h3>
+        <ul class="footer-links">
+          <li><a href="/house-rules">House Rules</a></li>
+          <li><a href="/terms">Terms & Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/cancellation-policy">Cancellation Policy</a></li>
+          <li><a href="/contacto">Contacto</a></li>
         </ul>
-        <div style="margin-top:1.5rem;font-size:0.875rem;">
-          <p style="margin:0.25rem 0;">Calderers 16 SL</p>
-          <p style="margin:0.25rem 0;"><a href="tel:+34682636848" style="color:#d6d3d1;">+34 682 636 848</a></p>
-          <p style="margin:0.25rem 0;"><a href="mailto:calderers16sl@gmail.com" style="color:#d6d3d1;">calderers16sl@gmail.com</a></p>
+        <div class="footer-contact">
+          <span>Calderers 16 SL</span>
+          <a href="tel:+34682636848">+34 682 636 848</a>
+          <a href="mailto:calderers16sl@gmail.com">calderers16sl@gmail.com</a>
         </div>
       </div>
     </div>
-    <div style="max-width:72rem;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid #44403c;font-size:0.75rem;color:#78716c;">
+    <div class="footer-bottom">
       © {new Date().getFullYear()} Aromatik Apartments · Calderers 16 SL
     </div>
   </footer>
