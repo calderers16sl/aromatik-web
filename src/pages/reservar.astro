@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingWidget from '../components/BookingWidget.astro';
+---
+<BaseLayout title="Reservar" description="Reserva tu apartamento en Girona directamente. Mejor precio garantizado.">
+  <section class="max-w-5xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-light text-center mb-4">Reserva tu estancia</h1>
+    <p class="text-center text-stone-600 mb-12">Selecciona las fechas y el apartamento que prefieras.</p>
+    <BookingWidget />
+  </section>
+</BaseLayout>

@@ -1,0 +1,94 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  ogImage?: string;
+}
+const { title, description = "Apartamentos turísticos en el corazón de Girona", lang = "es", ogImage } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | Aromatik Apartments</title>
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+  <link rel="canonical" href={canonicalURL} />
+  <!-- hreflang -->
+  <link rel="alternate" hreflang="es" href={`https://aromatik.apartments${Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="en" href={`https://aromatik.apartments/en${Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="ca" href={`https://aromatik.apartments/ca${Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="fr" href={`https://aromatik.apartments/fr${Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="de" href={`https://aromatik.apartments/de${Astro.url.pathname}`} />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={`${title} | Aromatik Apartments`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <link rel="stylesheet" href="/src/styles/global.css" />
+</head>
+<body>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200">
+    <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/images/logo.svg" alt="Aromatik" class="h-10" />
+        <span class="text-xl font-semibold tracking-wide" style="color:var(--color-primary)">Aromatik</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="/#apartamentos" class="hover:text-green-700 transition-colors">Apartamentos</a>
+        <a href="/reservar" class="hover:text-green-700 transition-colors">Reservar</a>
+        <a href="/contacto" class="hover:text-green-700 transition-colors">Contacto</a>
+        <a href="/reservar" class="bg-green-800 text-white px-5 py-2 rounded-full hover:bg-green-700 transition-colors">
+          Reservar ahora
+        </a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer class="bg-stone-900 text-stone-300 py-16 mt-24">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div>
+        <h3 class="text-white font-semibold mb-4">Aromatik Apartments</h3>
+        <p class="text-sm leading-relaxed">8 apartamentos de diseño en el casco antiguo de Girona. Reserva directa, mejor precio garantizado.</p>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-4">Apartamentos</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="/apartamentos/ylang-ylang" class="hover:text-white transition-colors">Ylang-Ylang</a></li>
+          <li><a href="/apartamentos/romani" class="hover:text-white transition-colors">Romaní</a></li>
+          <li><a href="/apartamentos/cipres" class="hover:text-white transition-colors">Ciprés</a></li>
+          <li><a href="/apartamentos/lavanda" class="hover:text-white transition-colors">Lavanda</a></li>
+          <li><a href="/apartamentos/limon" class="hover:text-white transition-colors">Limón</a></li>
+          <li><a href="/apartamentos/bergamota" class="hover:text-white transition-colors">Bergamota</a></li>
+          <li><a href="/apartamentos/arbol-de-te" class="hover:text-white transition-colors">Árbol de té</a></li>
+          <li><a href="/apartamentos/geranio" class="hover:text-white transition-colors">Geranio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-4">Información</h3>
+        <ul class="text-sm space-y-2">
+          <li><a href="/house-rules" class="hover:text-white transition-colors">House Rules</a></li>
+          <li><a href="/terms" class="hover:text-white transition-colors">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+          <li><a href="/cancellation-policy" class="hover:text-white transition-colors">Cancellation Policy</a></li>
+          <li><a href="/contacto" class="hover:text-white transition-colors">Contacto</a></li>
+        </ul>
+        <div class="mt-6 text-sm">
+          <p>Calderers 16 SL</p>
+          <p><a href="tel:+34682636848" class="hover:text-white">+34 682 636 848</a></p>
+          <p><a href="mailto:calderers16sl@gmail.com" class="hover:text-white">calderers16sl@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 mt-10 pt-6 border-t border-stone-700 text-xs text-stone-500">
+      © {new Date().getFullYear()} Aromatik Apartments · Calderers 16 SL
+    </div>
+  </footer>
+</body>
+</html>

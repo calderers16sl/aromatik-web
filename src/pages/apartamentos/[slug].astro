@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BookingWidget from '../../components/BookingWidget.astro';
+
+const apartments = [
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576,
+    description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Perfecto para parejas y familias pequeñas que buscan comodidad en el corazón de Girona.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+    emoji: "🌸" },
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
+    description: "Acogedor y aromático como la planta que le da nombre. Ideal para escapadas románticas en el casco antiguo de Girona.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+    emoji: "🌿" },
+  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631,
+    description: "Elegante como el ciprés mediterráneo. Dos habitaciones perfectas para grupos de amigos o familias.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+    emoji: "🌲" },
+  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
+    description: "Tranquilo y relajante como un campo de lavanda. Un refugio de calma en el centro histórico.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+    emoji: "💜" },
+  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266,
+    description: "Fresco y vibrante. Con capacidad para tres personas, es perfecto para grupos pequeños que quieren explorar Girona.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+    emoji: "🍋" },
+  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422,
+    description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+    emoji: "🍊" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321,
+    description: "Puro y reconfortante. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+    emoji: "🌱" },
+  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430,
+    description: "Alegre y mediterráneo como el geranio de los balcones de Girona. El más amplio de nuestros apartamentos.",
+    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+    emoji: "🌺" },
+];
+
+export function getStaticPaths() {
+  return apartments.map(apt => ({ params: { slug: apt.slug }, props: { apt } }));
+}
+
+const { apt } = Astro.props;
+---
+<BaseLayout title={apt.name} description={apt.description}>
+  <!-- Hero del apartamento -->
+  <section class="h-72 md:h-96 bg-stone-100 flex items-center justify-center text-8xl">
+    {apt.emoji}
+  </section>
+
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-12">
+      <!-- Info principal -->
+      <div class="md:col-span-2">
+        <h1 class="text-4xl font-light mb-2">Apartamento {apt.name}</h1>
+        <p class="text-stone-500 mb-6">{apt.guests} personas · {apt.bedrooms} dorm. · {apt.bathrooms} baño · {apt.size} m²</p>
+        <p class="text-lg text-stone-700 leading-relaxed mb-8">{apt.description}</p>
+        <h2 class="font-semibold text-lg mb-4">Servicios incluidos</h2>
+        <ul class="grid grid-cols-2 gap-2">
+          {apt.amenities.map(a => (
+            <li class="flex items-center gap-2 text-stone-600 text-sm">
+              <span class="text-green-600">✓</span> {a}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8 p-4 bg-stone-50 rounded-xl text-sm text-stone-600">
+          <strong>📍 Ubicación:</strong> Casco antiguo de Girona · Aparcament La Copa (gratuito, 10 min a pie)
+        </div>
+      </div>
+      <!-- Sidebar -->
+      <div>
+        <div class="sticky top-24 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">¿Te gusta?</h3>
+          <p class="text-sm text-stone-600 mb-6">Consulta disponibilidad y reserva directamente.</p>
+          <a href="/reservar" class="block w-full text-center bg-green-800 text-white py-3 rounded-full font-medium hover:bg-green-700 transition-colors mb-3">
+            Ver disponibilidad
+          </a>
+          <a href="/contacto" class="block w-full text-center border border-stone-300 py-3 rounded-full text-sm hover:bg-stone-50 transition-colors">
+            Hacer una pregunta
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motor de reservas -->
+    <div class="mt-16">
+      <h2 class="text-2xl font-light text-center mb-8">Reservar {apt.name}</h2>
+      <BookingWidget smoobuId={apt.smoobuId} />
+    </div>
+
+    <!-- Otros apartamentos -->
+    <div class="mt-16">
+      <h2 class="text-2xl font-light text-center mb-8">Otros apartamentos</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {apartments.filter(a => a.slug !== apt.slug).slice(0,4).map(a => (
+          <a href={`/apartamentos/${a.slug}`} class="group text-center p-4 rounded-xl border border-stone-200 hover:shadow-md transition-all">
+            <div class="text-4xl mb-2">{a.emoji}</div>
+            <div class="text-sm font-medium">{a.name}</div>
+            <div class="text-xs text-stone-500">{a.guests} pers.</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

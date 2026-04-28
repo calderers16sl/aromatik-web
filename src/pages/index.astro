@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const apartments = [
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, id: 1397576, emoji: "🌸" },
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, id: 1033021, emoji: "🌿" },
+  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, id: 1035631, emoji: "🌲" },
+  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, id: 1033339, emoji: "💜" },
+  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, id: 1037266, emoji: "🍋" },
+  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, id: 1034422, emoji: "🍊" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, id: 1315321, emoji: "🌱" },
+  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, id: 1599430, emoji: "🌺" },
+];
+---
+<BaseLayout title="Apartamentos en Girona" description="8 apartamentos de diseño en el casco antiguo de Girona. Reserva directa con el mejor precio.">
+  <!-- HERO -->
+  <section class="relative h-[90vh] flex items-center justify-center text-white overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20 z-10"></div>
+    <div class="absolute inset-0 bg-stone-800"></div>
+    <div class="relative z-20 text-center px-4 max-w-3xl mx-auto">
+      <p class="text-sm uppercase tracking-[0.3em] mb-4 text-stone-300">Girona · Casco antiguo</p>
+      <h1 class="text-5xl md:text-7xl font-light leading-tight mb-6">
+        Despierta en<br/><em>el corazón de Girona</em>
+      </h1>
+      <p class="text-lg text-stone-200 mb-10 max-w-xl mx-auto">
+        8 apartamentos únicos en la ciudad medieval. Cada uno con su propio aroma, su propia personalidad.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/#apartamentos" class="bg-white text-stone-900 px-8 py-3 rounded-full font-medium hover:bg-stone-100 transition-colors">
+          Ver apartamentos
+        </a>
+        <a href="/reservar" class="border border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors">
+          Reservar ahora
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="max-w-3xl mx-auto px-4 py-20 text-center">
+    <h2 class="text-3xl font-light mb-6" style="color:var(--color-primary)">Apartamentos con alma</h2>
+    <p class="text-lg text-stone-600 leading-relaxed">
+      Cada apartamento lleva el nombre de una planta aromática. Diseñados con mimo, equipados con todo lo necesario,
+      ubicados en el barrio más bonito de Girona. Porque los mejores recuerdos empiezan por un buen sitio donde quedarse.
+    </p>
+  </section>
+
+  <!-- APARTMENTS GRID -->
+  <section id="apartamentos" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-light text-center mb-12" style="color:var(--color-text)">Nuestros apartamentos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {apartments.map((apt) => (
+        <a href={`/apartamentos/${apt.slug}`} class="group block rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300">
+          <div class="h-48 bg-stone-100 flex items-center justify-center text-6xl group-hover:scale-105 transition-transform duration-300">
+            {apt.emoji}
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold mb-1">{apt.name}</h3>
+            <p class="text-sm text-stone-500">{apt.guests} personas · {apt.bedrooms} dorm.</p>
+            <span class="mt-4 inline-block text-sm font-medium text-green-700 group-hover:underline">
+              Ver detalles →
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- WHY BOOK DIRECT -->
+  <section class="bg-stone-50 py-20 mt-20">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-light mb-12">¿Por qué reservar directo?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { icon: "💰", title: "Mejor precio", desc: "Sin comisiones de portales. El precio más bajo, garantizado." },
+          { icon: "📞", title: "Atención directa", desc: "Hablas con Arnau, el propietario. Respuesta en menos de 1h." },
+          { icon: "🔄", title: "Flexibilidad", desc: "Más opciones de check-in/out y peticiones especiales." }
+        ].map(item => (
+          <div class="bg-white rounded-2xl p-8 shadow-sm">
+            <div class="text-4xl mb-4">{item.icon}</div>
+            <h3 class="font-semibold text-lg mb-2">{item.title}</h3>
+            <p class="text-stone-600 text-sm">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="max-w-3xl mx-auto px-4 py-20">
+    <h2 class="text-3xl font-light text-center mb-12">Preguntas frecuentes</h2>
+    <div class="space-y-6">
+      {[
+        { q: "¿Dónde están los apartamentos?", a: "En el casco antiguo de Girona, a pocos minutos a pie de la Catedral, los baños árabes y el río Onyar." },
+        { q: "¿Hay parking?", a: "Los apartamentos están en zona peatonal. El aparcamiento La Copa (gratuito) está a 10 minutos a pie. También hay parkings de pago Saba cerca." },
+        { q: "¿Se permiten bicicletas?", a: "Sí, todos los apartamentos permiten guardar bicicletas dentro. Los ascensores son amplios para que quepan." },
+        { q: "¿Cuáles son los horarios de check-in/out?", a: "Check-in desde las 15h, check-out hasta las 11h. Para horarios flexibles, contacta con antelación." },
+      ].map(faq => (
+        <div class="border-b border-stone-200 pb-6">
+          <h3 class="font-medium text-lg mb-2">{faq.q}</h3>
+          <p class="text-stone-600">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

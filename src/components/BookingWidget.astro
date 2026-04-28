@@ -1,0 +1,32 @@
+---
+export interface Props {
+  smoobuId?: string | number;
+  lang?: string;
+}
+const { smoobuId, lang = "es" } = Astro.props;
+const customerId = "333907";
+const iframeUrl = smoobuId
+  ? `https://login.smoobu.com/${lang}/booking-tool/iframe/${customerId}/${smoobuId}`
+  : `https://login.smoobu.com/${lang}/booking-tool/iframe/${customerId}`;
+const targetId = smoobuId ? `apartmentIframe${smoobuId}` : "apartmentIframeAll";
+---
+<div id={targetId} class="w-full min-h-[600px]">
+  <script type="text/javascript" src="https://login.smoobu.com/js/Settings/BookingToolIframe.js"></script>
+  <script define:vars={{ iframeUrl, targetId }}>
+    if (typeof BookingToolIframe !== 'undefined') {
+      BookingToolIframe.initialize({
+        url: iframeUrl,
+        baseUrl: "https://login.smoobu.com",
+        target: "#" + targetId
+      });
+    } else {
+      document.addEventListener('DOMContentLoaded', function() {
+        BookingToolIframe.initialize({
+          url: iframeUrl,
+          baseUrl: "https://login.smoobu.com",
+          target: "#" + targetId
+        });
+      });
+    }
+  </script>
+</div>
