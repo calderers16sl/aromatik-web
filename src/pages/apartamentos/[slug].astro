@@ -39,7 +39,7 @@ const { apt, allApartments } = Astro.props;
   description={`${apt.name}: apartamento boutique para ${apt.guests} personas en el Barri Vell de Girona. ${apt.size} m², ${apt.bedrooms === 1 ? '1 habitación' : apt.bedrooms + ' habitaciones'}. Reserva directa con Aromatik Apartments.`}
 >
   <!-- HERO APARTAMENTO -->
-  <div class="apt-detail-hero" style={`background-color: ${apt.color}`}>
+  <div class="apt-detail-hero" style={`background-image: url('/images/apartamentos/${apt.slug}.jpg'); background-color: ${apt.color}`}>
     <span class="apt-detail-emoji">{apt.emoji}</span>
   </div>
 

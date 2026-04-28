@@ -2,14 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, emoji: "🌸", color: "#C8B89A" },
-  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, emoji: "🌿", color: "#8EAB85" },
-  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, emoji: "🌲", color: "#6B9B7E" },
-  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, emoji: "💜", color: "#A899BB" },
-  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, emoji: "🍋", color: "#C4BC7E" },
-  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, emoji: "🍊", color: "#C4A06E" },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, emoji: "🌱", color: "#7AAF9E" },
-  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, emoji: "🌺", color: "#C49090" },
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, img: "/images/apartamentos/ylang-ylang.jpg", color: "#C8B89A" },
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, img: "/images/apartamentos/romani.jpg", color: "#8EAB85" },
+  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, img: "/images/apartamentos/cipres.jpg", color: "#6B9B7E" },
+  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, img: "/images/apartamentos/lavanda.jpg", color: "#A899BB" },
+  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, img: "/images/apartamentos/limon.jpg", color: "#C4BC7E" },
+  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, img: "/images/apartamentos/bergamota.jpg", color: "#C4A06E" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, img: "/images/apartamentos/arbol-de-te.jpg", color: "#7AAF9E" },
+  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, img: "/images/apartamentos/geranio.jpg", color: "#C49090" },
 ];
 
 const perks = [
@@ -22,7 +22,7 @@ const faqs = [
   { q: "¿Dónde están los apartamentos de Aromatik Apartments?", a: "Todos nuestros apartamentos están en el Barri Vell de Girona, a pocos minutos a pie de la Catedral, el Call Jueu, los Baños Árabes y el río Onyar." },
   { q: "¿Hay parking cerca de los apartamentos?", a: "Los apartamentos están en zona peatonal del centro histórico. El aparcamiento La Copa es gratuito y está a unos 10 minutos a pie. También hay parkings de pago Saba en los alrededores." },
   { q: "¿Se pueden guardar bicicletas?", a: "Sí. Todos los apartamentos de Aromatik Apartments permiten guardar bicicletas en el interior. Los ascensores son amplios y están pensados para ello." },
-  { q: "¿Cuáles son los horarios de entrada y salida?", a: "El check-in es a partir de las 15h y el check-out hasta las 11h. Si necesitas horarios más flexibles, ponte en contacto con nosotros antes de tu llegada y lo gestionamos." },
+  { q: "¿Cuáles son los horarios de entrada y salida?", a: "El check-in es a partir de las 15h y el check-out hasta las 11h. Si necesitas horarios más flexibles, ponte en contacto con nosotros antes de tu llegada." },
   { q: "¿Por qué reservar directamente con Aromatik Apartments?", a: "Porque al reservar en nuestra web oficial obtienes el mejor precio disponible, tratas directamente con el equipo local y tienes más flexibilidad que a través de cualquier plataforma externa." },
 ];
 ---
@@ -30,7 +30,6 @@ const faqs = [
   title="Apartamentos turísticos en el Barri Vell de Girona"
   description="Aromatik Apartments — apartamentos turísticos boutique en el centro histórico de Girona. Reserva directa, atención local y alojamientos seleccionados en el Barri Vell."
 >
-
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
@@ -73,9 +72,7 @@ const faqs = [
       <div class="apts-grid">
         {apartments.map((apt) => (
           <a href={`/apartamentos/${apt.slug}`} class="apt-card">
-            <div class="apt-card-img" style={`background-color: ${apt.color}`}>
-              <span class="apt-emoji-placeholder">{apt.emoji}</span>
-            </div>
+            <div class="apt-card-img" style={`background-image: url('${apt.img}'); background-color: ${apt.color}`}></div>
             <div class="apt-card-body">
               <h3>{apt.name}</h3>
               <p class="apt-meta">{apt.guests} personas · {apt.bedrooms === 1 ? '1 habitación' : `${apt.bedrooms} habitaciones`}</p>
@@ -153,5 +150,4 @@ const faqs = [
       </div>
     </div>
   </section>
-
 </BaseLayout>
