@@ -2,54 +2,84 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, smoobuId: 1397576, emoji: "🌸" },
-  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, smoobuId: 1033021, emoji: "🌿" },
-  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, smoobuId: 1035631, emoji: "🌲" },
-  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, smoobuId: 1033339, emoji: "💜" },
-  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, smoobuId: 1037266, emoji: "🍋" },
-  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, smoobuId: 1034422, emoji: "🍊" },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, smoobuId: 1315321, emoji: "🌱" },
-  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, smoobuId: 1599430, emoji: "🌺" },
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, emoji: "🌸", color: "#C8B89A" },
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, emoji: "🌿", color: "#8EAB85" },
+  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, emoji: "🌲", color: "#6B9B7E" },
+  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, emoji: "💜", color: "#A899BB" },
+  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, emoji: "🍋", color: "#C4BC7E" },
+  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, emoji: "🍊", color: "#C4A06E" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, emoji: "🌱", color: "#7AAF9E" },
+  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, emoji: "🌺", color: "#C49090" },
+];
+
+const perks = [
+  { icon: "✦", title: "Mejor precio garantizado", desc: "Reservando directamente en nuestra web siempre tendrás el precio más bajo disponible. Sin comisiones de plataformas externas." },
+  { icon: "◎", title: "Atención local y directa", desc: "Tratas directamente con el equipo de Aromatik Apartments. Respuesta rápida antes, durante y después de tu estancia en Girona." },
+  { icon: "◈", title: "Flexibilidad y confianza", desc: "Check-in personalizado, peticiones especiales y comunicación transparente desde el primer momento. Sin intermediarios." },
+];
+
+const faqs = [
+  { q: "¿Dónde están los apartamentos de Aromatik Apartments?", a: "Todos nuestros apartamentos están en el Barri Vell de Girona, a pocos minutos a pie de la Catedral, el Call Jueu, los Baños Árabes y el río Onyar." },
+  { q: "¿Hay parking cerca de los apartamentos?", a: "Los apartamentos están en zona peatonal del centro histórico. El aparcamiento La Copa es gratuito y está a unos 10 minutos a pie. También hay parkings de pago Saba en los alrededores." },
+  { q: "¿Se pueden guardar bicicletas?", a: "Sí. Todos los apartamentos de Aromatik Apartments permiten guardar bicicletas en el interior. Los ascensores son amplios y están pensados para ello." },
+  { q: "¿Cuáles son los horarios de entrada y salida?", a: "El check-in es a partir de las 15h y el check-out hasta las 11h. Si necesitas horarios más flexibles, ponte en contacto con nosotros antes de tu llegada y lo gestionamos." },
+  { q: "¿Por qué reservar directamente con Aromatik Apartments?", a: "Porque al reservar en nuestra web oficial obtienes el mejor precio disponible, tratas directamente con el equipo local y tienes más flexibilidad que a través de cualquier plataforma externa." },
 ];
 ---
-<BaseLayout title="Apartamentos en Girona" description="8 apartamentos de diseño en el casco antiguo de Girona. Reserva directa con el mejor precio.">
+<BaseLayout
+  title="Apartamentos turísticos en el Barri Vell de Girona"
+  description="Aromatik Apartments — apartamentos turísticos boutique en el centro histórico de Girona. Reserva directa, atención local y alojamientos seleccionados en el Barri Vell."
+>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-content">
-      <p class="hero-tag">Girona · Casco antiguo</p>
-      <h1>Despierta en<br/><em>el corazón de Girona</em></h1>
-      <p class="hero-desc">8 apartamentos únicos en la ciudad medieval. Cada uno con su propio aroma, su propia personalidad.</p>
-      <div class="hero-btns">
-        <a href="/#apartamentos" class="btn-white">Ver apartamentos</a>
-        <a href="/reservar" class="btn-outline">Reservar ahora</a>
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Barri Vell · Girona, Catalunya</span>
+      <h1>Apartamentos turísticos<br>en el Barri Vell de Girona</h1>
+      <p class="hero-subtitle">
+        Descubre Aromatik Apartments, una colección de apartamentos boutique en el centro histórico de Girona,
+        pensados para disfrutar de la ciudad con comodidad, estilo y atención local.
+      </p>
+      <div class="hero-actions">
+        <a href="#apartamentos" class="btn btn-white">Ver apartamentos disponibles</a>
+        <a href="/sobre-nosotros" class="btn btn-outline-white">Conoce Aromatik Apartments</a>
       </div>
-    </div>
-  </section>
-
-  <!-- INTRO -->
-  <section class="section">
-    <div class="section-sm text-center">
-      <h2 class="section-title">Apartamentos con alma</h2>
-      <p class="section-subtitle">
-        Cada apartamento lleva el nombre de una planta aromática. Diseñados con mimo, equipados con todo lo necesario,
-        ubicados en el barrio más bonito de Girona. Porque los mejores recuerdos empiezan por un buen sitio donde quedarse.
+      <p class="hero-trust">
+        Reserva directamente con Aromatik Apartments y disfruta de una experiencia más cercana, transparente y sin comisiones innecesarias.
       </p>
     </div>
   </section>
 
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div><span class="trust-num">8</span><span class="trust-label">Apartamentos</span></div>
+      <div><span class="trust-num">100%</span><span class="trust-label">Barri Vell</span></div>
+      <div><span class="trust-num">★ 4.9</span><span class="trust-label">Valoración media</span></div>
+      <div><span class="trust-num">0%</span><span class="trust-label">Comisiones</span></div>
+    </div>
+  </div>
+
   <!-- APARTMENTS GRID -->
-  <section id="apartamentos" class="section" style="padding-top:0">
-    <div class="section-inner">
-      <h2 class="section-title text-center mb-8">Nuestros apartamentos</h2>
-      <div class="apartments-grid">
+  <section id="apartamentos" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Colección Aromatik</span>
+        <h2 style="margin-top:0.75rem">Nuestros apartamentos en Girona</h2>
+        <p>Ocho espacios únicos, cada uno con el nombre de una planta aromática. Todos en el corazón del Barri Vell.</p>
+      </div>
+      <div class="apts-grid">
         {apartments.map((apt) => (
           <a href={`/apartamentos/${apt.slug}`} class="apt-card">
-            <div class="apt-card-img">{apt.emoji}</div>
+            <div class="apt-card-img" style={`background-color: ${apt.color}`}>
+              <span class="apt-emoji-placeholder">{apt.emoji}</span>
+            </div>
             <div class="apt-card-body">
               <h3>{apt.name}</h3>
-              <p>{apt.guests} personas · {apt.bedrooms} dorm.</p>
-              <span class="link">Ver detalles →</span>
+              <p class="apt-meta">{apt.guests} personas · {apt.bedrooms === 1 ? '1 habitación' : `${apt.bedrooms} habitaciones`}</p>
+              <span class="apt-link">Ver apartamento →</span>
             </div>
           </a>
         ))}
@@ -57,20 +87,29 @@ const apartments = [
     </div>
   </section>
 
+  <!-- BRAND STATEMENT -->
+  <div class="brand-statement">
+    <blockquote>
+      "Aromatik Apartments nace en Girona con una idea sencilla: ofrecer apartamentos turísticos bien ubicados,
+      cuidados y gestionados localmente para quienes quieren vivir el Barri Vell desde dentro."
+    </blockquote>
+    <cite>— Aromatik Apartments · Girona</cite>
+  </div>
+
   <!-- WHY BOOK DIRECT -->
-  <section class="section bg-stone">
-    <div class="section-inner">
-      <h2 class="section-title text-center mb-8">¿Por qué reservar directo?</h2>
+  <section class="section bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Reserva directa</span>
+        <h2 style="margin-top:0.75rem">Por qué reservar con Aromatik Apartments</h2>
+        <p>Al reservar en la web oficial tratas directamente con el equipo local. Sin intermediarios, sin sorpresas.</p>
+      </div>
       <div class="perks-grid">
-        {[
-          { icon: "💰", title: "Mejor precio", desc: "Sin comisiones de portales. El precio más bajo, garantizado." },
-          { icon: "📞", title: "Atención directa", desc: "Hablas con Arnau, el propietario. Respuesta en menos de 1h." },
-          { icon: "🔄", title: "Flexibilidad", desc: "Más opciones de check-in/out y peticiones especiales." }
-        ].map(item => (
-          <div class="perk-card">
-            <div class="perk-icon">{item.icon}</div>
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
+        {perks.map((p) => (
+          <div class="perk">
+            <div class="perk-icon">{p.icon}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
           </div>
         ))}
       </div>
@@ -79,19 +118,39 @@ const apartments = [
 
   <!-- FAQ -->
   <section class="section">
-    <div class="section-sm">
-      <h2 class="section-title text-center mb-8">Preguntas frecuentes</h2>
-      {[
-        { q: "¿Dónde están los apartamentos?", a: "En el casco antiguo de Girona, a pocos minutos a pie de la Catedral, los baños árabes y el río Onyar." },
-        { q: "¿Hay parking?", a: "Los apartamentos están en zona peatonal. El aparcamiento La Copa (gratuito) está a 10 minutos a pie. También hay parkings de pago Saba cerca." },
-        { q: "¿Se permiten bicicletas?", a: "Sí, todos los apartamentos permiten guardar bicicletas dentro. Los ascensores son amplios para que quepan." },
-        { q: "¿Cuáles son los horarios de check-in/out?", a: "Check-in desde las 15h, check-out hasta las 11h. Para horarios flexibles, contacta con antelación." },
-      ].map(faq => (
-        <div class="faq-item">
-          <h3>{faq.q}</h3>
-          <p>{faq.a}</p>
-        </div>
-      ))}
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">FAQ</span>
+        <h2 style="margin-top:0.75rem">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <p class="faq-q">{f.q}</p>
+            <p class="faq-a">{f.a}</p>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-12">
+        <a href="/contacto" class="btn btn-border">¿Más preguntas? Escríbenos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="section bg-black text-center">
+    <div class="container-sm">
+      <span class="eyebrow" style="color:rgba(255,255,255,0.4)">Reserva directa</span>
+      <h2 style="font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:400; color:#fff; margin:1rem 0 1.25rem;">
+        Vive el Barri Vell de Girona<br>desde tu propio apartamento boutique
+      </h2>
+      <p style="color:rgba(255,255,255,0.6); font-size:0.95rem; max-width:480px; margin:0 auto 2.5rem; line-height:1.8;">
+        Aromatik Apartments no es una plataforma anónima: somos una marca local especializada en apartamentos turísticos en el Barri Vell de Girona.
+      </p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/#apartamentos" class="btn btn-white">Ver apartamentos</a>
+        <a href="/contacto" class="btn btn-outline-white">Contactar</a>
+      </div>
     </div>
   </section>
 

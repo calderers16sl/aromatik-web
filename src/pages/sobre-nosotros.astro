@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Sobre Aromatik Apartments"
+  description="Aromatik Apartments es una marca local de apartamentos turísticos boutique en el Barri Vell de Girona. Gestión local, reserva directa y atención cercana."
+>
+  <div class="inner-hero">
+    <span class="eyebrow">Quiénes somos</span>
+    <h1 style="margin-top:0.75rem">Sobre Aromatik Apartments</h1>
+    <p>Una marca local especializada en apartamentos turísticos boutique en el corazón histórico de Girona.</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+        <div class="prose">
+          <p>
+            Aromatik Apartments nace en Girona con una idea sencilla: ofrecer apartamentos turísticos bien ubicados,
+            cuidados y gestionados localmente para quienes quieren vivir el Barri Vell desde dentro.
+          </p>
+          <p>
+            Nuestros apartamentos se encuentran en zonas emblemáticas del centro histórico de Girona,
+            cerca de la Rambla de la Llibertat, la Catedral, el Call Jueu y las casas del Onyar.
+          </p>
+          <p>
+            En Aromatik Apartments combinamos la comodidad de un apartamento privado con la tranquilidad
+            de una gestión profesional: check-in fácil, comunicación directa, alojamientos equipados
+            y atención local antes, durante y después de la estancia.
+          </p>
+          <h2>Nuestra colección</h2>
+          <p>
+            Cada apartamento de Aromatik Apartments lleva el nombre de una planta aromática.
+            Ocho espacios únicos, pensados con cuidado, en el corazón del Barri Vell de Girona.
+            Una colección de alojamientos que mezcla el carácter del centro histórico con la
+            comodidad que espera un viajero contemporáneo.
+          </p>
+          <h2>Reserva directa</h2>
+          <p>
+            Aromatik Apartments no es una plataforma anónima: somos una marca local especializada
+            en apartamentos turísticos en el Barri Vell de Girona. Al reservar directamente con nosotros
+            obtienes el mejor precio disponible, tratas con el equipo local y tienes más flexibilidad
+            que a través de cualquier plataforma externa.
+          </p>
+        </div>
+        <div>
+          <div style="background:var(--stone-50); border-radius:var(--radius-lg); padding:2.5rem; border:1px solid var(--stone-200);">
+            <p class="eyebrow" style="margin-bottom:1.5rem">Aromatik Apartments en cifras</p>
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+              {[
+                { n: "8", label: "Apartamentos en el Barri Vell" },
+                { n: "100%", label: "Centro histórico de Girona" },
+                { n: "★ 4.9", label: "Valoración media de huéspedes" },
+                { n: "0%", label: "Comisiones al reservar directo" },
+              ].map(item => (
+                <div style="display:flex; align-items:center; gap:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--stone-200);">
+                  <span style="font-family:var(--serif); font-size:2rem; font-weight:400; color:var(--green); min-width:80px;">{item.n}</span>
+                  <span style="font-size:0.875rem; color:var(--stone-600);">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; background:var(--black); color:#fff; border-radius:var(--radius-lg); padding:2rem;">
+            <p style="font-family:var(--serif); font-size:1.1rem; font-weight:400; font-style:italic; line-height:1.65; margin-bottom:1.5rem;">
+              "Gestión local, check-in fácil, atención directa y reserva segura en el centro histórico de Girona."
+            </p>
+            <a href="/reservar" class="btn btn-white" style="font-size:0.75rem;">Reservar ahora</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">Colección Aromatik</span>
+      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin:0.75rem 0 1rem;">Nuestros apartamentos</h2>
+      <p style="color:var(--stone-600); margin-bottom:3rem; font-size:0.95rem;">Todos en el Barri Vell de Girona. Todos gestionados por Aromatik Apartments.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/#apartamentos" class="btn btn-dark">Ver todos los apartamentos</a>
+        <a href="/contacto" class="btn btn-border">Contactar</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
