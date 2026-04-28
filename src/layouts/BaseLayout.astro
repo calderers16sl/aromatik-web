@@ -243,6 +243,85 @@ const schemaOrg = JSON.stringify({
     .prose { font-size: 0.975rem; color: var(--stone-600); line-height: 1.9; max-width: 680px; }
     .prose p + p { margin-top: 1.25rem; }
     .prose h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--black); margin: 2.5rem 0 1rem; }
+
+    /* === PÁGINAS LEGALES === */
+    .legal-hero {
+      margin-top: 70px;
+      padding: 4rem 1.5rem 2.5rem;
+      background: var(--cream);
+      text-align: center;
+      border-bottom: 1px solid var(--stone-200);
+    }
+    .legal-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .legal-hero p { color: var(--stone-500); font-size: 0.95rem; }
+    .legal-content {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .legal-content h2 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--black);
+    }
+    .legal-content p {
+      color: var(--stone-600);
+      line-height: 1.85;
+      margin-bottom: 0.75rem;
+    }
+    .legal-content a { color: var(--green); }
+    .legal-note {
+      margin-top: 3rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--cream);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: var(--stone-600);
+    }
+    /* Cancelación */
+    .cancel-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 2rem 0 3rem;
+    }
+    @media (max-width: 640px) { .cancel-cards { grid-template-columns: 1fr; } }
+    .cancel-card {
+      padding: 1.5rem;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .cancel-card h3 { font-size: 1rem; font-weight: 600; margin: 0.75rem 0 0.5rem; }
+    .cancel-card p { font-size: 0.9rem; line-height: 1.6; margin: 0; }
+    .cancel-card-icon { font-size: 1.75rem; }
+    .cancel-card-green { background: #e8f5e9; color: #2e7d32; }
+    .cancel-card-yellow { background: #fff8e1; color: #e65100; }
+    .cancel-card-red { background: #fce4ec; color: #b71c1c; }
+    /* Normas */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 640px) { .rules-grid { grid-template-columns: 1fr; } }
+    .rule-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem;
+      border: 1px solid var(--stone-200);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--stone-600);
+    }
+    .rule-icon { font-size: 1.4rem; flex-shrink: 0; }
   </style>
 </head>
 <body>

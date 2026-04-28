@@ -1,11 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="house-rules">
-  <section class="max-w-3xl mx-auto px-4 py-20">
-    <h1 class="text-3xl font-light mb-8 capitalize">house rules</h1>
-    <div class="prose prose-stone max-w-none text-stone-700 leading-relaxed">
-      <p>Contenido pendiente de añadir desde el panel CMS.</p>
+<BaseLayout
+  title="Normas de la casa — Aromatik Apartments"
+  description="Normas básicas de convivencia en los apartamentos turísticos Aromatik Apartments en Girona."
+>
+  <section class="legal-hero">
+    <h1>Normas de la casa</h1>
+    <p>Para que todos disfruten de una estancia perfecta</p>
+  </section>
+  <section class="section">
+    <div class="container legal-content">
+      <div class="rules-grid">
+        <div class="rule-item">
+          <span class="rule-icon">🕐</span>
+          <div><strong>Check-in:</strong> a partir de las 15:00h<br><strong>Check-out:</strong> antes de las 11:00h</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">🤫</span>
+          <div><strong>Silencio:</strong> respeta el descanso de vecinos entre las 22:00h y las 9:00h. Girona es una ciudad residencial.</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">🚭</span>
+          <div><strong>No fumar</strong> en el interior de los apartamentos. Se pueden utilizar los espacios exteriores comunes si los hay.</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">🐾</span>
+          <div><strong>Mascotas:</strong> consulta la disponibilidad con nosotros antes de reservar. Algunos apartamentos las aceptan bajo petición.</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">👥</span>
+          <div><strong>Ocupación máxima:</strong> no se permite superar el número de huéspedes indicado en la reserva en ningún caso.</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">🎉</span>
+          <div><strong>Fiestas y eventos:</strong> no están permitidos en los apartamentos. El alojamiento es para uso residencial-turístico.</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">♻️</span>
+          <div><strong>Reciclaje:</strong> separa los residuos en los contenedores indicados. Te explicamos el sistema de reciclaje de Girona al hacer el check-in.</div>
+        </div>
+        <div class="rule-item">
+          <span class="rule-icon">🔑</span>
+          <div><strong>Llaves:</strong> devuelve las llaves al finalizar la estancia. La pérdida o daño de llaves tiene un coste adicional.</div>
+        </div>
+      </div>
+
+      <div class="legal-note">
+        <p>¿Tienes alguna duda sobre las normas? <a href="/contacto">Contáctanos</a> antes de tu llegada y te lo explicamos todo.</p>
+      </div>
     </div>
   </section>
 </BaseLayout>
