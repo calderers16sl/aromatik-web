@@ -1,10 +1,7 @@
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  site: 'https://aromatik.apartments',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en', 'ca', 'fr', 'de'],
