@@ -83,7 +83,7 @@ const schemaOrg = JSON.stringify({
     .header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     .header-logo { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.04em; }
     .header-logo em { font-style: normal; color: var(--gold); }
-    .header-nav { display: flex; align-items: center; gap: 2.5rem; }
+    .header-nav { display: flex; align-items: center; gap: 2.5rem; position: fixed; top: 0; right: 2rem; height: 70px; z-index: 101; }
     .header-nav a { font-size: 0.825rem; font-weight: 400; color: var(--stone-600); letter-spacing: 0.02em; transition: color 0.2s; }
     .header-nav a:hover { color: var(--black); }
     .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: var(--radius); font-size: 0.75rem !important; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500 !important; transition: background 0.2s !important; }
