@@ -93,7 +93,7 @@ const schemaOrg = JSON.stringify({
     @media (max-width: 768px) {
       .header-nav { display: none; }
       .hamburger { display: flex; }
-      .header-nav.open { display: flex; flex-direction: column; align-items: flex-start; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; background: var(--white); padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--stone-200); }
+      .header-nav.open { display: flex; flex-direction: column; align-items: flex-start; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; z-index: 200; background: var(--white); padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--stone-200); }
       .header-nav.open a { font-size: 1.1rem; }
     }
 
@@ -327,16 +327,16 @@ const schemaOrg = JSON.stringify({
 <body>
   <header class="header" id="header">
     <a href="/" class="header-logo">Aromatik <em>Apartments</em></a>
-    <nav class="header-nav" id="nav">
-      <a href="/#apartamentos">Apartamentos</a>
-      <a href="/sobre-nosotros">Sobre nosotros</a>
-      <a href="/contacto">Contacto</a>
-      <a href="/reservar" class="nav-cta">Reservar</a>
-    </nav>
     <button class="hamburger" id="hamburger" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
   </header>
+  <nav class="header-nav" id="nav">
+    <a href="/#apartamentos">Apartamentos</a>
+    <a href="/sobre-nosotros">Sobre nosotros</a>
+    <a href="/contacto">Contacto</a>
+    <a href="/reservar" class="nav-cta">Reservar</a>
+  </nav>
 
   <main>
     <slot />
