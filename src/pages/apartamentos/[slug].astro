@@ -55,8 +55,12 @@ const hasGallery = apt.photos && apt.photos.length > 0;
 <BaseLayout title={apt.name} description={apt.description}>
 
   <!-- Hero del apartamento -->
-  <section class="h-72 md:h-96 bg-stone-100 flex items-center justify-center text-8xl">
-    {apt.emoji}
+  <section class="h-72 md:h-96 bg-stone-100 overflow-hidden">
+    <img
+      src={`/images/apartamentos/${apt.slug}/foto-1.jpg`}
+      alt={`Apartamento ${apt.name} en Girona`}
+      class="w-full h-full object-cover"
+    />
   </section>
 
   <div class="max-w-5xl mx-auto px-4 py-12">
@@ -64,4 +68,253 @@ const hasGallery = apt.photos && apt.photos.length > 0;
       <!-- Info principal -->
       <div class="md:col-span-2">
         <h1 class="text-4xl font-light mb-2">Apartamento {apt.name}</h1>
-        <p class="text-stone-500 mb-6">{apt.guests} personas · {ap
+        <p class="text-stone-500 mb-6">{apt.guests} personas · {apt.bedrooms} dorm. · {apt.bathrooms} baño · {apt.size} m²</p>
+        <p class="text-lg text-stone-700 leading-relaxed mb-8">{apt.description}</p>
+        <h2 class="font-semibold text-lg mb-4">Servicios incluidos</h2>
+        <ul class="grid grid-cols-2 gap-2">
+          {apt.amenities.map(a => (
+            <li class="flex items-center gap-2 text-stone-600 text-sm">
+              <span class="text-green-600">✓</span> {a}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8 p-4 bg-stone-50 rounded-xl text-sm text-stone-600">
+          <strong>📍 Ubicación:</strong> Casco antiguo de Girona · Aparcament La Copa (gratuito, 10 min a pie)
+        </div>
+      </div>
+      <!-- Sidebar -->
+      <div>
+        <div class="sticky top-24 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">¿Te gusta?</h3>
+          <p class="text-sm text-stone-600 mb-6">Consulta disponibilidad y reserva directamente.</p>
+          <a href="/reservar" class="block w-full text-center bg-green-800 text-white py-3 rounded-full font-medium hover:bg-green-700 transition-colors mb-3">
+            Ver disponibilidad
+          </a>
+          <a href="/contacto" class="block w-full text-center border border-stone-300 py-3 rounded-full text-sm hover:bg-stone-50 transition-colors">
+            Hacer una pregunta
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Galería de fotos -->
+    {hasGallery && (
+      <div class="mt-16">
+        <h2 class="text-2xl font-light text-center mb-8">Galería de fotos</h2>
+        <div class="gallery-grid">
+          {apt.photos.map((photo, i) => (
+            <button
+              class="gallery-thumb-btn"
+              data-index={i}
+              onclick="openLightbox(this)"
+              aria-label={`Ver foto ${i + 1} de ${apt.name}`}
+            >
+              <img
+                src={`/images/apartamentos/${apt.slug}/${photo}`}
+                alt={`${apt.name} - foto ${i + 1}`}
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Motor de reservas -->
+    <div class="mt-16">
+      <h2 class="text-2xl font-light text-center mb-8">Reservar {apt.name}</h2>
+      <BookingWidget smoobuId={apt.smoobuId} />
+    </div>
+
+    <!-- Otros apartamentos -->
+    <div class="mt-16">
+      <h2 class="text-2xl font-light text-center mb-8">Otros apartamentos</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {apartments.filter(a => a.slug !== apt.slug).slice(0,4).map(a => (
+          <a href={`/apartamentos/${a.slug}`} class="group rounded-xl border border-stone-200 hover:shadow-md transition-all overflow-hidden block">
+            <div class="h-28 bg-stone-100 overflow-hidden">
+              <img
+                src={`/images/apartamentos/${a.slug}/foto-1.jpg`}
+                alt={a.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-3 text-center">
+              <div class="text-sm font-medium">{a.name}</div>
+              <div class="text-xs text-stone-500">{a.guests} pers.</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  {hasGallery && (
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label={`Galería de ${apt.name}`} onclick="closeLightboxOutside(event)">
+      <button class="lb-close" onclick="closeLightbox()" aria-label="Cerrar galería">✕</button>
+      <button class="lb-prev" onclick="prevPhoto()" aria-label="Foto anterior">❮</button>
+      <button class="lb-next" onclick="nextPhoto()" aria-label="Foto siguiente">❯</button>
+      <div class="lb-content">
+        <img id="lb-img" src="" alt="" />
+        <p id="lb-counter" class="lb-counter"></p>
+      </div>
+    </div>
+  )}
+
+</BaseLayout>
+
+<style>
+  /* Galería grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .gallery-thumb-btn {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: #e7e5e4;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .gallery-thumb-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+  .gallery-thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox.active {
+    display: flex;
+  }
+
+  .lb-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  .lb-content img {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lb-counter {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    margin-top: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .lb-close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .lb-close:hover { background: rgba(255,255,255,0.3); }
+
+  .lb-prev,
+  .lb-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+  }
+  .lb-prev { left: 16px; }
+  .lb-next { right: 16px; }
+  .lb-prev:hover,
+  .lb-next:hover { background: rgba(255,255,255,0.3); }
+</style>
+
+<script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>
+  if (photos && photos.length > 0) {
+    let current = 0;
+
+    function showPhoto() {
+      const img = document.getElementById('lb-img');
+      const counter = document.getElementById('lb-counter');
+      if (!img || !counter) return;
+      img.src = `/images/apartamentos/${slug}/${photos[current]}`;
+      img.alt = `${aptName} - foto ${current + 1}`;
+      counter.textContent = `${current + 1} / ${photos.length}`;
+    }
+
+    window.openLightbox = function(btn) {
+      current = parseInt(btn.dataset.index);
+      showPhoto();
+      const lb = document.getElementById('lightbox');
+      if (lb) {
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    window.closeLightbox = function() {
+      const lb = document.getElementById('lightbox');
+      if (lb) {
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    };
+
+    window.closeLightboxOutside = function(e) {
+      if (e.target === document.getElementById('lightbox')) {
+        window.closeLightbox();
+      }
+    };
+
+    window.nextPhoto = function() {
+      current = (current + 1) % photos.length;
+      showPhoto();
