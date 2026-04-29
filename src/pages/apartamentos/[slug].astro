@@ -2,54 +2,53 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingWidget from '../../components/BookingWidget.astro';
 
-const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576,
-    description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Perfecto para parejas y familias pequeñas que buscan comodidad en el corazón de Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🌸",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
-    description: "Acogedor y aromático como la planta que le da nombre. Ideal para escapadas románticas en el casco antiguo de Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "🌿",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
-  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631,
-    description: "Elegante como el ciprés mediterráneo. Dos habitaciones perfectas para grupos de amigos o familias.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🌲",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg'] },
-  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
-    description: "Tranquilo y relajante como un campo de lavanda. Un refugio de calma en el centro histórico.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "💜",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg'] },
-  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266,
-    description: "Fresco y vibrante. Con capacidad para tres personas, es perfecto para grupos pequeños que quieren explorar Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "🍋",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422,
-    description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🍊",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321,
-    description: "Puro y reconfortante. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "🌱",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg','foto-22.jpg','foto-23.jpg'] },
-  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430,
-    description: "Alegre y mediterráneo como el geranio de los balcones de Girona. El más amplio de nuestros apartamentos.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🌺",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
-];
-
 export function getStaticPaths() {
-  return apartments.map(apt => ({ params: { slug: apt.slug }, props: { apt } }));
+  const apartments = [
+    { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576,
+      description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Perfecto para parejas y familias pequeñas que buscan comodidad en el corazón de Girona.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+      emoji: "🌸",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
+    { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
+      description: "Acogedor y aromático como la planta que le da nombre. Ideal para escapadas románticas en el casco antiguo de Girona.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+      emoji: "🌿",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
+    { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631,
+      description: "Elegante como el ciprés mediterráneo. Dos habitaciones perfectas para grupos de amigos o familias.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+      emoji: "🌲",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg'] },
+    { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
+      description: "Tranquilo y relajante como un campo de lavanda. Un refugio de calma en el centro histórico.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+      emoji: "💜",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg'] },
+    { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266,
+      description: "Fresco y vibrante. Con capacidad para tres personas, es perfecto para grupos pequeños que quieren explorar Girona.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+      emoji: "🍋",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
+    { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422,
+      description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+      emoji: "🍊",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
+    { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321,
+      description: "Puro y reconfortante. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
+      emoji: "🌱",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg','foto-22.jpg','foto-23.jpg'] },
+    { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430,
+      description: "Alegre y mediterráneo como el geranio de los balcones de Girona. El más amplio de nuestros apartamentos.",
+      amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
+      emoji: "🌺",
+      photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
+  ];
+  return apartments.map(apt => ({ params: { slug: apt.slug }, props: { apt, allApartments: apartments } }));
 }
 
-const { apt } = Astro.props;
+const { apt, allApartments } = Astro.props;
 const hasPhotos = apt.photos && apt.photos.length > 0;
 ---
 <BaseLayout title={apt.name} description={apt.description}>
@@ -140,7 +139,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     <div class="mt-16">
       <h2 class="text-2xl font-light text-center mb-8">Otros apartamentos</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {apartments.filter(a => a.slug !== apt.slug).slice(0, 4).map(a => (
+        {allApartments.filter(a => a.slug !== apt.slug).slice(0, 4).map(a => (
           <a href={`/apartamentos/${a.slug}`} class="group rounded-xl border border-stone-200 hover:shadow-md transition-all overflow-hidden block">
             <div class="h-28 bg-stone-100 overflow-hidden">
               <img
@@ -262,4 +261,217 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    backgr
+    background: rgba(255,255,255,0.18);
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, opacity 0.2s;
+    z-index: 10;
+    opacity: 0;                  /* ocultas por defecto */
+    backdrop-filter: blur(4px);
+  }
+  .carousel-wrap:hover .c-btn { opacity: 1; }   /* aparecen al hover */
+  .c-btn:hover { background: rgba(255,255,255,0.35); }
+  .c-prev { left: 12px; }
+  .c-next { right: 12px; }
+
+  /* En móvil puro (sin hover) siempre las mostramos sutilmente */
+  @media (hover: none) {
+    .c-btn { opacity: 0.5; }
+  }
+
+  /* ── LIGHTBOX ────────────────────────────────────── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.93);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    touch-action: pan-x; /* swipe táctil en lightbox */
+  }
+  .lightbox.active { display: flex; }
+
+  .lb-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 92vw;
+    max-height: 92vh;
+  }
+  .lb-content img {
+    max-width: 92vw;
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lb-counter-text {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.82rem;
+    margin-top: 12px;
+    letter-spacing: 0.06em;
+  }
+  .lb-close {
+    position: fixed;
+    top: 18px;
+    right: 20px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.3rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+    backdrop-filter: blur(4px);
+  }
+  .lb-close:hover { background: rgba(255,255,255,0.3); }
+  .lb-prev,
+  .lb-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.3rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 1001;
+    backdrop-filter: blur(4px);
+  }
+  .lb-prev { left: 14px; }
+  .lb-next { right: 14px; }
+  .lb-prev:hover,
+  .lb-next:hover { background: rgba(255,255,255,0.3); }
+</style>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════ -->
+<script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>
+  if (!photos || photos.length === 0) return;
+
+  /* ── CARRUSEL ── */
+  const track    = document.getElementById('cTrack');
+  const counter  = document.getElementById('cCounter');
+  const btnPrev  = document.getElementById('cPrev');
+  const btnNext  = document.getElementById('cNext');
+  let currentIdx = 0;
+
+  /* Actualiza contador leyendo la posición de scroll */
+  function updateCounter() {
+    if (!track || !counter) return;
+    const idx = Math.round(track.scrollLeft / track.clientWidth);
+    if (idx !== currentIdx) {
+      currentIdx = idx;
+      counter.textContent = `${idx + 1} / ${photos.length}`;
+    }
+  }
+
+  /* Desplaza la pista al índice indicado (animado) */
+  function scrollTo(idx) {
+    if (!track) return;
+    idx = Math.max(0, Math.min(photos.length - 1, idx));
+    track.scrollTo({ left: idx * track.clientWidth, behavior: 'smooth' });
+    currentIdx = idx;
+    if (counter) counter.textContent = `${idx + 1} / ${photos.length}`;
+  }
+
+  if (track) {
+    track.addEventListener('scroll', updateCounter, { passive: true });
+  }
+  if (btnPrev) btnPrev.addEventListener('click', () => scrollTo(currentIdx - 1));
+  if (btnNext) btnNext.addEventListener('click', () => scrollTo(currentIdx + 1));
+
+  /* Click en foto → abrir lightbox */
+  document.querySelectorAll('.c-img').forEach(img => {
+    img.addEventListener('click', () => {
+      openLightbox(parseInt(img.dataset.index));
+    });
+  });
+
+  /* Oculta el hint "desliza" después de la animación CSS */
+  const hint = document.getElementById('cHint');
+  if (hint) setTimeout(() => { hint.style.display = 'none'; }, 3200);
+
+  /* ── LIGHTBOX ── */
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lb-img');
+  const lbCnt   = document.getElementById('lb-counter');
+  let lbCurrent = 0;
+
+  function showLbPhoto() {
+    if (!lbImg || !lbCnt) return;
+    lbImg.src = `/images/apartamentos/${slug}/${photos[lbCurrent]}`;
+    lbImg.alt = `${aptName} - foto ${lbCurrent + 1}`;
+    lbCnt.textContent = `${lbCurrent + 1} / ${photos.length}`;
+  }
+
+  function openLightbox(idx) {
+    lbCurrent = idx;
+    showLbPhoto();
+    if (lb) {
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeLightbox() {
+    if (lb) {
+      lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function lbNext() { lbCurrent = (lbCurrent + 1) % photos.length; showLbPhoto(); }
+  function lbPrev() { lbCurrent = (lbCurrent - 1 + photos.length) % photos.length; showLbPhoto(); }
+
+  const btnLbClose = document.getElementById('lbClose');
+  const btnLbPrev  = document.getElementById('lbPrev');
+  const btnLbNext  = document.getElementById('lbNext');
+
+  if (btnLbClose) btnLbClose.addEventListener('click', closeLightbox);
+  if (btnLbPrev)  btnLbPrev.addEventListener('click', lbPrev);
+  if (btnLbNext)  btnLbNext.addEventListener('click', lbNext);
+
+  /* Click en el fondo oscuro → cerrar */
+  if (lb) lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+  /* Teclado */
+  document.addEventListener('keydown', e => {
+    if (!lb || !lb.classList.contains('active')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') lbNext();
+    if (e.key === 'ArrowLeft')  lbPrev();
+  });
+
+  /* Swipe táctil en lightbox */
+  let lbTouchX = 0;
+  if (lb) {
+    lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - lbTouchX;
+      if (Math.abs(dx) > 40) { dx < 0 ? lbNext() : lbPrev(); }
+    }, { passive: true });
+  }
+</script>
