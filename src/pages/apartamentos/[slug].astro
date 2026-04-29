@@ -139,7 +139,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
             <h3 class="booking-card-title">¿Te gusta?</h3>
             <p class="booking-card-sub">Reserva directo al mejor precio.</p>
           </div>
-          <a href="/reservar" class="btn-reservar">Ver disponibilidad</a>
+          <a href="#reservar-widget" class="btn-reservar js-scroll-reservar">Ver disponibilidad</a>
           <a href="/contacto" class="btn-contactar">Hacer una pregunta</a>
           <p class="booking-note">Sin intermediarios · Confirmación inmediata</p>
         </div>
@@ -147,7 +147,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     </div>
 
     <!-- Motor de reservas -->
-    <div class="booking-section">
+    <div class="booking-section" id="reservar-widget">
       <h2 class="section-heading">Reservar {apt.name}</h2>
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
@@ -391,6 +391,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
 
   /* ── BOOKING WIDGET ──────────────────────────────── */
   .booking-section {
+    scroll-margin-top: 90px;
     margin-top: 4rem;
     padding-top: 3rem;
     border-top: 1px solid #e7e5e4;
