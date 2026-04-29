@@ -13,17 +13,17 @@ const apartments = [
 ];
 
 const perks = [
-  { icon: "✦", title: "Mejor precio garantizado", desc: "Reservando directamente en nuestra web siempre tendrás el precio más bajo disponible. Sin comisiones de plataformas externas." },
-  { icon: "◎", title: "Atención local y directa", desc: "Tratas directamente con el equipo de Aromatik Apartments. Respuesta rápida antes, durante y después de tu estancia en Girona." },
-  { icon: "◈", title: "Flexibilidad y confianza", desc: "Check-in personalizado, peticiones especiales y comunicación transparente desde el primer momento. Sin intermediarios." },
+  { icon: "✦", title: "Mejor precio directo", desc: "Reservando en la web oficial evitas comisiones de plataformas externas y accedes al precio más claro disponible." },
+  { icon: "◎", title: "Hablas directamente con el anfitrión", desc: "Antes, durante y después de la estancia puedes escribirme por WhatsApp si tienes dudas sobre el apartamento, el check-in, el parking o cualquier detalle de Girona." },
+  { icon: "◈", title: "Más margen para ayudarte", desc: "Si necesitas una hora de llegada especial, vienes con bicicletas, viajas en familia o tienes una petición concreta, es mucho más fácil gestionarlo directamente." },
 ];
 
 const faqs = [
-  { q: "¿Dónde están los apartamentos de Aromatik Apartments?", a: "Todos nuestros apartamentos están en el Barri Vell de Girona, a pocos minutos a pie de la Catedral, el Call Jueu, los Baños Árabes y el río Onyar." },
-  { q: "¿Hay parking cerca de los apartamentos?", a: "Los apartamentos están en zona peatonal del centro histórico. El aparcamiento La Copa es gratuito y está a unos 10 minutos a pie. También hay parkings de pago Saba en los alrededores." },
-  { q: "¿Se pueden guardar bicicletas?", a: "Sí. Todos los apartamentos de Aromatik Apartments permiten guardar bicicletas en el interior. Los ascensores son amplios y están pensados para ello." },
-  { q: "¿Cuáles son los horarios de entrada y salida?", a: "El check-in es a partir de las 15h y el check-out hasta las 11h. Si necesitas horarios más flexibles, ponte en contacto con nosotros antes de tu llegada." },
-  { q: "¿Por qué reservar directamente con Aromatik Apartments?", a: "Porque al reservar en nuestra web oficial obtienes el mejor precio disponible, tratas directamente con el equipo local y tienes más flexibilidad que a través de cualquier plataforma externa." },
+  { q: "¿Dónde están los apartamentos?", a: "Todos los apartamentos de Aromatik están en el Barri Vell de Girona, a pocos minutos andando de la Catedral, el Call Jueu, los Baños Árabes y el río Onyar. El centro histórico de Girona es completamente visitable a pie desde cualquiera de ellos." },
+  { q: "¿Dónde puedo dejar el coche?", a: "Los apartamentos están en zona peatonal. Lo más práctico suele ser el parking La Copa, a unos 10 minutos andando, o los parkings Saba de los alrededores. Si tienes dudas antes de llegar, escríbeme y te indico la opción más cómoda según tu apartamento." },
+  { q: "¿Puedo venir con bicicleta?", a: "Sí. Girona es una ciudad muy vinculada al ciclismo y muchos huéspedes vienen con bicicleta. Los apartamentos permiten guardarlas en el interior y los ascensores son amplios, algo que facilita mucho la llegada y la salida." },
+  { q: "¿Cómo funciona el check-in?", a: "El check-in está pensado para que sea sencillo y flexible. Antes de la llegada recibirás toda la información necesaria y, si tienes cualquier duda, puedes escribirme directamente. La idea es que no pierdas tiempo al llegar y puedas empezar a disfrutar Girona desde el primer momento." },
+  { q: "¿Por qué reservar directamente?", a: "Reservar directamente en la web oficial de Aromatik Apartments te permite evitar comisiones externas y hablar conmigo de forma directa si necesitas resolver cualquier detalle antes de confirmar la estancia." },
 ];
 ---
 <BaseLayout
@@ -36,17 +36,16 @@ const faqs = [
     <div class="hero-overlay"></div>
     <div class="hero-inner">
       <span class="hero-eyebrow">Barri Vell · Girona, Catalunya</span>
-      <h1>Apartamentos turísticos<br>en el Barri Vell de Girona</h1>
+      <h1>Apartamentos con alma<br>en el Barri Vell de Girona</h1>
       <p class="hero-subtitle">
-        Descubre Aromatik Apartments, una colección de apartamentos boutique en el centro histórico de Girona,
-        pensados para disfrutar de la ciudad con comodidad, estilo y atención local.
+        Soy Arnau, anfitrión de Aromatik Apartments. Gestiono personalmente una pequeña colección de apartamentos en el centro histórico de Girona, todos cerca de la Catedral, el Call Jueu, los Baños Árabes y el río Onyar.
       </p>
       <div class="hero-actions">
         <a href="#apartamentos" class="btn btn-white">Ver apartamentos disponibles</a>
-        <a href="/sobre-nosotros" class="btn btn-outline-white">Conoce Aromatik Apartments</a>
+        <a href="/contacto" class="btn btn-outline-white">Contactar directamente</a>
       </div>
       <p class="hero-trust">
-        Reserva directamente con Aromatik Apartments y disfruta de una experiencia más cercana, transparente y sin comisiones innecesarias.
+        Mi objetivo es sencillo: que llegues, lo entiendas todo fácilmente y disfrutes Girona desde un apartamento bien ubicado, cómodo y cuidado.
       </p>
     </div>
   </section>
@@ -66,8 +65,8 @@ const faqs = [
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">Colección Aromatik</span>
-        <h2 style="margin-top:0.75rem">Nuestros apartamentos en Girona</h2>
-        <p>Ocho espacios únicos, cada uno con el nombre de una planta aromática. Todos en el corazón del Barri Vell.</p>
+        <h2 style="margin-top:0.75rem">Ocho apartamentos, ocho aromas, una misma idea</h2>
+        <p>Cada apartamento lleva el nombre de una planta aromática. Algunos para parejas mirando al Onyar, otros para familias o grupos. Todos pensados para vivir Girona andando.</p>
       </div>
       <div class="apts-grid">
         {apartments.map((apt) => (
@@ -90,7 +89,7 @@ const faqs = [
       "Aromatik Apartments nace en Girona con una idea sencilla: ofrecer apartamentos turísticos bien ubicados,
       cuidados y gestionados localmente para quienes quieren vivir el Barri Vell desde dentro."
     </blockquote>
-    <cite>— Aromatik Apartments · Girona</cite>
+    <cite>— Arnau · Aromatik Apartments</cite>
   </div>
 
   <!-- WHY BOOK DIRECT -->
@@ -98,8 +97,8 @@ const faqs = [
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">Reserva directa</span>
-        <h2 style="margin-top:0.75rem">Por qué reservar con Aromatik Apartments</h2>
-        <p>Al reservar en la web oficial tratas directamente con el equipo local. Sin intermediarios, sin sorpresas.</p>
+        <h2 style="margin-top:0.75rem">Reserva directa, trato directo y una estancia más fácil</h2>
+        <p>Reservar directamente con nosotros es más sencillo, más claro y más personal que a través de cualquier plataforma.</p>
       </div>
       <div class="perks-grid">
         {perks.map((p) => (
@@ -110,6 +109,21 @@ const faqs = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+
+  <!-- NO SOMOS UNA CADENA -->
+  <section class="section">
+    <div class="container-sm" style="text-align:center">
+      <span class="eyebrow">Gestión personal</span>
+      <h2 style="font-family:var(--serif); font-size:clamp(1.8rem,3vw,2.6rem); font-weight:400; margin:0.75rem 0 1.5rem;">No somos una cadena. Y eso se nota.</h2>
+      <p style="font-size:1rem; color:var(--stone-600); line-height:1.9; max-width:600px; margin:0 auto 1.25rem;">
+        Aromatik Apartments no funciona como un hotel impersonal ni como una agencia enorme. Cada apartamento lo conozco, lo he preparado y lo gestiono con atención al detalle.
+      </p>
+      <p style="font-size:1rem; color:var(--stone-600); line-height:1.9; max-width:600px; margin:0 auto;">
+        Algunos huéspedes vienen por trabajo, otros por una escapada romántica, otros para descubrir Girona en bicicleta o pasar unos días en familia. Mi trabajo es que el apartamento no sea una preocupación, sino una parte agradable del viaje.
+      </p>
     </div>
   </section>
 
