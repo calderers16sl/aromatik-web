@@ -13,7 +13,7 @@ import BookingWidget from '../components/BookingWidget.astro';
     <p>Selecciona fechas y apartamento. Mejor precio garantizado al reservar directamente con nosotros.</p>
   </section>
 
-  <section class="section">
+  <section class="section" id="reservar-widget">
     <div class="container">
       <div class="booking-benefits">
         <div class="benefit-item"><span>✓</span> Mejor precio garantizado</div>
@@ -28,6 +28,7 @@ import BookingWidget from '../components/BookingWidget.astro';
 </BaseLayout>
 
 <style is:global>
+#reservar-widget { scroll-margin-top: 80px; }
 .reservar-hero {
   text-align: center;
   padding: 5rem 1.5rem 3rem;
