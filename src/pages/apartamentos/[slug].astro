@@ -89,74 +89,93 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   )}
 
   <!-- ═══════════════════════════════════════
+
+  <!-- ═══════════════════════════════════════
        CONTENIDO DEL APARTAMENTO
   ══════════════════════════════════════════ -->
   <div class="max-w-5xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-12">
+    <div class="apt-layout">
 
       <!-- Info principal -->
-      <div class="md:col-span-2">
-        <h1 class="text-4xl font-light mb-2">Apartamento {apt.name}</h1>
-        <p class="text-stone-500 mb-6">{apt.guests} personas · {apt.bedrooms} dorm. · {apt.bathrooms} baños · {apt.size} m²</p>
-        <p class="text-lg text-stone-700 leading-relaxed mb-8">{apt.description}</p>
+      <div class="apt-main">
+        <h1 class="apt-title">Apartamento {apt.name}</h1>
 
-        <h2 class="font-semibold text-lg mb-4">Servicios incluidos</h2>
-        <ul class="grid grid-cols-2 gap-2">
-          {apt.amenities.map(a => (
-            <li class="flex items-center gap-2 text-stone-600 text-sm">
-              <span class="text-green-600">✓</span> {a}
-            </li>
-          ))}
-        </ul>
+        <div class="apt-stats">
+          <span class="stat-badge">👥 {apt.guests} personas</span>
+          <span class="stat-badge">🛏 {apt.bedrooms} dormitorio{apt.bedrooms > 1 ? 's' : ''}</span>
+          <span class="stat-badge">🚿 {apt.bathrooms} baño{apt.bathrooms > 1 ? 's' : ''}</span>
+          <span class="stat-badge">📐 {apt.size} m²</span>
+        </div>
 
-        <div class="mt-8 p-4 bg-stone-50 rounded-xl text-sm text-stone-600">
-          <strong>📍 Ubicación:</strong> Casco antiguo de Girona · Aparcament La Copa (gratuito, 10 min a pie)
+        <div class="apt-divider"></div>
+
+        <p class="apt-description">{apt.description}</p>
+
+        <div class="apt-section">
+          <h2 class="apt-section-title">Servicios incluidos</h2>
+          <ul class="apt-amenities">
+            {apt.amenities.map(a => (
+              <li class="amenity-item">
+                <span class="amenity-check">✓</span>
+                <span>{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="location-box">
+          <span class="location-icon">📍</span>
+          <div>
+            <p class="location-title">Barri Vell de Girona</p>
+            <p class="location-sub">Aparcament La Copa · gratuito · 10 min a pie</p>
+          </div>
         </div>
       </div>
 
       <!-- Sidebar reserva -->
-      <div>
-        <div class="sticky top-24 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-lg mb-2">¿Te gusta?</h3>
-          <p class="text-sm text-stone-600 mb-6">Consulta disponibilidad y reserva directamente.</p>
-          <a href="/reservar" class="block w-full text-center bg-green-800 text-white py-3 rounded-full font-medium hover:bg-green-700 transition-colors mb-3">
-            Ver disponibilidad
-          </a>
-          <a href="/contacto" class="block w-full text-center border border-stone-300 py-3 rounded-full text-sm hover:bg-stone-50 transition-colors">
-            Hacer una pregunta
-          </a>
+      <div class="apt-sidebar">
+        <div class="booking-card">
+          <div class="booking-card-header">
+            <h3 class="booking-card-title">¿Te gusta?</h3>
+            <p class="booking-card-sub">Reserva directo al mejor precio.</p>
+          </div>
+          <a href="/reservar" class="btn-reservar">Ver disponibilidad</a>
+          <a href="/contacto" class="btn-contactar">Hacer una pregunta</a>
+          <p class="booking-note">Sin intermediarios · Confirmación inmediata</p>
         </div>
       </div>
     </div>
 
     <!-- Motor de reservas -->
-    <div class="mt-16">
-      <h2 class="text-2xl font-light text-center mb-8">Reservar {apt.name}</h2>
+    <div class="booking-section">
+      <h2 class="section-heading">Reservar {apt.name}</h2>
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
     <!-- Otros apartamentos -->
-    <div class="mt-16">
-      <h2 class="text-2xl font-light text-center mb-8">Otros apartamentos</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="otros-section">
+      <h2 class="section-heading">Otros apartamentos</h2>
+      <div class="otros-grid">
         {allApartments.filter(a => a.slug !== apt.slug).slice(0, 4).map(a => (
-          <a href={`/apartamentos/${a.slug}`} class="group rounded-xl border border-stone-200 hover:shadow-md transition-all overflow-hidden block">
-            <div class="h-28 bg-stone-100 overflow-hidden">
+          <a href={`/apartamentos/${a.slug}`} class="otro-card group">
+            <div class="otro-img-wrap">
               <img
                 src={`/images/apartamentos/${a.slug}/foto-1.jpg`}
                 alt={a.name}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                class="otro-img group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
             </div>
-            <div class="p-3 text-center">
-              <div class="text-sm font-medium">{a.name}</div>
-              <div class="text-xs text-stone-500">{a.guests} pers.</div>
+            <div class="otro-info">
+              <div class="otro-name">{a.name}</div>
+              <div class="otro-meta">{a.guests} pers. · {a.bedrooms} dorm. · {a.size} m²</div>
             </div>
           </a>
         ))}
       </div>
     </div>
+  </div>
+
   </div>
 
   <!-- ═══════════════════════════════════════
@@ -189,102 +208,46 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     overflow: hidden;
     user-select: none;
   }
-
   .carousel-track {
-    display: flex;
-    height: 100%;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    cursor: grab;
+    display: flex; height: 100%;
+    overflow-x: scroll; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab;
   }
   .carousel-track:active { cursor: grabbing; }
   .carousel-track::-webkit-scrollbar { display: none; }
-
-  .carousel-slide {
-    flex: 0 0 100%;
-    width: 100%;
-    height: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
-
-  .c-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    cursor: zoom-in;
-  }
-
-  .c-counter {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    padding: 4px 10px;
-    border-radius: 20px;
-    pointer-events: none;
-  }
-
-  .c-hint {
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.45);
-    color: rgba(255,255,255,0.9);
-    font-size: 0.75rem;
-    padding: 4px 12px;
-    border-radius: 20px;
-    pointer-events: none;
-    animation: fadeHint 3s ease forwards;
-    backdrop-filter: blur(4px);
-  }
-  @keyframes fadeHint {
-    0%   { opacity: 1; }
-    60%  { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  .c-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.25);
-    border: none;
-    color: #fff;
-    font-size: 1.2rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, opacity 0.2s;
-    z-index: 10;
-    opacity: 0;
-  }
+  .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+  .c-img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .c-counter { position: absolute; bottom: 16px; right: 16px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.8rem; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; pointer-events: none; }
+  .c-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.45); color: rgba(255,255,255,0.9); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; pointer-events: none; animation: fadeHint 3s ease forwards; }
+  @keyframes fadeHint { 0%,60% { opacity:1; } 100% { opacity:0; } }
+  .c-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.25); border: none; color: #fff; font-size: 1.2rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, opacity 0.2s; z-index: 10; opacity: 0; }
   .carousel-wrap:hover .c-btn { opacity: 1; }
   .c-btn:hover { background: rgba(255,255,255,0.35); }
-  .c-prev { left: 12px; }
-  .c-next { right: 12px; }
+  .c-prev { left: 12px; } .c-next { right: 12px; }
   @media (hover: none) { .c-btn { opacity: 0.5; } }
 
-  /* ── CONTENIDO DEL APARTAMENTO ───────────────────── */
+  /* ── LAYOUT APARTAMENTO ──────────────────────────── */
+  .apt-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .apt-layout { grid-template-columns: 1fr; }
+    .apt-sidebar { order: -1; }
+  }
+
+  /* ── INFO PRINCIPAL ──────────────────────────────── */
   .apt-title {
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 2.4rem;
-    font-weight: 300;
+    font-weight: 400;
     color: #1c1917;
     margin-bottom: 1rem;
     line-height: 1.2;
   }
-  @media (max-width: 640px) { .apt-title { font-size: 1.9rem; } }
+  @media (max-width: 640px) { .apt-title { font-size: 1.85rem; } }
 
   .apt-stats {
     display: flex;
@@ -296,7 +259,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    background: #f5f5f4;
+    background: #fafaf9;
     border: 1px solid #e7e5e4;
     color: #44403c;
     font-size: 0.82rem;
@@ -308,37 +271,37 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   .apt-divider {
     border: none;
     border-top: 1px solid #e7e5e4;
-    margin: 1.5rem 0;
+    margin: 1.25rem 0;
   }
 
   .apt-description {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: #57534e;
-    line-height: 1.8;
+    line-height: 1.85;
     margin-bottom: 2rem;
   }
 
-  /* Servicios */
+  /* ── SERVICIOS ───────────────────────────────────── */
   .apt-section { margin-bottom: 2rem; }
   .apt-section-title {
-    font-size: 1rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    color: #1c1917;
-    letter-spacing: 0.04em;
+    color: #9c9490;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e7e5e4;
+    border-bottom: 1px solid #e7e5e4;
   }
-  .amenities-grid {
+  .apt-amenities {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
+    gap: 0.5rem;
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  @media (max-width: 480px) { .amenities-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .apt-amenities { grid-template-columns: 1fr; } }
   .amenity-item {
     display: flex;
     align-items: center;
@@ -348,7 +311,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     padding: 0.5rem 0.75rem;
     background: #fafaf9;
     border: 1px solid #f0efed;
-    border-radius: 0.5rem;
+    border-radius: 8px;
   }
   .amenity-check {
     color: #d0b050;
@@ -356,63 +319,69 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     flex-shrink: 0;
   }
 
-  /* Ubicación */
+  /* ── UBICACIÓN ───────────────────────────────────── */
   .location-box {
     display: flex;
     align-items: flex-start;
     gap: 0.875rem;
     background: #fdf8ec;
     border: 1px solid #e8c870;
-    border-radius: 0.875rem;
+    border-radius: 12px;
     padding: 1rem 1.25rem;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
   }
   .location-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
-  .location-title { font-weight: 600; font-size: 0.9rem; color: #7a5c10; margin: 0 0 0.2rem; }
+  .location-title { font-weight: 600; font-size: 0.875rem; color: #7a5c10; margin: 0 0 0.2rem; }
   .location-sub { font-size: 0.8rem; color: #8a6a20; margin: 0; }
 
-  /* Sidebar booking card */
+  /* ── SIDEBAR BOOKING ─────────────────────────────── */
+  .apt-sidebar { }
   .booking-card {
     position: sticky;
     top: 88px;
     background: #fff;
-    border: 1.5px solid #d6d3d1;
-    border-radius: 1.25rem;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 16px;
     padding: 1.75rem;
     box-shadow: 0 4px 24px rgba(0,0,0,0.07);
   }
   .booking-card-header { margin-bottom: 1.25rem; }
-  .booking-card-title { font-size: 1.2rem; font-weight: 600; color: #1c1917; margin: 0 0 0.3rem; }
-  .booking-card-sub { font-size: 0.85rem; color: #78716c; margin: 0; }
-  .btn-primary {
+  .booking-card-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-weight: 400; color: #1c1917; margin: 0 0 0.3rem; }
+  .booking-card-sub { font-size: 0.83rem; color: #78716c; margin: 0; }
+
+  .btn-reservar {
     display: block;
     width: 100%;
     text-align: center;
     background: #d0b050;
     color: #fff;
     padding: 0.875rem 1.5rem;
-    border-radius: 9999px;
+    border-radius: 8px;
+    font-size: 0.82rem;
     font-weight: 500;
-    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     text-decoration: none;
     transition: background 0.2s;
     margin-bottom: 0.75rem;
   }
-  .btn-primary:hover { background: #b89a40; }
-  .btn-secondary {
+  .btn-reservar:hover { background: #b89a40; }
+
+  .btn-contactar {
     display: block;
     width: 100%;
     text-align: center;
-    border: 1.5px solid #d6d3d1;
+    border: 1.5px solid #e7e5e4;
     color: #44403c;
     padding: 0.875rem 1.5rem;
-    border-radius: 9999px;
-    font-size: 0.875rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
+    transition: border-color 0.2s;
     margin-bottom: 1rem;
   }
-  .btn-secondary:hover { background: #fafaf9; border-color: #a8a29e; }
+  .btn-contactar:hover { border-color: #a8a29e; }
+
   .booking-note {
     font-size: 0.72rem;
     color: #a8a29e;
@@ -420,11 +389,16 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     margin: 0;
   }
 
-  /* Motor reservas */
-  .booking-section { margin-top: 4rem; }
+  /* ── BOOKING WIDGET ──────────────────────────────── */
+  .booking-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e7e5e4;
+  }
   .section-heading {
+    font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.75rem;
-    font-weight: 300;
+    font-weight: 400;
     text-align: center;
     color: #1c1917;
     margin-bottom: 2rem;
@@ -441,7 +415,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 640px) {
     .otros-grid { grid-template-columns: repeat(4, 1fr); }
   }
 
@@ -450,16 +424,15 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     text-decoration: none;
     background: #fff;
     border: 1.5px solid #e7e5e4;
-    border-radius: 1rem;
+    border-radius: 12px;
     overflow: hidden;
     transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
   }
   .otro-card:hover {
     box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-    border-color: #a8a29e;
-    transform: translateY(-2px);
+    border-color: #d0b050;
+    transform: translateY(-3px);
   }
-
   .otro-img-wrap {
     width: 100%;
     height: 160px;
@@ -467,14 +440,12 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     background: #e7e5e4;
   }
   @media (max-width: 640px) { .otro-img-wrap { height: 130px; } }
-
   .otro-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-
   .otro-info {
     padding: 0.875rem 1rem;
     border-top: 1px solid #f0efed;
@@ -483,7 +454,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     font-size: 0.9rem;
     font-weight: 600;
     color: #1c1917;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
   }
   .otro-meta {
     font-size: 0.75rem;
@@ -491,79 +462,16 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   }
 
   /* ── LIGHTBOX ────────────────────────────────────── */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.93);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    touch-action: pan-x;
-  }
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 1000; align-items: center; justify-content: center; touch-action: pan-x; }
   .lightbox.active { display: flex; }
-
-  .lb-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 92vw;
-    max-height: 92vh;
-  }
-  .lb-content img {
-    max-width: 92vw;
-    max-height: 82vh;
-    object-fit: contain;
-    border-radius: 4px;
-  }
-  .lb-counter-text {
-    color: rgba(255,255,255,0.65);
-    font-size: 0.82rem;
-    margin-top: 12px;
-    letter-spacing: 0.06em;
-  }
-  .lb-close {
-    position: fixed;
-    top: 18px;
-    right: 20px;
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: #fff;
-    font-size: 1.3rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    z-index: 1001;
-  }
+  .lb-content { display: flex; flex-direction: column; align-items: center; max-width: 92vw; max-height: 92vh; }
+  .lb-content img { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 4px; }
+  .lb-counter-text { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin-top: 12px; letter-spacing: 0.06em; }
+  .lb-close { position: fixed; top: 18px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 1.3rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1001; }
   .lb-close:hover { background: rgba(255,255,255,0.3); }
-  .lb-prev,
-  .lb-next {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: #fff;
-    font-size: 1.3rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    z-index: 1001;
-  }
-  .lb-prev { left: 14px; }
-  .lb-next { right: 14px; }
-  .lb-prev:hover,
-  .lb-next:hover { background: rgba(255,255,255,0.3); }
+  .lb-prev, .lb-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 1.3rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1001; }
+  .lb-prev { left: 14px; } .lb-next { right: 14px; }
+  .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.3); }
 </style>
 
 <!-- ═══════════════════════════════════════════════════
@@ -676,4 +584,3 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     }, { passive: true });
   }
 </script>
-                                                                                                                                   
