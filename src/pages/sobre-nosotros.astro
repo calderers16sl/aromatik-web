@@ -13,7 +13,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="section">
     <div class="container">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+      <div class="about-grid">
         <div class="prose">
           <p>
             Aromatik Apartments nace en Girona con una idea sencilla: ofrecer apartamentos turísticos bien ubicados,
@@ -43,8 +43,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             que a través de cualquier plataforma externa.
           </p>
         </div>
-        <div>
-          <div style="background:var(--stone-50); border-radius:var(--radius-lg); padding:2.5rem; border:1px solid var(--stone-200);">
+        <div class="about-sidebar">
+          <div class="stats-box">
             <p class="eyebrow" style="margin-bottom:1.5rem">Aromatik Apartments en cifras</p>
             <div style="display:flex; flex-direction:column; gap:1.5rem;">
               {[
@@ -53,15 +53,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 { n: "★ 4.9", label: "Valoración media de huéspedes" },
                 { n: "0%", label: "Comisiones al reservar directo" },
               ].map(item => (
-                <div style="display:flex; align-items:center; gap:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--stone-200);">
-                  <span style="font-family:var(--serif); font-size:2rem; font-weight:400; color:var(--green); min-width:80px;">{item.n}</span>
-                  <span style="font-size:0.875rem; color:var(--stone-600);">{item.label}</span>
+                <div class="stat-row">
+                  <span class="stat-num">{item.n}</span>
+                  <span class="stat-label">{item.label}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div style="margin-top:1.5rem; background:var(--black); color:#fff; border-radius:var(--radius-lg); padding:2rem;">
-            <p style="font-family:var(--serif); font-size:1.1rem; font-weight:400; font-style:italic; line-height:1.65; margin-bottom:1.5rem;">
+          <div class="quote-box">
+            <p class="quote-text">
               "Gestión local, check-in fácil, atención directa y reserva segura en el centro histórico de Girona."
             </p>
             <a href="/reservar" class="btn btn-white" style="font-size:0.75rem;">Reservar ahora</a>
@@ -83,3 +83,77 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .stats-box {
+    background: var(--stone-50);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    border: 1px solid var(--stone-200);
+  }
+
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--stone-200);
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--green);
+    min-width: 80px;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--stone-600);
+  }
+
+  .quote-box {
+    margin-top: 1.5rem;
+    background: var(--black);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+  }
+
+  .quote-text {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .about-sidebar {
+      order: -1;
+    }
+
+    .stats-box {
+      padding: 1.5rem;
+    }
+
+    .stat-num {
+      font-size: 1.6rem;
+      min-width: 64px;
+    }
+  }
+</style>
