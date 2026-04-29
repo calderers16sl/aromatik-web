@@ -2,319 +2,366 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingWidget from '../../components/BookingWidget.astro';
 
-const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576,
-    description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Perfecto para parejas y familias pequeñas que buscan comodidad en el corazón de Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🌸",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
-    description: "Acogedor y aromático como la planta que le da nombre. Ideal para escapadas románticas en el casco antiguo de Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "🌿",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
-  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631,
-    description: "Elegante como el ciprés mediterráneo. Dos habitaciones perfectas para grupos de amigos o familias.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🌲",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg'] },
-  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
-    description: "Tranquilo y relajante como un campo de lavanda. Un refugio de calma en el centro histórico.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "💜",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg'] },
-  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266,
-    description: "Fresco y vibrante. Con capacidad para tres personas, es perfecto para grupos pequeños que quieren explorar Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "🍋",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422,
-    description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🍊",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321,
-    description: "Puro y reconfortante. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly"],
-    emoji: "🌱",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg','foto-22.jpg','foto-23.jpg'] },
-  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430,
-    description: "Alegre y mediterráneo como el geranio de los balcones de Girona. El más amplio de nuestros apartamentos.",
-    amenities: ["WiFi fibra", "Aire acondicionado", "Cocina equipada", "Lavadora", "Bike-friendly", "Ascensor"],
-    emoji: "🌺",
-    photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
-];
-
 export function getStaticPaths() {
-  return apartments.map(apt => ({ params: { slug: apt.slug }, props: { apt } }));
+  const apartments = [
+    { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576, emoji: "🌸", color: "#C8B89A",
+      description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Diseñado con cuidado y equipado con todo lo necesario para disfrutar del Barri Vell de Girona. Perfecto para parejas y familias pequeñas que buscan comodidad y carácter en el corazón histórico de la ciudad.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ascensor", "Ropa de cama incluida", "Check-in flexible"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg', 'foto-20.jpg', 'foto-21.jpg'] },
+    { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021, emoji: "🌿", color: "#8EAB85",
+      description: "Acogedor y aromático como la planta que le da nombre. Un apartamento íntimo en el centro histórico de Girona, ideal para escapadas románticas. La ubicación en el Barri Vell te pone a pasos de los principales monumentos de la ciudad.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ropa de cama incluida"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg', 'foto-20.jpg'] },
+    { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631, emoji: "🌲", color: "#6B9B7E",
+      description: "Elegante como el ciprés mediterráneo. Dos habitaciones bien distribuidas en el corazón del Barri Vell de Girona. Perfecto para grupos de amigos o familias que quieren explorar la ciudad medieval con toda la comodidad.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ascensor", "Ropa de cama incluida"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg'] },
+    { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339, emoji: "💜", color: "#A899BB",
+      description: "Tranquilo y relajante como un campo de lavanda en flor. Un refugio de calma en pleno centro histórico de Girona. La decoración cuidada y la ubicación privilegiada hacen de Lavanda una experiencia única en el Barri Vell.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ropa de cama incluida"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg'] },
+    { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266, emoji: "🍋", color: "#C4BC7E",
+      description: "Fresco y vibrante como el cítrico que lo inspira. Con capacidad para tres personas, es la opción perfecta para grupos pequeños que quieren descubrir Girona desde el Barri Vell con toda la comodidad.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ropa de cama incluida"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg', 'foto-20.jpg', 'foto-21.jpg'] },
+    { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422, emoji: "🍊", color: "#C4A06E",
+      description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona al máximo. Ubicado en el centro histórico, a pocos pasos de la Catedral y el río Onyar.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ascensor", "Ropa de cama incluida"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg', 'foto-20.jpg', 'foto-21.jpg'] },
+    { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321, emoji: "🌱", color: "#7AAF9E",
+      description: "Puro y reconfortante como el árbol de té. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión en pleno corazón del Barri Vell de Girona. Calma y comodidad en un entorno histórico excepcional.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ropa de cama incluida"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg', 'foto-20.jpg', 'foto-21.jpg', 'foto-22.jpg', 'foto-23.jpg'] },
+    { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430, emoji: "🌺", color: "#C49090",
+      description: "Alegre y mediterráneo como los geranios de los balcones de Girona. El más amplio de los apartamentos de Aromatik Apartments, con dos habitaciones bien equipadas en el centro histórico. Un espacio con carácter y comodidad para grupos y familias.",
+      amenities: ["WiFi fibra óptica", "Aire acondicionado", "Cocina totalmente equipada", "Lavadora", "Friendly para bicicletas", "Ascensor", "Ropa de cama incluida", "Check-in flexible"],
+      photos: ['foto-1.jpg', 'foto-2.jpg', 'foto-3.jpg', 'foto-4.jpg', 'foto-5.jpg', 'foto-6.jpg', 'foto-7.jpg', 'foto-8.jpg', 'foto-9.jpg', 'foto-10.jpg', 'foto-11.jpg', 'foto-12.jpg', 'foto-13.jpg', 'foto-14.jpg', 'foto-15.jpg', 'foto-16.jpg', 'foto-17.jpg', 'foto-18.jpg', 'foto-19.jpg', 'foto-20.jpg'] },
+  ];
+  return apartments.map(apt => ({ params: { slug: apt.slug }, props: { apt, allApartments: apartments } }));
 }
 
-const { apt } = Astro.props;
+const { apt, allApartments } = Astro.props;
 const hasGallery = apt.photos && apt.photos.length > 0;
 ---
-<BaseLayout title={apt.name} description={apt.description}>
-
-  <!-- Hero del apartamento -->
-  <section class="h-72 md:h-96 bg-stone-100 overflow-hidden">
+<BaseLayout
+  title={`Apartamento ${apt.name} — Aromatik Apartments, Barri Vell Girona`}
+  description={`${apt.name}: apartamento boutique para ${apt.guests} personas en el Barri Vell de Girona. ${apt.size} m², ${apt.bedrooms === 1 ? '1 habitación' : apt.bedrooms + ' habitaciones'}. Reserva directa con Aromatik Apartments.`}
+>
+  <!-- HERO APARTAMENTO -->
+  <div class="apt-detail-hero" style="overflow:hidden; position:relative;">
     <img
       src={`/images/apartamentos/${apt.slug}/foto-1.jpg`}
-      alt={`Apartamento ${apt.name} en Girona`}
-      class="w-full h-full object-cover"
+      alt={`Apartamento ${apt.name} en el Barri Vell de Girona`}
+      style="width:100%; height:100%; object-fit:cover; display:block;"
     />
-  </section>
-
-  <div class="max-w-5xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-12">
-      <!-- Info principal -->
-      <div class="md:col-span-2">
-        <h1 class="text-4xl font-light mb-2">Apartamento {apt.name}</h1>
-        <p class="text-stone-500 mb-6">{apt.guests} personas · {apt.bedrooms} dorm. · {apt.bathrooms} baño · {apt.size} m²</p>
-        <p class="text-lg text-stone-700 leading-relaxed mb-8">{apt.description}</p>
-        <h2 class="font-semibold text-lg mb-4">Servicios incluidos</h2>
-        <ul class="grid grid-cols-2 gap-2">
-          {apt.amenities.map(a => (
-            <li class="flex items-center gap-2 text-stone-600 text-sm">
-              <span class="text-green-600">✓</span> {a}
-            </li>
-          ))}
-        </ul>
-        <div class="mt-8 p-4 bg-stone-50 rounded-xl text-sm text-stone-600">
-          <strong>📍 Ubicación:</strong> Casco antiguo de Girona · Aparcament La Copa (gratuito, 10 min a pie)
-        </div>
-      </div>
-      <!-- Sidebar -->
-      <div>
-        <div class="sticky top-24 bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
-          <h3 class="font-semibold text-lg mb-2">¿Te gusta?</h3>
-          <p class="text-sm text-stone-600 mb-6">Consulta disponibilidad y reserva directamente.</p>
-          <a href="/reservar" class="block w-full text-center bg-green-800 text-white py-3 rounded-full font-medium hover:bg-green-700 transition-colors mb-3">
-            Ver disponibilidad
-          </a>
-          <a href="/contacto" class="block w-full text-center border border-stone-300 py-3 rounded-full text-sm hover:bg-stone-50 transition-colors">
-            Hacer una pregunta
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Galería de fotos -->
-    {hasGallery && (
-      <div class="mt-16">
-        <h2 class="text-2xl font-light text-center mb-8">Galería de fotos</h2>
-        <div class="gallery-grid">
-          {apt.photos.map((photo, i) => (
-            <button
-              class="gallery-thumb-btn"
-              data-index={i}
-              onclick="openLightbox(this)"
-              aria-label={`Ver foto ${i + 1} de ${apt.name}`}
-            >
-              <img
-                src={`/images/apartamentos/${apt.slug}/${photo}`}
-                alt={`${apt.name} - foto ${i + 1}`}
-                loading="lazy"
-              />
-            </button>
-          ))}
-        </div>
-      </div>
-    )}
-
-    <!-- Motor de reservas -->
-    <div class="mt-16">
-      <h2 class="text-2xl font-light text-center mb-8">Reservar {apt.name}</h2>
-      <BookingWidget smoobuId={apt.smoobuId} />
-    </div>
-
-    <!-- Otros apartamentos -->
-    <div class="mt-16">
-      <h2 class="text-2xl font-light text-center mb-8">Otros apartamentos</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {apartments.filter(a => a.slug !== apt.slug).slice(0,4).map(a => (
-          <a href={`/apartamentos/${a.slug}`} class="group rounded-xl border border-stone-200 hover:shadow-md transition-all overflow-hidden block">
-            <div class="h-28 bg-stone-100 overflow-hidden">
-              <img
-                src={`/images/apartamentos/${a.slug}/foto-1.jpg`}
-                alt={a.name}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-3 text-center">
-              <div class="text-sm font-medium">{a.name}</div>
-              <div class="text-xs text-stone-500">{a.guests} pers.</div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
   </div>
 
-  <!-- Lightbox -->
-  {hasGallery && (
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label={`Galería de ${apt.name}`} onclick="closeLightboxOutside(event)">
-      <button class="lb-close" onclick="closeLightbox()" aria-label="Cerrar galería">✕</button>
-      <button class="lb-prev" onclick="prevPhoto()" aria-label="Foto anterior">❮</button>
-      <button class="lb-next" onclick="nextPhoto()" aria-label="Foto siguiente">❯</button>
-      <div class="lb-content">
-        <img id="lb-img" src="" alt="" />
-        <p id="lb-counter" class="lb-counter"></p>
+  <!-- CONTENIDO PRINCIPAL -->
+  <section class="section">
+    <div class="container">
+      <div class="apt-detail-grid">
+
+        <!-- INFORMACIÓN -->
+        <div>
+          <p class="eyebrow" style="margin-bottom:0.75rem">Un apartamento de Aromatik Apartments</p>
+          <h1 class="apt-detail-title">{apt.name}</h1>
+          <p class="apt-detail-meta">
+            {apt.guests} personas &nbsp;·&nbsp; {apt.bedrooms === 1 ? '1 habitación' : `${apt.bedrooms} habitaciones`} &nbsp;·&nbsp; {apt.bathrooms} baño &nbsp;·&nbsp; {apt.size} m²
+          </p>
+          <p class="apt-detail-desc">{apt.description}</p>
+
+          <p class="amenities-label">Servicios incluidos</p>
+          <ul class="amenities-grid">
+            {apt.amenities.map((a: string) => (
+              <li><span class="check-icon">✓</span> {a}</li>
+            ))}
+          </ul>
+
+          <div class="location-box mt-8">
+            <strong>📍 Ubicación:</strong> Barri Vell de Girona — a pocos minutos a pie de la Catedral, el Call Jueu y el río Onyar.<br/>
+            <span style="color:var(--stone-500)">Parking gratuito La Copa a 10 min a pie · Parkings de pago Saba disponibles cerca.</span>
+          </div>
+        </div>
+
+        <!-- TARJETA RESERVA -->
+        <div>
+          <div class="booking-card">
+            <h3>¿Te gusta {apt.name}?</h3>
+            <p>Gestión local, check-in fácil, atención directa y reserva segura en el centro histórico de Girona.</p>
+            <a href="/reservar" class="btn btn-green">Ver disponibilidad</a>
+            <a href="/contacto" class="btn btn-border">Hacer una pregunta</a>
+            <hr class="divider" style="margin:1.25rem 0"/>
+            <p style="font-size:0.75rem; color:var(--stone-400); line-height:1.7; text-align:center;">
+              Mejor precio garantizado al reservar directamente con Aromatik Apartments
+            </p>
+          </div>
+        </div>
+
       </div>
+
+      <!-- GALERÍA DE FOTOS -->
+      {hasGallery && (
+        <div class="gallery-section">
+          <h2 class="gallery-title">Galería de fotos</h2>
+          <div class="gallery-grid" id="gallery-grid">
+            {apt.photos.map((photo: string, i: number) => (
+              <button
+                class="gallery-thumb-btn"
+                data-index={i}
+                aria-label={`Ver foto ${i + 1} de ${apt.name}`}
+                onclick="openLightbox(this)"
+              >
+                <img
+                  src={`/images/apartamentos/${apt.slug}/${photo}`}
+                  alt={`${apt.name} — foto ${i + 1}`}
+                  class="gallery-thumb"
+                  loading="lazy"
+                />
+                <span class="gallery-thumb-overlay">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                  </svg>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- LIGHTBOX -->
+      {hasGallery && (
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotos" onclick="closeLightboxOutside(event)">
+          <button class="lb-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+          <button class="lb-prev" onclick="prevPhoto()" aria-label="Foto anterior">&#8249;</button>
+          <button class="lb-next" onclick="nextPhoto()" aria-label="Foto siguiente">&#8250;</button>
+          <div class="lb-content">
+            <img id="lb-img" src="" alt="" class="lb-image" />
+            <p id="lb-counter" class="lb-counter"></p>
+          </div>
+        </div>
+      )}
+
+      <!-- MOTOR DE RESERVAS -->
+      <div class="mt-16">
+        <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:2rem;">
+          Reservar apartamento {apt.name}
+        </h2>
+        <BookingWidget smoobuId={apt.smoobuId} />
+      </div>
+
+      <!-- OTROS APARTAMENTOS -->
+      <div class="mt-16">
+        <h2 style="font-family:var(--serif); font-size:1.5rem; font-weight:400; text-align:center; margin-bottom:2rem;">
+          Otros apartamentos de Aromatik Apartments
+        </h2>
+        <div class="other-apts-grid">
+          {allApartments.filter((a: any) => a.slug !== apt.slug).slice(0, 4).map((a: any) => (
+            <a href={`/apartamentos/${a.slug}`} class="other-apt">
+              <div class="other-apt-img">
+                <img
+                  src={`/images/apartamentos/${a.slug}/foto-1.jpg`}
+                  alt={a.name}
+                  loading="lazy"
+                  style="width:100%; height:100%; object-fit:cover; border-radius:6px 6px 0 0;"
+                />
+              </div>
+              <div class="other-apt-name">{a.name}</div>
+              <div class="other-apt-cap">{a.guests} personas</div>
+            </a>
+          ))}
+        </div>
+      </div>
+
     </div>
-  )}
+  </section>
 
 </BaseLayout>
 
-<style>
-  /* Galería grid */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  @media (min-width: 768px) {
-    .gallery-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
+<style is:global>
+/* GALERÍA */
+.gallery-section {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--stone-200);
+}
+.gallery-title {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--black);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
 
-  .gallery-thumb-btn {
-    aspect-ratio: 1;
-    overflow: hidden;
-    border-radius: 8px;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    background: #e7e5e4;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .gallery-thumb-btn:hover {
-    opacity: 0.85;
-    transform: scale(1.02);
-  }
-  .gallery-thumb-btn img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+.gallery-thumb-btn {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 6px;
+  aspect-ratio: 4/3;
+  display: block;
+  width: 100%;
+}
+.gallery-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.gallery-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.gallery-thumb-btn:hover .gallery-thumb { transform: scale(1.05); }
+.gallery-thumb-btn:hover .gallery-thumb-overlay { background: rgba(0,0,0,0.35); opacity: 1; }
 
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.92);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  .lightbox.active {
-    display: flex;
-  }
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  animation: lbFadeIn 0.2s ease;
+}
+.lightbox.active { display: flex; }
+@keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  .lb-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 90vw;
-    max-height: 90vh;
-  }
-  .lb-content img {
-    max-width: 90vw;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 4px;
-  }
-  .lb-counter {
-    color: rgba(255,255,255,0.7);
-    font-size: 0.85rem;
-    margin-top: 12px;
-    letter-spacing: 0.05em;
-  }
-
-  .lb-close {
-    position: fixed;
-    top: 20px;
-    right: 24px;
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: white;
-    font-size: 1.4rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    z-index: 1001;
-  }
-  .lb-close:hover { background: rgba(255,255,255,0.3); }
-
-  .lb-prev,
-  .lb-next {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: white;
-    font-size: 1.4rem;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-    z-index: 1001;
-  }
-  .lb-prev { left: 16px; }
-  .lb-next { right: 16px; }
-  .lb-prev:hover,
-  .lb-next:hover { background: rgba(255,255,255,0.3); }
+.lb-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.lb-image {
+  max-width: 90vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.lb-counter {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+.lb-close {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.75rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  z-index: 10000;
+  line-height: 1;
+}
+.lb-close:hover { opacity: 1; }
+.lb-prev, .lb-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+  z-index: 10000;
+}
+.lb-prev { left: 1rem; }
+.lb-next { right: 1rem; }
+.lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.22); }
+@media (max-width: 600px) {
+  .lb-prev { left: 0.25rem; padding: 0.4rem 0.75rem; font-size: 2rem; }
+  .lb-next { right: 0.25rem; padding: 0.4rem 0.75rem; font-size: 2rem; }
+}
 </style>
 
-<script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>
-  if (photos && photos.length > 0) {
-    let current = 0;
+<script define:vars={{ photos: apt.photos, slug: apt.slug, name: apt.name }}>
+  let current = 0;
 
-    function showPhoto() {
-      const img = document.getElementById('lb-img');
-      const counter = document.getElementById('lb-counter');
-      if (!img || !counter) return;
-      img.src = `/images/apartamentos/${slug}/${photos[current]}`;
-      img.alt = `${aptName} - foto ${current + 1}`;
-      counter.textContent = `${current + 1} / ${photos.length}`;
-    }
+  function buildSrc(photo) {
+    return `/images/apartamentos/${slug}/${photo}`;
+  }
 
-    window.openLightbox = function(btn) {
-      current = parseInt(btn.dataset.index);
-      showPhoto();
-      const lb = document.getElementById('lightbox');
-      if (lb) {
-        lb.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    };
+  function openLightbox(btn) {
+    current = parseInt(btn.dataset.index, 10);
+    showPhoto();
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-    window.closeLightbox = function() {
-      const lb = document.getElementById('lightbox');
-      if (lb) {
-        lb.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    };
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
-    window.closeLightboxOutside = function(e) {
-      if (e.target === document.getElementById('lightbox')) {
-        window.closeLightbox();
-      }
-    };
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
 
-    window.nextPhoto = function() {
-      current = (current + 1) % photos.length;
-      showPhoto();
+  function showPhoto() {
+    const img = document.getElementById('lb-img');
+    const counter = document.getElementById('lb-counter');
+    img.src = buildSrc(photos[current]);
+    img.alt = `${name} — foto ${current + 1}`;
+    counter.textContent = `${current + 1} / ${photos.length}`;
+  }
+
+  function nextPhoto() {
+    current = (current + 1) % photos.length;
+    showPhoto();
+  }
+
+  function prevPhoto() {
+    current = (current - 1 + photos.length) % photos.length;
+    showPhoto();
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (!lb || !lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextPhoto();
+    if (e.key === 'ArrowLeft') prevPhoto();
+  });
+
+  // Expose to inline onclick handlers
+  window.openLightbox = openLightbox;
+  window.closeLightbox = closeLightbox;
+  window.closeLightboxOutside = closeLightboxOutside;
+  window.nextPhoto = nextPhoto;
+  window.prevPhoto = prevPhoto;
+</script>
