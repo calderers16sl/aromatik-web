@@ -184,7 +184,6 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   .carousel-wrap {
     position: relative;
     width: 100%;
-    /* Altura: en móvil ocupa casi la pantalla, en desktop es más compacto */
     height: min(72vw, 520px);
     background: #1c1917;
     overflow: hidden;
@@ -196,8 +195,8 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     height: 100%;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* iOS momentum */
-    scrollbar-width: none;            /* Firefox */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     cursor: grab;
   }
   .carousel-track:active { cursor: grabbing; }
@@ -217,10 +216,8 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     object-fit: cover;
     display: block;
     cursor: zoom-in;
-    /* Sin transición para que el swipe se sienta instantáneo */
   }
 
-  /* Contador */
   .c-counter {
     position: absolute;
     bottom: 16px;
@@ -234,7 +231,6 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     pointer-events: none;
   }
 
-  /* Hint "desliza" */
   .c-hint {
     position: absolute;
     bottom: 16px;
@@ -255,7 +251,6 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     100% { opacity: 0; }
   }
 
-  /* Flechas: ocultas en móvil táctil, visibles en hover en desktop */
   .c-btn {
     position: absolute;
     top: 50%;
@@ -273,16 +268,226 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     justify-content: center;
     transition: background 0.2s, opacity 0.2s;
     z-index: 10;
-    opacity: 0;                  /* ocultas por defecto */
+    opacity: 0;
   }
-  .carousel-wrap:hover .c-btn { opacity: 1; }   /* aparecen al hover */
+  .carousel-wrap:hover .c-btn { opacity: 1; }
   .c-btn:hover { background: rgba(255,255,255,0.35); }
   .c-prev { left: 12px; }
   .c-next { right: 12px; }
+  @media (hover: none) { .c-btn { opacity: 0.5; } }
 
-  /* En móvil puro (sin hover) siempre las mostramos sutilmente */
-  @media (hover: none) {
-    .c-btn { opacity: 0.5; }
+  /* ── CONTENIDO DEL APARTAMENTO ───────────────────── */
+  .apt-title {
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: #1c1917;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  @media (max-width: 640px) { .apt-title { font-size: 1.9rem; } }
+
+  .apt-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .stat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #f5f5f4;
+    border: 1px solid #e7e5e4;
+    color: #44403c;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .apt-divider {
+    border: none;
+    border-top: 1px solid #e7e5e4;
+    margin: 1.5rem 0;
+  }
+
+  .apt-description {
+    font-size: 1.1rem;
+    color: #57534e;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  /* Servicios */
+  .apt-section { margin-bottom: 2rem; }
+  .apt-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1c1917;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e7e5e4;
+  }
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  @media (max-width: 480px) { .amenities-grid { grid-template-columns: 1fr; } }
+  .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    color: #57534e;
+    padding: 0.5rem 0.75rem;
+    background: #fafaf9;
+    border: 1px solid #f0efed;
+    border-radius: 0.5rem;
+  }
+  .amenity-check {
+    color: #15803d;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Ubicación */
+  .location-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 0.875rem;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+  }
+  .location-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .location-title { font-weight: 600; font-size: 0.9rem; color: #14532d; margin: 0 0 0.2rem; }
+  .location-sub { font-size: 0.8rem; color: #166534; margin: 0; }
+
+  /* Sidebar booking card */
+  .booking-card {
+    position: sticky;
+    top: 88px;
+    background: #fff;
+    border: 1.5px solid #d6d3d1;
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  }
+  .booking-card-header { margin-bottom: 1.25rem; }
+  .booking-card-title { font-size: 1.2rem; font-weight: 600; color: #1c1917; margin: 0 0 0.3rem; }
+  .booking-card-sub { font-size: 0.85rem; color: #78716c; margin: 0; }
+  .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #166534;
+    color: #fff;
+    padding: 0.875rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-bottom: 0.75rem;
+  }
+  .btn-primary:hover { background: #15803d; }
+  .btn-secondary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 1.5px solid #d6d3d1;
+    color: #44403c;
+    padding: 0.875rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    margin-bottom: 1rem;
+  }
+  .btn-secondary:hover { background: #fafaf9; border-color: #a8a29e; }
+  .booking-note {
+    font-size: 0.72rem;
+    color: #a8a29e;
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Motor reservas */
+  .booking-section { margin-top: 4rem; }
+  .section-heading {
+    font-size: 1.75rem;
+    font-weight: 300;
+    text-align: center;
+    color: #1c1917;
+    margin-bottom: 2rem;
+  }
+
+  /* ── OTROS APARTAMENTOS ──────────────────────────── */
+  .otros-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e7e5e4;
+  }
+  .otros-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .otros-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .otro-card {
+    display: block;
+    text-decoration: none;
+    background: #fff;
+    border: 1.5px solid #e7e5e4;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+  }
+  .otro-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    border-color: #a8a29e;
+    transform: translateY(-2px);
+  }
+
+  .otro-img-wrap {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    background: #e7e5e4;
+  }
+  @media (max-width: 640px) { .otro-img-wrap { height: 130px; } }
+
+  .otro-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .otro-info {
+    padding: 0.875rem 1rem;
+    border-top: 1px solid #f0efed;
+  }
+  .otro-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1c1917;
+    margin-bottom: 0.25rem;
+  }
+  .otro-meta {
+    font-size: 0.75rem;
+    color: #78716c;
   }
 
   /* ── LIGHTBOX ────────────────────────────────────── */
@@ -294,7 +499,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     z-index: 1000;
     align-items: center;
     justify-content: center;
-    touch-action: pan-x; /* swipe táctil en lightbox */
+    touch-action: pan-x;
   }
   .lightbox.active { display: flex; }
 
