@@ -66,8 +66,8 @@ const schemaOrg = JSON.stringify({
       --stone-600: #6B6560;
       --stone-800: #3A3530;
       --black: #1A1816;
-      --green: #2C5F2E;
-      --green-hover: #224A23;
+      --gold: #d0b050;
+      --gold-hover: #b89a40;
       --serif: 'Playfair Display', Georgia, serif;
       --sans: 'DM Sans', system-ui, sans-serif;
       --radius: 4px;
@@ -82,12 +82,12 @@ const schemaOrg = JSON.stringify({
     .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--stone-200); transition: box-shadow 0.3s; }
     .header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     .header-logo { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.04em; }
-    .header-logo em { font-style: normal; color: var(--green); }
+    .header-logo em { font-style: normal; color: var(--gold); }
     .header-nav { display: flex; align-items: center; gap: 2.5rem; }
     .header-nav a { font-size: 0.825rem; font-weight: 400; color: var(--stone-600); letter-spacing: 0.02em; transition: color 0.2s; }
     .header-nav a:hover { color: var(--black); }
-    .nav-cta { background: var(--green) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: var(--radius); font-size: 0.75rem !important; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500 !important; transition: background 0.2s !important; }
-    .nav-cta:hover { background: var(--green-hover) !important; }
+    .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: var(--radius); font-size: 0.75rem !important; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500 !important; transition: background 0.2s !important; }
+    .nav-cta:hover { background: var(--gold-hover) !important; }
     .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; }
     .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: all 0.3s; }
     @media (max-width: 768px) {
@@ -99,7 +99,7 @@ const schemaOrg = JSON.stringify({
 
     /* ── HERO ── */
     .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); overflow: hidden; padding-top: 70px; }
-    .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1a2e1c 0%, #2C5F2E 40%, #1e3d20 70%, #111e12 100%); background-image: url("/images/hero-girona.jpg"); background-size: cover; background-position: center; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1a1510 0%, #2a1f0a 40%, #1e1708 70%, #110e06 100%); background-image: url("/images/hero-girona.jpg"); background-size: cover; background-position: center; }
     .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.25); }
     .hero-inner { position: relative; z-index: 1; max-width: 820px; padding: 4rem 2rem; }
     .hero-eyebrow { display: inline-block; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 2rem; font-weight: 300; }
@@ -116,8 +116,8 @@ const schemaOrg = JSON.stringify({
     .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
     .btn-dark { background: var(--black); color: var(--white); }
     .btn-dark:hover { background: var(--stone-800); }
-    .btn-green { background: var(--green); color: var(--white); }
-    .btn-green:hover { background: var(--green-hover); }
+    .btn-green { background: var(--gold); color: var(--white); }
+    .btn-green:hover { background: var(--gold-hover); }
     .btn-border { border: 1px solid var(--stone-200); color: var(--stone-600); background: var(--white); }
     .btn-border:hover { border-color: var(--black); color: var(--black); }
 
@@ -153,7 +153,7 @@ const schemaOrg = JSON.stringify({
     .apt-card-body { padding: 1.25rem 1.5rem; }
     .apt-card-body h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.3rem; }
     .apt-meta { font-size: 0.78rem; color: var(--stone-500); margin-bottom: 0.875rem; }
-    .apt-link { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+    .apt-link { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
 
     /* ── BRAND STATEMENT ── */
     .brand-statement { padding: 6rem 2rem; text-align: center; background: var(--black); }
@@ -203,7 +203,7 @@ const schemaOrg = JSON.stringify({
     .amenities-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone-500); margin-bottom: 1rem; font-weight: 500; }
     .amenities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; list-style: none; }
     .amenities-grid li { font-size: 0.85rem; color: var(--stone-600); display: flex; align-items: center; gap: 0.5rem; }
-    .check-icon { color: var(--green); font-weight: 600; font-size: 0.8rem; }
+    .check-icon { color: var(--gold); font-weight: 600; font-size: 0.8rem; }
     .location-box { background: var(--stone-50); border-radius: var(--radius); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--stone-600); margin-top: 2rem; line-height: 1.7; }
 
     .booking-card { position: sticky; top: 90px; border: 1px solid var(--stone-200); border-radius: var(--radius-lg); padding: 2rem; background: var(--white); }
@@ -275,7 +275,7 @@ const schemaOrg = JSON.stringify({
       line-height: 1.85;
       margin-bottom: 0.75rem;
     }
-    .legal-content a { color: var(--green); }
+    .legal-content a { color: var(--gold); }
     .legal-note {
       margin-top: 3rem;
       padding: 1.25rem 1.5rem;
