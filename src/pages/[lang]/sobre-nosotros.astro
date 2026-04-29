@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+const t = getT(lang);
+---
+<BaseLayout title={`${t.aboutTitle} — Aromatik Apartments`} lang={lang}>
+  <div class="inner-hero">
+    <h1>{t.aboutTitle}</h1>
+    <p>{t.aboutSubtitle}</p>
+  </div>
+  <section class="section">
+    <div class="container-sm">
+      <div class="prose">
+        <p>Aromatik Apartments es una colección de ocho apartamentos turísticos boutique situados en el Barri Vell de Girona, el corazón histórico de la ciudad. Cada apartamento lleva el nombre de una planta aromática y está diseñado para ofrecer una experiencia de alojamiento auténtica, cómoda y con personalidad propia.</p>
+        <h2>Nuestra filosofía</h2>
+        <p>Creemos que la mejor manera de conocer Girona es desde dentro: vivir en el centro histórico, pasear por sus callejones medievales, descubrir sus rincones escondidos. Por eso todos nuestros apartamentos están en el Barri Vell, a pocos metros de la Catedral, el Call Jueu y los monumentos más emblemáticos.</p>
+        <h2>Gestión local y directa</h2>
+        <p>Somos un equipo local comprometido con ofrecer la mejor experiencia a cada huésped. Gestionamos directamente todos los apartamentos, lo que nos permite garantizar estándares de calidad consistentes y una atención personalizada. Cuando nos contactas, hablas con nosotros, no con una centralita.</p>
+        <h2>Reserva directa</h2>
+        <p>Apostamos por la reserva directa porque beneficia a todos: tú obtienes el mejor precio y el trato más cercano; nosotros podemos invertir en mantener y mejorar los apartamentos sin pagar comisiones a plataformas externas.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

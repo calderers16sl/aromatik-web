@@ -1,10 +1,15 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BookingWidget from '../components/BookingWidget.astro';
-import { getT } from '../i18n/translations';
-const t = getT('es');
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BookingWidget from '../../components/BookingWidget.astro';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+const t = getT(lang);
 ---
-<BaseLayout title={`${t.bookTitle} — Aromatik Apartments`} description={t.metaDescription} lang="es">
+<BaseLayout title={`${t.bookTitle} — Aromatik Apartments`} description={t.metaDescription} lang={lang}>
   <section class="reservar-hero">
     <span class="eyebrow">{t.bookEyebrow}</span>
     <h1>{t.bookTitle}</h1>

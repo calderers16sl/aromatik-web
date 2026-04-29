@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+---
+<BaseLayout title="Aromatik Apartments" lang={lang}>
+  <div style="margin-top:70px; text-align:center; padding:6rem 2rem;">
+    <script>window.location.replace(window.location.pathname.replace(/^\/[a-z]{2}\//, '/'));</script>
+  </div>
+</BaseLayout>

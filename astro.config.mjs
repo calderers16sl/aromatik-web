@@ -4,7 +4,7 @@ export default defineConfig({
   site: 'https://aromatik.apartments',
   i18n: {
     defaultLocale: 'es',
-    locales: ['es', 'en', 'ca', 'fr', 'de'],
+    locales: ['es', 'en', 'ca', 'fr', 'de', 'zh', 'ko'],
     routing: { prefixDefaultLocale: false }
   }
 });

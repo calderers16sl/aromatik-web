@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getT, type Locale } from '../i18n/translations';
+
+export interface Props { lang: Locale; }
+const { lang } = Astro.props;
+const t = getT(lang);
+const base = lang === 'es' ? '' : `/${lang}`;
+const privacyLink = `${base}/privacy`;
+const apartments = ["Ylang-Ylang","Romaní","Ciprés","Lavanda","Limón","Bergamota","Árbol de té","Geranio"];
+---
+<BaseLayout title={`${t.contactTitle} — Aromatik Apartments`} description={t.metaDescription} lang={lang}>
+  <section class="contact-hero" style="margin-top:70px;">
+    <span class="eyebrow">{t.contactEyebrow}</span>
+    <h1>{t.contactTitle}</h1>
+    <p>{t.contactSubtitle}</p>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <h2>{t.contactHeading}</h2>
+        <p class="contact-intro">{t.contactIntro}</p>
+        <div class="contact-methods">
+          <a href="https://wa.me/34682636848" class="contact-method" target="_blank" rel="noopener">
+            <span class="contact-method-icon">💬</span>
+            <div><strong>{t.contactWaLabel}</strong><span>+34 682 636 848</span></div>
+          </a>
+          <a href="mailto:hola@aromatik.apartments" class="contact-method">
+            <span class="contact-method-icon">✉️</span>
+            <div><strong>{t.contactEmailLabel}</strong><span>hola@aromatik.apartments</span></div>
+          </a>
+          <div class="contact-method">
+            <span class="contact-method-icon">📍</span>
+            <div><strong>{t.contactLocLabel}</strong><span>{t.contactLocValue}</span></div>
+          </div>
+          <div class="contact-method">
+            <span class="contact-method-icon">🕐</span>
+            <div><strong>{t.contactHoursLabel}</strong><span>{t.contactHoursValue}</span></div>
+          </div>
+        </div>
+        <div class="contact-note">
+          <p><strong>{t.contactUrgTitle}</strong> {t.contactUrgText}</p>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h2>{t.contactFormTitle}</h2>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">{t.contactFormName}</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">{t.contactFormEmail}</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="checkin">{t.contactFormCheckin}</label>
+            <input type="date" id="checkin" name="checkin" />
+          </div>
+          <div class="form-group">
+            <label for="checkout">{t.contactFormCheckout}</label>
+            <input type="date" id="checkout" name="checkout" />
+          </div>
+          <div class="form-group">
+            <label for="apartment">{t.contactFormApt}</label>
+            <select id="apartment" name="apartment">
+              <option value="">{t.contactFormAptDefault}</option>
+              {apartments.map(a => <option value={a}>{a}</option>)}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">{t.contactFormMsg}</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-green" id="submitBtn" style="width:100%">{t.contactFormSubmit}</button>
+          <p class="form-disclaimer">
+            <a href={privacyLink}>{t.footerPrivacy}</a>
+          </p>
+        </form>
+        <div class="form-success" id="formSuccess" style="display:none">
+          <span class="success-icon">✓</span>
+          <h3>{t.contactFormOk}</h3>
+        </div>
+        <div class="form-error" id="formError" style="display:none">
+          <p>{t.contactFormErr}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+.contact-hero { text-align: center; padding: 5rem 1.5rem 3rem; background: var(--cream); }
+.contact-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; margin: 0.5rem 0 1rem; }
+.contact-hero p { color: var(--stone-500); max-width: 500px; margin: 0 auto; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.contact-info h2, .contact-form-wrap h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem; }
+.contact-intro { color: var(--stone-500); margin-bottom: 2rem; line-height: 1.7; }
+.contact-methods { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.contact-method { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--stone-200); border-radius: 12px; text-decoration: none; color: var(--black); transition: border-color 0.2s, box-shadow 0.2s; }
+a.contact-method:hover { border-color: var(--green); box-shadow: 0 2px 12px rgba(44,95,46,0.08); }
+.contact-method-icon { font-size: 1.4rem; flex-shrink: 0; }
+.contact-method strong { display: block; font-size: 0.85rem; font-weight: 600; }
+.contact-method span { font-size: 0.9rem; color: var(--stone-500); }
+.contact-note { background: var(--cream); border-left: 3px solid var(--green); padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; font-size: 0.9rem; color: var(--stone-600); }
+.form-group { margin-bottom: 1.25rem; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--stone-200); border-radius: 8px; font-size: 0.95rem; font-family: var(--sans); background: white; transition: border-color 0.2s, box-shadow 0.2s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(44,95,46,0.1); }
+.form-group textarea { resize: vertical; }
+.form-disclaimer { font-size: 0.75rem; color: var(--stone-400); text-align: center; margin-top: 0.75rem; }
+.form-disclaimer a { color: var(--stone-500); }
+.form-success { text-align: center; padding: 3rem 2rem; border: 2px solid var(--green); border-radius: 16px; }
+.success-icon { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; background: var(--green); color: white; border-radius: 50%; font-size: 1.5rem; margin-bottom: 1rem; }
+.form-success h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; }
+.form-error { padding: 1rem; background: #fce4ec; border-radius: 8px; color: #b71c1c; font-size: 0.9rem; margin-top: 1rem; }
+</style>
+
+<script>
+const form = document.getElementById('contactForm') as HTMLFormElement | null;
+const successEl = document.getElementById('formSuccess');
+const errorEl = document.getElementById('formError');
+const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement | null;
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (submitBtn) submitBtn.disabled = true;
+    const fd = new FormData(form);
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', body: fd });
+      if (res.ok) {
+        form.style.display = 'none';
+        if (successEl) successEl.style.display = 'block';
+      } else throw new Error();
+    } catch {
+      if (errorEl) errorEl.style.display = 'block';
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+}
+</script>

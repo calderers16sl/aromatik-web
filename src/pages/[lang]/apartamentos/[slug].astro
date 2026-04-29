@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BookingWidget from '../../../components/BookingWidget.astro';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../../i18n/translations';
+
+export function getStaticPaths() {
+  const APARTMENTS = [
+    { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576,
+      description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Perfecto para parejas y familias pequeñas que buscan comodidad en el corazón de Girona.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly","Ascensor"], emoji: "🌸",
+      photos: Array.from({length:21}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
+      description: "Acogedor y aromático como la planta que le da nombre. Ideal para escapadas románticas en el casco antiguo de Girona.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly"], emoji: "🌿",
+      photos: Array.from({length:20}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631,
+      description: "Elegante como el ciprés mediterráneo. Dos habitaciones perfectas para grupos de amigos o familias.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly","Ascensor"], emoji: "🌲",
+      photos: Array.from({length:12}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
+      description: "Tranquilo y relajante como un campo de lavanda. Un refugio de calma en el centro histórico.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly"], emoji: "💜",
+      photos: Array.from({length:19}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266,
+      description: "Fresco y vibrante. Con capacidad para tres personas, es perfecto para grupos pequeños que quieren explorar Girona.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly"], emoji: "🍋",
+      photos: Array.from({length:21}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422,
+      description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly","Ascensor"], emoji: "🍊",
+      photos: Array.from({length:21}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321,
+      description: "Puro y reconfortante. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly"], emoji: "🌱",
+      photos: Array.from({length:23}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+    { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430,
+      description: "Alegre y mediterráneo como el geranio de los balcones de Girona. El más amplio de nuestros apartamentos.",
+      amenities: ["WiFi fibra","Aire acondicionado","Cocina equipada","Lavadora","Bike-friendly","Ascensor"], emoji: "🌺",
+      photos: Array.from({length:20}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
+  ];
+  const paths = [];
+  for (const lang of NON_DEFAULT_LOCALES) {
+    for (const apt of APARTMENTS) {
+      paths.push({ params: { lang, slug: apt.slug }, props: { apt, allApartments: APARTMENTS } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params as { lang: Locale; slug: string };
+const { apt, allApartments } = Astro.props;
+const t = getT(lang);
+const hasPhotos = apt.photos && apt.photos.length > 0;
+---
+<BaseLayout title={apt.name} description={apt.description} lang={lang}>
+
+  {hasPhotos && (
+    <div class="carousel-wrap" id="carouselWrap">
+      <div class="carousel-track" id="cTrack" role="region" aria-label={`${t.aptLabel} ${apt.name}`}>
+        {apt.photos.map((photo: string, i: number) => (
+          <div class="carousel-slide" data-index={i}>
+            <img src={`/images/apartamentos/${apt.slug}/${photo}`}
+              alt={`${apt.name} ${i+1}`} class="c-img" data-index={i}
+              loading={i === 0 ? "eager" : "lazy"} />
+          </div>
+        ))}
+      </div>
+      <div class="c-counter" id="cCounter" aria-live="polite">1 / {apt.photos.length}</div>
+      <button class="c-btn c-prev" id="cPrev" aria-label="←">&#10094;</button>
+      <button class="c-btn c-next" id="cNext" aria-label="→">&#10095;</button>
+      <div class="c-hint" id="cHint" aria-hidden="true"><span>{t.aptSwipeHint}</span></div>
+    </div>
+  )}
+
+  <div style="max-width:1000px; margin:0 auto; padding:3rem 2rem;">
+    <div style="display:grid; grid-template-columns:1fr 360px; gap:3rem; align-items:start;" class="apt-detail-grid-inner">
+      <div>
+        <h1 class="apt-detail-title">{t.aptLabel} {apt.name}</h1>
+        <p class="apt-detail-meta">
+          {t.aptGuests(apt.guests)} · {t.aptBeds(apt.bedrooms)} · {t.aptBath(apt.bathrooms)} · {t.aptSize(apt.size)}
+        </p>
+        <p class="apt-detail-desc">{apt.description}</p>
+        <p class="amenities-label">{t.aptServicesTitle}</p>
+        <ul class="amenities-grid">
+          {apt.amenities.map((a: string) => (
+            <li><span class="check-icon">✓</span>{a}</li>
+          ))}
+        </ul>
+        <div class="location-box">
+          <strong>{t.aptLocationTitle}</strong> {t.aptLocationText}
+        </div>
+      </div>
+      <div>
+        <div class="booking-card">
+          <h3>{t.aptBookTitle}</h3>
+          <p>{t.aptBookSubtitle}</p>
+          <a href={`/${lang}/reservar`} class="btn btn-green">{t.aptBookCta}</a>
+          <a href={`/${lang}/contacto`} class="btn btn-border">{t.aptContactCta}</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:4rem;">
+      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:2rem;">
+        {t.aptBookingTitle(apt.name)}
+      </h2>
+      <BookingWidget smoobuId={apt.smoobuId} />
+    </div>
+
+    <div style="margin-top:4rem;">
+      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:1.5rem;">
+        {t.aptOtherTitle}
+      </h2>
+      <div class="other-apts-grid">
+        {allApartments.filter((a: {slug:string}) => a.slug !== apt.slug).slice(0,4).map((a: {slug:string; name:string; guests:number}) => (
+          <a href={`/${lang}/apartamentos/${a.slug}`} class="other-apt">
+            <div style={`height:90px; background-image:url('/images/apartamentos/${a.slug}/foto-1.jpg'); background-size:cover; background-position:center; border-radius:8px; margin-bottom:0.5rem;`}></div>
+            <div class="other-apt-name">{a.name}</div>
+            <div class="other-apt-cap">{t.aptGuests(a.guests)}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {hasPhotos && (
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+      <button class="lb-close" id="lbClose" aria-label="✕">✕</button>
+      <button class="lb-prev" id="lbPrev" aria-label="←">&#10094;</button>
+      <button class="lb-next" id="lbNext" aria-label="→">&#10095;</button>
+      <div class="lb-content">
+        <img id="lb-img" src="" alt="" />
+        <p id="lb-counter" class="lb-counter-text"></p>
+      </div>
+    </div>
+  )}
+
+</BaseLayout>
+
+<style>
+@media (max-width: 768px) { .apt-detail-grid-inner { grid-template-columns: 1fr !important; } }
+.carousel-wrap { position:relative; width:100%; height:min(72vw,520px); background:#1c1917; overflow:hidden; user-select:none; margin-top:70px; }
+.carousel-track { display:flex; height:100%; overflow-x:scroll; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; cursor:grab; }
+.carousel-track:active { cursor:grabbing; }
+.carousel-track::-webkit-scrollbar { display:none; }
+.carousel-slide { flex:0 0 100%; width:100%; height:100%; scroll-snap-align:start; scroll-snap-stop:always; }
+.c-img { width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; }
+.c-counter { position:absolute; bottom:16px; right:16px; background:rgba(0,0,0,0.55); color:#fff; font-size:0.8rem; letter-spacing:0.08em; padding:4px 10px; border-radius:20px; pointer-events:none; backdrop-filter:blur(4px); }
+.c-hint { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.45); color:rgba(255,255,255,0.9); font-size:0.75rem; padding:4px 12px; border-radius:20px; pointer-events:none; animation:fadeHint 3s ease forwards; backdrop-filter:blur(4px); }
+@keyframes fadeHint { 0%{opacity:1} 60%{opacity:1} 100%{opacity:0} }
+.c-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.18); border:none; color:#fff; font-size:1.2rem; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s,opacity 0.2s; z-index:10; opacity:0; backdrop-filter:blur(4px); }
+.carousel-wrap:hover .c-btn { opacity:1; }
+.c-btn:hover { background:rgba(255,255,255,0.35); }
+.c-prev { left:12px; } .c-next { right:12px; }
+@media (hover:none) { .c-btn { opacity:0.5; } }
+.lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.93); z-index:1000; align-items:center; justify-content:center; touch-action:pan-x; }
+.lightbox.active { display:flex; }
+.lb-content { display:flex; flex-direction:column; align-items:center; max-width:92vw; max-height:92vh; }
+.lb-content img { max-width:92vw; max-height:82vh; object-fit:contain; border-radius:4px; }
+.lb-counter-text { color:rgba(255,255,255,0.65); font-size:0.82rem; margin-top:12px; letter-spacing:0.06em; }
+.lb-close { position:fixed; top:18px; right:20px; background:rgba(255,255,255,0.15); border:none; color:#fff; font-size:1.3rem; width:44px; height:44px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; z-index:1001; backdrop-filter:blur(4px); }
+.lb-close:hover { background:rgba(255,255,255,0.3); }
+.lb-prev,.lb-next { position:fixed; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.15); border:none; color:#fff; font-size:1.3rem; width:50px; height:50px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; z-index:1001; backdrop-filter:blur(4px); }
+.lb-prev { left:14px; } .lb-next { right:14px; }
+.lb-prev:hover,.lb-next:hover { background:rgba(255,255,255,0.3); }
+</style>
+
+<script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>
+  if (photos && photos.length > 0) {
+    const track=document.getElementById('cTrack'),counter=document.getElementById('cCounter'),btnPrev=document.getElementById('cPrev'),btnNext=document.getElementById('cNext');
+    let ci=0;
+    function scrollToIdx(idx){if(!track)return;idx=Math.max(0,Math.min(photos.length-1,idx));track.scrollTo({left:idx*track.clientWidth,behavior:'smooth'});ci=idx;if(counter)counter.textContent=`${idx+1} / ${photos.length}`;}
+    if(track)track.addEventListener('scroll',()=>{if(!track||!counter)return;const idx=Math.round(track.scrollLeft/track.clientWidth);if(idx!==ci){ci=idx;counter.textContent=`${idx+1} / ${photos.length}`;}},{passive:true});
+    if(btnPrev)btnPrev.addEventListener('click',()=>scrollToIdx(ci-1));
+    if(btnNext)btnNext.addEventListener('click',()=>scrollToIdx(ci+1));
+    const hint=document.getElementById('cHint');
+    if(hint)setTimeout(()=>{hint.style.display='none';},3200);
+    const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-img'),lbCnt=document.getElementById('lb-counter');
+    let lbc=0;
+    function showLb(){if(!lbImg||!lbCnt)return;lbImg.src=`/images/apartamentos/${slug}/${photos[lbc]}`;lbImg.alt=`${aptName} ${lbc+1}`;lbCnt.textContent=`${lbc+1} / ${photos.length}`;}
+    function openLb(idx){lbc=idx;showLb();if(lb){lb.classList.add('active');document.body.style.overflow='hidden';}}
+    function closeLb(){if(lb){lb.classList.remove('active');document.body.style.overflow='';}}
+    function lbNext(){lbc=(lbc+1)%photos.length;showLb();}
+    function lbPrev(){lbc=(lbc-1+photos.length)%photos.length;showLb();}
+    document.querySelectorAll('.c-img').forEach(img=>img.addEventListener('click',()=>openLb(parseInt(img.dataset.index))));
+    document.getElementById('lbClose')?.addEventListener('click',closeLb);
+    document.getElementById('lbPrev')?.addEventListener('click',lbPrev);
+    document.getElementById('lbNext')?.addEventListener('click',lbNext);
+    if(lb)lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+    document.addEventListener('keydown',e=>{if(!lb?.classList.contains('active'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowRight')lbNext();if(e.key==='ArrowLeft')lbPrev();});
+    let ltx=0;
+    if(lb){lb.addEventListener('touchstart',e=>{ltx=e.touches[0].clientX;},{passive:true});lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-ltx;if(Math.abs(dx)>40){dx<0?lbNext():lbPrev();}},{passive:true});}
+  }
+</script>
