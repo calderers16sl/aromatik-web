@@ -13,6 +13,43 @@ const targetId = smoobuId ? `smoobuFrame${smoobuId}` : "smoobuFrameAll";
 <div id={targetId} class="smoobu-widget-wrap">
   <script type="text/javascript" src="https://login.smoobu.com/js/Settings/BookingToolIframe.js"></script>
   <script define:vars={{ iframeUrl, targetId }}>
+    function scrollToWidget(container) {
+      var headerH = 80;
+      var rect = container.getBoundingClientRect();
+      var absoluteTop = rect.top + window.pageYOffset - headerH;
+      window.scrollTo({ top: Math.max(0, absoluteTop), behavior: 'smooth' });
+    }
+
+    function attachScrollFix(container) {
+      var lastHeight = 0;
+      var scrollFix = new ResizeObserver(function(entries) {
+        var iframe = container.querySelector('iframe');
+        if (!iframe) return;
+        var h = iframe.offsetHeight || 0;
+        // Significant height jump = booking step changed (not just initial load)
+        if (lastHeight > 200 && h > 200 && Math.abs(h - lastHeight) > 80) {
+          // Small delay so iFrameResize finishes its own scroll first, then override it
+          setTimeout(function() { scrollToWidget(container); }, 80);
+        }
+        lastHeight = h;
+      });
+
+      var iframe = container.querySelector('iframe');
+      if (iframe) {
+        scrollFix.observe(iframe);
+      } else {
+        // Iframe not yet created — wait for it
+        var mo = new MutationObserver(function() {
+          var iframeEl = container.querySelector('iframe');
+          if (iframeEl) {
+            mo.disconnect();
+            scrollFix.observe(iframeEl);
+          }
+        });
+        mo.observe(container, { childList: true, subtree: true });
+      }
+    }
+
     function initSmoobu() {
       if (typeof BookingToolIframe !== 'undefined') {
         BookingToolIframe.initialize({
@@ -20,6 +57,8 @@ const targetId = smoobuId ? `smoobuFrame${smoobuId}` : "smoobuFrameAll";
           baseUrl: "https://login.smoobu.com",
           target: "#" + targetId
         });
+        var container = document.getElementById(targetId);
+        if (container) attachScrollFix(container);
       }
     }
     if (document.readyState === 'loading') {
