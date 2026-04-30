@@ -90,11 +90,6 @@ const apartments = [
           </div>
         ))}
       </div>
-      <div style="text-align:center; margin-top:4rem; padding: 3rem 2rem; background: var(--stone-50); border-radius: var(--radius-lg);">
-        <h3 style="font-family:var(--serif); font-size:1.4rem; font-weight:400; margin-bottom:0.75rem;">{t.faqCtaTitle}</h3>
-        <p style="color:var(--stone-600); font-size:0.9rem; margin-bottom:1.5rem;">{t.faqCtaDesc}</p>
-        <a href="/contacto" class="btn btn-dark">{t.faqCtaBtn}</a>
-      </div>
     </div>
   </section>
   <!-- BLOQUE INFORMACIÓN IMPORTANTE -->
@@ -112,6 +107,13 @@ const apartments = [
         </div>
         <a href="/informacion-importante" class="btn btn-outline-dark">{t.infoIndexBtn} →</a>
       </div>
+    </div>
+  </section>
+  <section class="section faq-cta-section">
+    <div class="container" style="text-align:center;">
+      <h3 style="font-family:var(--serif); font-size:1.6rem; font-weight:400; margin-bottom:0.75rem;">{t.faqCtaTitle}</h3>
+      <p style="color:var(--stone-600); font-size:0.9rem; margin-bottom:1.5rem;">{t.faqCtaDesc}</p>
+      <a href="/contacto" class="btn btn-dark">{t.faqCtaBtn}</a>
     </div>
   </section>
 </BaseLayout>
