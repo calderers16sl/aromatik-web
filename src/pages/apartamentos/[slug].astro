@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingWidget from '../../components/BookingWidget.astro';
 import GoogleReviews from '../../components/GoogleReviews.astro';
+import { getT } from '../../i18n/translations';
 
 export function getStaticPaths() {
   const apartments = [
@@ -75,6 +76,7 @@ export function getStaticPaths() {
 
 const { apt, allApartments } = Astro.props;
 const hasPhotos = apt.photos && apt.photos.length > 0;
+const t = getT('es');
 const siteUrl = "https://aromatik.apartments";
 const aptUrl = `${siteUrl}/apartamentos/${apt.slug}`;
 
@@ -155,7 +157,7 @@ const breadcrumbSchema = JSON.stringify({
 
       <!-- Indicador "desliza" solo la primera vez en móvil -->
       <div class="c-hint" id="cHint" aria-hidden="true">
-        <span>← desliza →</span>
+        <span>{t.aptSwipeHint}</span>
       </div>
     </div>
   )}
@@ -184,7 +186,7 @@ const breadcrumbSchema = JSON.stringify({
         <p class="apt-description">{apt.description}</p>
 
         <div class="apt-section">
-          <h2 class="apt-section-title">Servicios incluidos</h2>
+          <h2 class="apt-section-title">{t.aptServicesTitle}</h2>
           <ul class="apt-amenities">
             {apt.amenities.map(a => (
               <li class="amenity-item">
@@ -214,19 +216,19 @@ const breadcrumbSchema = JSON.stringify({
       <div class="apt-sidebar">
         <div class="booking-card">
           <div class="booking-card-header">
-            <h3 class="booking-card-title">¿Te gusta?</h3>
-            <p class="booking-card-sub">Reserva directo al mejor precio.</p>
+            <h3 class="booking-card-title">{t.aptBookTitle}</h3>
+            <p class="booking-card-sub">{t.aptBookSubtitle}</p>
           </div>
-          <a href="#reservar-widget" class="btn-reservar js-scroll-reservar">Ver disponibilidad</a>
-          <a href="/contacto" class="btn-contactar">Hacer una pregunta</a>
-          <p class="booking-note">Sin intermediarios · Confirmación inmediata</p>
+          <a href="#reservar-widget" class="btn-reservar js-scroll-reservar">{t.aptBookCta}</a>
+          <a href="/contacto" class="btn-contactar">{t.aptContactCta}</a>
+          <p class="booking-note">{t.aptBookNote}</p>
         </div>
       </div>
     </div>
 
     <!-- Motor de reservas -->
     <div class="booking-section" id="reservar-widget">
-      <h2 class="section-heading">Reservar {apt.name}</h2>
+      <h2 class="section-heading">{t.aptBookingTitle(apt.name)}</h2>
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
@@ -236,7 +238,7 @@ const breadcrumbSchema = JSON.stringify({
 
     <!-- Otros apartamentos -->
     <div class="otros-section">
-      <h2 class="section-heading">Otros apartamentos</h2>
+      <h2 class="section-heading">{t.aptOtherTitle}</h2>
       <div class="otros-grid">
         {allApartments.filter(a => a.slug !== apt.slug).slice(0, 4).map(a => (
           <a href={`/apartamentos/${a.slug}`} class="otro-card group">

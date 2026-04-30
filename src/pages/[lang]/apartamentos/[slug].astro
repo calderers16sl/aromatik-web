@@ -53,7 +53,7 @@ const { apt, allApartments } = Astro.props;
 const t = getT(lang);
 const hasPhotos = apt.photos && apt.photos.length > 0;
 ---
-<BaseLayout title={apt.name} description={apt.description} lang={lang}>
+<BaseLayout title={`${t.aptLabel} ${apt.name} — ${t.aptMapTitle} Barri Vell de Girona | Aromatik`} description={apt.description} lang={lang}>
 
   {hasPhotos && (
     <div class="carousel-wrap" id="carouselWrap">
@@ -76,7 +76,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   <div style="max-width:1000px; margin:0 auto; padding:3rem 2rem;">
     <div style="display:grid; grid-template-columns:1fr 360px; gap:3rem; align-items:start;" class="apt-detail-grid-inner">
       <div>
-        <h1 class="apt-detail-title">{t.aptLabel} {apt.name}</h1>
+        <h1 class="apt-detail-title">{t.aptLabel} {apt.name} — Barri Vell de Girona</h1>
         <p class="apt-detail-meta">
           {t.aptGuests(apt.guests)} · {t.aptBeds(apt.bedrooms)} · {t.aptBath(apt.bathrooms)} · {t.aptSize(apt.size)}
         </p>
@@ -88,7 +88,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
           ))}
         </ul>
         <div class="inline-map">
-          <p class="inline-map-label">📍 Barri Vell de Girona · Rambla de la Llibertat, 11</p>
+          <p class="inline-map-label">📍 Barri Vell de Girona · {apt.address ?? "Rambla de la Llibertat, 11"}</p>
           <div class="inline-map-wrapper">
             <iframe
               title="Aromatik Apartments — ubicación"
@@ -96,7 +96,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
               style="border:0; border-radius:10px; display:block;"
               loading="lazy" allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=${lang}`}
             ></iframe>
           </div>
         </div>
@@ -121,8 +121,8 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
 
     <!-- Google Maps -->
     <div class="map-section">
-      <h2 class="section-heading" style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:0.5rem;">Ubicación</h2>
-      <p class="map-subtitle">Barri Vell de Girona · Rambla de la Llibertat, 11</p>
+      <h2 class="section-heading" style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:0.5rem;">{t.aptMapTitle}</h2>
+      <p class="map-subtitle">Barri Vell de Girona · {apt.address ?? "Rambla de la Llibertat, 11"}</p>
       <div class="map-wrapper">
         <iframe
           title="Aromatik Apartments — ubicación en Girona"
@@ -132,7 +132,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
           loading="lazy"
           allowfullscreen
           referrerpolicy="no-referrer-when-downgrade"
-          src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es`}
+          src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=${lang}`}
         ></iframe>
       </div>
     </div>
