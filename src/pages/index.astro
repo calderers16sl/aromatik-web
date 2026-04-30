@@ -1,219 +1,105 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getT } from '../i18n/translations';
-import ReviewsCarousel from '../components/ReviewsCarousel.astro';
-import HostCard from '../components/HostCard.astro';
-
-const lang = 'es';
-const t = getT(lang);
 
 const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, img: "/images/apartamentos/ylang-ylang/foto-1.jpg", color: "#C8B89A" },
-  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, img: "/images/apartamentos/romani/foto-1.jpg", color: "#8EAB85" },
-  { name: "Ciprés", slug: "cipres", guests: 2, bedrooms: 1, img: "/images/apartamentos/cipres/foto-1.jpg", color: "#6B9B7E" },
-  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, img: "/images/apartamentos/lavanda/foto-1.jpg", color: "#A899BB" },
-  { name: "Limón", slug: "limon", guests: 2, bedrooms: 1, img: "/images/apartamentos/limon/foto-1.jpg", color: "#C4BC7E" },
-  { name: "Bergamota", slug: "bergamota", guests: 6, bedrooms: 3, img: "/images/apartamentos/bergamota/foto-1.jpg", color: "#C4A06E" },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 6, bedrooms: 3, img: "/images/apartamentos/arbol-de-te/foto-1.jpg", color: "#7AAF9E" },
-  { name: "Geranio", slug: "geranio", guests: 2, bedrooms: 1, img: "/images/apartamentos/geranio/foto-1.jpg", color: "#C49090" },
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, id: 1397576, emoji: "🌸" },
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, id: 1033021, emoji: "🌿" },
+  { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, id: 1035631, emoji: "🌲" },
+  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, id: 1033339, emoji: "💜" },
+  { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, id: 1037266, emoji: "🍋" },
+  { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, id: 1034422, emoji: "🍊" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, id: 1315321, emoji: "🌱" },
+  { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, id: 1599430, emoji: "🌺" },
 ];
 ---
-<BaseLayout title={t.metaTitle} description={t.metaDescription} lang={lang}>
+<BaseLayout title="Apartamentos en Girona" description="8 apartamentos de diseño en el casco antiguo de Girona. Reserva directa con el mejor precio.">
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-inner">
-      <span class="hero-eyebrow">{t.heroEyebrow}</span>
-      <h1 set:html={t.heroTitle.replace('\n','<br>')} />
-      <div class="hero-actions">
-        <a href="#apartamentos" class="btn btn-white">{t.heroCta1}</a>
-        <a href="#anfitrion" class="btn btn-outline-white" id="heroScrollBtn">{t.heroCta2}</a>
-      </div>
-      <div class="hero-badges">
-        <span class="hero-badge">🚲 Cyclist friendly</span>
-        <span class="hero-badge">🐾 Pet friendly</span>
+  <section class="relative h-[90vh] flex items-center justify-center text-white overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-stone-800" style="background-image:url('/images/apartamentos/bergamota/foto-1.jpg')"></div>
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <div class="relative z-20 text-center px-8 py-10 max-w-3xl mx-auto bg-black/25 rounded-3xl backdrop-blur-[2px]">
+      <p class="text-sm uppercase tracking-[0.3em] mb-4 text-stone-300">Girona · Casco antiguo</p>
+      <h1 class="text-5xl md:text-7xl font-light leading-tight mb-6">
+        Despierta en<br/><em>el corazón de Girona</em>
+      </h1>
+      <p class="text-lg text-stone-200 mb-10 max-w-xl mx-auto">
+        8 apartamentos únicos en la ciudad medieval. Cada uno con su propio aroma, su propia personalidad.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/#apartamentos" class="bg-white text-stone-900 px-8 py-3 rounded-full font-medium hover:bg-stone-100 transition-colors">
+          Ver apartamentos
+        </a>
+        <a href="/reservar" class="border border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors">
+          Reservar ahora
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- TRUST BAR -->
-  </div>
+  <!-- INTRO -->
+  <section class="max-w-3xl mx-auto px-4 py-20 text-center">
+    <h2 class="text-3xl font-light mb-6" style="color:var(--color-primary)">Apartamentos con alma</h2>
+    <p class="text-lg text-stone-600 leading-relaxed">
+      Cada apartamento lleva el nombre de una planta aromática. Diseñados con mimo, equipados con todo lo necesario,
+      ubicados en el barrio más bonito de Girona. Porque los mejores recuerdos empiezan por un buen sitio donde quedarse.
+    </p>
+  </section>
 
   <!-- APARTMENTS GRID -->
-  <section id="apartamentos" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">{t.aptsEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{t.aptsTitle}</h2>
-        <p>{t.aptsSubtitle}</p>
-      </div>
-      <div class="apts-grid">
-        {apartments.map((apt) => (
-          <a href={`/apartamentos/${apt.slug}`} class="apt-card">
-            <div class="apt-card-img" style={`background-image: url('${apt.img}'); background-color: ${apt.color}`}></div>
-            <div class="apt-card-body">
-              <h3>{apt.name}</h3>
-              <p class="apt-meta">{t.aptsGuests(apt.guests)} · {t.aptsBedroom(apt.bedrooms)}</p>
-              <span class="apt-link">{t.aptsViewBtn}</span>
-            </div>
-          </a>
-        ))}
-      </div>
+  <section id="apartamentos" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-light text-center mb-12" style="color:var(--color-text)">Nuestros apartamentos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {apartments.map((apt) => (
+        <a href={`/apartamentos/${apt.slug}`} class="group block rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300">
+          <div class="h-48 bg-stone-100 overflow-hidden">
+            <img
+              src={`/images/apartamentos/${apt.slug}/foto-1.jpg`}
+              alt={apt.name}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold mb-1">{apt.name}</h3>
+            <p class="text-sm text-stone-500">{apt.guests} personas · {apt.bedrooms} dorm.</p>
+            <span class="mt-4 inline-block text-sm font-medium text-green-700 group-hover:underline">
+              Ver detalles →
+            </span>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 
   <!-- WHY BOOK DIRECT -->
-  <section class="section bg-cream">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">{t.whyEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{t.whyTitle}</h2>
-        <p>{t.whySubtitle}</p>
-      </div>
-      <div class="perks-grid">
-        <div class="perk"><div class="perk-icon">✦</div><h3>{t.perk1Title}</h3><p>{t.perk1Desc}</p></div>
-        <div class="perk"><div class="perk-icon">◎</div><h3>{t.perk2Title}</h3><p>{t.perk2Desc}</p></div>
-        <div class="perk"><div class="perk-icon">◈</div><h3>{t.perk3Title}</h3><p>{t.perk3Desc}</p></div>
+  <section class="bg-stone-50 py-20 mt-20">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-light mb-12">¿Por qué reservar directo?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { icon: "💰", title: "Mejor precio", desc: "Sin comisiones de portales. El precio más bajo, garantizado." },
+          { icon: "📞", title: "Atención directa", desc: "Hablas con Arnau, el propietario. Respuesta en menos de 1h." },
+          { icon: "🔄", title: "Flexibilidad", desc: "Más opciones de check-in/out y peticiones especiales." }
+        ].map(item => (
+          <div class="bg-white rounded-2xl p-8 shadow-sm">
+            <div class="text-4xl mb-4">{item.icon}</div>
+            <h3 class="font-semibold text-lg mb-2">{item.title}</h3>
+            <p class="text-stone-600 text-sm">{item.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">{t.faqEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{t.faqTitle}</h2>
-      </div>
-      <div class="faq-list">
-        {t.faqItems.map(item => (
-          <div class="faq-item">
-            <p class="faq-q">{item.q}</p>
-            <p class="faq-a">{item.a}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-  <!-- BLOQUE INFORMACIÓN IMPORTANTE -->
-  <HostCard />
-
-  <ReviewsCarousel />
-
-  <!-- SEO BLOCK 1: Barri Vell -->
-  <section class="section seo-barri-vell">
-    <div class="container">
-      <div class="seo-grid">
-        <div class="seo-text">
-          <span class="eyebrow">{t.seoBarriEyebrow}</span>
-          <h2>{t.seoBarriTitle}</h2>
-          <p>{t.seoBarriText}</p>
-        </div>
-        <div class="seo-features">
-          <div class="seo-feature-item">
-            <span class="seo-icon">⛪</span>
-            <div>
-              <strong>{t.seoBarriFeat1Title}</strong>
-              <span>{t.seoBarriFeat1Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🕍</span>
-            <div>
-              <strong>{t.seoBarriFeat2Title}</strong>
-              <span>{t.seoBarriFeat2Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🌉</span>
-            <div>
-              <strong>{t.seoBarriFeat3Title}</strong>
-              <span>{t.seoBarriFeat3Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🚉</span>
-            <div>
-              <strong>{t.seoBarriFeat4Title}</strong>
-              <span>{t.seoBarriFeat4Sub}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEO BLOCK 2: Cycling -->
-  <section class="section seo-cycling">
-    <div class="container">
-      <div class="seo-grid reverse">
-        <div class="seo-features">
-          <div class="seo-feature-item">
-            <span class="seo-icon">🚲</span>
-            <div>
-              <strong>{t.seoCyclingFeat1Title}</strong>
-              <span>{t.seoCyclingFeat1Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🏔️</span>
-            <div>
-              <strong>{t.seoCyclingFeat2Title}</strong>
-              <span>{t.seoCyclingFeat2Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🛗</span>
-            <div>
-              <strong>{t.seoCyclingFeat3Title}</strong>
-              <span>{t.seoCyclingFeat3Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">👕</span>
-            <div>
-              <strong>{t.seoCyclingFeat4Title}</strong>
-              <span>{t.seoCyclingFeat4Sub}</span>
-            </div>
-          </div>
-        </div>
-        <div class="seo-text">
-          <span class="eyebrow">{t.seoCyclingEyebrow}</span>
-          <h2>{t.seoCyclingTitle}</h2>
-          <p>{t.seoCyclingText}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section bg-cream info-banner-section">
-    <div class="container">
-      <div class="info-banner">
-        <div class="info-banner-text">
-          <span class="eyebrow">Antes de llegar</span>
-          <h2>{t.infoIndexTitle}</h2>
-          <p>{t.infoIndexText}</p>
-        </div>
-        <a href="/informacion-importante" class="btn btn-outline-dark">{t.infoIndexBtn} →</a>
-      </div>
-    </div>
-  </section>
-  <section class="section faq-cta-section">
-    <div class="container" style="text-align:center;">
-      <h3 style="font-family:var(--serif); font-size:1.6rem; font-weight:400; margin-bottom:0.75rem;">{t.faqCtaTitle}</h3>
-      <p style="color:var(--stone-600); font-size:0.9rem; margin-bottom:1.5rem;">{t.faqCtaDesc}</p>
-      <a href="/contacto" class="btn btn-dark">{t.faqCtaBtn}</a>
-    </div>
-  </section>
-
-<script is:inline>
-  document.getElementById('heroScrollBtn')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    var target = document.getElementById('anfitrion');
-    if (!target) return;
-    var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  });
-</script>
-</BaseLayout>
+  <section class="max-w-3xl mx-auto px-4 py-20">
+    <h2 class="text-3xl font-light text-center mb-12">Preguntas frecuentes</h2>
+    <div class="space-y-6">
+      {[
+        { q: "¿Dónde están los apartamentos?", a: "En el casco antiguo de Girona, a pocos minutos a pie de la Catedral, los baños árabes y el río Onyar." },
+        { q: "¿Hay parking?", a: "Los apartamentos están en zona peatonal. El aparcamiento La Copa (gratuito) está a 10 minutos a pie. También hay parkings de pago Saba cerca." },
+        { q: "¿Se permiten bicicletas?", a: "Sí, todos los apartamentos permiten guardar bicicletas dentro. Los ascensores son amplios para que quepan." },
+        { q: "¿Cuáles son los horarios de check-in/out?", a: "Check-in desde las 15h, check-out hasta las 11h. Para horarios flexibles, contacta con antelación." },
+      ].map(faq => (
+        <div class="border-b border-stone-200 pb-6">
+          <h3 class="font-medium text-lg mb-2">{faq.q}</h3>
