@@ -1,5 +1,5 @@
 ---
-// ReviewsCarousel.astro — auto-sliding reviews carousel
+// ReviewsCarousel.astro
 ---
 
 <section class="rc-section">
@@ -15,15 +15,11 @@
 
     <div class="rc-stage">
       <button class="rc-arrow rc-prev" id="rc-prev" aria-label="Anterior">&#10094;</button>
-
-      <div class="rc-viewport">
+      <div class="rc-viewport" id="rc-viewport">
         <div class="rc-track" id="rc-track">
-          <div class="rc-card">
-            <p class="rc-text">Cargando reseñas…</p>
-          </div>
+          <div class="rc-card"><p class="rc-text">Cargando reseñas…</p></div>
         </div>
       </div>
-
       <button class="rc-arrow rc-next" id="rc-next" aria-label="Siguiente">&#10095;</button>
     </div>
 
@@ -36,7 +32,6 @@
     background: var(--cream, #f8f4ef);
     padding: 64px 0;
   }
-
   .rc-container {
     max-width: 720px;
     margin: 0 auto;
@@ -44,24 +39,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 28px;
+    box-sizing: border-box;
   }
-
   .rc-header {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
-
   .eyebrow {
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--gold, #d0b050);
   }
-
   .rc-rating {
     display: flex;
     align-items: center;
@@ -69,7 +62,6 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-
   .rc-score {
     font-family: var(--serif, Georgia, serif);
     font-size: 2rem;
@@ -77,53 +69,48 @@
     color: var(--black, #1a1a1a);
     line-height: 1;
   }
+  .rc-stars { font-size: 1rem; color: var(--gold, #d0b050); letter-spacing: 2px; }
+  .rc-count { font-size: 0.78rem; color: #888; }
 
-  .rc-stars {
-    font-size: 1rem;
-    color: var(--gold, #d0b050);
-    letter-spacing: 2px;
-  }
-
-  .rc-count {
-    font-size: 0.78rem;
-    color: #888;
-  }
-
+  /* ── Stage layout ── */
   .rc-stage {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     width: 100%;
+    box-sizing: border-box;
   }
-
   .rc-viewport {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;          /* prevent flex blowout */
+    width: 100%;
     overflow: hidden;
   }
-
   .rc-track {
     display: flex;
+    width: 100%;
     transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
 
+  /* ── Card ── */
   .rc-card {
-    min-width: 100%;
+    flex: 0 0 100%;        /* never shrink, always full width */
+    width: 100%;
     box-sizing: border-box;
     background: #fff;
     border-radius: 14px;
-    padding: 28px 32px;
+    padding: 26px 28px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   }
-
   .rc-card-top {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-
   .rc-avatar {
     width: 32px;
     height: 32px;
@@ -131,7 +118,6 @@
     object-fit: cover;
     flex-shrink: 0;
   }
-
   .rc-avatar-fallback {
     width: 32px;
     height: 32px;
@@ -145,32 +131,23 @@
     color: #fff;
     flex-shrink: 0;
   }
-
-  .rc-author {
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: var(--black, #1a1a1a);
-  }
-
-  .rc-time {
-    font-size: 0.75rem;
-    color: #aaa;
-  }
-
-  .rc-card-stars {
-    color: var(--gold, #d0b050);
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-  }
-
+  .rc-author { font-weight: 600; font-size: 0.88rem; color: var(--black, #1a1a1a); }
+  .rc-time   { font-size: 0.74rem; color: #aaa; }
+  .rc-card-stars { color: var(--gold, #d0b050); font-size: 0.85rem; letter-spacing: 2px; }
   .rc-text {
-    font-size: 0.93rem;
+    font-size: 0.92rem;
     line-height: 1.7;
     color: #555;
     margin: 0;
     font-style: italic;
+    /* clamp long reviews */
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
+  /* ── Controls ── */
   .rc-arrow {
     background: #fff;
     border: 1px solid #e5e0d8;
@@ -187,122 +164,103 @@
     transition: border-color 0.2s, color 0.2s;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
-
-  .rc-arrow:hover {
-    border-color: var(--gold, #d0b050);
-    color: var(--gold, #d0b050);
-  }
-
-  .rc-dots {
-    display: flex;
-    gap: 6px;
-  }
-
+  .rc-arrow:hover { border-color: var(--gold, #d0b050); color: var(--gold, #d0b050); }
+  .rc-dots { display: flex; gap: 6px; }
   .rc-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: #d5cfc6;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
-    border: none;
-    padding: 0;
+    border: none; padding: 0;
   }
-
-  .rc-dot.active {
-    background: var(--gold, #d0b050);
-    transform: scale(1.35);
-  }
+  .rc-dot.active { background: var(--gold, #d0b050); transform: scale(1.35); }
 
   @media (max-width: 600px) {
     .rc-section { padding: 48px 0; }
-    .rc-card { padding: 22px 20px; }
+    .rc-container { padding: 0 16px; gap: 20px; }
+    .rc-card { padding: 20px 18px; }
     .rc-arrow { display: none; }
   }
 </style>
 
 <script>
-  (async () => {
-    const STARS = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
-    const track = document.getElementById('rc-track');
-    const dotsEl = document.getElementById('rc-dots');
-    const scoreEl = document.getElementById('rc-score');
-    const starsEl = document.getElementById('rc-stars');
-    const countEl = document.getElementById('rc-count');
-    const prevBtn = document.getElementById('rc-prev');
-    const nextBtn = document.getElementById('rc-next');
+(async () => {
+  const STARS = n => '★'.repeat(n) + '☆'.repeat(5 - n);
+  const $ = id => document.getElementById(id);
+  const track   = $('rc-track');
+  const viewport= $('rc-viewport');
+  const dotsEl  = $('rc-dots');
+  const prevBtn = $('rc-prev');
+  const nextBtn = $('rc-next');
 
-    let current = 0;
-    let total = 0;
-    let timer;
+  let current = 0, total = 0, timer;
 
-    function goTo(idx) {
-      current = (idx + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.rc-dot').forEach((d, i) =>
-        d.classList.toggle('active', i === current)
-      );
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.rc-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 5500);
+  }
+
+  // Touch swipe
+  let touchX = null;
+  viewport.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  viewport.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) { goTo(current + (dx < 0 ? 1 : -1)); startAuto(); }
+    touchX = null;
+  }, { passive: true });
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+
+  try {
+    const data = await fetch('/api/reviews').then(r => r.json());
+    if (data.error) throw new Error(data.error);
+
+    const s = $('rc-score'), st = $('rc-stars'), c = $('rc-count');
+    if (s) s.textContent = data.rating ? data.rating.toFixed(1) : '—';
+    if (st) st.textContent = STARS(Math.round(data.rating || 0));
+    if (c) c.textContent = data.user_ratings_total ? `${data.user_ratings_total} reseñas` : '';
+
+    if (!data.reviews?.length) {
+      track.innerHTML = '<div class="rc-card"><p class="rc-text">Sé el primero en dejar una reseña.</p></div>';
+      return;
     }
 
-    function startAuto() {
-      clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 5500);
-    }
+    total = data.reviews.length;
+    track.innerHTML = data.reviews.map(r => {
+      const init = (r.author || '?').charAt(0).toUpperCase();
+      const avatar = r.avatar
+        ? `<img class="rc-avatar" src="${r.avatar}" alt="${r.author}" loading="lazy">`
+        : `<div class="rc-avatar-fallback">${init}</div>`;
+      const text = (r.text || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return `<div class="rc-card">
+        <div class="rc-card-top">${avatar}<div><div class="rc-author">${r.author||'Huésped'}</div><div class="rc-time">${r.time||''}</div></div></div>
+        <div class="rc-card-stars">${STARS(r.rating||5)}</div>
+        <p class="rc-text">"${text}"</p>
+      </div>`;
+    }).join('');
 
-    try {
-      const res = await fetch('/api/reviews');
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+    dotsEl.innerHTML = data.reviews.map((_,i) =>
+      `<button class="rc-dot${i===0?' active':''}" data-i="${i}" aria-label="Reseña ${i+1}"></button>`
+    ).join('');
+    dotsEl.querySelectorAll('.rc-dot').forEach(d =>
+      d.addEventListener('click', () => { goTo(+d.dataset.i); startAuto(); })
+    );
 
-      if (scoreEl) scoreEl.textContent = data.rating ? data.rating.toFixed(1) : '—';
-      if (starsEl) starsEl.textContent = STARS(Math.round(data.rating || 0));
-      if (countEl) countEl.textContent = data.user_ratings_total
-        ? `${data.user_ratings_total} reseñas` : '';
-
-      if (!data.reviews || data.reviews.length === 0) {
-        track.innerHTML = '<div class="rc-card"><p class="rc-text">Sé el primero en dejar una reseña en Google.</p></div>';
-        return;
-      }
-
-      total = data.reviews.length;
-
-      track.innerHTML = data.reviews.map(r => {
-        const initial = r.author ? r.author.charAt(0).toUpperCase() : '?';
-        const avatar = r.avatar
-          ? `<img class="rc-avatar" src="${r.avatar}" alt="${r.author}" loading="lazy">`
-          : `<div class="rc-avatar-fallback">${initial}</div>`;
-        const text = r.text ? r.text.replace(/"/g, '&quot;') : '';
-        return `
-          <div class="rc-card">
-            <div class="rc-card-top">
-              ${avatar}
-              <div>
-                <div class="rc-author">${r.author || 'Huésped'}</div>
-                <div class="rc-time">${r.time || ''}</div>
-              </div>
-            </div>
-            <div class="rc-card-stars">${STARS(r.rating || 5)}</div>
-            <p class="rc-text">"${text}"</p>
-          </div>`;
-      }).join('');
-
-      dotsEl.innerHTML = data.reviews.map((_, i) =>
-        `<button class="rc-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Reseña ${i+1}"></button>`
-      ).join('');
-
-      dotsEl.querySelectorAll('.rc-dot').forEach(d =>
-        d.addEventListener('click', () => { goTo(+d.dataset.i); startAuto(); })
-      );
-
-      prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
-      nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
-
-      goTo(0);
-      startAuto();
-
-    } catch (err) {
-      console.warn('Reviews carousel error:', err);
-      if (track) track.innerHTML = '';
-    }
-  })();
+    goTo(0);
+    startAuto();
+  } catch(e) {
+    console.warn('Reviews carousel:', e);
+    if (track) track.innerHTML = '';
+  }
+})();
 </script>
