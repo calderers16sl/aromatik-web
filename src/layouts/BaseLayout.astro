@@ -422,9 +422,34 @@ const schemaOrg = JSON.stringify({
     .seo-feature-item strong { font-size: 0.9rem; font-weight: 500; color: var(--black); }
     .seo-feature-item span { font-size: 0.8rem; color: var(--stone-400); }
   </style>
+  <!-- Consent Mode v2 — defaults GDPR antes de que GTM cargue -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage':        'denied',
+      'analytics_storage': 'denied',
+      'ad_user_data':      'denied',
+      'ad_personalization':'denied',
+      'wait_for_update':   500
+    });
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough',    true);
+  </script>
+  <!-- Google Tag Manager — GTM-PQRPRS7D -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PQRPRS7D');</script>
+  <!-- End Google Tag Manager -->
   <slot name="head" />
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQRPRS7D"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <header class="header" id="header">
     <a href={langRoot || '/'} class="header-logo">Aromatik <em>Apartments</em></a>
 
@@ -580,6 +605,43 @@ const schemaOrg = JSON.stringify({
         }
       });
     });
+  </script>
+  <!-- Banner de cookies — Consent Mode v2 -->
+  <div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 24px;z-index:9999;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--sans,'DM Sans',sans-serif);font-size:0.85rem;">
+    <p style="margin:0;max-width:680px;line-height:1.5;">
+      Usamos cookies de analítica (Google Analytics) para mejorar el sitio. Puedes aceptar o rechazar su uso.
+      <a href="/privacy" style="color:#C9A96E;text-decoration:underline;">Más info</a>
+    </p>
+    <div style="display:flex;gap:10px;flex-shrink:0;">
+      <button id="cookie-reject" style="background:transparent;border:1px solid rgba(255,255,255,0.4);color:#fff;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85rem;">Rechazar</button>
+      <button id="cookie-accept" style="background:#C9A96E;border:none;color:#1a1a1a;padding:8px 20px;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;">Aceptar</button>
+    </div>
+  </div>
+  <script>
+  (function() {
+    var banner = document.getElementById('cookie-banner');
+    var consent = localStorage.getItem('aromatik_consent');
+    function updateConsent(state) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'update', {
+        'ad_storage': state, 'analytics_storage': state,
+        'ad_user_data': state, 'ad_personalization': state
+      });
+    }
+    if (consent === 'granted') { updateConsent('granted'); return; }
+    if (consent === 'denied') { return; }
+    banner.style.display = 'flex';
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+      localStorage.setItem('aromatik_consent', 'granted');
+      updateConsent('granted');
+      banner.style.display = 'none';
+    });
+    document.getElementById('cookie-reject').addEventListener('click', function() {
+      localStorage.setItem('aromatik_consent', 'denied');
+      banner.style.display = 'none';
+    });
+  })();
   </script>
 </body>
 </html>
