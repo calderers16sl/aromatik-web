@@ -131,14 +131,41 @@ const schemaOrg = JSON.stringify({
     .lang-dropdown a.lang-active::after { content: "✓"; font-size: 0.65rem; }
 
     @media (max-width: 768px) {
-      /* — NAV PAGES — */
-      .header-nav { display: none; }
+      /* — MOBILE NAV: roll-down animation — */
+      .header-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        z-index: 999;
+        background: var(--white);
+        border-top: 1px solid #ece8e2;
+        box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1), opacity 0.28s ease;
+      }
+      .header-nav.open { max-height: 520px; opacity: 1; pointer-events: auto; }
       .hamburger { display: flex; }
-      /* Dropdown páginas: superpuesto, altura exacta al contenido, sin scroll */
-      .header-nav.open { display: flex; flex-direction: column; align-items: stretch; position: fixed; top: 70px; left: 0; right: 0; z-index: 999; height: auto; background: var(--white); padding: 0; border-top: 1px solid var(--stone-200); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
-      .header-nav.open a { display: block; font-size: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--stone-50); color: var(--stone-800); }
-      .header-nav.open a:last-child { border-bottom: none; }
-      .header-nav.open .nav-cta { display: none; }
+      .header-nav a {
+        display: flex; align-items: center;
+        font-size: 0.95rem; font-weight: 400;
+        padding: 0.95rem 1.5rem;
+        color: #3a3631;
+        border-bottom: 1px solid #f2ede8;
+        letter-spacing: 0.01em;
+        transition: background 0.15s, color 0.15s, padding-left 0.18s;
+      }
+      .header-nav a:hover { background: #faf7f4; color: var(--black); padding-left: 1.85rem; }
+      .header-nav a:last-child { border-bottom: none; }
+      .header-nav .nav-cta { display: none; }
+      /* Hamburger → X */
+      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
       /* — LANG SWITCHER — ya funciona como dropdown independiente en header-controls */
       .lang-dropdown { right: 0; left: auto; min-width: 140px; }
     }
@@ -455,9 +482,13 @@ const schemaOrg = JSON.stringify({
     const nav = document.getElementById('nav');
     hamburger?.addEventListener('click', () => {
       nav?.classList.toggle('open');
+      hamburger.classList.toggle('open');
     });
     nav?.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => nav.classList.remove('open'));
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        hamburger?.classList.remove('open');
+      });
     });
     // Lang switcher — funciona en desktop (hover/click) y móvil (tap)
     const langBtn = document.getElementById('langBtn');
