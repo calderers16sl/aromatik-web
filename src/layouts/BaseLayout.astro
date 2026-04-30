@@ -131,15 +131,17 @@ const schemaOrg = JSON.stringify({
     @media (max-width: 768px) {
       .header-nav { display: none; }
       .hamburger { display: flex; }
-      .header-nav.open { display: flex; flex-direction: column; align-items: flex-start; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; background: var(--white); padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--stone-200); overflow-y: auto; }
+      /* z-index 999 para aparecer sobre hero y cualquier contenido */
+      .header-nav.open { display: flex; flex-direction: column; align-items: flex-start; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; z-index: 999; background: var(--white); padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--stone-200); overflow-y: auto; }
       .header-nav.open a { font-size: 1.1rem; }
-      /* En móvil el dropdown queda fijo dentro del menú abierto */
-      .lang-switcher { flex-direction: column; align-items: flex-start; width: 100%; }
-      .lang-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 1px solid var(--stone-200); width: 100%; margin-top: 0.5rem;
-        display: none; }
-      .lang-switcher.open .lang-dropdown { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-      .lang-btn { font-size: 1rem; border: none; padding: 0; color: var(--stone-800); letter-spacing: 0.02em; }
-      .lang-btn svg { display: inline-block; }
+      /* Lang switcher en móvil: mostrar todos los idiomas directamente (sin segundo tap) */
+      .lang-switcher { width: 100%; }
+      .lang-btn { display: none; }
+      .lang-dropdown { position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; box-shadow: none; border: none; width: 100%; padding: 0.25rem 0 0; background: transparent; display: flex !important; flex-wrap: wrap; gap: 0.5rem; }
+      .lang-dropdown a { padding: 0.35rem 0.75rem; border: 1px solid var(--stone-200); border-radius: 4px; font-size: 0.85rem; background: var(--stone-50); color: var(--stone-600); }
+      .lang-dropdown a.lang-active { border-color: var(--gold); color: var(--gold); background: transparent; font-weight: 600; }
+      .lang-dropdown a.lang-active::after { display: none; }
+      .lang-dropdown a:hover { background: var(--stone-50); }
     }
 
     /* ── HERO ── */
