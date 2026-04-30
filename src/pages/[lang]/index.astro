@@ -32,7 +32,7 @@ const apartments = [
       <h1 set:html={t.heroTitle.replace('\n','<br>')} />
       <div class="hero-actions">
         <a href={`#apartamentos`} class="btn btn-white">{t.heroCta1}</a>
-        <a href={`/${lang}/sobre-nosotros`} class="btn btn-outline-white">{t.heroCta2}</a>
+        <a href="#anfitrion" class="btn btn-outline-white" id="heroScrollBtn">{t.heroCta2}</a>
       </div>
       <div class="hero-badges">
         <span class="hero-badge">🚲 Cyclist friendly</span>
@@ -122,4 +122,14 @@ const apartments = [
       <a href={`/${lang}/contacto`} class="btn btn-dark">{t.faqCtaBtn}</a>
     </div>
   </section>
+
+<script is:inline>
+  document.getElementById('heroScrollBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.getElementById('anfitrion');
+    if (!target) return;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
+</script>
 </BaseLayout>
