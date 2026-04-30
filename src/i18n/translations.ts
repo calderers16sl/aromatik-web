@@ -45,6 +45,8 @@ export interface T {
   contactFormMsg: string; contactFormSubmit: string; contactFormSending: string;
   contactFormOk: string; contactFormErr: string;
   aboutTitle: string; aboutSubtitle: string;
+  footerImportantInfo: string;
+  infoIndexTitle: string; infoIndexText: string; infoIndexBtn: string;
 }
 
 const es: T = {
@@ -131,6 +133,10 @@ const es: T = {
   contactFormOk: "¡Mensaje enviado! Te respondemos en menos de 1 hora.",
   contactFormErr: "Hubo un error al enviar. Escríbenos directamente a hola@aromatik.apartments",
   aboutTitle: "Sobre nosotros", aboutSubtitle: "Aromatik Apartments en el Barri Vell de Girona",
+  footerImportantInfo: "Información importante",
+  infoIndexTitle: "Antes de tu llegada",
+  infoIndexText: "Revisa la información importante sobre acceso, normas de la casa, mascotas, basura y cancelación.",
+  infoIndexBtn: "Información importante",
 };
 
 const en: T = {
@@ -217,6 +223,10 @@ const en: T = {
   contactFormOk: "Message sent! We'll reply within 1 hour.",
   contactFormErr: "There was an error sending. Write to us directly at hola@aromatik.apartments",
   aboutTitle: "About us", aboutSubtitle: "Aromatik Apartments in the Barri Vell of Girona",
+  footerImportantInfo: "Important information",
+  infoIndexTitle: "Before your arrival",
+  infoIndexText: "Review the important information about access, house rules, pets, waste and cancellation.",
+  infoIndexBtn: "Important information",
 };
 
 const fr: T = {
@@ -303,6 +313,10 @@ const fr: T = {
   contactFormOk: "Message envoyé ! Nous vous répondons en moins d'1 heure.",
   contactFormErr: "Une erreur s'est produite. Écrivez-nous directement à hola@aromatik.apartments",
   aboutTitle: "À propos", aboutSubtitle: "Aromatik Apartments dans le Barri Vell de Gérone",
+  footerImportantInfo: "Informations importantes",
+  infoIndexTitle: "Avant votre arrivée",
+  infoIndexText: "Consultez les informations importantes sur l'accès, les règles de la maison, les animaux, les déchets et l'annulation.",
+  infoIndexBtn: "Informations importantes",
 };
 
 const ca: T = {
@@ -389,6 +403,10 @@ const ca: T = {
   contactFormOk: "Missatge enviat! Et responem en menys d'1 hora.",
   contactFormErr: "Hi ha hagut un error en l'enviament. Escriu-nos directament a hola@aromatik.apartments",
   aboutTitle: "Sobre nosaltres", aboutSubtitle: "Aromatik Apartments al Barri Vell de Girona",
+  footerImportantInfo: "Informació important",
+  infoIndexTitle: "Abans de la teva arribada",
+  infoIndexText: "Revisa la informació important sobre accés, normes de la casa, mascotes, escombraries i cancel·lació.",
+  infoIndexBtn: "Informació important",
 };
 
 const de: T = {
@@ -475,6 +493,10 @@ const de: T = {
   contactFormOk: "Nachricht gesendet! Wir antworten in weniger als 1 Stunde.",
   contactFormErr: "Beim Senden ist ein Fehler aufgetreten. Schreiben Sie uns direkt an hola@aromatik.apartments",
   aboutTitle: "Über uns", aboutSubtitle: "Aromatik Apartments im Barri Vell von Girona",
+  footerImportantInfo: "Wichtige Informationen",
+  infoIndexTitle: "Vor Ihrer Ankunft",
+  infoIndexText: "Lesen Sie die wichtigen Informationen zu Zugang, Hausregeln, Haustieren, Müll und Stornierung.",
+  infoIndexBtn: "Wichtige Informationen",
 };
 
 const zh: T = {
@@ -561,6 +583,10 @@ const zh: T = {
   contactFormOk: "消息已发送！我们将在1小时内回复。",
   contactFormErr: "发送时出错。请直接发送邮件至 hola@aromatik.apartments",
   aboutTitle: "关于我们", aboutSubtitle: "Aromatik Apartments位于赫罗纳Barri Vell",
+  footerImportantInfo: "重要须知",
+  infoIndexTitle: "抵达前须知",
+  infoIndexText: "请查阅有关入住方式、房屋规则、宠物、垃圾处理和取消政策的重要信息。",
+  infoIndexBtn: "重要须知",
 };
 
 const ko: T = {
@@ -647,6 +673,10 @@ const ko: T = {
   contactFormOk: "메시지가 전송되었습니다! 1시간 이내에 답변 드리겠습니다.",
   contactFormErr: "전송 중 오류가 발생했습니다. hola@aromatik.apartments로 직접 연락해 주세요.",
   aboutTitle: "소개", aboutSubtitle: "헤로나 Barri Vell의 Aromatik Apartments",
+  footerImportantInfo: "중요 안내",
+  infoIndexTitle: "도착 전 확인 사항",
+  infoIndexText: "출입 방법, 숙소 규칙, 반려동물, 쓰레기 처리 및 취소 정책에 관한 중요 정보를 확인하세요.",
+  infoIndexBtn: "중요 안내",
 };
 
 
@@ -726,6 +756,10 @@ const pt: T = {
   contactFormOk: "Mensagem enviada! Respondemos em menos de 1 hora.",
   contactFormErr: "Ocorreu um erro ao enviar. Escreva-nos diretamente para hola@aromatik.apartments",
   aboutTitle: "Sobre nós", aboutSubtitle: "Aromatik Apartments no Barri Vell de Girona",
+  footerImportantInfo: "Informações importantes",
+  infoIndexTitle: "Antes da sua chegada",
+  infoIndexText: "Reveja as informações importantes sobre acesso, regras da casa, animais, lixo e cancelamento.",
+  infoIndexBtn: "Informações importantes",
 };
 
 const nl: T = {
@@ -804,6 +838,10 @@ const nl: T = {
   contactFormOk: "Bericht verzonden! Wij reageren binnen 1 uur.",
   contactFormErr: "Er is een fout opgetreden. Schrijf ons direct op hola@aromatik.apartments",
   aboutTitle: "Over ons", aboutSubtitle: "Aromatik Apartments in de Barri Vell van Girona",
+  footerImportantInfo: "Belangrijke informatie",
+  infoIndexTitle: "Vóór uw aankomst",
+  infoIndexText: "Lees de belangrijke informatie over toegang, huisregels, huisdieren, afval en annulering.",
+  infoIndexBtn: "Belangrijke informatie",
 };
 
 export const translations: Record<Locale, T> = { es, en, fr, ca, de, zh, ko, pt, nl };

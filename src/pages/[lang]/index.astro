@@ -8,6 +8,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Locale };
 const t = getT(lang);
+const langRoot = `/${lang}`;
 
 const apartments = [
   { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, img: "/images/apartamentos/ylang-ylang/foto-1.jpg", color: "#C8B89A" },
@@ -108,4 +109,19 @@ const apartments = [
       </div>
     </div>
   </section>
+  <!-- BLOQUE INFORMACIÓN IMPORTANTE -->
+  <section class="section bg-cream info-banner-section">
+    <div class="container">
+      <div class="info-banner">
+        <div class="info-banner-text">
+          <span class="eyebrow">ℹ</span>
+          <h2>{t.infoIndexTitle}</h2>
+          <p>{t.infoIndexText}</p>
+        </div>
+        <a href={`${langRoot}/informacion-importante`} class="btn btn-outline-dark">{t.infoIndexBtn} →</a>
+      </div>
+    </div>
+  </section>
+
+
 </BaseLayout>

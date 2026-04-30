@@ -168,6 +168,18 @@ const schemaOrg = JSON.stringify({
     .btn-dark:hover { background: var(--stone-800); }
     .btn-green { background: var(--gold); color: var(--white); }
     .btn-green:hover { background: var(--gold-hover); }
+    .btn-outline-dark { border: 1px solid var(--stone-800); color: var(--stone-800); background: transparent; }
+    .btn-outline-dark:hover { background: var(--stone-800); color: var(--white); }
+    /* INFO BANNER (bloque índice → info importante) */
+    .info-banner-section { padding: 2.5rem 0; }
+    .info-banner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); padding: 2rem 2.5rem; }
+    .info-banner-text .eyebrow { display: block; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--stone-400); margin-bottom: 0.5rem; }
+    .info-banner-text h2 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: var(--black); margin: 0 0 0.5rem; }
+    .info-banner-text p { font-size: 0.88rem; color: var(--stone-600); margin: 0; line-height: 1.6; max-width: 480px; }
+    @media (max-width: 640px) {
+      .info-banner { flex-direction: column; align-items: flex-start; padding: 1.5rem; }
+      .info-banner .btn { width: 100%; text-align: center; }
+    }
     .btn-border { border: 1px solid var(--stone-200); color: var(--stone-600); background: var(--white); }
     .btn-border:hover { border-color: var(--black); color: var(--black); }
 
@@ -383,6 +395,7 @@ const schemaOrg = JSON.stringify({
           <li><a href={`${langRoot}/sobre-nosotros`}>{t.footerAbout}</a></li>
           <li><a href={`${langRoot}/contacto`}>{t.footerContact}</a></li>
           <li><a href={`${langRoot}/reservar`}>{t.footerBooking}</a></li>
+          <li><a href={`${langRoot}/informacion-importante`}>{t.footerImportantInfo}</a></li>
           <li><a href={`${langRoot}/cancellation-policy`}>{t.footerCancellation}</a></li>
           <li><a href={`${langRoot}/house-rules`}>{t.footerHouseRules}</a></li>
         </ul>
