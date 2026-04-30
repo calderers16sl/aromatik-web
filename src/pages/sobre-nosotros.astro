@@ -5,8 +5,11 @@ import ReviewsCarousel from '../components/ReviewsCarousel.astro';
 ---
 <BaseLayout
   title="Sobre Aromatik Apartments — Apartamentos boutique en el Barri Vell de Girona"
-  description="Aromatik Apartments es una pequeña colección de apartamentos boutique en el Barri Vell de Girona, gestionados personalmente por Arnau. Reserva directo y ahorra un 5%."
+  description="Aromatik Apartments es una pequeña colección de apartamentos boutique en el Barri Vell de Girona, gestionados personalmente por Arnau. Reserva directamente al mejor precio disponible."
 >
+  <HostCard />
+  <ReviewsCarousel />
+
   <div class="inner-hero">
     <span class="eyebrow">Conoce el proyecto</span>
     <h1 style="margin-top:0.75rem">Sobre Aromatik Apartments</h1>
@@ -25,24 +28,19 @@ import ReviewsCarousel from '../components/ReviewsCarousel.astro';
             fácil mediante código y el mismo servicio de confianza que encontrarías al reservar a través de Airbnb.
           </p>
           <p>
-            Reservando directamente en nuestra web, obtienes un <strong>5% de descuento</strong> respecto al precio de Airbnb
-            y evitas comisiones innecesarias de plataforma, manteniendo el mismo apartamento, la misma calidad y la misma
-            atención personalizada.
+            Al reservar directamente en nuestra web obtienes el <strong>mejor precio disponible</strong>, sin comisiones de plataforma y con la misma calidad y atención personalizada que encontrarías en Airbnb.
           </p>
           <p>
             Alójate en el centro histórico de Girona, reserva directamente y disfruta de una forma más personal de viajar.
           </p>
           <a href="/reservar" class="btn btn-dark" style="margin-top:1rem; display:inline-block;">
-            Reserva directamente y ahorra un 5% →
+            Reservar al mejor precio →
           </a>
         </div>
         </div>
       </div>
     </div>
   </section>
-
-  <HostCard />
-  <ReviewsCarousel />
 
   <section class="section bg-cream">
     <div class="container" style="text-align:center;">
