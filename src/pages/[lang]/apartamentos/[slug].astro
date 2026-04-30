@@ -53,7 +53,7 @@ const { apt, allApartments } = Astro.props;
 const t = getT(lang);
 const hasPhotos = apt.photos && apt.photos.length > 0;
 ---
-<BaseLayout title={`${t.aptLabel} ${apt.name} — ${t.aptMapTitle} Barri Vell de Girona | Aromatik`} description={apt.description} lang={lang}>
+<BaseLayout title={`${t.aptH1s[apt.slug] ?? (t.aptLabel + " " + apt.name)} | Aromatik`} description={t.aptDescriptions[apt.slug] ?? apt.description} lang={lang}>
 
   {hasPhotos && (
     <div class="carousel-wrap" id="carouselWrap">
@@ -76,15 +76,15 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   <div style="max-width:1000px; margin:0 auto; padding:3rem 2rem;">
     <div style="display:grid; grid-template-columns:1fr 360px; gap:3rem; align-items:start;" class="apt-detail-grid-inner">
       <div>
-        <h1 class="apt-detail-title">{t.aptLabel} {apt.name} — Barri Vell de Girona</h1>
+        <h1 class="apt-detail-title">{t.aptH1s[apt.slug] ?? `${t.aptLabel} ${apt.name}`}</h1>
         <p class="apt-detail-meta">
           {t.aptGuests(apt.guests)} · {t.aptBeds(apt.bedrooms)} · {t.aptBath(apt.bathrooms)} · {t.aptSize(apt.size)}
         </p>
-        <p class="apt-detail-desc">{apt.description}</p>
+        <p class="apt-detail-desc">{t.aptDescriptions[apt.slug] ?? apt.description}</p>
         <p class="amenities-label">{t.aptServicesTitle}</p>
         <ul class="amenities-grid">
           {apt.amenities.map((a: string) => (
-            <li><span class="check-icon">✓</span>{a}</li>
+            <li><span class="check-icon">✓</span>{t.amenityLabels[a] ?? a}</li>
           ))}
         </ul>
         <div class="inline-map">
