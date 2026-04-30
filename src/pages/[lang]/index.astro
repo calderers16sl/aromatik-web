@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
-import GoogleReviews from '../../components/GoogleReviews.astro';
+import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
 
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
@@ -38,13 +38,7 @@ const apartments = [
     </div>
   </section>
 
-  <div class="trust-bar">
-    <div class="trust-bar-inner">
-      <div><span class="trust-num">8</span><span class="trust-label">{t.trustApts}</span></div>
-      <div><span class="trust-num">100%</span><span class="trust-label">{t.trustLocation}</span></div>
-      <div><span class="trust-num">★ 4.9</span><span class="trust-label">{t.trustRating}</span></div>
-      <div><span class="trust-num">0%</span><span class="trust-label">{t.trustCommission}</span></div>
-    </div>
+  <ReviewsCarousel />
   </div>
 
   <section id="apartamentos" class="section">
@@ -123,10 +117,4 @@ const apartments = [
       </div>
     </div>
   </section>
-
-
-
-  <!-- Google Reviews -->
-  <GoogleReviews />
-
 </BaseLayout>

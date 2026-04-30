@@ -1,0 +1,291 @@
+---
+// ReviewsCarousel.astro — auto-sliding reviews carousel, dark background
+// Fetches from /api/reviews on the client
+---
+
+<div class="rc-wrap">
+  <div class="rc-badge">
+    <span class="rc-score" id="rc-score">4.6</span>
+    <span class="rc-stars" id="rc-stars">★★★★★</span>
+    <span class="rc-count" id="rc-count">Google Reviews</span>
+  </div>
+
+  <div class="rc-stage">
+    <button class="rc-arrow rc-prev" id="rc-prev" aria-label="Anterior">&#10094;</button>
+
+    <div class="rc-viewport">
+      <div class="rc-track" id="rc-track">
+        <!-- Cards injected by JS -->
+        <div class="rc-card rc-placeholder">
+          <p class="rc-text">Cargando reseñas…</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="rc-arrow rc-next" id="rc-next" aria-label="Siguiente">&#10095;</button>
+  </div>
+
+  <div class="rc-dots" id="rc-dots"></div>
+</div>
+
+<style>
+  .rc-wrap {
+    background: var(--black, #1a1a1a);
+    color: var(--white, #fff);
+    padding: 48px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .rc-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .rc-score {
+    font-family: var(--serif, Georgia, serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--gold, #d0b050);
+    line-height: 1;
+  }
+
+  .rc-stars {
+    font-size: 1.1rem;
+    color: var(--gold, #d0b050);
+    letter-spacing: 2px;
+  }
+
+  .rc-count {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .rc-stage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .rc-viewport {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .rc-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .rc-card {
+    min-width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .rc-placeholder {
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+  }
+
+  .rc-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .rc-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .rc-avatar-fallback {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gold, #d0b050);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--black, #1a1a1a);
+    flex-shrink: 0;
+  }
+
+  .rc-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .rc-time {
+    font-size: 0.75rem;
+    opacity: 0.45;
+  }
+
+  .rc-card-stars {
+    color: var(--gold, #d0b050);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+  }
+
+  .rc-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+  }
+
+  .rc-arrow {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.6);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .rc-arrow:hover {
+    border-color: var(--gold, #d0b050);
+    color: var(--gold, #d0b050);
+  }
+
+  .rc-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .rc-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    padding: 0;
+  }
+
+  .rc-dot.active {
+    background: var(--gold, #d0b050);
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 600px) {
+    .rc-wrap { padding: 36px 16px 32px; gap: 20px; }
+    .rc-stage { gap: 6px; }
+    .rc-text { font-size: 0.88rem; }
+  }
+</style>
+
+<script>
+  (async () => {
+    const STARS = (n) => '★'.repeat(n) + '☆'.repeat(5 - n);
+    const track = document.getElementById('rc-track');
+    const dotsEl = document.getElementById('rc-dots');
+    const scoreEl = document.getElementById('rc-score');
+    const starsEl = document.getElementById('rc-stars');
+    const countEl = document.getElementById('rc-count');
+    const prevBtn = document.getElementById('rc-prev');
+    const nextBtn = document.getElementById('rc-next');
+
+    let current = 0;
+    let total = 0;
+    let timer;
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.rc-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function startAuto() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    try {
+      const res = await fetch('/api/reviews');
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      if (scoreEl) scoreEl.textContent = data.rating ? data.rating.toFixed(1) : '—';
+      if (starsEl) starsEl.textContent = STARS(Math.round(data.rating || 0));
+      if (countEl) countEl.textContent = data.user_ratings_total
+        ? `${data.user_ratings_total} reseñas en Google`
+        : 'Google Reviews';
+
+      if (!data.reviews || data.reviews.length === 0) {
+        track.innerHTML = '<div class="rc-card rc-placeholder"><p class="rc-text">Sé el primero en dejar una reseña.</p></div>';
+        return;
+      }
+
+      total = data.reviews.length;
+
+      track.innerHTML = data.reviews.map(r => {
+        const initial = r.author ? r.author.charAt(0).toUpperCase() : '?';
+        const avatarHtml = r.avatar
+          ? `<img class="rc-avatar" src="${r.avatar}" alt="${r.author}" loading="lazy">`
+          : `<div class="rc-avatar-fallback">${initial}</div>`;
+        return `
+          <div class="rc-card">
+            <div class="rc-card-top">
+              ${avatarHtml}
+              <div>
+                <div class="rc-author">${r.author || 'Huésped'}</div>
+                <div class="rc-time">${r.time || ''}</div>
+              </div>
+            </div>
+            <div class="rc-card-stars">${STARS(r.rating || 5)}</div>
+            <p class="rc-text">"${r.text || ''}"</p>
+          </div>
+        `;
+      }).join('');
+
+      // Dots
+      dotsEl.innerHTML = data.reviews.map((_, i) =>
+        `<button class="rc-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Reseña ${i+1}"></button>`
+      ).join('');
+
+      dotsEl.querySelectorAll('.rc-dot').forEach(d => {
+        d.addEventListener('click', () => { goTo(+d.dataset.i); startAuto(); });
+      });
+
+      prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+      nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+
+      goTo(0);
+      startAuto();
+
+    } catch (err) {
+      console.warn('Reviews carousel error:', err);
+      track.innerHTML = '';
+    }
+  })();
+</script>
