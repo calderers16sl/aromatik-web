@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingWidget from '../../components/BookingWidget.astro';
-import GoogleReviews from '../../components/GoogleReviews.astro';
+import HostCard from '../../components/HostCard.astro';
+import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
 import { getT } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -162,11 +163,7 @@ const breadcrumbSchema = JSON.stringify({
     </div>
   )}
 
-  <!-- ═══════════════════════════════════════
-
-  <!-- ═══════════════════════════════════════
-       CONTENIDO DEL APARTAMENTO
-  ══════════════════════════════════════════ -->
+  <!-- CONTENIDO DEL APARTAMENTO -->
   <div class="apt-container">
     <div class="apt-layout">
 
@@ -196,20 +193,6 @@ const breadcrumbSchema = JSON.stringify({
             ))}
           </ul>
         </div>
-
-        <div class="inline-map">
-          <p class="inline-map-label">📍 Barri Vell de Girona · Rambla de la Llibertat, 11</p>
-          <div class="inline-map-wrapper">
-            <iframe
-              title="Aromatik Apartments — ubicación"
-              width="100%" height="280"
-              style="border:0; border-radius:10px; display:block;"
-              loading="lazy" allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es`}
-            ></iframe>
-          </div>
-        </div>
       </div>
 
       <!-- Sidebar reserva -->
@@ -233,34 +216,50 @@ const breadcrumbSchema = JSON.stringify({
     </div>
 
 
-    <!-- Google Reviews -->
-    <GoogleReviews />
-
     <!-- Otros apartamentos -->
     <div class="otros-section">
       <h2 class="section-heading">{t.aptOtherTitle}</h2>
-      <div class="otros-grid">
-        {allApartments.filter(a => a.slug !== apt.slug).slice(0, 4).map(a => (
-          <a href={`/apartamentos/${a.slug}`} class="otro-card group">
-            <div class="otro-img-wrap">
-              <img
-                src={`/images/apartamentos/${a.slug}/foto-1.jpg`}
-                alt={a.name}
-                class="otro-img"
-                loading="lazy"
-              />
-            </div>
-            <div class="otro-info">
-              <div class="otro-name">{a.name}</div>
-              <div class="otro-meta">{a.guests} pers. · {a.bedrooms} dorm. · {a.size} m²</div>
-            </div>
-          </a>
-        ))}
+      <div class="apts-grid">
+        {allApartments.filter(a => a.slug !== apt.slug).slice(0, 4).map(a => {
+          const count = Math.min(5, a.photos.length);
+          const photoNums = Array.from({ length: count }, (_, i) => i + 1);
+          return (
+            <a href={`/apartamentos/${a.slug}`} class="apt-card">
+              <div class="apt-card-img" style={`background-color:#e7e5e4`}>
+                {photoNums.map((n, i) => (
+                  <img
+                    src={`/images/apartamentos/${a.slug}/foto-${n}.jpg`}
+                    alt={`${a.name} - foto ${n}`}
+                    class={i > 0 ? 'c-hidden' : ''}
+                    loading="lazy"
+                  />
+                ))}
+                {count > 1 && (
+                  <>
+                    <button class="apt-card-prev" aria-label="Anterior">&#8249;</button>
+                    <button class="apt-card-next" aria-label="Siguiente">&#8250;</button>
+                    <div class="apt-card-dots">
+                      {photoNums.map((_, i) => (
+                        <span class={`apt-card-dot${i === 0 ? ' c-active' : ''}`}></span>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+              <div class="apt-card-body">
+                <h3>{a.name}</h3>
+                <p class="apt-meta">{a.guests} pers. · {a.bedrooms} dorm. · {a.size} m²</p>
+                <span class="apt-link">{t.aptsViewBtn}</span>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   </div>
 
-  </div>
+  <HostCard />
+  <ReviewsCarousel />
 
   <!-- ═══════════════════════════════════════
        LIGHTBOX (pantalla completa al click)
@@ -411,22 +410,6 @@ const breadcrumbSchema = JSON.stringify({
     flex-shrink: 0;
   }
 
-  /* ── UBICACIÓN (mapa inline) ────────────────────── */
-  .inline-map { margin-top: 1.5rem; }
-  .inline-map-label {
-    font-size: 0.82rem;
-    color: #6b6560;
-    margin: 0 0 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-  .inline-map-wrapper {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
-  }
-
   /* ── SIDEBAR BOOKING ─────────────────────────────── */
   .apt-sidebar { }
   .booking-card {
@@ -497,51 +480,6 @@ const breadcrumbSchema = JSON.stringify({
     color: #1c1917;
     margin-bottom: 2rem;
   }
-
-  /* ── OTROS APARTAMENTOS ──────────────────────────── */
-  .otros-section {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid #e7e5e4;
-  }
-  .otros-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-  @media (min-width: 640px) {
-    .otros-grid { grid-template-columns: repeat(4, 1fr); }
-  }
-
-  .otro-card {
-    display: block;
-    text-decoration: none;
-    background: #fff;
-    border: 1.5px solid #e7e5e4;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
-  }
-  .otro-card:hover {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-    border-color: #d0b050;
-    transform: translateY(-3px);
-  }
-  .otro-img-wrap {
-    width: 100%;
-    height: 160px;
-    overflow: hidden;
-    background: #e7e5e4;
-  }
-  @media (max-width: 640px) { .otro-img-wrap { height: 130px; } }
-  .otro-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s;
-  }
-  .otro-card:hover .otro-img { transform: scale(1.05); }
   .otro-info {
     padding: 0.875rem 1rem;
     border-top: 1px solid #f0efed;
@@ -671,6 +609,28 @@ const breadcrumbSchema = JSON.stringify({
     if (e.key === 'Escape')     closeLightbox();
     if (e.key === 'ArrowRight') lbNext();
     if (e.key === 'ArrowLeft')  lbPrev();
+  });
+
+
+  /* ── MINI-CARRUSELS ALTRES APARTAMENTS ── */
+  document.querySelectorAll('.apt-card').forEach(function(card) {
+    var imgs = Array.from(card.querySelectorAll('.apt-card-img img'));
+    var dots = Array.from(card.querySelectorAll('.apt-card-dot'));
+    var prev = card.querySelector('.apt-card-prev');
+    var next = card.querySelector('.apt-card-next');
+    if (imgs.length <= 1) return;
+    var cur = 0, timer;
+    function goTo(n) {
+      imgs[cur].classList.add('c-hidden');
+      dots[cur] && dots[cur].classList.remove('c-active');
+      cur = (n + imgs.length) % imgs.length;
+      imgs[cur].classList.remove('c-hidden');
+      dots[cur] && dots[cur].classList.add('c-active');
+    }
+    prev && prev.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur - 1); });
+    next && next.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur + 1); });
+    card.addEventListener('mouseenter', function() { timer = setInterval(function(){ goTo(cur + 1); }, 2500); });
+    card.addEventListener('mouseleave', function() { clearInterval(timer); });
   });
 
   /* Swipe táctil en lightbox */
