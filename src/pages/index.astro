@@ -10,14 +10,14 @@ const t = getT(lang);
 const CARD_PHOTOS = 5;
 
 const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, photos: 21, color: "#C8B89A" },
-  { name: "Romaní",      slug: "romani",      guests: 2, bedrooms: 1, photos: 20, color: "#8EAB85" },
-  { name: "Ciprés",      slug: "cipres",      guests: 2, bedrooms: 1, photos: 12, color: "#6B9B7E" },
-  { name: "Lavanda",     slug: "lavanda",     guests: 2, bedrooms: 1, photos: 19, color: "#A899BB" },
-  { name: "Limón",       slug: "limon",       guests: 2, bedrooms: 1, photos: 21, color: "#C4BC7E" },
-  { name: "Bergamota",   slug: "bergamota",   guests: 6, bedrooms: 3, photos: 21, color: "#C4A06E" },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 6, bedrooms: 3, photos: 23, color: "#7AAF9E" },
-  { name: "Geranio",     slug: "geranio",     guests: 2, bedrooms: 1, photos: 20, color: "#C49090" },
+  { name: "Ylang-Ylang", nameCa: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, photos: 21, color: "#C8B89A" },
+  { name: "Romaní", nameCa: "Romaní",      slug: "romani",      guests: 2, bedrooms: 1, photos: 20, color: "#8EAB85" },
+  { name: "Ciprés", nameCa: "Xiprer",      slug: "cipres",      guests: 2, bedrooms: 1, photos: 12, color: "#6B9B7E" },
+  { name: "Lavanda", nameCa: "Lavanda",     slug: "lavanda",     guests: 2, bedrooms: 1, photos: 19, color: "#A899BB" },
+  { name: "Limón", nameCa: "Llimona",       slug: "limon",       guests: 2, bedrooms: 1, photos: 21, color: "#C4BC7E" },
+  { name: "Bergamota", nameCa: "Bergamota",   slug: "bergamota",   guests: 6, bedrooms: 3, photos: 21, color: "#C4A06E" },
+  { name: "Árbol de té", nameCa: "Arbre de te", slug: "arbol-de-te", guests: 6, bedrooms: 3, photos: 23, color: "#7AAF9E" },
+  { name: "Geranio", nameCa: "Gerani",     slug: "geranio",     guests: 2, bedrooms: 1, photos: 20, color: "#C49090" },
 ];
 ---
 <BaseLayout title={t.metaTitle} description={t.metaDescription} lang={lang}>
@@ -75,7 +75,7 @@ const apartments = [
                 )}
               </div>
               <div class="apt-card-body">
-                <h3>{apt.name}</h3>
+                <h3>{apt.nameCa}</h3>
                 <p class="apt-meta">{t.aptsGuests(apt.guests)} · {t.aptsBedroom(apt.bedrooms)}</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>

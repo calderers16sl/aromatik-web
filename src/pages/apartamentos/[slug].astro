@@ -7,7 +7,7 @@ import { getT } from '../../i18n/translations';
 
 export function getStaticPaths() {
   const apartments = [
-    { name: "Ylang-Ylang", slug: "ylang-ylang", address: "Rambla de la Llibertat, 11", guests: 4, bedrooms: 2, bathrooms: 1.5, size: 70, smoobuId: 1397576,
+    { name: "Ylang-Ylang", nameCa: "Ylang-Ylang", slug: "ylang-ylang", address: "Rambla de la Llibertat, 11", guests: 4, bedrooms: 2, bathrooms: 1.5, size: 70, smoobuId: 1397576,
       seoTitle: "Apartamento Ylang-Ylang — vistas al Onyar en el Barri Vell de Girona | Aromatik",
       seoDescription: "Apartamento boutique para 4 personas con vistas al río Onyar en el casco antiguo de Girona. Balcón, WiFi, AC, self check-in. Reserva directa al mejor precio.",
       h1: "Apartamento Ylang-Ylang — vistas al Onyar, Barri Vell de Girona",
@@ -15,7 +15,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV con Netflix", "Aire acondicionado centralizado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Balcón", "Vistas al río", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "🌸",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-    { name: "Romaní", slug: "romani", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
+    { name: "Romaní", nameCa: "Romaní", slug: "romani", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
       seoTitle: "Apartamento Romaní con vistas al río Onyar — Barri Vell de Girona | Aromatik",
       seoDescription: "Acogedor apartamento para parejas con vistas al río Onyar en el casco antiguo de Girona. WiFi, AC, cocina equipada. Reserva directa sin comisiones.",
       h1: "Apartamento Romaní — vistas al Onyar en el Barri Vell de Girona",
@@ -23,7 +23,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Vistas al río", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "🌿",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
-    { name: "Ciprés", slug: "cipres", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 35, smoobuId: 1035631,
+    { name: "Ciprés", nameCa: "Xiprer", slug: "cipres", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 35, smoobuId: 1035631,
       seoTitle: "Apartamento Ciprés con balcón — Casco Antiguo de Girona | Aromatik",
       seoDescription: "Luminoso apartamento con balcón en el corazón del Barri Vell de Girona. Para 2 personas, WiFi, cocina equipada. Reserva directa al mejor precio.",
       h1: "Apartamento Ciprés — balcón en el Casco Antiguo de Girona",
@@ -31,7 +31,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Balcón", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "🌲",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg'] },
-    { name: "Lavanda", slug: "lavanda", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
+    { name: "Lavanda", nameCa: "Lavanda", slug: "lavanda", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
       seoTitle: "Apartamento Lavanda con vistas al río Onyar | Aromatik Girona",
       seoDescription: "Tranquilo apartamento para parejas con vistas al Onyar en el Barri Vell de Girona. Pet friendly, WiFi, cocina. Reserva directa, mejor precio garantizado.",
       h1: "Apartamento Lavanda — vistas al Onyar en el Barri Vell de Girona",
@@ -39,7 +39,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Vistas al río", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "💜",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg'] },
-    { name: "Limón", slug: "limon", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 30, smoobuId: 1037266,
+    { name: "Limón", nameCa: "Llimona", slug: "limon", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 30, smoobuId: 1037266,
       seoTitle: "Apartamento Limón con balcón — Barri Vell de Girona | Aromatik",
       seoDescription: "Fresco apartamento con balcón en el casco histórico de Girona. Para 2 personas, pet friendly, WiFi, cafetera expreso. Reserva directa sin intermediarios.",
       h1: "Apartamento Limón — balcón en el Barri Vell de Girona",
@@ -47,7 +47,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera expreso", "Hervidor de agua", "Tostadora", "Ascensor", "Balcón", "Vistas a la ciudad", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "🍋",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-    { name: "Bergamota", slug: "bergamota", address: "Rambla de la Llibertat, 11", guests: 6, bedrooms: 3, bathrooms: 2, size: 120, smoobuId: 1034422,
+    { name: "Bergamota", nameCa: "Bergamota", slug: "bergamota", address: "Rambla de la Llibertat, 11", guests: 6, bedrooms: 3, bathrooms: 2, size: 120, smoobuId: 1034422,
       seoTitle: "Apartamento Bergamota — ático para 6 personas en Girona | Aromatik",
       seoDescription: "Espectacular ático para 6 personas con vistas al río Onyar. 3 dormitorios, 2 baños, bañera, lavadora y balcón en el Barri Vell de Girona. Reserva directa.",
       h1: "Apartamento Bergamota — ático para 6 personas en el Barri Vell de Girona",
@@ -55,7 +55,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina completa", "Nevera", "Microondas", "Horno", "Cafetera Nespresso", "Tostadora", "Lavadora", "Ascensor", "Balcón", "Vistas al río", "Bañera", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "🍊",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
-    { name: "Árbol de té", slug: "arbol-de-te", address: "Rambla de la Llibertat, 26", guests: 6, bedrooms: 3, bathrooms: 2, size: 130, smoobuId: 1315321,
+    { name: "Árbol de té", nameCa: "Arbre de te", slug: "arbol-de-te", address: "Rambla de la Llibertat, 26", guests: 6, bedrooms: 3, bathrooms: 2, size: 130, smoobuId: 1315321,
       seoTitle: "Apartamento Árbol de Té — ático de diseño en Girona | Aromatik",
       seoDescription: "Lujoso ático de diseño para 6 personas en el centro histórico de Girona. 3 dormitorios, lavavajillas, bañera, balcón privado. Reserva directa al mejor precio.",
       h1: "Apartamento Árbol de Té — ático de diseño en el Barri Vell de Girona",
@@ -63,7 +63,7 @@ export function getStaticPaths() {
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción central", "Cocina completa", "Nevera", "Congelador", "Lavavajillas", "Microondas", "Horno", "Cocina de gas", "Cafetera Nespresso", "Hervidor de agua", "Tostadora", "Copas de vino", "Lavadora", "Ascensor", "Balcón privado", "Bañera", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"],
       emoji: "🌱",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg','foto-22.jpg','foto-23.jpg'] },
-    { name: "Geranio", slug: "geranio", address: "Rambla de la Llibertat, 26", guests: 2, bedrooms: 1, bathrooms: 1, size: 40, smoobuId: 1599430,
+    { name: "Geranio", nameCa: "Gerani", slug: "geranio", address: "Rambla de la Llibertat, 26", guests: 2, bedrooms: 1, bathrooms: 1, size: 40, smoobuId: 1599430,
       seoTitle: "Apartamento Geranio con balcón — Barri Vell de Girona | Aromatik",
       seoDescription: "Alegre apartamento con balcón en el corazón del casco antiguo de Girona. Para 2 personas, pet friendly, lavadora, WiFi. Reserva directa sin comisiones.",
       h1: "Apartamento Geranio — balcón en el Barri Vell de Girona",
@@ -211,7 +211,7 @@ const breadcrumbSchema = JSON.stringify({
 
     <!-- Motor de reservas -->
     <div class="booking-section" id="reservar-widget">
-      <h2 class="section-heading">{t.aptBookingTitle(apt.name)}</h2>
+      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
@@ -247,7 +247,7 @@ const breadcrumbSchema = JSON.stringify({
                 )}
               </div>
               <div class="apt-card-body">
-                <h3>{a.name}</h3>
+                <h3>{a.nameCa}</h3>
                 <p class="apt-meta">{a.guests} pers. · {a.bedrooms} dorm. · {a.size} m²</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>
