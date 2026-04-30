@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /reservar/confirmacion
+
+Sitemap: https://aromatik.apartments/sitemap.xml

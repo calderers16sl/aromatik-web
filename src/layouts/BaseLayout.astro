@@ -40,17 +40,53 @@ const schemaOrg = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
   "name": "Aromatik Apartments",
-  "description": "Apartamentos turísticos boutique en el Barri Vell de Girona",
+  "description": "Apartamentos turísticos boutique en el Barri Vell de Girona. Cycling friendly, pet friendly, reserva directa al mejor precio.",
   "url": siteUrl,
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "Rambla de la Llibertat, 11",
     "addressLocality": "Girona",
     "addressRegion": "Cataluña",
+    "postalCode": "17004",
     "addressCountry": "ES"
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 41.9833, "longitude": 2.8249 },
   "numberOfRooms": 8,
-  "priceRange": "€€"
+  "priceRange": "€€–€€€",
+  "telephone": "+34 600 000 000",
+  "email": "info@aromatik.apartments",
+  "checkinTime": "15:00",
+  "checkoutTime": "11:00",
+  "petsAllowed": true,
+  "smokingAllowed": false,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.71",
+    "reviewCount": "2272",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://www.airbnb.es/users/show/aromatik",
+    "https://www.instagram.com/aromatik.apartments",
+    "https://www.booking.com/hotel/es/aromatik-apartments.html"
+  ],
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "WiFi gratuito", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Aire acondicionado", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Cocina equipada", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Almacenamiento de bicicletas", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Se admiten mascotas", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Ascensor", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Self check-in", "value": true }
+  ],
+  "image": [
+    "https://aromatik.apartments/images/apartamentos/ylang-ylang/foto-1.jpg",
+    "https://aromatik.apartments/images/apartamentos/bergamota/foto-1.jpg",
+    "https://aromatik.apartments/images/apartamentos/lavanda/foto-1.jpg",
+    "https://aromatik.apartments/images/apartamentos/arbol-de-te/foto-1.jpg",
+    "https://aromatik.apartments/images/apartamentos/geranio/foto-1.jpg"
+  ]
 });
 ---
 <!DOCTYPE html>
@@ -58,7 +94,7 @@ const schemaOrg = JSON.stringify({
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} | Aromatik Apartments</title>
+  <title>{title.includes("Aromatik") ? title : `${title} | Aromatik Apartments`}</title>
   <meta name="description" content={description} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href={canonicalURL} />
@@ -67,7 +103,7 @@ const schemaOrg = JSON.stringify({
   ))}
   <link rel="alternate" hreflang="x-default" href={`${siteUrl}${rawPath}`} />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content={`${title} | Aromatik Apartments`} />
+  <meta property="og:title" content={title.includes("Aromatik") ? title : `${title} | Aromatik Apartments`} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
   {ogImage && <meta property="og:image" content={`${siteUrl}${ogImage}`} />}
@@ -364,7 +400,28 @@ const schemaOrg = JSON.stringify({
     @media (max-width: 640px) { .rules-grid { grid-template-columns: 1fr; } }
     .rule-item { display: flex; gap: 1rem; padding: 1.25rem; border: 1px solid var(--stone-200); border-radius: 12px; font-size: 0.9rem; line-height: 1.6; color: var(--stone-600); }
     .rule-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+    /* ── SEO CONTENT BLOCKS (home) ──────────────────── */
+    .seo-barri-vell { background: var(--white); }
+    .seo-cycling { background: var(--cream); }
+    .seo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .seo-grid.reverse { direction: rtl; }
+    .seo-grid.reverse > * { direction: ltr; }
+    @media (max-width: 768px) {
+      .seo-grid, .seo-grid.reverse { grid-template-columns: 1fr; gap: 2rem; direction: ltr; }
+    }
+    .seo-text h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 400; margin: 0.75rem 0 1.25rem; }
+    .seo-text p { font-size: 0.95rem; line-height: 1.8; color: var(--stone-600); }
+    .seo-features { display: flex; flex-direction: column; gap: 1rem; }
+    .seo-feature-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem; background: var(--white); border-radius: 12px; border: 1px solid var(--stone-200); }
+    .seo-cycling .seo-feature-item { background: var(--cream); border-color: var(--stone-200); }
+    .seo-barri-vell .seo-feature-item { background: var(--cream); }
+    .seo-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .seo-feature-item div { display: flex; flex-direction: column; gap: 0.15rem; }
+    .seo-feature-item strong { font-size: 0.9rem; font-weight: 500; color: var(--black); }
+    .seo-feature-item span { font-size: 0.8rem; color: var(--stone-400); }
   </style>
+  <slot name="head" />
 </head>
 <body>
   <header class="header" id="header">

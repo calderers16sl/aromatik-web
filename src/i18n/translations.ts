@@ -50,8 +50,8 @@ export interface T {
 }
 
 const es: T = {
-  metaTitle: "Apartamentos turísticos en el Barri Vell de Girona",
-  metaDescription: "Aromatik Apartments — apartamentos turísticos boutique en el centro histórico de Girona. Reserva directa, atención local y alojamientos seleccionados en el Barri Vell.",
+  metaTitle: "Apartamentos turísticos Girona Barri Vell | Aromatik",
+  metaDescription: "Apartamentos boutique en el casco antiguo de Girona. Reserva directa con mejor precio, atención local y check-in flexible. 4,71★ y 2.272 reseñas.",
   navApartments: "Apartamentos", navImportantInfo: "Info importante", navCancellation: "Cancelación", navAbout: "Sobre nosotros", navContact: "Contacto", navBook: "Reservar",
   footerTagline: "Apartamentos turísticos boutique en el Barri Vell de Girona. Reserva directa, atención local y alojamientos seleccionados en el centro histórico.",
   footerColApts: "Apartamentos", footerColInfo: "Información", footerColGirona: "Girona",
@@ -140,8 +140,8 @@ const es: T = {
 };
 
 const en: T = {
-  metaTitle: "Tourist apartments in the Barri Vell of Girona",
-  metaDescription: "Aromatik Apartments — boutique tourist apartments in the historic centre of Girona. Direct booking, local attention and selected accommodations in the Barri Vell.",
+  metaTitle: "Holiday Apartments Girona Old Town | Aromatik",
+  metaDescription: "Boutique apartments in the heart of Girona's Barri Vell. Best-price direct booking, cycling friendly, pet friendly. 4.71★ and 2,272 reviews.",
   navApartments: "Apartments", navImportantInfo: "Important info", navCancellation: "Cancellation", navAbout: "About us", navContact: "Contact", navBook: "Book",
   footerTagline: "Boutique tourist apartments in the Barri Vell of Girona. Direct booking, local attention and selected accommodations in the historic centre.",
   footerColApts: "Apartments", footerColInfo: "Information", footerColGirona: "Girona",
@@ -230,8 +230,8 @@ const en: T = {
 };
 
 const fr: T = {
-  metaTitle: "Appartements touristiques dans le Barri Vell de Gérone",
-  metaDescription: "Aromatik Apartments — appartements boutique dans le centre historique de Gérone. Réservation directe, attention locale et hébergements sélectionnés dans le Barri Vell.",
+  metaTitle: "Appartements Gérone Vieille Ville | Aromatik",
+  metaDescription: "Appartements boutique au cœur du Barri Vell de Gérone. Réservation directe au meilleur prix, cycling friendly, animaux acceptés. 4,71★ et 2 272 avis.",
   navApartments: "Appartements", navImportantInfo: "Infos importantes", navCancellation: "Annulation", navAbout: "À propos", navContact: "Contact", navBook: "Réserver",
   footerTagline: "Appartements touristiques boutique dans le Barri Vell de Gérone. Réservation directe et attention locale au cœur du centre historique.",
   footerColApts: "Appartements", footerColInfo: "Informations", footerColGirona: "Gérone",
@@ -320,8 +320,8 @@ const fr: T = {
 };
 
 const ca: T = {
-  metaTitle: "Apartaments turístics al Barri Vell de Girona",
-  metaDescription: "Aromatik Apartments — apartaments turístics boutique al centre històric de Girona. Reserva directa, atenció local i allotjaments seleccionats al Barri Vell.",
+  metaTitle: "Apartaments turístics Girona Barri Vell | Aromatik",
+  metaDescription: "Apartaments boutique al cor del Barri Vell de Girona. Reserva directa al millor preu, cycling friendly i pet friendly. 4,71★ i 2.272 ressenyes.",
   navApartments: "Apartaments", navImportantInfo: "Info important", navCancellation: "Cancel·lació", navAbout: "Sobre nosaltres", navContact: "Contacte", navBook: "Reservar",
   footerTagline: "Apartaments turístics boutique al Barri Vell de Girona. Reserva directa, atenció local i allotjaments seleccionats al centre històric.",
   footerColApts: "Apartaments", footerColInfo: "Informació", footerColGirona: "Girona",
@@ -410,8 +410,8 @@ const ca: T = {
 };
 
 const de: T = {
-  metaTitle: "Ferienwohnungen im Barri Vell von Girona",
-  metaDescription: "Aromatik Apartments — Boutique-Ferienwohnungen im historischen Zentrum von Girona. Direktbuchung, lokale Betreuung und ausgewählte Unterkünfte im Barri Vell.",
+  metaTitle: "Ferienwohnung Girona Altstadt | Aromatik",
+  metaDescription: "Boutique-Apartments im Herzen des Barri Vell von Girona. Direktbuchung zum besten Preis, fahrradfreundlich, haustierfreundlich. 4,71★ und 2.272 Bewertungen.",
   navApartments: "Apartments", navImportantInfo: "Wichtige Infos", navCancellation: "Stornierung", navAbout: "Über uns", navContact: "Kontakt", navBook: "Buchen",
   footerTagline: "Boutique-Ferienwohnungen im Barri Vell von Girona. Direktbuchung, lokale Betreuung und ausgewählte Unterkünfte im historischen Stadtzentrum.",
   footerColApts: "Apartments", footerColInfo: "Informationen", footerColGirona: "Girona",
@@ -763,8 +763,8 @@ const pt: T = {
 };
 
 const nl: T = {
-  metaTitle: "Vakantieappartementen in de Barri Vell van Girona",
-  metaDescription: "Aromatik Apartments — boutique vakantieappartementen in het historische centrum van Girona. Directe boeking, lokale service en geselecteerde accommodaties in de Barri Vell.",
+  metaTitle: "Vakantieappartementen Girona Barri Vell | Aromatik",
+  metaDescription: "Boutique appartementen in het hart van de Barri Vell van Girona. Directe boeking, fietsvriendelijk, huisdieren welkom. 4,71★ en 2.272 beoordelingen.",
   navApartments: "Appartementen", navImportantInfo: "Belangrijke info", navCancellation: "Annulering", navAbout: "Over ons", navContact: "Contact", navBook: "Boeken",
   footerTagline: "Boutique vakantieappartementen in de Barri Vell van Girona. Directe boeking, lokale zorg en geselecteerde accommodaties in het historische centrum.",
   footerColApts: "Appartementen", footerColInfo: "Informatie", footerColGirona: "Girona",
