@@ -19,7 +19,7 @@ const canonicalURL = `${siteUrl}${Astro.url.pathname}`;
 // Canonical path without language prefix (for alternate links + lang switcher)
 const rawPath = (() => {
   const p = Astro.url.pathname;
-  for (const l of ['en','fr','ca','de','zh','ko']) {
+  for (const l of ['en','fr','ca','de','zh','ko','pt','nl']) {
     if (p.startsWith(`/${l}/`)) return p.slice(l.length + 1) || '/';
     if (p === `/${l}`) return '/';
   }

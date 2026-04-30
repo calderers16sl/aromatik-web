@@ -5,7 +5,7 @@
  * If the user has manually selected a language (cookie), that takes priority.
  */
 
-const SUPPORTED_LANGS = ['en', 'fr', 'ca', 'de', 'zh', 'ko'];
+const SUPPORTED_LANGS = ['en', 'fr', 'ca', 'de', 'zh', 'ko', 'pt', 'nl'];
 const DEFAULT_LANG = 'es';
 
 // Country → language fallback map
@@ -21,6 +21,10 @@ const COUNTRY_LANG = {
   CN: 'zh', TW: 'zh', HK: 'zh', MO: 'zh',
   // Korean-speaking
   KR: 'ko',
+  // Portuguese-speaking
+  PT: 'pt', BR: 'pt', AO: 'pt', MZ: 'pt', CV: 'pt', GW: 'pt', ST: 'pt', TL: 'pt',
+  // Dutch-speaking
+  NL: 'nl', SR: 'nl',
   // Catalan regions (handled by Accept-Language, Spain stays ES)
   // ES → 'es' (default)
 };
