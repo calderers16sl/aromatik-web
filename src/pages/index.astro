@@ -1,99 +1,215 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getT } from '../i18n/translations';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+import HostCard from '../components/HostCard.astro';
+
+const lang = 'es';
+const t = getT(lang);
+
+const CARD_PHOTOS = 5;
 
 const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, id: 1397576, emoji: "🌸", photos: 21 },
-  { name: "Romaní",      slug: "romani",      guests: 2, bedrooms: 1, id: 1033021, emoji: "🌿", photos: 20 },
-  { name: "Ciprés",      slug: "cipres",      guests: 4, bedrooms: 2, id: 1035631, emoji: "🌲", photos: 12 },
-  { name: "Lavanda",     slug: "lavanda",     guests: 2, bedrooms: 1, id: 1033339, emoji: "💜", photos: 19 },
-  { name: "Limón",       slug: "limon",       guests: 3, bedrooms: 1, id: 1037266, emoji: "🍋", photos: 21 },
-  { name: "Bergamota",   slug: "bergamota",   guests: 4, bedrooms: 2, id: 1034422, emoji: "🍊", photos: 21 },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, id: 1315321, emoji: "🌱", photos: 23 },
-  { name: "Geranio",     slug: "geranio",     guests: 4, bedrooms: 2, id: 1599430, emoji: "🌺", photos: 20 },
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, photos: 21, color: "#C8B89A" },
+  { name: "Romaní",      slug: "romani",      guests: 2, bedrooms: 1, photos: 20, color: "#8EAB85" },
+  { name: "Ciprés",      slug: "cipres",      guests: 2, bedrooms: 1, photos: 12, color: "#6B9B7E" },
+  { name: "Lavanda",     slug: "lavanda",     guests: 2, bedrooms: 1, photos: 19, color: "#A899BB" },
+  { name: "Limón",       slug: "limon",       guests: 2, bedrooms: 1, photos: 21, color: "#C4BC7E" },
+  { name: "Bergamota",   slug: "bergamota",   guests: 6, bedrooms: 3, photos: 21, color: "#C4A06E" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 6, bedrooms: 3, photos: 23, color: "#7AAF9E" },
+  { name: "Geranio",     slug: "geranio",     guests: 2, bedrooms: 1, photos: 20, color: "#C49090" },
 ];
-
-const CARD_PHOTOS = 5; // fotos por carrusel en la grid
 ---
-<BaseLayout title="Apartamentos en Girona" description="8 apartamentos de diseño en el casco antiguo de Girona. Reserva directa con el mejor precio.">
-
-  <!-- ═══════════════════════════════
-       HERO
-  ════════════════════════════════ -->
-  <section class="relative h-[90vh] flex items-center justify-center text-white overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center bg-stone-800" style="background-image:url('/images/apartamentos/bergamota/foto-1.jpg')"></div>
-    <div class="absolute inset-0 bg-black/50 z-10"></div>
-    <div class="relative z-20 text-center px-8 py-10 max-w-3xl mx-auto bg-black/25 rounded-3xl backdrop-blur-[2px]">
-      <p class="text-sm uppercase tracking-[0.3em] mb-4 text-stone-300">Girona · Casco antiguo</p>
-      <h1 class="text-5xl md:text-7xl font-light leading-tight mb-6">
-        Despierta en<br/><em>el corazón de Girona</em>
-      </h1>
-      <p class="text-lg text-stone-200 mb-10 max-w-xl mx-auto">
-        8 apartamentos únicos en la ciudad medieval. Cada uno con su propio aroma, su propia personalidad.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/#apartamentos" class="bg-white text-stone-900 px-8 py-3 rounded-full font-medium hover:bg-stone-100 transition-colors">
-          Ver apartamentos
-        </a>
-        <a href="/reservar" class="border border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition-colors">
-          Reservar ahora
-        </a>
+<BaseLayout title={t.metaTitle} description={t.metaDescription} lang={lang}>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <span class="hero-eyebrow">{t.heroEyebrow}</span>
+      <h1 set:html={t.heroTitle.replace('\n','<br>')} />
+      <div class="hero-actions">
+        <a href="#apartamentos" class="btn btn-white">{t.heroCta1}</a>
+        <a href="#anfitrion" class="btn btn-outline-white" id="heroScrollBtn">{t.heroCta2}</a>
+      </div>
+      <div class="hero-badges">
+        <span class="hero-badge">🚲 Cyclist friendly</span>
+        <span class="hero-badge">🐾 Pet friendly</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════
-       INTRO
-  ════════════════════════════════ -->
-  <section class="max-w-3xl mx-auto px-4 py-20 text-center">
-    <h2 class="text-3xl font-light mb-6" style="color:var(--color-primary)">Apartamentos con alma</h2>
-    <p class="text-lg text-stone-600 leading-relaxed">
-      Cada apartamento lleva el nombre de una planta aromática. Diseñados con mimo, equipados con todo lo necesario,
-      ubicados en el barrio más bonito de Girona. Porque los mejores recuerdos empiezan por un buen sitio donde quedarse.
-    </p>
+  <!-- APARTMENTS GRID -->
+  <section id="apartamentos" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">{t.aptsEyebrow}</span>
+        <h2 style="margin-top:0.75rem">{t.aptsTitle}</h2>
+        <p>{t.aptsSubtitle}</p>
+      </div>
+      <div class="apts-grid">
+        {apartments.map((apt) => {
+          const count = Math.min(CARD_PHOTOS, apt.photos);
+          const photoNums = Array.from({ length: count }, (_, i) => i + 1);
+          return (
+            <a href={`/apartamentos/${apt.slug}`} class="apt-card">
+              <div class="apt-card-img" style={`background-color:${apt.color}`}>
+                {photoNums.map((n, i) => (
+                  <img
+                    src={`/images/apartamentos/${apt.slug}/foto-${n}.jpg`}
+                    alt={`${apt.name} - foto ${n}`}
+                    class={i > 0 ? 'c-hidden' : ''}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                  />
+                ))}
+                {count > 1 && (
+                  <>
+                    <button class="apt-card-prev" aria-label="Anterior">&#8249;</button>
+                    <button class="apt-card-next" aria-label="Siguiente">&#8250;</button>
+                    <div class="apt-card-dots">
+                      {photoNums.map((_, i) => (
+                        <span class={`apt-card-dot${i === 0 ? ' c-active' : ''}`}></span>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+              <div class="apt-card-body">
+                <h3>{apt.name}</h3>
+                <p class="apt-meta">{t.aptsGuests(apt.guests)} · {t.aptsBedroom(apt.bedrooms)}</p>
+                <span class="apt-link">{t.aptsViewBtn}</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
   </section>
 
-  <!-- ═══════════════════════════════
-       APARTMENTS GRID — carrusel mini
-  ════════════════════════════════ -->
-  <section id="apartamentos" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-light text-center mb-12" style="color:var(--color-text)">Nuestros apartamentos</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {apartments.map((apt) => {
-        const count = Math.min(CARD_PHOTOS, apt.photos);
-        const imgs  = Array.from({ length: count }, (_, i) => i + 1);
-        return (
-          <a
-            href={`/apartamentos/${apt.slug}`}
-            class="apt-card group block rounded-2xl overflow-hidden border border-stone-200 hover:shadow-xl transition-all duration-300"
-            data-slug={apt.slug}
-          >
-            {/* ── Carrusel de fotos ── */}
-            <div class="relative h-48 bg-stone-100 overflow-hidden">
+  <!-- WHY BOOK DIRECT -->
+  <section class="section bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">{t.whyEyebrow}</span>
+        <h2 style="margin-top:0.75rem">{t.whyTitle}</h2>
+        <p>{t.whySubtitle}</p>
+      </div>
+      <div class="perks-grid">
+        <div class="perk"><div class="perk-icon">✦</div><h3>{t.perk1Title}</h3><p>{t.perk1Desc}</p></div>
+        <div class="perk"><div class="perk-icon">◎</div><h3>{t.perk2Title}</h3><p>{t.perk2Desc}</p></div>
+        <div class="perk"><div class="perk-icon">◈</div><h3>{t.perk3Title}</h3><p>{t.perk3Desc}</p></div>
+      </div>
+    </div>
+  </section>
 
-              {imgs.map((n, i) => (
-                <img
-                  src={`/images/apartamentos/${apt.slug}/foto-${n}.jpg`}
-                  alt={`${apt.name} - foto ${n}`}
-                  class={`card-img absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
-                  loading={i === 0 ? "eager" : "lazy"}
-                />
-              ))}
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">{t.faqEyebrow}</span>
+        <h2 style="margin-top:0.75rem">{t.faqTitle}</h2>
+      </div>
+      <div class="faq-list">
+        {t.faqItems.map(item => (
+          <div class="faq-item">
+            <p class="faq-q">{item.q}</p>
+            <p class="faq-a">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-              {/* Flechas — solo se muestran con más de 1 foto */}
-              {count > 1 && (
-                <>
-                  <button
-                    class="card-prev absolute left-1.5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-black/40 hover:bg-black/65 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-base leading-none"
-                    aria-label="Foto anterior"
-                  >&#8249;</button>
-                  <button
-                    class="card-next absolute right-1.5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-black/40 hover:bg-black/65 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-base leading-none"
-                    aria-label="Foto siguiente"
-                  >&#8250;</button>
-                </>
-              )}
+  <HostCard />
+  <ReviewsCarousel />
 
-              {/* Puntos indicadores */}
-              {count > 1 && (
-                <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-10 pointer-events-none">
-                  {imgs.map((_
+  <!-- SEO BLOCK 1: Barri Vell -->
+  <section class="section seo-barri-vell">
+    <div class="container">
+      <div class="seo-grid">
+        <div class="seo-text">
+          <span class="eyebrow">{t.seoBarriEyebrow}</span>
+          <h2>{t.seoBarriTitle}</h2>
+          <p>{t.seoBarriText}</p>
+        </div>
+        <div class="seo-features">
+          <div class="seo-feature-item"><span class="seo-icon">⛪</span><div><strong>{t.seoBarriFeat1Title}</strong><span>{t.seoBarriFeat1Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🕍</span><div><strong>{t.seoBarriFeat2Title}</strong><span>{t.seoBarriFeat2Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🌉</span><div><strong>{t.seoBarriFeat3Title}</strong><span>{t.seoBarriFeat3Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🚉</span><div><strong>{t.seoBarriFeat4Title}</strong><span>{t.seoBarriFeat4Sub}</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO BLOCK 2: Cycling -->
+  <section class="section seo-cycling">
+    <div class="container">
+      <div class="seo-grid reverse">
+        <div class="seo-features">
+          <div class="seo-feature-item"><span class="seo-icon">🚲</span><div><strong>{t.seoCyclingFeat1Title}</strong><span>{t.seoCyclingFeat1Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🏔️</span><div><strong>{t.seoCyclingFeat2Title}</strong><span>{t.seoCyclingFeat2Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🛗</span><div><strong>{t.seoCyclingFeat3Title}</strong><span>{t.seoCyclingFeat3Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">👕</span><div><strong>{t.seoCyclingFeat4Title}</strong><span>{t.seoCyclingFeat4Sub}</span></div></div>
+        </div>
+        <div class="seo-text">
+          <span class="eyebrow">{t.seoCyclingEyebrow}</span>
+          <h2>{t.seoCyclingTitle}</h2>
+          <p>{t.seoCyclingText}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream info-banner-section">
+    <div class="container">
+      <div class="info-banner">
+        <div class="info-banner-text">
+          <span class="eyebrow">Antes de llegar</span>
+          <h2>{t.infoIndexTitle}</h2>
+          <p>{t.infoIndexText}</p>
+        </div>
+        <a href="/informacion-importante" class="btn btn-outline-dark">{t.infoIndexBtn} →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-cta-section">
+    <div class="container" style="text-align:center;">
+      <h3 style="font-family:var(--serif); font-size:1.6rem; font-weight:400; margin-bottom:0.75rem;">{t.faqCtaTitle}</h3>
+      <p style="color:var(--stone-600); font-size:0.9rem; margin-bottom:1.5rem;">{t.faqCtaDesc}</p>
+      <a href="/contacto" class="btn btn-dark">{t.faqCtaBtn}</a>
+    </div>
+  </section>
+
+<script is:inline>
+  // Smooth scroll hero CTA
+  document.getElementById('heroScrollBtn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.getElementById('anfitrion');
+    if (!target) return;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+  });
+
+  // Mini-carruseles en las cartas de apartamento
+  document.querySelectorAll('.apt-card').forEach(function(card) {
+    var imgs = Array.from(card.querySelectorAll('.apt-card-img img'));
+    var dots = Array.from(card.querySelectorAll('.apt-card-dot'));
+    var prev = card.querySelector('.apt-card-prev');
+    var next = card.querySelector('.apt-card-next');
+    if (imgs.length <= 1) return;
+    var cur = 0, timer;
+    function goTo(n) {
+      imgs[cur].classList.add('c-hidden');
+      dots[cur] && dots[cur].classList.remove('c-active');
+      cur = (n + imgs.length) % imgs.length;
+      imgs[cur].classList.remove('c-hidden');
+      dots[cur] && dots[cur].classList.add('c-active');
+    }
+    prev && prev.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur - 1); });
+    next && next.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur + 1); });
+    card.addEventListener('mouseenter', function() { timer = setInterval(function(){ goTo(cur + 1); }, 2500); });
+    card.addEventListener('mouseleave', function() { clearInterval(timer); });
+  });
+</script>
+</BaseLayout>

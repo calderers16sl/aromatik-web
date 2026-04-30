@@ -12,15 +12,17 @@ const { lang } = Astro.params as { lang: Locale };
 const t = getT(lang);
 const langRoot = `/${lang}`;
 
+const CARD_PHOTOS = 5;
+
 const apartments = [
-  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, img: "/images/apartamentos/ylang-ylang/foto-1.jpg", color: "#C8B89A" },
-  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, img: "/images/apartamentos/romani/foto-1.jpg", color: "#8EAB85" },
-  { name: "Ciprés", slug: "cipres", guests: 2, bedrooms: 1, img: "/images/apartamentos/cipres/foto-1.jpg", color: "#6B9B7E" },
-  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, img: "/images/apartamentos/lavanda/foto-1.jpg", color: "#A899BB" },
-  { name: "Limón", slug: "limon", guests: 2, bedrooms: 1, img: "/images/apartamentos/limon/foto-1.jpg", color: "#C4BC7E" },
-  { name: "Bergamota", slug: "bergamota", guests: 6, bedrooms: 3, img: "/images/apartamentos/bergamota/foto-1.jpg", color: "#C4A06E" },
-  { name: "Árbol de té", slug: "arbol-de-te", guests: 6, bedrooms: 3, img: "/images/apartamentos/arbol-de-te/foto-1.jpg", color: "#7AAF9E" },
-  { name: "Geranio", slug: "geranio", guests: 2, bedrooms: 1, img: "/images/apartamentos/geranio/foto-1.jpg", color: "#C49090" },
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, photos: 21, color: "#C8B89A" },
+  { name: "Romaní",      slug: "romani",      guests: 2, bedrooms: 1, photos: 20, color: "#8EAB85" },
+  { name: "Ciprés",      slug: "cipres",      guests: 2, bedrooms: 1, photos: 12, color: "#6B9B7E" },
+  { name: "Lavanda",     slug: "lavanda",     guests: 2, bedrooms: 1, photos: 19, color: "#A899BB" },
+  { name: "Limón",       slug: "limon",       guests: 2, bedrooms: 1, photos: 21, color: "#C4BC7E" },
+  { name: "Bergamota",   slug: "bergamota",   guests: 6, bedrooms: 3, photos: 21, color: "#C4A06E" },
+  { name: "Árbol de té", slug: "arbol-de-te", guests: 6, bedrooms: 3, photos: 23, color: "#7AAF9E" },
+  { name: "Geranio",     slug: "geranio",     guests: 2, bedrooms: 1, photos: 20, color: "#C49090" },
 ];
 ---
 <BaseLayout title={t.metaTitle} description={t.metaDescription} lang={lang}>
@@ -31,7 +33,7 @@ const apartments = [
       <span class="hero-eyebrow">{t.heroEyebrow}</span>
       <h1 set:html={t.heroTitle.replace('\n','<br>')} />
       <div class="hero-actions">
-        <a href={`#apartamentos`} class="btn btn-white">{t.heroCta1}</a>
+        <a href="#apartamentos" class="btn btn-white">{t.heroCta1}</a>
         <a href="#anfitrion" class="btn btn-outline-white" id="heroScrollBtn">{t.heroCta2}</a>
       </div>
       <div class="hero-badges">
@@ -41,8 +43,6 @@ const apartments = [
     </div>
   </section>
 
-  </div>
-
   <section id="apartamentos" class="section">
     <div class="container">
       <div class="section-header">
@@ -51,21 +51,43 @@ const apartments = [
         <p>{t.aptsSubtitle}</p>
       </div>
       <div class="apts-grid">
-        {apartments.map((apt) => (
-          <a href={`/${lang}/apartamentos/${apt.slug}`} class="apt-card">
-            <div class="apt-card-img" style={`background-image: url('${apt.img}'); background-color: ${apt.color}`}></div>
-            <div class="apt-card-body">
-              <h3>{apt.name}</h3>
-              <p class="apt-meta">{t.aptsGuests(apt.guests)} · {t.aptsBedroom(apt.bedrooms)}</p>
-              <span class="apt-link">{t.aptsViewBtn}</span>
-            </div>
-          </a>
-        ))}
+        {apartments.map((apt) => {
+          const count = Math.min(CARD_PHOTOS, apt.photos);
+          const photoNums = Array.from({ length: count }, (_, i) => i + 1);
+          return (
+            <a href={`/${lang}/apartamentos/${apt.slug}`} class="apt-card">
+              <div class="apt-card-img" style={`background-color:${apt.color}`}>
+                {photoNums.map((n, i) => (
+                  <img
+                    src={`/images/apartamentos/${apt.slug}/foto-${n}.jpg`}
+                    alt={`${apt.name} - foto ${n}`}
+                    class={i > 0 ? 'c-hidden' : ''}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                  />
+                ))}
+                {count > 1 && (
+                  <>
+                    <button class="apt-card-prev" aria-label="Anterior">&#8249;</button>
+                    <button class="apt-card-next" aria-label="Siguiente">&#8250;</button>
+                    <div class="apt-card-dots">
+                      {photoNums.map((_, i) => (
+                        <span class={`apt-card-dot${i === 0 ? ' c-active' : ''}`}></span>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+              <div class="apt-card-body">
+                <h3>{apt.name}</h3>
+                <p class="apt-meta">{t.aptsGuests(apt.guests)} · {t.aptsBedroom(apt.bedrooms)}</p>
+                <span class="apt-link">{t.aptsViewBtn}</span>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
-
-
 
   <section class="section bg-cream">
     <div class="container">
@@ -98,12 +120,10 @@ const apartments = [
       </div>
     </div>
   </section>
-  <!-- BLOQUE INFORMACIÓN IMPORTANTE -->
-  <HostCard />
 
+  <HostCard />
   <ReviewsCarousel />
 
-  <!-- SEO BLOCK 1: Barri Vell -->
   <section class="section seo-barri-vell">
     <div class="container">
       <div class="seo-grid">
@@ -113,72 +133,23 @@ const apartments = [
           <p>{t.seoBarriText}</p>
         </div>
         <div class="seo-features">
-          <div class="seo-feature-item">
-            <span class="seo-icon">⛪</span>
-            <div>
-              <strong>{t.seoBarriFeat1Title}</strong>
-              <span>{t.seoBarriFeat1Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🕍</span>
-            <div>
-              <strong>{t.seoBarriFeat2Title}</strong>
-              <span>{t.seoBarriFeat2Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🌉</span>
-            <div>
-              <strong>{t.seoBarriFeat3Title}</strong>
-              <span>{t.seoBarriFeat3Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🚉</span>
-            <div>
-              <strong>{t.seoBarriFeat4Title}</strong>
-              <span>{t.seoBarriFeat4Sub}</span>
-            </div>
-          </div>
+          <div class="seo-feature-item"><span class="seo-icon">⛪</span><div><strong>{t.seoBarriFeat1Title}</strong><span>{t.seoBarriFeat1Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🕍</span><div><strong>{t.seoBarriFeat2Title}</strong><span>{t.seoBarriFeat2Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🌉</span><div><strong>{t.seoBarriFeat3Title}</strong><span>{t.seoBarriFeat3Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🚉</span><div><strong>{t.seoBarriFeat4Title}</strong><span>{t.seoBarriFeat4Sub}</span></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEO BLOCK 2: Cycling -->
   <section class="section seo-cycling">
     <div class="container">
       <div class="seo-grid reverse">
         <div class="seo-features">
-          <div class="seo-feature-item">
-            <span class="seo-icon">🚲</span>
-            <div>
-              <strong>{t.seoCyclingFeat1Title}</strong>
-              <span>{t.seoCyclingFeat1Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🏔️</span>
-            <div>
-              <strong>{t.seoCyclingFeat2Title}</strong>
-              <span>{t.seoCyclingFeat2Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">🛗</span>
-            <div>
-              <strong>{t.seoCyclingFeat3Title}</strong>
-              <span>{t.seoCyclingFeat3Sub}</span>
-            </div>
-          </div>
-          <div class="seo-feature-item">
-            <span class="seo-icon">👕</span>
-            <div>
-              <strong>{t.seoCyclingFeat4Title}</strong>
-              <span>{t.seoCyclingFeat4Sub}</span>
-            </div>
-          </div>
+          <div class="seo-feature-item"><span class="seo-icon">🚲</span><div><strong>{t.seoCyclingFeat1Title}</strong><span>{t.seoCyclingFeat1Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🏔️</span><div><strong>{t.seoCyclingFeat2Title}</strong><span>{t.seoCyclingFeat2Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">🛗</span><div><strong>{t.seoCyclingFeat3Title}</strong><span>{t.seoCyclingFeat3Sub}</span></div></div>
+          <div class="seo-feature-item"><span class="seo-icon">👕</span><div><strong>{t.seoCyclingFeat4Title}</strong><span>{t.seoCyclingFeat4Sub}</span></div></div>
         </div>
         <div class="seo-text">
           <span class="eyebrow">{t.seoCyclingEyebrow}</span>
@@ -201,6 +172,7 @@ const apartments = [
       </div>
     </div>
   </section>
+
   <section class="section faq-cta-section">
     <div class="container" style="text-align:center;">
       <h3 style="font-family:var(--serif); font-size:1.6rem; font-weight:400; margin-bottom:0.75rem;">{t.faqCtaTitle}</h3>
@@ -214,8 +186,27 @@ const apartments = [
     e.preventDefault();
     var target = document.getElementById('anfitrion');
     if (!target) return;
-    var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
-    window.scrollTo({ top: top, behavior: 'smooth' });
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+  });
+
+  document.querySelectorAll('.apt-card').forEach(function(card) {
+    var imgs = Array.from(card.querySelectorAll('.apt-card-img img'));
+    var dots = Array.from(card.querySelectorAll('.apt-card-dot'));
+    var prev = card.querySelector('.apt-card-prev');
+    var next = card.querySelector('.apt-card-next');
+    if (imgs.length <= 1) return;
+    var cur = 0, timer;
+    function goTo(n) {
+      imgs[cur].classList.add('c-hidden');
+      dots[cur] && dots[cur].classList.remove('c-active');
+      cur = (n + imgs.length) % imgs.length;
+      imgs[cur].classList.remove('c-hidden');
+      dots[cur] && dots[cur].classList.add('c-active');
+    }
+    prev && prev.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur - 1); });
+    next && next.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur + 1); });
+    card.addEventListener('mouseenter', function() { timer = setInterval(function(){ goTo(cur + 1); }, 2500); });
+    card.addEventListener('mouseleave', function() { clearInterval(timer); });
   });
 </script>
 </BaseLayout>

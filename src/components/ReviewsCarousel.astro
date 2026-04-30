@@ -1,16 +1,32 @@
 ---
-// ReviewsCarousel.astro — rating badge only
+// ReviewsCarousel.astro — Google Places embed
 ---
 
 <section class="rc-section">
-  <div class="rc-container">
-    <span class="eyebrow">Google Reviews</span>
-    <div class="rc-rating">
-      <span class="rc-score" id="rc-score">4.6</span>
-      <div class="rc-right">
-        <span class="rc-stars" id="rc-stars">★★★★★</span>
-        <span class="rc-count" id="rc-count"></span>
-      </div>
+  <div class="container">
+    <div class="section-header" style="margin-bottom:2rem">
+      <span class="eyebrow">Google Reviews</span>
+      <h2 style="margin-top:0.75rem">Lo que dicen nuestros huéspedes</h2>
+    </div>
+    <div class="rc-embed-wrap">
+      <iframe
+        src="https://maps.google.com/maps?q=Aromatik+Apartments+Rambla+de+la+Llibertat+Girona&output=embed&hl=es&z=16"
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Aromatik Apartments en Google Maps"
+      ></iframe>
+    </div>
+    <div style="text-align:center; margin-top:1.5rem">
+      <a
+        href="https://www.google.com/maps/search/Aromatik+Apartments+Girona"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-outline-dark"
+      >Ver todas las reseñas en Google Maps →</a>
     </div>
   </div>
 </section>
@@ -18,62 +34,13 @@
 <style>
   .rc-section {
     background: var(--cream, #f8f4ef);
-    padding: 48px 24px;
-    text-align: center;
+    padding: 5rem 0;
   }
-  .rc-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold, #d0b050);
-  }
-  .rc-rating {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .rc-score {
-    font-family: var(--serif, Georgia, serif);
-    font-size: 3rem;
-    font-weight: 400;
-    color: var(--black, #1a1a1a);
-    line-height: 1;
-  }
-  .rc-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-  .rc-stars {
-    font-size: 1.2rem;
-    color: var(--gold, #d0b050);
-    letter-spacing: 3px;
-  }
-  .rc-count {
-    font-size: 0.78rem;
-    color: #888;
+  .rc-embed-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    height: 480px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    border: 1px solid var(--stone-200, #e5e7eb);
   }
 </style>
-
-<script>
-(async () => {
-  try {
-    const data = await fetch('/api/reviews').then(r => r.json());
-    if (data.error) return;
-    const STARS = n => '★'.repeat(n) + '☆'.repeat(5 - n);
-    const s = document.getElementById('rc-score');
-    const st = document.getElementById('rc-stars');
-    const c = document.getElementById('rc-count');
-    if (s) s.textContent = data.rating ? data.rating.toFixed(1) : '4.6';
-    if (st) st.textContent = STARS(Math.round(data.rating || 5));
-    if (c) c.textContent = data.user_ratings_total ? `${data.user_ratings_total} reseñas` : '';
-  } catch(e) {}
-})();
-</script>
