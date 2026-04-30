@@ -133,7 +133,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
               style="border:0; border-radius:10px; display:block;"
               loading="lazy" allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed/v1/place?key={import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es"
+              src={`https://www.google.com/maps/embed/v1/place?key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es`}
             ></iframe>
           </div>
         </div>
