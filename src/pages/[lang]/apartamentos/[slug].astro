@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BookingWidget from '../../../components/BookingWidget.astro';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../../i18n/translations';
 
 export function getStaticPaths() {
@@ -107,6 +108,28 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
+
+    <!-- Google Maps -->
+    <div class="map-section">
+      <h2 class="section-heading" style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:0.5rem;">Ubicación</h2>
+      <p class="map-subtitle">Barri Vell de Girona · Rambla de la Llibertat, 11</p>
+      <div class="map-wrapper">
+        <iframe
+          title="Aromatik Apartments — ubicación en Girona"
+          width="100%"
+          height="400"
+          style="border:0; border-radius:12px;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCRo3JFPd3a7LkgKnGdux85-dG0cTGkE1s&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Google Reviews -->
+    <GoogleReviews />
+
     <div style="margin-top:4rem;">
       <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:1.5rem;">
         {t.aptOtherTitle}
@@ -163,6 +186,20 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
 .lb-prev,.lb-next { position:fixed; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.15); border:none; color:#fff; font-size:1.3rem; width:50px; height:50px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; z-index:1001; backdrop-filter:blur(4px); }
 .lb-prev { left:14px; } .lb-next { right:14px; }
 .lb-prev:hover,.lb-next:hover { background:rgba(255,255,255,0.3); }
+
+  .map-section {
+    padding: 60px 0 0;
+  }
+  .map-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin: -12px 0 20px;
+  }
+  .map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
 </style>
 
 <script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>

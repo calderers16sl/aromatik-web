@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import GoogleReviews from '../../components/GoogleReviews.astro';
 
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
@@ -123,5 +124,9 @@ const apartments = [
     </div>
   </section>
 
+
+
+  <!-- Google Reviews -->
+  <GoogleReviews />
 
 </BaseLayout>
