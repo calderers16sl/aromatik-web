@@ -8,6 +8,81 @@ export function getStaticPaths() {
 const { lang } = Astro.params as { lang: Locale };
 const content = getInfoContent(lang);
 const langRoot = `/${lang}`;
+
+const ICONS: Record<string, string> = {
+  // ES
+  'Entrada y salida': '🕐',
+  'Respeto por los demás huéspedes': '🤝',
+  'No se permiten fiestas ni eventos': '🚫',
+  'Horario de silencio': '🔇',
+  'No fumar': '🚭',
+  'Número de huéspedes': '👥',
+  'Acceso al apartamento': '🔑',
+  'Cuidado del apartamento': '🏠',
+  'Limpieza': '✨',
+  'Basura': '♻️',
+  'Toallas y ropa de cama': '🛏️',
+  'Aire acondicionado, calefacción y luces': '🌡️',
+  'Bicicletas': '🚲',
+  'Mascotas': '🐾',
+  'Seguridad': '🔒',
+  'Cancelación': '📋',
+  'Si algo no va bien, dímelo durante la estancia': '💬',
+  // EN
+  'Check-in and check-out': '🕐',
+  'Respect for other guests': '🤝',
+  'No parties or events': '🚫',
+  'Quiet hours': '🔇',
+  'No smoking': '🚭',
+  'Number of guests': '👥',
+  'Apartment access': '🔑',
+  'Apartment care': '🏠',
+  'Cleaning': '✨',
+  'Rubbish': '♻️',
+  'Towels and bed linen': '🛏️',
+  'Air conditioning, heating and lights': '🌡️',
+  'Bicycles': '🚲',
+  'Pets': '🐾',
+  'Security': '🔒',
+  'Cancellation': '📋',
+  'If something is wrong, tell me during your stay': '💬',
+  // FR
+  'Entrée et sortie': '🕐',
+  'Respect des autres voyageurs': '🤝',
+  'Pas de fêtes ni d\'événements': '🚫',
+  'Heures de silence': '🔇',
+  'Non-fumeur': '🚭',
+  'Nombre de voyageurs': '👥',
+  'Accès à l\'appartement': '🔑',
+  'Soin de l\'appartement': '🏠',
+  'Nettoyage': '✨',
+  'Déchets': '♻️',
+  'Serviettes et linge de lit': '🛏️',
+  'Climatisation, chauffage et lumières': '🌡️',
+  'Vélos': '🚲',
+  'Animaux': '🐾',
+  'Sécurité': '🔒',
+  'Annulation': '📋',
+  'Si quelque chose ne va pas, dites-le moi pendant le séjour': '💬',
+  // DE
+  'Check-in und Check-out': '🕐',
+  'Rücksicht auf andere Gäste': '🤝',
+  'Keine Partys oder Veranstaltungen': '🚫',
+  'Ruhezeiten': '🔇',
+  'Nichtrauchen': '🚭',
+  'Anzahl der Gäste': '👥',
+  'Zugang zur Wohnung': '🔑',
+  'Pflege der Wohnung': '🏠',
+  'Reinigung': '✨',
+  'Müll': '♻️',
+  'Handtücher und Bettwäsche': '🛏️',
+  'Klimaanlage, Heizung und Lichter': '🌡️',
+  'Fahrräder': '🚲',
+  'Haustiere': '🐾',
+  'Sicherheit': '🔒',
+  'Stornierung': '📋',
+  'Wenn etwas nicht stimmt, sagen Sie es mir während des Aufenthalts': '💬',
+};
 ---
 <BaseLayout
   title={content.metaTitle}
@@ -35,12 +110,15 @@ const langRoot = `/${lang}`;
 
   <!-- SECCIONES -->
   <section class="section section-rules">
-    <div class="container-sm">
+    <div class="container-rules">
       <div class="rules-grid">
         {content.sections.map((section) => (
-          <div class="rule-block">
-            <h2>{section.title}</h2>
-            <p>{section.text}</p>
+          <div class="rule-card">
+            <div class="rule-icon">{ICONS[section.title] ?? '📌'}</div>
+            <div class="rule-body">
+              <h2>{section.title}</h2>
+              <p>{section.text}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -64,7 +142,7 @@ const langRoot = `/${lang}`;
       <div class="info-cta-box">
         <h2>{content.ctaTitle}</h2>
         <p>{content.ctaText}</p>
-        <a href={`${langRoot}/contacto`} class="btn btn-green">{content.ctaBtn}</a>
+        <a href={`${langRoot}/contacto`} class="btn btn-dark">{content.ctaBtn}</a>
       </div>
     </div>
   </section>
@@ -75,14 +153,14 @@ const langRoot = `/${lang}`;
     background: var(--cream);
     text-align: center;
     padding: 7rem 2rem 4rem;
-    border-bottom: 1px solid var(--stone-200);
+    border-bottom: 1px solid #e7e0d8;
   }
   .inner-hero .eyebrow {
     display: inline-block;
     font-size: 0.7rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--stone-400);
+    color: #9e9689;
     margin-bottom: 1rem;
   }
   .inner-hero h1 {
@@ -95,21 +173,24 @@ const langRoot = `/${lang}`;
   }
   .hero-sub {
     font-size: 1rem;
-    color: var(--stone-600);
+    color: #6b6560;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.8;
   }
+
   .container-sm { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+  .container-rules { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
   .section { padding: 3.5rem 0; }
-  .section-intro { background: var(--white); border-bottom: 1px solid var(--stone-200); }
+
+  .section-intro { background: var(--white); border-bottom: 1px solid #e7e0d8; }
   .intro-card {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
     background: var(--cream);
-    border: 1px solid var(--stone-200);
-    border-radius: var(--radius-lg);
+    border: 1px solid #e7e0d8;
+    border-radius: 12px;
     padding: 2rem;
   }
   .intro-avatar {
@@ -128,30 +209,53 @@ const langRoot = `/${lang}`;
   .intro-text p {
     margin: 0;
     font-size: 0.95rem;
-    color: var(--stone-800);
+    color: #3a3631;
     line-height: 1.8;
   }
+
   .section-rules { background: var(--white); }
-  .rules-grid { display: grid; gap: 0; }
-  .rule-block {
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--stone-200);
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
-  .rule-block:last-child { border-bottom: none; }
-  .rule-block h2 {
+  .rule-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--cream);
+    border: 1px solid #e7e0d8;
+    border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .rule-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+  .rule-icon {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .rule-body h2 {
     font-family: var(--serif);
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 400;
     color: var(--black);
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.45rem;
+    line-height: 1.3;
   }
-  .rule-block p {
+  .rule-body p {
     margin: 0;
-    font-size: 0.93rem;
-    color: var(--stone-600);
-    line-height: 1.8;
+    font-size: 0.88rem;
+    color: #6b6560;
+    line-height: 1.75;
   }
-  .section-thanks { background: var(--cream); border-top: 1px solid var(--stone-200); border-bottom: 1px solid var(--stone-200); }
+
+  .section-thanks {
+    background: var(--cream);
+    border-top: 1px solid #e7e0d8;
+    border-bottom: 1px solid #e7e0d8;
+  }
   .thanks-card { text-align: center; padding: 1rem 0; }
   .thanks-card h2 {
     font-family: var(--serif);
@@ -162,7 +266,7 @@ const langRoot = `/${lang}`;
   }
   .thanks-card p {
     font-size: 0.95rem;
-    color: var(--stone-600);
+    color: #6b6560;
     line-height: 1.8;
     max-width: 560px;
     margin: 0 auto 0.5rem;
@@ -174,12 +278,13 @@ const langRoot = `/${lang}`;
     margin-top: 1.5rem !important;
     font-style: italic;
   }
+
   .section-cta { background: var(--white); }
   .info-cta-box {
     text-align: center;
     padding: 2.5rem;
-    border: 1px solid var(--stone-200);
-    border-radius: var(--radius-lg);
+    border: 1px solid #e7e0d8;
+    border-radius: 12px;
     background: var(--cream);
   }
   .info-cta-box h2 {
@@ -191,13 +296,16 @@ const langRoot = `/${lang}`;
   }
   .info-cta-box p {
     font-size: 0.93rem;
-    color: var(--stone-600);
+    color: #6b6560;
     margin: 0 0 1.5rem;
     line-height: 1.7;
   }
-  @media (max-width: 640px) {
+
+  @media (max-width: 700px) {
+    .rules-grid { grid-template-columns: 1fr; }
     .intro-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
     .info-cta-box { padding: 1.75rem 1.25rem; }
     .section { padding: 2.5rem 0; }
+    .rule-card { padding: 1.2rem; }
   }
 </style>
