@@ -102,6 +102,7 @@ const schemaOrg = JSON.stringify({
     <link rel="alternate" hreflang={l} href={`${siteUrl}${getLangUrl(l)}`} />
   ))}
   <link rel="alternate" hreflang="x-default" href={`${siteUrl}${rawPath}`} />
+  <meta property="og:site_name" content="Aromatik Apartments" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title.includes("Aromatik") ? title : `${title} | Aromatik Apartments`} />
   <meta property="og:description" content={description} />
