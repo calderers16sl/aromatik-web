@@ -87,8 +87,18 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
             <li><span class="check-icon">✓</span>{a}</li>
           ))}
         </ul>
-        <div class="location-box">
-          <strong>{t.aptLocationTitle}</strong> {t.aptLocationText}
+        <div class="inline-map">
+          <p class="inline-map-label">📍 Barri Vell de Girona · Rambla de la Llibertat, 11</p>
+          <div class="inline-map-wrapper">
+            <iframe
+              title="Aromatik Apartments — ubicación"
+              width="100%" height="280"
+              style="border:0; border-radius:10px; display:block;"
+              loading="lazy" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCRo3JFPd3a7LkgKnGdux85-dG0cTGkE1s&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es"
+            ></iframe>
+          </div>
         </div>
       </div>
       <div>
@@ -187,19 +197,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
 .lb-prev { left:14px; } .lb-next { right:14px; }
 .lb-prev:hover,.lb-next:hover { background:rgba(255,255,255,0.3); }
 
-  .map-section {
-    padding: 60px 0 0;
-  }
-  .map-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin: -12px 0 20px;
-  }
-  .map-wrapper {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  }
+
 </style>
 
 <script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>

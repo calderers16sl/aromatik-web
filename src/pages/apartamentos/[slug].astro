@@ -124,11 +124,17 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
           </ul>
         </div>
 
-        <div class="location-box">
-          <span class="location-icon">📍</span>
-          <div>
-            <p class="location-title">{apt.address}</p>
-            <p class="location-sub">Barri Vell de Girona · Aparcament La Copa a 10 min a peu</p>
+        <div class="inline-map">
+          <p class="inline-map-label">📍 Barri Vell de Girona · Rambla de la Llibertat, 11</p>
+          <div class="inline-map-wrapper">
+            <iframe
+              title="Aromatik Apartments — ubicación"
+              width="100%" height="280"
+              style="border:0; border-radius:10px; display:block;"
+              loading="lazy" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCRo3JFPd3a7LkgKnGdux85-dG0cTGkE1s&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es"
+            ></iframe>
           </div>
         </div>
       </div>
@@ -153,24 +159,6 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
-
-    <!-- Google Maps -->
-    <div class="map-section">
-      <h2 class="section-heading">Ubicación</h2>
-      <p class="map-subtitle">Barri Vell de Girona · Rambla de la Llibertat, 11</p>
-      <div class="map-wrapper">
-        <iframe
-          title="Aromatik Apartments — ubicación en Girona"
-          width="100%"
-          height="400"
-          style="border:0; border-radius:12px;"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCRo3JFPd3a7LkgKnGdux85-dG0cTGkE1s&q=place_id:ChIJXaF0pMTnuhIRDyEJziGYj2c&language=es"
-        ></iframe>
-      </div>
-    </div>
 
     <!-- Google Reviews -->
     <GoogleReviews />
@@ -350,20 +338,21 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
     flex-shrink: 0;
   }
 
-  /* ── UBICACIÓN ───────────────────────────────────── */
-  .location-box {
+  /* ── UBICACIÓN (mapa inline) ────────────────────── */
+  .inline-map { margin-top: 1.5rem; }
+  .inline-map-label {
+    font-size: 0.82rem;
+    color: #6b6560;
+    margin: 0 0 0.6rem;
     display: flex;
-    align-items: flex-start;
-    gap: 0.875rem;
-    background: #fdf8ec;
-    border: 1px solid #e8c870;
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    margin-top: 0.5rem;
+    align-items: center;
+    gap: 0.3rem;
   }
-  .location-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
-  .location-title { font-weight: 600; font-size: 0.875rem; color: #7a5c10; margin: 0 0 0.2rem; }
-  .location-sub { font-size: 0.8rem; color: #8a6a20; margin: 0; }
+  .inline-map-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+  }
 
   /* ── SIDEBAR BOOKING ─────────────────────────────── */
   .apt-sidebar { }
@@ -507,19 +496,7 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
   .lb-prev { left: 14px; } .lb-next { right: 14px; }
   .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.3); }
 
-  .map-section {
-    padding: 60px 0 0;
-  }
-  .map-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin: -12px 0 20px;
-  }
-  .map-wrapper {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  }
+
 </style>
 
 <!-- ═══════════════════════════════════════════════════
