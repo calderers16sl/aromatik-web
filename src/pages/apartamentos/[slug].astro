@@ -491,13 +491,6 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
 <script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>
   if (!photos || photos.length === 0) return;
 
-  /* ── CONTENEDOR PRINCIPAL ──────────────────────── */
-  .apt-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-  @media (max-width: 640px) { .apt-container { padding: 2rem 1rem; } }
 
   /* ── CARRUSEL ── */
   const track    = document.getElementById('cTrack');
