@@ -28,7 +28,7 @@ const apartments = [
       <h1 set:html={t.heroTitle.replace('\n','<br>')} />
       <div class="hero-actions">
         <a href="#apartamentos" class="btn btn-white">{t.heroCta1}</a>
-        <a href="/sobre-nosotros" class="btn btn-outline-white">{t.heroCta2}</a>
+        <a href="#anfitrion" class="btn btn-outline-white" onclick="event.preventDefault();document.getElementById('anfitrion').scrollIntoView({behavior:'smooth'})">{t.heroCta2}</a>
       </div>
     </div>
   </section>
