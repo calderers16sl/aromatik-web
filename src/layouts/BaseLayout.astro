@@ -111,6 +111,8 @@ const schemaOrg = JSON.stringify({
     .header-nav a:hover { color: var(--black); }
     .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: var(--radius); font-size: 0.75rem !important; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500 !important; transition: background 0.2s !important; }
     .nav-cta:hover { background: var(--gold-hover) !important; }
+    /* Header controls: agrupa lang-switcher + hamburguesa */
+    .header-controls { display: flex; align-items: center; gap: 0.75rem; }
 
     /* ── LANG SWITCHER ── */
     .lang-switcher { position: relative; display: flex; align-items: center; }
@@ -126,22 +128,21 @@ const schemaOrg = JSON.stringify({
     .lang-dropdown a.lang-active { color: var(--gold); font-weight: 500; }
     .lang-dropdown a.lang-active::after { content: "✓"; font-size: 0.65rem; }
 
-    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; }
-    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: all 0.3s; }
     @media (max-width: 768px) {
+      /* — NAV PAGES — */
       .header-nav { display: none; }
       .hamburger { display: flex; }
-      /* z-index 999 para aparecer sobre hero y cualquier contenido */
-      .header-nav.open { display: flex; flex-direction: column; align-items: flex-start; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; z-index: 999; background: var(--white); padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--stone-200); overflow-y: auto; }
-      .header-nav.open a { font-size: 1.1rem; }
-      /* Lang switcher en móvil: mostrar todos los idiomas directamente (sin segundo tap) */
-      .lang-switcher { width: 100%; }
-      .lang-btn { display: none; }
-      .lang-dropdown { position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; box-shadow: none; border: none; width: 100%; padding: 0.25rem 0 0; background: transparent; display: flex !important; flex-wrap: wrap; gap: 0.5rem; }
-      .lang-dropdown a { padding: 0.35rem 0.75rem; border: 1px solid var(--stone-200); border-radius: 4px; font-size: 0.85rem; background: var(--stone-50); color: var(--stone-600); }
-      .lang-dropdown a.lang-active { border-color: var(--gold); color: var(--gold); background: transparent; font-weight: 600; }
-      .lang-dropdown a.lang-active::after { display: none; }
-      .lang-dropdown a:hover { background: var(--stone-50); }
+      /* Dropdown páginas: superpuesto, altura exacta al contenido, sin scroll */
+      .header-nav.open { display: flex; flex-direction: column; align-items: stretch; position: fixed; top: 70px; left: 0; right: 0; z-index: 999; height: auto; background: var(--white); padding: 0; border-top: 1px solid var(--stone-200); box-shadow: 0 8px 24px rgba(0,0,0,0.10); }
+      .header-nav.open a { display: block; font-size: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--stone-50); color: var(--stone-800); }
+      .header-nav.open a:last-child { border-bottom: none; }
+      .header-nav.open .nav-cta { background: var(--gold); color: var(--white); text-align: center; margin: 0.75rem 1rem; border-radius: var(--radius); border-bottom: none; padding: 0.75rem 1rem; }
+      /* — LANG SWITCHER — ya funciona como dropdown independiente en header-controls */
+      .lang-dropdown { right: 0; left: auto; min-width: 140px; }
+    }
+    /* — HEADER CONTROLS (lang + hamburger, siempre visibles en móvil) — */
+    @media (max-width: 768px) {
+      .header-controls { display: flex; align-items: center; gap: 0.75rem; }
     }
 
     /* ── HERO ── */
@@ -314,14 +315,20 @@ const schemaOrg = JSON.stringify({
 <body>
   <header class="header" id="header">
     <a href={langRoot || '/'} class="header-logo">Aromatik <em>Apartments</em></a>
+
+    <!-- Nav páginas (desktop: inline | móvil: dropdown vía hamburguesa) -->
     <nav class="header-nav" id="nav">
       <a href={`${langRoot}/#apartamentos`}>{t.navApartments}</a>
       <a href={`${langRoot}/sobre-nosotros`}>{t.navAbout}</a>
       <a href={`${langRoot}/contacto`}>{t.navContact}</a>
+      <a href={`${langRoot}/reservar`} class="nav-cta">{t.navBook}</a>
+    </nav>
 
-      <!-- Language switcher -->
+    <!-- Controles derechos: selector idioma + hamburguesa -->
+    <div class="header-controls">
+      <!-- Selector de idioma (independiente, visible siempre) -->
       <div class="lang-switcher" id="langSwitcher">
-        <button class="lang-btn" aria-label="Change language" aria-expanded="false" id="langBtn">
+        <button class="lang-btn" aria-label="Cambiar idioma" aria-expanded="false" id="langBtn">
           {LOCALE_LABELS[lang]}
           <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M1 1l4 4 4-4"/>
@@ -335,11 +342,11 @@ const schemaOrg = JSON.stringify({
         </div>
       </div>
 
-      <a href={`${langRoot}/reservar`} class="nav-cta">{t.navBook}</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+      <!-- Hamburguesa (solo móvil) -->
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <main>
