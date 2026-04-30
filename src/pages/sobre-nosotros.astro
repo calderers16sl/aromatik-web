@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HostCard from '../components/HostCard.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
 ---
 <BaseLayout
   title="Sobre Aromatik Apartments — Apartamentos boutique en el Barri Vell de Girona"
@@ -12,7 +14,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="section">
     <div class="container">
-      <div class="about-grid">
+      <div class="about-grid about-grid--single">
         <div class="prose">
           <p>
             Aromatik Apartments es una pequeña colección de apartamentos boutique en el corazón del Barri Vell de Girona,
@@ -34,34 +36,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             Reserva directamente y ahorra un 5% →
           </a>
         </div>
-        <div class="about-sidebar">
-          <div class="stats-box">
-            <p class="eyebrow" style="margin-bottom:1.5rem">Aromatik en números</p>
-            <div style="display:flex; flex-direction:column; gap:1.5rem;">
-              {[
-                { n: "8", label: "Apartamentos en el Barri Vell" },
-                { n: "100%", label: "Gestión personal de Arnau" },
-                { n: "★ 4.7", label: "Valoración media en Google" },
-                { n: "5%", label: "Descuento al reservar directo" },
-              ].map(item => (
-                <div class="stat-row">
-                  <span class="stat-num">{item.n}</span>
-                  <span class="stat-label">{item.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div class="quote-box">
-            <p class="quote-text">
-              "Mismo apartamento, misma calidad, misma atención — sin comisiones de plataforma."
-            </p>
-            <p style="font-size:0.8rem; color:rgba(255,255,255,0.5); margin-bottom:1.5rem;">— Arnau · Aromatik Apartments</p>
-            <a href="/reservar" class="btn btn-white" style="font-size:0.75rem;">Reservar ahora</a>
-          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <HostCard />
+  <ReviewsCarousel />
 
   <section class="section bg-cream">
     <div class="container" style="text-align:center;">
@@ -77,6 +58,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
+  .about-grid--single { grid-template-columns: 1fr !important; max-width: 680px; margin: 0 auto; }
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -84,46 +66,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     align-items: start;
   }
   .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--stone-700, #44403c); }
-  .stats-box {
-    background: var(--stone-50);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    border: 1px solid var(--stone-200);
-  }
-  .stat-row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--stone-200);
-  }
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 400;
-    color: var(--gold);
-    min-width: 80px;
-  }
-  .stat-label { font-size: 0.875rem; color: var(--stone-600); }
-  .quote-box {
-    margin-top: 1.5rem;
-    background: var(--black);
-    color: #fff;
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-  }
-  .quote-text {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.75;
-    margin-bottom: 0.75rem;
-  }
   @media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid--single { grid-template-columns: 1fr !important; max-width: 680px; margin: 0 auto; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-sidebar { order: -1; }
-    .stats-box { padding: 1.5rem; }
-    .stat-num { font-size: 1.6rem; min-width: 64px; }
   }
 </style>
