@@ -115,12 +115,10 @@ const schemaOrg = JSON.stringify({
     .lang-btn { display: flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; color: var(--stone-600); background: none; border: 1px solid var(--stone-200); border-radius: 4px; padding: 0.3rem 0.55rem; cursor: pointer; transition: border-color 0.2s, color 0.2s; font-family: var(--sans); }
     .lang-btn:hover { border-color: var(--stone-400); color: var(--black); }
     .lang-btn svg { width: 10px; height: 10px; transition: transform 0.2s; }
-    .lang-switcher:hover .lang-btn svg,
-    .lang-switcher:focus-within .lang-btn svg { transform: rotate(180deg); }
+    .lang-switcher.open .lang-btn svg { transform: rotate(180deg); }
     .lang-dropdown { position: absolute; top: calc(100% + 6px); right: 0; background: var(--white); border: 1px solid var(--stone-200); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); min-width: 120px; padding: 0.4rem 0; z-index: 200;
       opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity 0.15s, transform 0.15s, visibility 0.15s; }
-    .lang-switcher:hover .lang-dropdown,
-    .lang-switcher:focus-within .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-switcher.open .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
     .lang-dropdown a { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 0.9rem; font-size: 0.78rem; color: var(--stone-600); transition: background 0.15s, color 0.15s; white-space: nowrap; }
     .lang-dropdown a:hover { background: var(--stone-50); color: var(--black); }
     .lang-dropdown a.lang-active { color: var(--green); font-weight: 500; }
@@ -133,7 +131,13 @@ const schemaOrg = JSON.stringify({
       .hamburger { display: flex; }
       .header-nav.open { display: flex; flex-direction: column; align-items: flex-start; position: fixed; top: 70px; left: 0; right: 0; bottom: 0; background: var(--white); padding: 2rem; gap: 1.5rem; border-top: 1px solid var(--stone-200); overflow-y: auto; }
       .header-nav.open a { font-size: 1.1rem; }
-      .lang-dropdown { min-width: 160px; }
+      /* En móvil el dropdown queda fijo dentro del menú abierto */
+      .lang-switcher { flex-direction: column; align-items: flex-start; width: 100%; }
+      .lang-dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 1px solid var(--stone-200); width: 100%; margin-top: 0.5rem;
+        display: none; }
+      .lang-switcher.open .lang-dropdown { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+      .lang-btn { font-size: 1rem; border: none; padding: 0; color: var(--stone-800); letter-spacing: 0.02em; }
+      .lang-btn svg { display: inline-block; }
     }
 
     /* ── HERO ── */
@@ -415,15 +419,27 @@ const schemaOrg = JSON.stringify({
     nav?.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => nav.classList.remove('open'));
     });
-    // Lang switcher accessibility
+    // Lang switcher — funciona en desktop (hover/click) y móvil (tap)
     const langBtn = document.getElementById('langBtn');
+    const langSwitcher = document.getElementById('langSwitcher');
     langBtn?.addEventListener('click', (e) => {
-      const switcher = langBtn.closest('.lang-switcher');
-      const expanded = langBtn.getAttribute('aria-expanded') === 'true';
-      langBtn.setAttribute('aria-expanded', String(!expanded));
       e.stopPropagation();
+      const isOpen = langSwitcher?.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', String(!!isOpen));
     });
-    document.addEventListener('click', () => {
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', (e) => {
+      if (!langSwitcher?.contains(e.target as Node)) {
+        langSwitcher?.classList.remove('open');
+        langBtn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+    // En desktop también abrir con hover
+    langSwitcher?.addEventListener('mouseenter', () => {
+      langSwitcher.classList.add('open');
+    });
+    langSwitcher?.addEventListener('mouseleave', () => {
+      langSwitcher.classList.remove('open');
       langBtn?.setAttribute('aria-expanded', 'false');
     });
     // Save language preference cookie on manual selection
