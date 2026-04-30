@@ -26,11 +26,15 @@ const rawPath = (() => {
   return p;
 })();
 
+// getLangUrl: para el switcher de idioma — misma página en otro idioma
 const getLangUrl = (targetLang: string) => {
   if (targetLang === 'es') return rawPath;
   const suffix = rawPath === '/' ? '' : rawPath;
   return `/${targetLang}${suffix}`;
 };
+
+// langRoot: raíz del idioma actual — para nav y footer
+const langRoot = lang === 'es' ? '' : `/${lang}`;
 
 const schemaOrg = JSON.stringify({
   "@context": "https://schema.org",
@@ -301,11 +305,11 @@ const schemaOrg = JSON.stringify({
 </head>
 <body>
   <header class="header" id="header">
-    <a href={getLangUrl('es')} class="header-logo">Aromatik <em>Apartments</em></a>
+    <a href={langRoot || '/'} class="header-logo">Aromatik <em>Apartments</em></a>
     <nav class="header-nav" id="nav">
-      <a href={`${getLangUrl(lang)}#apartamentos`}>{t.navApartments}</a>
-      <a href={`${getLangUrl(lang)}/sobre-nosotros`}>{t.navAbout}</a>
-      <a href={`${getLangUrl(lang)}/contacto`}>{t.navContact}</a>
+      <a href={`${langRoot}/#apartamentos`}>{t.navApartments}</a>
+      <a href={`${langRoot}/sobre-nosotros`}>{t.navAbout}</a>
+      <a href={`${langRoot}/contacto`}>{t.navContact}</a>
 
       <!-- Language switcher -->
       <div class="lang-switcher" id="langSwitcher">
@@ -323,7 +327,7 @@ const schemaOrg = JSON.stringify({
         </div>
       </div>
 
-      <a href={`${getLangUrl(lang)}/reservar`} class="nav-cta">{t.navBook}</a>
+      <a href={`${langRoot}/reservar`} class="nav-cta">{t.navBook}</a>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menú">
       <span></span><span></span><span></span>
@@ -352,36 +356,36 @@ const schemaOrg = JSON.stringify({
             ['lavanda','Lavanda'],['limon','Limón'],['bergamota','Bergamota'],
             ['arbol-de-te','Árbol de té'],['geranio','Geranio']
           ].map(([slug, name]) => (
-            <li><a href={`${getLangUrl(lang)}/apartamentos/${slug}`}>{name}</a></li>
+            <li><a href={`${langRoot}/apartamentos/${slug}`}>{name}</a></li>
           ))}
         </ul>
       </div>
       <div class="footer-col">
         <h4>{t.footerColInfo}</h4>
         <ul>
-          <li><a href={`${getLangUrl(lang)}/sobre-nosotros`}>{t.footerAbout}</a></li>
-          <li><a href={`${getLangUrl(lang)}/contacto`}>{t.footerContact}</a></li>
-          <li><a href={`${getLangUrl(lang)}/reservar`}>{t.footerBooking}</a></li>
-          <li><a href={`${getLangUrl(lang)}/cancellation-policy`}>{t.footerCancellation}</a></li>
-          <li><a href={`${getLangUrl(lang)}/house-rules`}>{t.footerHouseRules}</a></li>
+          <li><a href={`${langRoot}/sobre-nosotros`}>{t.footerAbout}</a></li>
+          <li><a href={`${langRoot}/contacto`}>{t.footerContact}</a></li>
+          <li><a href={`${langRoot}/reservar`}>{t.footerBooking}</a></li>
+          <li><a href={`${langRoot}/cancellation-policy`}>{t.footerCancellation}</a></li>
+          <li><a href={`${langRoot}/house-rules`}>{t.footerHouseRules}</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>{t.footerColGirona}</h4>
         <ul>
-          <li><a href={`${getLangUrl(lang)}#apartamentos`}>Apartamentos turísticos Girona</a></li>
-          <li><a href={`${getLangUrl(lang)}#apartamentos`}>Apartamentos Barri Vell</a></li>
-          <li><a href={`${getLangUrl(lang)}#apartamentos`}>Boutique apartments Girona</a></li>
-          <li><a href={`${getLangUrl(lang)}#apartamentos`}>Holiday apartments Girona</a></li>
-          <li><a href={`${getLangUrl(lang)}#apartamentos`}>Apartaments Girona Centre</a></li>
+          <li><a href={`${langRoot}/#apartamentos`}>Apartamentos turísticos Girona</a></li>
+          <li><a href={`${langRoot}/#apartamentos`}>Apartamentos Barri Vell</a></li>
+          <li><a href={`${langRoot}/#apartamentos`}>Boutique apartments Girona</a></li>
+          <li><a href={`${langRoot}/#apartamentos`}>Holiday apartments Girona</a></li>
+          <li><a href={`${langRoot}/#apartamentos`}>Apartaments Girona Centre</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© {new Date().getFullYear()} Aromatik Apartments · Girona, Catalunya</p>
       <div style="display:flex; gap:1.5rem;">
-        <a href={`${getLangUrl(lang)}/privacy`} style="font-size:0.75rem; color:rgba(255,255,255,0.4)">{t.footerPrivacy}</a>
-        <a href={`${getLangUrl(lang)}/terms`} style="font-size:0.75rem; color:rgba(255,255,255,0.4)">{t.footerTerms}</a>
+        <a href={`${langRoot}/privacy`} style="font-size:0.75rem; color:rgba(255,255,255,0.4)">{t.footerPrivacy}</a>
+        <a href={`${langRoot}/terms`} style="font-size:0.75rem; color:rgba(255,255,255,0.4)">{t.footerTerms}</a>
       </div>
     </div>
   </footer>
@@ -393,7 +397,7 @@ const schemaOrg = JSON.stringify({
 
   <!-- Mobile sticky CTA -->
   <div class="mobile-cta">
-    <a href={`${getLangUrl(lang)}/reservar`} class="btn btn-green">{t.mobileCta}</a>
+    <a href={`${langRoot}/reservar`} class="btn btn-green">{t.mobileCta}</a>
   </div>
 
   <script>
