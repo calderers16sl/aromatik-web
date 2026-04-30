@@ -49,6 +49,16 @@ export interface T {
   aboutTitle: string; aboutSubtitle: string;
   footerImportantInfo: string;
   infoIndexTitle: string; infoIndexText: string; infoIndexBtn: string;
+  seoBarriEyebrow: string; seoBarriTitle: string; seoBarriText: string;
+  seoBarriFeat1Title: string; seoBarriFeat1Sub: string;
+  seoBarriFeat2Title: string; seoBarriFeat2Sub: string;
+  seoBarriFeat3Title: string; seoBarriFeat3Sub: string;
+  seoBarriFeat4Title: string; seoBarriFeat4Sub: string;
+  seoCyclingEyebrow: string; seoCyclingTitle: string; seoCyclingText: string;
+  seoCyclingFeat1Title: string; seoCyclingFeat1Sub: string;
+  seoCyclingFeat2Title: string; seoCyclingFeat2Sub: string;
+  seoCyclingFeat3Title: string; seoCyclingFeat3Sub: string;
+  seoCyclingFeat4Title: string; seoCyclingFeat4Sub: string;
 }
 
 const es: T = {
@@ -141,6 +151,18 @@ const es: T = {
   infoIndexTitle: "Antes de tu llegada",
   infoIndexText: "Revisa la información importante sobre acceso, normas de la casa, mascotas, basura y cancelación.",
   infoIndexBtn: "Información importante",
+  seoBarriEyebrow: "El barrio", seoBarriTitle: "Por qué el Barri Vell de Girona",
+  seoBarriText: "El Barri Vell es el corazón histórico de Girona y uno de los centros medievales mejor conservados de Europa. Desde Aromatik, todo está a menos de diez minutos a pie: la Catedral de Girona y sus 90 escaleras, el Call Jueu —uno de los barrios judíos medievales más completos del mundo—, los Baños Árabes del siglo XII, el Pont de Pedra sobre el río Onyar y la muralla romana que rodea el casco antiguo. Sin desplazamientos, sin coche. Solo caminar por callejuelas empedradas y despertar con las campanadas de la ciudad.",
+  seoBarriFeat1Title: "Catedral de Girona", seoBarriFeat1Sub: "5 min a pie",
+  seoBarriFeat2Title: "Call Jueu medieval", seoBarriFeat2Sub: "3 min a pie",
+  seoBarriFeat3Title: "Pont de Pedra & río Onyar", seoBarriFeat3Sub: "1 min a pie",
+  seoBarriFeat4Title: "Estación AVE Girona", seoBarriFeat4Sub: "15 min a pie",
+  seoCyclingEyebrow: "🚲 Cyclist friendly", seoCyclingTitle: "Girona: capital europea del ciclismo",
+  seoCyclingText: "Girona es el cuartel general de ciclistas profesionales de todo el mundo. Desde el Barri Vell sale una red de rutas incomparable: la Vía Verde de la Costa Brava, los puertos del Prepirineo, el acceso al Baix Empordà y la conexión con el Tour de France. En Aromatik tenemos espacio para tu bicicleta, ascensores con ancho suficiente para subirla y lavandería para la ropa técnica. Todo lo que necesitas para pedalear de sol a sol y recuperar en un apartamento boutique.",
+  seoCyclingFeat1Title: "Almacenamiento seguro de bicicletas", seoCyclingFeat1Sub: "Espacio en todos los apartamentos",
+  seoCyclingFeat2Title: "Acceso directo a las Vies Verdes", seoCyclingFeat2Sub: "Girona–Costa Brava–Pirineos",
+  seoCyclingFeat3Title: "Ascensores amplios", seoCyclingFeat3Sub: "Para subir la bici sin esfuerzo",
+  seoCyclingFeat4Title: "Lavandería para ropa técnica", seoCyclingFeat4Sub: "Disponible en apartamentos seleccionados",
 };
 
 const en: T = {
@@ -233,6 +255,18 @@ const en: T = {
   infoIndexTitle: "Before your arrival",
   infoIndexText: "Review the important information about access, house rules, pets, waste and cancellation.",
   infoIndexBtn: "Important information",
+  seoBarriEyebrow: "The neighbourhood", seoBarriTitle: "Why the Barri Vell of Girona",
+  seoBarriText: "The Barri Vell is the historic heart of Girona and one of the best-preserved medieval centres in Europe. From Aromatik, everything is within ten minutes on foot: Girona Cathedral and its 90 steps, the Jewish Quarter (Call Jueu) — one of the most complete medieval Jewish neighbourhoods in the world —, the 12th-century Arab Baths, the Pont de Pedra over the Onyar river, and the Roman walls surrounding the old town. No transfers, no car. Just strolling cobbled lanes and waking to the city's bells.",
+  seoBarriFeat1Title: "Girona Cathedral", seoBarriFeat1Sub: "5 min walk",
+  seoBarriFeat2Title: "Medieval Jewish Quarter", seoBarriFeat2Sub: "3 min walk",
+  seoBarriFeat3Title: "Pont de Pedra & Onyar river", seoBarriFeat3Sub: "1 min walk",
+  seoBarriFeat4Title: "Girona AVE train station", seoBarriFeat4Sub: "15 min walk",
+  seoCyclingEyebrow: "🚲 Cyclist friendly", seoCyclingTitle: "Girona: cycling capital of Europe",
+  seoCyclingText: "Girona is the headquarters of professional cyclists from around the world. From the Barri Vell, an unmatched network of routes fans out: the Costa Brava Greenway, the Pre-Pyrenean climbs, access to the Baix Empordà coast, and the connection to Tour de France routes. At Aromatik we have space for your bike, lifts wide enough to take it up, and laundry for your technical kit. Everything you need to ride from dawn to dusk and recover in a boutique apartment.",
+  seoCyclingFeat1Title: "Secure bike storage", seoCyclingFeat1Sub: "Space in all apartments",
+  seoCyclingFeat2Title: "Direct access to the Vies Verdes", seoCyclingFeat2Sub: "Girona–Costa Brava–Pyrenees",
+  seoCyclingFeat3Title: "Wide lifts", seoCyclingFeat3Sub: "Bring your bike up with ease",
+  seoCyclingFeat4Title: "Laundry for technical clothing", seoCyclingFeat4Sub: "Available in selected apartments",
 };
 
 const fr: T = {
@@ -325,6 +359,18 @@ const fr: T = {
   infoIndexTitle: "Avant votre arrivée",
   infoIndexText: "Consultez les informations importantes sur l'accès, les règles de la maison, les animaux, les déchets et l'annulation.",
   infoIndexBtn: "Informations importantes",
+  seoBarriEyebrow: "Le quartier", seoBarriTitle: "Pourquoi le Barri Vell de Gérone",
+  seoBarriText: "Le Barri Vell est le cœur historique de Gérone et l'un des centres médiévaux les mieux conservés d'Europe. Depuis Aromatik, tout est à moins de dix minutes à pied : la Cathédrale de Gérone et ses 90 marches, le Call Jueu — l'un des quartiers juifs médiévaux les plus complets du monde —, les Bains arabes du XIIe siècle, le Pont de Pedra sur la rivière Onyar et les remparts romains encerclant la vieille ville. Sans transferts, sans voiture. Juste se promener dans des ruelles pavées et se réveiller au son des cloches.",
+  seoBarriFeat1Title: "Cathédrale de Gérone", seoBarriFeat1Sub: "5 min à pied",
+  seoBarriFeat2Title: "Quartier juif médiéval", seoBarriFeat2Sub: "3 min à pied",
+  seoBarriFeat3Title: "Pont de Pedra & Onyar", seoBarriFeat3Sub: "1 min à pied",
+  seoBarriFeat4Title: "Gare AVE de Gérone", seoBarriFeat4Sub: "15 min à pied",
+  seoCyclingEyebrow: "🚲 Cycliste friendly", seoCyclingTitle: "Gérone : capitale européenne du cyclisme",
+  seoCyclingText: "Gérone est le quartier général des cyclistes professionnels du monde entier. Depuis le Barri Vell, un réseau incomparable de routes s'étend : la Voie Verte de la Costa Brava, les cols du Pré-Pyrénées, l'accès au Baix Empordà et la connexion aux routes du Tour de France. Chez Aromatik, nous avons de l'espace pour votre vélo, des ascenseurs assez larges pour le monter et une laverie pour vos vêtements techniques. Tout ce qu'il vous faut pour pédaler du lever au coucher du soleil.",
+  seoCyclingFeat1Title: "Stockage sécurisé des vélos", seoCyclingFeat1Sub: "Espace dans tous les appartements",
+  seoCyclingFeat2Title: "Accès direct aux Vies Verdes", seoCyclingFeat2Sub: "Gérone–Costa Brava–Pyrénées",
+  seoCyclingFeat3Title: "Ascenseurs larges", seoCyclingFeat3Sub: "Montez votre vélo facilement",
+  seoCyclingFeat4Title: "Laverie pour vêtements techniques", seoCyclingFeat4Sub: "Disponible dans certains appartements",
 };
 
 const ca: T = {
@@ -417,6 +463,18 @@ const ca: T = {
   infoIndexTitle: "Abans de la teva arribada",
   infoIndexText: "Revisa la informació important sobre accés, normes de la casa, mascotes, escombraries i cancel·lació.",
   infoIndexBtn: "Informació important",
+  seoBarriEyebrow: "El barri", seoBarriTitle: "Per què el Barri Vell de Girona",
+  seoBarriText: "El Barri Vell és el cor històric de Girona i un dels centres medievals millor conservats d'Europa. Des d'Aromatik, tot és a menys de deu minuts a peu: la Catedral de Girona i els seus 90 graons, el Call Jueu —un dels barris jueus medievals més complets del món—, els Banys Àrabs del segle XII, el Pont de Pedra sobre el riu Onyar i la muralla romana que envolta el casc antic. Sense desplaçaments, sense cotxe. Només passejar per carrerons empedrats i despertar-se amb les campanes de la ciutat.",
+  seoBarriFeat1Title: "Catedral de Girona", seoBarriFeat1Sub: "5 min a peu",
+  seoBarriFeat2Title: "Call Jueu medieval", seoBarriFeat2Sub: "3 min a peu",
+  seoBarriFeat3Title: "Pont de Pedra i riu Onyar", seoBarriFeat3Sub: "1 min a peu",
+  seoBarriFeat4Title: "Estació AVE Girona", seoBarriFeat4Sub: "15 min a peu",
+  seoCyclingEyebrow: "🚲 Cyclist friendly", seoCyclingTitle: "Girona: capital europea del ciclisme",
+  seoCyclingText: "Girona és el quarter general de ciclistes professionals de tot el món. Des del Barri Vell surt una xarxa de rutes incomparable: la Via Verda de la Costa Brava, els ports del Prepirineu, l'accés al Baix Empordà i la connexió amb el Tour de France. A Aromatik tenim espai per a la teva bicicleta, ascensors amb amplada suficient per pujar-la i bugaderia per a la roba tècnica. Tot el que necessites per pedalar de sol a sol i recuperar en un apartament boutique.",
+  seoCyclingFeat1Title: "Emmagatzematge segur de bicicletes", seoCyclingFeat1Sub: "Espai a tots els apartaments",
+  seoCyclingFeat2Title: "Accés directe a les Vies Verdes", seoCyclingFeat2Sub: "Girona–Costa Brava–Pirineus",
+  seoCyclingFeat3Title: "Ascensors amplis", seoCyclingFeat3Sub: "Per pujar la bici sense esforç",
+  seoCyclingFeat4Title: "Bugaderia per a roba tècnica", seoCyclingFeat4Sub: "Disponible en apartaments seleccionats",
 };
 
 const de: T = {
@@ -509,6 +567,18 @@ const de: T = {
   infoIndexTitle: "Vor Ihrer Ankunft",
   infoIndexText: "Lesen Sie die wichtigen Informationen zu Zugang, Hausregeln, Haustieren, Müll und Stornierung.",
   infoIndexBtn: "Wichtige Informationen",
+  seoBarriEyebrow: "Das Viertel", seoBarriTitle: "Warum der Barri Vell von Girona",
+  seoBarriText: "Der Barri Vell ist das historische Herz Gironas und eines der besterhaltenen mittelalterlichen Zentren Europas. Von Aromatik aus ist alles in weniger als zehn Minuten zu Fuß erreichbar: die Kathedrale von Girona mit ihren 90 Stufen, das jüdische Viertel (Call Jueu) — eines der vollständigsten mittelalterlichen jüdischen Viertel der Welt —, die arabischen Bäder aus dem 12. Jahrhundert, die Pont de Pedra über den Fluss Onyar und die römischen Stadtmauern rund um die Altstadt. Keine Transfers, kein Auto. Nur durch gepflasterte Gassen schlendern und beim Läuten der Stadtglocken aufwachen.",
+  seoBarriFeat1Title: "Kathedrale von Girona", seoBarriFeat1Sub: "5 Min zu Fuß",
+  seoBarriFeat2Title: "Mittelalterliches jüdisches Viertel", seoBarriFeat2Sub: "3 Min zu Fuß",
+  seoBarriFeat3Title: "Pont de Pedra & Fluss Onyar", seoBarriFeat3Sub: "1 Min zu Fuß",
+  seoBarriFeat4Title: "Bahnhof Girona (AVE)", seoBarriFeat4Sub: "15 Min zu Fuß",
+  seoCyclingEyebrow: "🚲 Fahrradfreundlich", seoCyclingTitle: "Girona: Radsporthauptstadt Europas",
+  seoCyclingText: "Girona ist das Hauptquartier professioneller Radfahrer aus aller Welt. Vom Barri Vell aus erstreckt sich ein unvergleichliches Routennetz: der Grünweg der Costa Brava, die Pässe des Vorpyrenäengebirges, Zugang zum Baix Empordà und Verbindung zu Tour-de-France-Strecken. Bei Aromatik haben wir Platz für Ihr Fahrrad, breite Aufzüge zum Hochtransport und eine Wäscherei für Ihre Sportkleidung. Alles, was Sie brauchen, um von Sonnenaufgang bis Sonnenuntergang zu radeln und sich in einem Boutique-Apartment zu erholen.",
+  seoCyclingFeat1Title: "Sicherer Fahrradabstellraum", seoCyclingFeat1Sub: "Platz in allen Apartments",
+  seoCyclingFeat2Title: "Direktzugang zu den Vies Verdes", seoCyclingFeat2Sub: "Girona–Costa Brava–Pyrenäen",
+  seoCyclingFeat3Title: "Breite Aufzüge", seoCyclingFeat3Sub: "Fahrrad mühelos hochtransportieren",
+  seoCyclingFeat4Title: "Wäscherei für Sportkleidung", seoCyclingFeat4Sub: "In ausgewählten Apartments verfügbar",
 };
 
 const zh: T = {
@@ -601,6 +671,19 @@ const zh: T = {
   infoIndexTitle: "抵达前须知",
   infoIndexText: "请查阅有关入住方式、房屋规则、宠物、垃圾处理和取消政策的重要信息。",
   infoIndexBtn: "重要须知",
+  seoBarriEyebrow: "街区", seoBarriTitle: "为什么选择赫罗纳旧城区",
+  seoBarriText: "旧城区（Barri Vell）是赫罗纳的历史中心，也是欧洲保存最完好的中世纪中心之一。从Aromatik出发，步行不到十分钟即可到达所有地标：赫罗纳大教堂及其90级台阶、Call Jueu犹太区、12世纪阿拉伯浴场、横跨奥尼亚尔河的佩德拉桥，以及环绕老城的罗马城墙。无需交通，无需汽车。只需漫步在鹅卵石小巷中，在城市钟声中醒来。",
+  seoBarriFeat1Title: "赫罗纳大教堂", seoBarriFeat1Sub: "步行5分钟",
+  seoBarriFeat2Title: "中世纪犹太区", seoBarriFeat2Sub: "步行3分钟",
+  seoBarriFeat3Title: "佩德拉桥和奥尼亚尔河", seoBarriFeat3Sub: "步行1分钟",
+  seoBarriFeat4Title: "赫罗纳高铁站", seoBarriFeat4Sub: "步行15分钟",
+  seoCyclingEyebrow: "🚲 自行车友好", seoCyclingTitle: "赫罗纳：欧洲自行车之都",
+  seoCyclingText: "赫罗纳是全球职业自行车手的大本营。从旧城区出发，路线网络无与伦比：科斯塔布拉瓦绿道、比利牛斯山前麓山口、通往Baix Empordà海岸以及环法自行车赛路线的连接。Aromatik为您的自行车提供存放空间，电梯足够宽敞，还有运动服装洗衣设施。",
+  seoCyclingFeat1Title: "安全自行车存放", seoCyclingFeat1Sub: "所有公寓均有空间",
+  seoCyclingFeat2Title: "直达绿道", seoCyclingFeat2Sub: "赫罗纳–科斯塔布拉瓦–比利牛斯",
+  seoCyclingFeat3Title: "宽大电梯", seoCyclingFeat3Sub: "轻松搬运自行车",
+  seoCyclingFeat4Title: "运动服装洗衣", seoCyclingFeat4Sub: "部分公寓提供",
+
 };
 
 const ko: T = {
@@ -692,6 +775,18 @@ const ko: T = {
   infoIndexTitle: "도착 전 확인 사항",
   infoIndexText: "출입 방법, 숙소 규칙, 반려동물, 쓰레기 처리 및 취소 정책에 관한 중요 정보를 확인하세요.",
   infoIndexBtn: "중요 안내",
+  seoBarriEyebrow: "동네", seoBarriTitle: "헤로나 구시가지를 선택하는 이유",
+  seoBarriText: "바리 벨(Barri Vell)은 헤로나의 역사적 중심지이자 유럽에서 가장 잘 보존된 중세 도심 중 하나입니다. Aromatik에서 도보 10분 이내에 모든 명소가 있습니다: 헤로나 대성당, 세계에서 가장 완전한 중세 유대인 구역 중 하나인 Call Jueu, 12세기 아랍 목욕탕, 오냐르 강 위의 페드라 다리, 구시가지를 둘러싼 로마 성벽. 교통수단도 자동차도 필요 없습니다.",
+  seoBarriFeat1Title: "헤로나 대성당", seoBarriFeat1Sub: "도보 5분",
+  seoBarriFeat2Title: "중세 유대인 지구", seoBarriFeat2Sub: "도보 3분",
+  seoBarriFeat3Title: "페드라 다리 & 오냐르 강", seoBarriFeat3Sub: "도보 1분",
+  seoBarriFeat4Title: "헤로나 AVE 역", seoBarriFeat4Sub: "도보 15분",
+  seoCyclingEyebrow: "🚲 사이클리스트 친화적", seoCyclingTitle: "헤로나: 유럽의 사이클링 수도",
+  seoCyclingText: "헤로나는 전 세계 프로 사이클리스트들의 본거지입니다. 바리 벨에서 비교할 수 없는 루트 네트워크가 펼쳐집니다: 코스타브라바 그린웨이, 피레네 산맥 고개, 바이스 엠포르다 해안 접근. Aromatik에는 자전거 보관 공간, 넓은 엘리베이터, 기술 의류 세탁 시설이 있습니다.",
+  seoCyclingFeat1Title: "안전한 자전거 보관", seoCyclingFeat1Sub: "모든 아파트에 공간 있음",
+  seoCyclingFeat2Title: "비에스 베르데스 직접 접근", seoCyclingFeat2Sub: "헤로나–코스타브라바–피레네",
+  seoCyclingFeat3Title: "넓은 엘리베이터", seoCyclingFeat3Sub: "자전거를 쉽게 올릴 수 있음",
+  seoCyclingFeat4Title: "기술 의류 세탁", seoCyclingFeat4Sub: "일부 아파트에서 제공",
 };
 
 
@@ -777,6 +872,19 @@ const pt: T = {
   infoIndexTitle: "Antes da sua chegada",
   infoIndexText: "Reveja as informações importantes sobre acesso, regras da casa, animais, lixo e cancelamento.",
   infoIndexBtn: "Informações importantes",
+  seoBarriEyebrow: "O bairro", seoBarriTitle: "Por que o Barri Vell de Girona",
+  seoBarriText: "O Barri Vell é o coração histórico de Girona e um dos centros medievais mais bem preservados da Europa. A partir da Aromatik, tudo fica a menos de dez minutos a pé: a Catedral de Girona com os seus 90 degraus, o Call Jueu — um dos bairros judaicos medievais mais completos do mundo —, os Banhos Árabes do século XII, a Ponte de Pedra sobre o rio Onyar e as muralhas romanas que rodeiam o casco antigo. Sem transfers, sem carro. Só passear por ruelas empedradas e acordar com os sinos da cidade.",
+  seoBarriFeat1Title: "Catedral de Girona", seoBarriFeat1Sub: "5 min a pé",
+  seoBarriFeat2Title: "Bairro Judaico Medieval", seoBarriFeat2Sub: "3 min a pé",
+  seoBarriFeat3Title: "Ponte de Pedra & rio Onyar", seoBarriFeat3Sub: "1 min a pé",
+  seoBarriFeat4Title: "Estação AVE de Girona", seoBarriFeat4Sub: "15 min a pé",
+  seoCyclingEyebrow: "🚲 Amigo dos ciclistas", seoCyclingTitle: "Girona: capital europeia do ciclismo",
+  seoCyclingText: "Girona é o quartel-general de ciclistas profissionais de todo o mundo. A partir do Barri Vell, uma rede incomparável de rotas se estende: a Vía Verde da Costa Brava, as subidas do Pré-Pirenéus, o acesso ao Baix Empordà e a ligação às rotas do Tour de France. Na Aromatik temos espaço para a sua bicicleta, elevadores com largura suficiente para a subir e lavandaria para roupa técnica.",
+  seoCyclingFeat1Title: "Armazenamento seguro de bicicletas", seoCyclingFeat1Sub: "Espaço em todos os apartamentos",
+  seoCyclingFeat2Title: "Acesso direto às Vies Verdes", seoCyclingFeat2Sub: "Girona–Costa Brava–Pirenéus",
+  seoCyclingFeat3Title: "Elevadores amplos", seoCyclingFeat3Sub: "Suba a bicicleta com facilidade",
+  seoCyclingFeat4Title: "Lavandaria para roupa técnica", seoCyclingFeat4Sub: "Disponível em apartamentos selecionados",
+
 };
 
 const nl: T = {
@@ -861,6 +969,18 @@ const nl: T = {
   infoIndexTitle: "Vóór uw aankomst",
   infoIndexText: "Lees de belangrijke informatie over toegang, huisregels, huisdieren, afval en annulering.",
   infoIndexBtn: "Belangrijke informatie",
+  seoBarriEyebrow: "De wijk", seoBarriTitle: "Waarom de Barri Vell van Girona",
+  seoBarriText: "De Barri Vell is het historische hart van Girona en een van de best bewaarde middeleeuwse centra van Europa. Vanuit Aromatik is alles op minder dan tien minuten lopen: de kathedraal van Girona met zijn 90 treden, de Joodse wijk (Call Jueu), de 12e-eeuwse Arabische baden, de Pont de Pedra over de Onyar-rivier en de Romeinse muren rondom de oude stad. Geen transfers, geen auto.",
+  seoBarriFeat1Title: "Kathedraal van Girona", seoBarriFeat1Sub: "5 min lopen",
+  seoBarriFeat2Title: "Middeleeuws joods kwartier", seoBarriFeat2Sub: "3 min lopen",
+  seoBarriFeat3Title: "Pont de Pedra & rivier Onyar", seoBarriFeat3Sub: "1 min lopen",
+  seoBarriFeat4Title: "Station Girona (AVE)", seoBarriFeat4Sub: "15 min lopen",
+  seoCyclingEyebrow: "🚲 Fietsvriendelijk", seoCyclingTitle: "Girona: wielrenhoofdstad van Europa",
+  seoCyclingText: "Girona is het hoofdkwartier van professionele wielrenners van over de hele wereld. Vanuit de Barri Vell strekt een ongeëvenaard routenetwerk zich uit: de Groene Route van de Costa Brava, de cols van de Pre-Pyreneeën, toegang tot de Baix Empordà kust. Bij Aromatik hebben we ruimte voor uw fiets, brede liften en een wasserij voor uw technische kleding.",
+  seoCyclingFeat1Title: "Veilige fietsopslag", seoCyclingFeat1Sub: "Ruimte in alle appartementen",
+  seoCyclingFeat2Title: "Directe toegang tot de Vies Verdes", seoCyclingFeat2Sub: "Girona–Costa Brava–Pyreneeën",
+  seoCyclingFeat3Title: "Brede liften", seoCyclingFeat3Sub: "Fiets gemakkelijk omhoog brengen",
+  seoCyclingFeat4Title: "Wasserij voor technische kleding", seoCyclingFeat4Sub: "Beschikbaar in geselecteerde appartementen",
 };
 
 export const translations: Record<Locale, T> = { es, en, fr, ca, de, zh, ko, pt, nl };
