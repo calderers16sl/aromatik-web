@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getT } from '../i18n/translations';
 import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+import HostCard from '../components/HostCard.astro';
 
 const lang = 'es';
 const t = getT(lang);
@@ -100,6 +101,8 @@ const apartments = [
     </div>
   </section>
   <!-- BLOQUE INFORMACIÓN IMPORTANTE -->
+  <HostCard />
+
   <section class="section bg-cream info-banner-section">
     <div class="container">
       <div class="info-banner">

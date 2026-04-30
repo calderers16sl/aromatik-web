@@ -1,0 +1,209 @@
+---
+// HostCard.astro — Arnau's Airbnb host profile card
+---
+
+<section class="host-section">
+  <div class="container">
+    <div class="host-card">
+      <div class="host-avatar-wrap">
+        <img
+          src="/images/arnau-profile.jpg"
+          alt="Arnau — Anfitrión de Aromatik Apartments"
+          class="host-avatar"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <div class="host-avatar-fallback" style="display:none">A</div>
+        <div class="host-verified" title="Identidad verificada">✓</div>
+      </div>
+
+      <div class="host-info">
+        <p class="host-eyebrow">Tu anfitrión</p>
+        <h3 class="host-name">Arnau</h3>
+        <p class="host-role">Anfitrión · Aromatik Apartments</p>
+
+        <div class="host-stats">
+          <div class="host-stat">
+            <span class="host-stat-num">2272</span>
+            <span class="host-stat-label">Evaluaciones</span>
+          </div>
+          <div class="host-stat-sep"></div>
+          <div class="host-stat">
+            <span class="host-stat-num">4,71 <span class="host-star">★</span></span>
+            <span class="host-stat-label">Valoración</span>
+          </div>
+          <div class="host-stat-sep"></div>
+          <div class="host-stat">
+            <span class="host-stat-num">4</span>
+            <span class="host-stat-label">Años de experiencia</span>
+          </div>
+        </div>
+
+        <a
+          href="https://www.airbnb.es/users/show/1469972322678354410"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="host-airbnb-link"
+        >
+          <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 2c7.18 0 13 5.82 13 13S23.18 29 16 29 3 23.18 3 16 8.82 3 16 3zm-.002 4.5c-1.24 0-2.248 1.008-2.248 2.25S14.758 12 16 12s2.25-1.008 2.25-2.25S17.243 7.5 15.998 7.5zM13 13.5v1h1v7h-1v1h5v-1h-1v-8H13z"/></svg>
+          Ver perfil en Airbnb
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .host-section {
+    background: var(--white, #fff);
+    padding: 64px 0;
+  }
+
+  .host-card {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--cream, #f8f4ef);
+    border-radius: 20px;
+    padding: 40px 48px;
+  }
+
+  /* Avatar */
+  .host-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .host-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid var(--gold, #d0b050);
+  }
+
+  .host-avatar-fallback {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--gold, #d0b050);
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif, Georgia, serif);
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #fff;
+    border: 3px solid var(--gold, #d0b050);
+  }
+
+  .host-verified {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 26px;
+    height: 26px;
+    background: #ff385c;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border: 2px solid #fff;
+  }
+
+  /* Info */
+  .host-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .host-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold, #d0b050);
+    margin: 0 0 6px;
+  }
+
+  .host-name {
+    font-family: var(--serif, Georgia, serif);
+    font-size: 1.9rem;
+    font-weight: 400;
+    margin: 0 0 2px;
+    color: var(--black, #1a1a1a);
+  }
+
+  .host-role {
+    font-size: 0.82rem;
+    color: #888;
+    margin: 0 0 24px;
+  }
+
+  .host-stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .host-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .host-stat-num {
+    font-family: var(--serif, Georgia, serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--black, #1a1a1a);
+    line-height: 1;
+  }
+
+  .host-star { color: var(--gold, #d0b050); }
+
+  .host-stat-label {
+    font-size: 0.7rem;
+    color: #888;
+    letter-spacing: 0.05em;
+  }
+
+  .host-stat-sep {
+    width: 1px;
+    height: 32px;
+    background: #ddd;
+    flex-shrink: 0;
+  }
+
+  .host-airbnb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #ff385c;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
+  }
+
+  .host-airbnb-link:hover { opacity: 0.75; }
+
+  @media (max-width: 640px) {
+    .host-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 32px 24px;
+      gap: 24px;
+    }
+    .host-stats { justify-content: center; }
+    .host-eyebrow, .host-role { text-align: center; }
+    .host-airbnb-link { margin: 0 auto; }
+  }
+</style>
