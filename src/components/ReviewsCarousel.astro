@@ -1,79 +1,99 @@
 ---
-// ReviewsCarousel.astro — auto-sliding reviews carousel, dark background
-// Fetches from /api/reviews on the client
+// ReviewsCarousel.astro — auto-sliding reviews carousel
 ---
 
-<div class="rc-wrap">
-  <div class="rc-badge">
-    <span class="rc-score" id="rc-score">4.6</span>
-    <span class="rc-stars" id="rc-stars">★★★★★</span>
-    <span class="rc-count" id="rc-count">Google Reviews</span>
-  </div>
-
-  <div class="rc-stage">
-    <button class="rc-arrow rc-prev" id="rc-prev" aria-label="Anterior">&#10094;</button>
-
-    <div class="rc-viewport">
-      <div class="rc-track" id="rc-track">
-        <!-- Cards injected by JS -->
-        <div class="rc-card rc-placeholder">
-          <p class="rc-text">Cargando reseñas…</p>
-        </div>
+<section class="rc-section">
+  <div class="rc-container">
+    <div class="rc-header">
+      <span class="eyebrow">Google Reviews</span>
+      <div class="rc-rating">
+        <span class="rc-score" id="rc-score">4.6</span>
+        <span class="rc-stars" id="rc-stars">★★★★★</span>
+        <span class="rc-count" id="rc-count"></span>
       </div>
     </div>
 
-    <button class="rc-arrow rc-next" id="rc-next" aria-label="Siguiente">&#10095;</button>
-  </div>
+    <div class="rc-stage">
+      <button class="rc-arrow rc-prev" id="rc-prev" aria-label="Anterior">&#10094;</button>
 
-  <div class="rc-dots" id="rc-dots"></div>
-</div>
+      <div class="rc-viewport">
+        <div class="rc-track" id="rc-track">
+          <div class="rc-card">
+            <p class="rc-text">Cargando reseñas…</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="rc-arrow rc-next" id="rc-next" aria-label="Siguiente">&#10095;</button>
+    </div>
+
+    <div class="rc-dots" id="rc-dots"></div>
+  </div>
+</section>
 
 <style>
-  .rc-wrap {
-    background: var(--black, #1a1a1a);
-    color: var(--white, #fff);
-    padding: 48px 24px 40px;
+  .rc-section {
+    background: var(--cream, #f8f4ef);
+    padding: 64px 0;
+  }
+
+  .rc-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 28px;
+    gap: 32px;
   }
 
-  .rc-badge {
+  .rc-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold, #d0b050);
+  }
+
+  .rc-rating {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .rc-score {
     font-family: var(--serif, Georgia, serif);
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 400;
-    color: var(--gold, #d0b050);
+    color: var(--black, #1a1a1a);
     line-height: 1;
   }
 
   .rc-stars {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--gold, #d0b050);
     letter-spacing: 2px;
   }
 
   .rc-count {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
+    font-size: 0.78rem;
+    color: #888;
   }
 
   .rc-stage {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     width: 100%;
-    max-width: 800px;
   }
 
   .rc-viewport {
@@ -88,56 +108,53 @@
 
   .rc-card {
     min-width: 100%;
-    padding: 0 8px;
     box-sizing: border-box;
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 32px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .rc-placeholder {
-    align-items: center;
-    justify-content: center;
-    opacity: 0.4;
+    gap: 14px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   }
 
   .rc-card-top {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   .rc-avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
   }
 
   .rc-avatar-fallback {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: var(--gold, #d0b050);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1rem;
-    color: var(--black, #1a1a1a);
+    font-size: 0.8rem;
+    color: #fff;
     flex-shrink: 0;
   }
 
   .rc-author {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    color: var(--black, #1a1a1a);
   }
 
   .rc-time {
     font-size: 0.75rem;
-    opacity: 0.45;
+    color: #aaa;
   }
 
   .rc-card-stars {
@@ -147,26 +164,28 @@
   }
 
   .rc-text {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: rgba(255,255,255,0.8);
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
     font-style: italic;
   }
 
   .rc-arrow {
-    background: none;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.6);
+    background: #fff;
+    border: 1px solid #e5e0d8;
+    color: #aaa;
     width: 36px;
     height: 36px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     transition: border-color 0.2s, color 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
 
   .rc-arrow:hover {
@@ -183,7 +202,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.25);
+    background: #d5cfc6;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
     border: none;
@@ -192,13 +211,13 @@
 
   .rc-dot.active {
     background: var(--gold, #d0b050);
-    transform: scale(1.3);
+    transform: scale(1.35);
   }
 
   @media (max-width: 600px) {
-    .rc-wrap { padding: 36px 16px 32px; gap: 20px; }
-    .rc-stage { gap: 6px; }
-    .rc-text { font-size: 0.88rem; }
+    .rc-section { padding: 48px 0; }
+    .rc-card { padding: 22px 20px; }
+    .rc-arrow { display: none; }
   }
 </style>
 
@@ -220,14 +239,14 @@
     function goTo(idx) {
       current = (idx + total) % total;
       track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.rc-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === current);
-      });
+      document.querySelectorAll('.rc-dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current)
+      );
     }
 
     function startAuto() {
       clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 5000);
+      timer = setInterval(() => goTo(current + 1), 5500);
     }
 
     try {
@@ -238,11 +257,10 @@
       if (scoreEl) scoreEl.textContent = data.rating ? data.rating.toFixed(1) : '—';
       if (starsEl) starsEl.textContent = STARS(Math.round(data.rating || 0));
       if (countEl) countEl.textContent = data.user_ratings_total
-        ? `${data.user_ratings_total} reseñas en Google`
-        : 'Google Reviews';
+        ? `${data.user_ratings_total} reseñas` : '';
 
       if (!data.reviews || data.reviews.length === 0) {
-        track.innerHTML = '<div class="rc-card rc-placeholder"><p class="rc-text">Sé el primero en dejar una reseña.</p></div>';
+        track.innerHTML = '<div class="rc-card"><p class="rc-text">Sé el primero en dejar una reseña en Google.</p></div>';
         return;
       }
 
@@ -250,32 +268,31 @@
 
       track.innerHTML = data.reviews.map(r => {
         const initial = r.author ? r.author.charAt(0).toUpperCase() : '?';
-        const avatarHtml = r.avatar
+        const avatar = r.avatar
           ? `<img class="rc-avatar" src="${r.avatar}" alt="${r.author}" loading="lazy">`
           : `<div class="rc-avatar-fallback">${initial}</div>`;
+        const text = r.text ? r.text.replace(/"/g, '&quot;') : '';
         return `
           <div class="rc-card">
             <div class="rc-card-top">
-              ${avatarHtml}
+              ${avatar}
               <div>
                 <div class="rc-author">${r.author || 'Huésped'}</div>
                 <div class="rc-time">${r.time || ''}</div>
               </div>
             </div>
             <div class="rc-card-stars">${STARS(r.rating || 5)}</div>
-            <p class="rc-text">"${r.text || ''}"</p>
-          </div>
-        `;
+            <p class="rc-text">"${text}"</p>
+          </div>`;
       }).join('');
 
-      // Dots
       dotsEl.innerHTML = data.reviews.map((_, i) =>
         `<button class="rc-dot${i === 0 ? ' active' : ''}" data-i="${i}" aria-label="Reseña ${i+1}"></button>`
       ).join('');
 
-      dotsEl.querySelectorAll('.rc-dot').forEach(d => {
-        d.addEventListener('click', () => { goTo(+d.dataset.i); startAuto(); });
-      });
+      dotsEl.querySelectorAll('.rc-dot').forEach(d =>
+        d.addEventListener('click', () => { goTo(+d.dataset.i); startAuto(); })
+      );
 
       prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
       nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
@@ -285,7 +302,7 @@
 
     } catch (err) {
       console.warn('Reviews carousel error:', err);
-      track.innerHTML = '';
+      if (track) track.innerHTML = '';
     }
   })();
 </script>
