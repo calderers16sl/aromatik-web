@@ -26,16 +26,16 @@ const apartments = [
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
-      <span class="hero-eyebrow">{t.heroEyebrow}</span>
+      <div class="hero-badges">
+        <span class="hero-badge">🚲 Cyclist friendly</span>
+        <span class="hero-badge">🐾 Pet friendly</span>
+      </div>
       <h1 set:html={t.heroTitle.replace('\n','<br>')} />
       <div class="hero-actions">
         <a href="#apartamentos" class="btn btn-white" id="heroCta1Btn">{t.heroCta1}</a>
         <a href="#anfitrion" class="btn btn-outline-white" id="heroScrollBtn">{t.heroCta2}</a>
       </div>
-      <div class="hero-badges">
-        <span class="hero-badge">🚲 Cyclist friendly</span>
-        <span class="hero-badge">🐾 Pet friendly</span>
-      </div>
+      <span class="hero-eyebrow">{t.heroEyebrow}</span>
     </div>
   </section>
 
