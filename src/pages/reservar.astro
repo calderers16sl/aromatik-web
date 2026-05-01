@@ -10,7 +10,7 @@ const t = getT('es');
     <h1>{t.bookTitle}</h1>
     <p>{t.bookSubtitle}</p>
   </section>
-  <section class="section">
+  <section class="section" id="motor">
     <div class="container">
         <BookingWidget />
     </div>
@@ -21,3 +21,33 @@ const t = getT('es');
 .reservar-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; margin: 0.5rem 0 1rem; }
 .reservar-hero p { color: var(--stone-500); max-width: 500px; margin: 0 auto; }
 </style>
+
+<script is:inline>
+  // Auto-scroll al motor si la URL tiene #motor
+  (function() {
+    function scrollToMotor() {
+      var el = document.getElementById('motor');
+      if (!el) return;
+      var header = 80;
+      var startY = window.pageYOffset;
+      var targetY = el.getBoundingClientRect().top + startY - header;
+      var diff = targetY - startY;
+      var start = null;
+      function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+      function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / 1400, 1);
+        window.scrollTo(0, startY + diff * ease(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if (window.location.hash === '#motor') {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { setTimeout(scrollToMotor, 200); });
+      } else {
+        setTimeout(scrollToMotor, 200);
+      }
+    }
+  })();
+</script>
