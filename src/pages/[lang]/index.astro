@@ -192,6 +192,13 @@ const apartments = [
     next && next.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); goTo(cur + 1); });
     card.addEventListener('mouseenter', function() { timer = setInterval(function(){ goTo(cur + 1); }, 2500); });
     card.addEventListener('mouseleave', function() { clearInterval(timer); });
+    // Swipe táctil
+    var touchStartX = 0;
+    card.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    card.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { e.preventDefault(); goTo(dx < 0 ? cur + 1 : cur - 1); }
+    });
   });
 </script>
 </BaseLayout>
