@@ -167,11 +167,18 @@ const apartments = [
   </section>
 
 <script is:inline>
+  // "Ver apartamentos" → scroll rápido directo a las cartas
+  document.getElementById('heroCta1Btn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector('.apts-grid');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // "Conoce Aromatik" → scroll rápido hasta host section
   document.getElementById('heroScrollBtn')?.addEventListener('click', function(e) {
     e.preventDefault();
     var target = document.getElementById('anfitrion');
-    if (!target) return;
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   document.querySelectorAll('.apt-card').forEach(function(card) {

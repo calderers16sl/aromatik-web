@@ -167,36 +167,18 @@ const apartments = [
   </section>
 
 <script is:inline>
-  // Slow smooth scroll helper
-  function slowScrollTo(targetEl, duration) {
-    duration = duration || 1400;
-    var header = 80;
-    var startY = window.pageYOffset;
-    var targetY = targetEl.getBoundingClientRect().top + startY - header;
-    var diff = targetY - startY;
-    var start = null;
-    function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
-    function step(ts) {
-      if (!start) start = ts;
-      var progress = Math.min((ts - start) / duration, 1);
-      window.scrollTo(0, startY + diff * ease(progress));
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  // "Ver apartamentos" → slow scroll hasta las cartas
+  // "Ver apartamentos" → scroll rápido directo a las cartas
   document.getElementById('heroCta1Btn')?.addEventListener('click', function(e) {
     e.preventDefault();
-    var target = document.getElementById('apartamentos');
-    if (target) slowScrollTo(target, 1400);
+    var target = document.querySelector('.apts-grid');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  // "Conoce Aromatik" → slow scroll hasta host section
+  // "Conoce Aromatik" → scroll rápido hasta host section
   document.getElementById('heroScrollBtn')?.addEventListener('click', function(e) {
     e.preventDefault();
     var target = document.getElementById('anfitrion');
-    if (target) slowScrollTo(target, 1400);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   // Mini-carruseles en las cartas de apartamento
