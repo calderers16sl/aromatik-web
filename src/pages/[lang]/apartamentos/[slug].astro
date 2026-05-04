@@ -62,7 +62,8 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
           <div class="carousel-slide" data-index={i}>
             <img src={`/images/apartamentos/${apt.slug}/${photo}`}
               alt={`${apt.name} ${i+1}`} class="c-img" data-index={i}
-              loading={i === 0 ? "eager" : "lazy"} />
+              loading={i === 0 ? "eager" : "lazy"}
+              width="1200" height="800" />
           </div>
         ))}
       </div>

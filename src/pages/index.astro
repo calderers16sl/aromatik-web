@@ -60,6 +60,8 @@ const apartments = [
                     alt={`${apt.name} - foto ${n}`}
                     class={i > 0 ? 'c-hidden' : ''}
                     loading={i === 0 ? 'eager' : 'lazy'}
+                    width="400"
+                    height="300"
                   />
                 ))}
                 {count > 1 && (
@@ -75,7 +77,7 @@ const apartments = [
                 )}
               </div>
               <div class="apt-card-body">
-                <h3>{apt.nameCa}</h3>
+                <h3>{apt.name}</h3>
                 <p class="apt-meta">{t.aptsGuests(apt.guests)} · {t.aptsBedroom(apt.bedrooms)}</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>
@@ -209,4 +211,19 @@ const apartments = [
     });
   });
 </script>
+
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": t.faqItems.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }))
+    })} />
+  </Fragment>
 </BaseLayout>
