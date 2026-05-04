@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /reservar/confirmacion
 
-Sitemap: https://aromatik.apartments/sitemap.xml
+Sitemap: https://aromatik.apartments/sitemap-index.xml

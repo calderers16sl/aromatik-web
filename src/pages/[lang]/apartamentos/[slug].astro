@@ -53,7 +53,7 @@ const { apt, allApartments } = Astro.props;
 const t = getT(lang);
 const hasPhotos = apt.photos && apt.photos.length > 0;
 ---
-<BaseLayout title={`${t.aptH1s[apt.slug] ?? (t.aptLabel + " " + apt.name)} | Aromatik`} description={t.aptDescriptions[apt.slug] ?? apt.description} lang={lang}>
+<BaseLayout title={`${t.aptH1s[apt.slug] ?? (t.aptLabel + " " + apt.name)} | Aromatik`} description={t.aptDescriptions[apt.slug] ?? apt.description} lang={lang} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
 
   {hasPhotos && (
     <div class="carousel-wrap" id="carouselWrap">

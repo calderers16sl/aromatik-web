@@ -124,7 +124,7 @@ const breadcrumbSchema = JSON.stringify({
   ]
 });
 ---
-<BaseLayout title={apt.seoTitle ?? `Apartamento ${apt.name} — Barri Vell de Girona | Aromatik`} description={apt.seoDescription ?? apt.description}>
+<BaseLayout title={apt.seoTitle ?? `Apartamento ${apt.name} — Barri Vell de Girona | Aromatik`} description={apt.seoDescription ?? apt.description} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
   <script type="application/ld+json" set:html={apartmentSchema} slot="head" />
   <script type="application/ld+json" set:html={breadcrumbSchema} slot="head" />
 
