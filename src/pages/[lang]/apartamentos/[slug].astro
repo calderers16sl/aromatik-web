@@ -6,35 +6,35 @@ import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../../i18n/translatio
 
 export function getStaticPaths() {
   const APARTMENTS = [
-    { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576,
+    { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, bathrooms: 1, size: 70, smoobuId: 1397576, calendarToken: "2641959c015aaf85db8ec4e813438dcadf921f96e17d463fc63dbc8ea38833e1",
       description: "Un apartamento luminoso con el aroma delicado del ylang-ylang. Perfecto para parejas y familias pequeñas que buscan comodidad en el corazón de Girona.",
       amenities: ["WiFi", "Smart TV con Netflix", "Aire acondicionado centralizado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Balcón", "Vistas al río", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🌸",
       photos: Array.from({length:21}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021,
+    { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021, calendarToken: "605d06bb5d83bab6cbbbef4a2419e21638f0130f656f6a75260e26a91acd7e0c",
       description: "Acogedor y aromático como la planta que le da nombre. Ideal para escapadas románticas en el casco antiguo de Girona.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Vistas al río", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🌿",
       photos: Array.from({length:20}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631,
+    { name: "Ciprés", slug: "cipres", guests: 4, bedrooms: 2, bathrooms: 1, size: 65, smoobuId: 1035631, calendarToken: "02a1c68c3613eade7b8644c46938685f606ed811ad15a88e1f3185c1f316b1f1",
       description: "Elegante como el ciprés mediterráneo. Dos habitaciones perfectas para grupos de amigos o familias.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Balcón", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🌲",
       photos: Array.from({length:12}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339,
+    { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339, calendarToken: "c4b41ccacd97b4eef671774013b7a17a1d3b5b47fd243acb327a048279cbe0a9",
       description: "Tranquilo y relajante como un campo de lavanda. Un refugio de calma en el centro histórico.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Ascensor", "Vistas al río", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "💜",
       photos: Array.from({length:19}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266,
+    { name: "Limón", slug: "limon", guests: 3, bedrooms: 1, bathrooms: 1, size: 55, smoobuId: 1037266, calendarToken: "11826c74a49500f30c292467e92eab13c859ab324b89c373f0781a2fb26a24cf",
       description: "Fresco y vibrante. Con capacidad para tres personas, es perfecto para grupos pequeños que quieren explorar Girona.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera expreso", "Hervidor de agua", "Tostadora", "Ascensor", "Balcón", "Vistas a la ciudad", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🍋",
       photos: Array.from({length:21}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422,
+    { name: "Bergamota", slug: "bergamota", guests: 4, bedrooms: 2, bathrooms: 1, size: 68, smoobuId: 1034422, calendarToken: "dbe995d003fd83567fb2ebc64c143de86b5d0fc7eddc7429ae6f488d288fe631",
       description: "Sofisticado y cálido como el aroma de la bergamota. Dos habitaciones con todo el confort para disfrutar de Girona.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina completa", "Nevera", "Microondas", "Horno", "Cafetera Nespresso", "Tostadora", "Lavadora", "Ascensor", "Balcón", "Vistas al río", "Bañera", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🍊",
       photos: Array.from({length:21}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321,
+    { name: "Árbol de té", slug: "arbol-de-te", guests: 2, bedrooms: 1, bathrooms: 1, size: 48, smoobuId: 1315321, calendarToken: "d661c9850fefe6da5f3ed44a982d8ce0308e92ee6ae2196922e0b7aed644bdd7",
       description: "Puro y reconfortante. Un apartamento íntimo para dos, diseñado para el descanso y la desconexión.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción central", "Cocina completa", "Nevera", "Congelador", "Lavavajillas", "Microondas", "Horno", "Cocina de gas", "Cafetera Nespresso", "Hervidor de agua", "Tostadora", "Copas de vino", "Lavadora", "Ascensor", "Balcón privado", "Bañera", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🌱",
       photos: Array.from({length:23}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
-    { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430,
+    { name: "Geranio", slug: "geranio", guests: 4, bedrooms: 2, bathrooms: 1, size: 72, smoobuId: 1599430, calendarToken: "c6d294659c74f77593b64288e7f746b97fa0cadb210355c2a65c1f316720dbda",
       description: "Alegre y mediterráneo como el geranio de los balcones de Girona. El más amplio de nuestros apartamentos.",
       amenities: ["WiFi", "Smart TV", "Aire acondicionado", "Calefacción", "Cocina equipada", "Nevera", "Microondas", "Cafetera", "Hervidor de agua", "Tostadora", "Lavadora", "Ascensor", "Balcón", "Zona de trabajo", "Plancha", "Cuna (bajo demanda)", "Trona (bajo demanda)", "Secador de pelo", "Self check-in", "Se admiten mascotas"], emoji: "🌺",
       photos: Array.from({length:20}, (_:unknown,i:number)=>`foto-${i+1}.jpg`) },
@@ -51,6 +51,13 @@ export function getStaticPaths() {
 const { lang, slug } = Astro.params as { lang: Locale; slug: string };
 const { apt, allApartments } = Astro.props;
 const t = getT(lang);
+const calendarTitles: Record<string,string> = {
+  es:'Disponibilidad', en:'Availability', fr:'Disponibilit\u00e9',
+  ca:'Disponibilitat', de:'Verf\u00fcgbarkeit', zh:'\u53ef\u7528\u65e5\u671f',
+  ko:'\uc774\uc6a9 \uac00\ub2a5 \uc77c\uc815', pt:'Disponibilidade', nl:'Beschikbaarheid'
+};
+const calendarTitle = calendarTitles[lang] ?? 'Availability';
+const smoobuLang = ['es','en','fr','de','pt','nl','it'].includes(lang) ? lang : 'en';
 const hasPhotos = apt.photos && apt.photos.length > 0;
 ---
 <BaseLayout title={`${t.aptH1s[apt.slug] ?? (t.aptLabel + " " + apt.name)} | Aromatik`} description={t.aptDescriptions[apt.slug] ?? apt.description} lang={lang} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
@@ -119,6 +126,19 @@ const hasPhotos = apt.photos && apt.photos.length > 0;
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
+    <!-- Calendario de disponibilidad -->
+    <div class="calendar-section" style="margin-top:3rem;">
+      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:1.5rem;">{calendarTitle}</h2>
+      <div class="smoobu-cal-wrap" style="overflow-x:auto; display:flex; justify-content:center;">
+        <link rel="stylesheet" type="text/css" href="https://login.smoobu.com/css/singleCalendarWidgetIframe.css">
+        <iframe class="smallDevices" height="540px" width="280px"
+          src={`https://login.smoobu.com/${smoobuLang}/cockpit/widget/show-calendar-iframe/${apt.smoobuId}/${apt.calendarToken}`}
+          loading="lazy" title={calendarTitle}></iframe>
+        <iframe class="bigDevices" height="600px" width="1000px"
+          src={`https://login.smoobu.com/${smoobuLang}/cockpit/widget/show-calendar-iframe/${apt.smoobuId}/${apt.calendarToken}`}
+          loading="lazy" title={calendarTitle}></iframe>
+      </div>
+    </div>
 
     <!-- Google Maps -->
     <div class="map-section">
