@@ -3,10 +3,13 @@
  * Detects user language from Accept-Language header + CF-IPCountry
  * and redirects to the appropriate language prefix.
  * If the user has manually selected a language (cookie), that takes priority.
+ * Cookie: aromatik_lang — functional cookie, no consent required.
  */
 
 const SUPPORTED_LANGS = ['en', 'fr', 'ca', 'de', 'zh', 'ko', 'pt', 'nl'];
 const DEFAULT_LANG = 'es';
+const COOKIE_NAME = 'aromatik_lang';
+const COOKIE_TTL = 60 * 60 * 24 * 365; // 1 year
 
 // Country → language fallback map
 const COUNTRY_LANG = {
@@ -25,9 +28,10 @@ const COUNTRY_LANG = {
   PT: 'pt', BR: 'pt', AO: 'pt', MZ: 'pt', CV: 'pt', GW: 'pt', ST: 'pt', TL: 'pt',
   // Dutch-speaking
   NL: 'nl', SR: 'nl',
-  // Catalan regions (handled by Accept-Language, Spain stays ES)
-  // ES → 'es' (default)
 };
+
+// Pages that exist ONLY in default (es) and should never be redirected
+const SKIP_PATHS = new Set(['/aviso-legal', '/aviso-legal/']);
 
 /**
  * Parse Accept-Language header and return best matching supported locale.
@@ -71,12 +75,40 @@ function getLangCookie(cookieHeader) {
   return (lang === DEFAULT_LANG || SUPPORTED_LANGS.includes(lang)) ? lang : null;
 }
 
+/**
+ * Build a response that clones src but adds a Set-Cookie header.
+ */
+function responseWithCookie(response, lang) {
+  const headers = new Headers(response.headers);
+  headers.append(
+    'Set-Cookie',
+    `${COOKIE_NAME}=${lang}; Path=/; Max-Age=${COOKIE_TTL}; SameSite=Lax`
+  );
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
+/**
+ * Build a redirect response, optionally with a cookie.
+ */
+function redirectWithCookie(dest, lang) {
+  return new Response(null, {
+    status: 302,
+    headers: {
+      'Location': dest,
+      'Set-Cookie': `${COOKIE_NAME}=${lang}; Path=/; Max-Age=${COOKIE_TTL}; SameSite=Lax`,
+    },
+  });
+}
+
 export async function onRequest({ request, next }) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
   // ── Skip non-page requests ──────────────────────────────────────
-  // Static assets, API routes, sitemap, robots
   if (
     pathname.startsWith('/api/') ||
     pathname.startsWith('/images/') ||
@@ -86,35 +118,47 @@ export async function onRequest({ request, next }) {
     return next();
   }
 
-  // ── Already on a localized path? Don't redirect again ──────────
-  const isLocalized = SUPPORTED_LANGS.some(
-    lang => pathname === `/${lang}` || pathname.startsWith(`/${lang}/`)
+  // ── Skip pages that only exist in Spanish ───────────────────────
+  if (SKIP_PATHS.has(pathname)) {
+    return next();
+  }
+
+  // ── Already on a localized path ─────────────────────────────────
+  // Set cookie so that if the user later hits a non-prefixed URL we remember.
+  const activeLang = SUPPORTED_LANGS.find(
+    l => pathname === `/${l}` || pathname.startsWith(`/${l}/`)
   );
-  if (isLocalized) return next();
+  if (activeLang) {
+    const existingCookie = getLangCookie(request.headers.get('cookie'));
+    if (!existingCookie) {
+      // First localized page visit — persist language in cookie
+      const response = await next();
+      return responseWithCookie(response, activeLang);
+    }
+    return next();
+  }
 
   // ── Check cookie first (user manually selected language) ────────
   const cookieLang = getLangCookie(request.headers.get('cookie'));
   if (cookieLang !== null) {
-    if (cookieLang === DEFAULT_LANG) return next(); // stay on /
+    if (cookieLang === DEFAULT_LANG) return next();
     const dest = buildRedirectUrl(url, cookieLang, pathname);
     return Response.redirect(dest, 302);
   }
 
-  // ── Detect from Accept-Language (primary signal) ─────────────
+  // ── Auto-detect: Accept-Language wins; country is tiebreaker ────
   const acceptLang = detectFromAcceptLanguage(request.headers.get('Accept-Language'));
-
-  // ── Detect from IP country (secondary signal) ─────────────────
   const countryLang = detectFromCountry(request.headers.get('CF-IPCountry'));
-
-  // Accept-Language wins; country is the tiebreaker
   const detectedLang = acceptLang ?? countryLang ?? DEFAULT_LANG;
 
-  if (detectedLang && detectedLang !== DEFAULT_LANG) {
+  if (detectedLang !== DEFAULT_LANG) {
     const dest = buildRedirectUrl(url, detectedLang, pathname);
-    return Response.redirect(dest, 302);
+    return redirectWithCookie(dest, detectedLang);
   }
 
-  return next();
+  // Spanish detected on first visit — set cookie and continue
+  const response = await next();
+  return responseWithCookie(response, DEFAULT_LANG);
 }
 
 function buildRedirectUrl(url, lang, pathname) {
