@@ -3,36 +3,167 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HostCard from '../../components/HostCard.astro';
 import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Locale };
 const t = getT(lang);
+
+const copy: Record<string, {
+  eyebrow: string; h1: string;
+  p1: string; p2: string; p3: string; p4: string;
+  sectionEyebrow: string; sectionH2: string; sectionP: string;
+  ctaApts: string; ctaContact: string;
+}> = {
+  en: {
+    eyebrow: "Meet the project",
+    h1: "About Aromatik Apartments",
+    p1: "Aromatik Apartments is a small collection of boutique apartments in the heart of Girona's Barri Vell, personally managed by Arnau.",
+    p2: "Our goal is simple: to offer comfortable, well-located apartments with clear communication, easy keycode access and the same trustworthy service you'd find booking through Airbnb.",
+    p3: "By booking directly on our website you get the <strong>best available price</strong>, with no platform fees and the same quality and personalised attention you'd find on Airbnb.",
+    p4: "Stay in the historic heart of Girona, book directly and enjoy a more personal way to travel.",
+    sectionEyebrow: "The apartments",
+    sectionH2: "Eight apartments in the Barri Vell of Girona",
+    sectionP: "All personally managed. All with direct booking available.",
+    ctaApts: "View all apartments",
+    ctaContact: "Write to me directly",
+  },
+  fr: {
+    eyebrow: "Le projet",
+    h1: "\u00c0 propos d'Aromatik Apartments",
+    p1: "Aromatik Apartments est une petite collection d'appartements de charme au c\u0153ur du Barri Vell de G\u00e9rone, g\u00e9r\u00e9s personnellement par Arnau.",
+    p2: "Notre objectif est simple\u00a0: proposer des appartements confortables, bien situ\u00e9s, avec une communication claire, un acc\u00e8s facile par code et le m\u00eame service de confiance que vous trouveriez en r\u00e9servant via Airbnb.",
+    p3: "En r\u00e9servant directement sur notre site, vous obtenez le <strong>meilleur prix disponible</strong>, sans frais de plateforme et avec la m\u00eame qualit\u00e9 et attention personnalis\u00e9e qu'Airbnb.",
+    p4: "S\u00e9journez au c\u0153ur historique de G\u00e9rone, r\u00e9servez directement et profitez d'une fa\u00e7on de voyager plus personnelle.",
+    sectionEyebrow: "Les appartements",
+    sectionH2: "Huit appartements dans le Barri Vell de G\u00e9rone",
+    sectionP: "Tous g\u00e9r\u00e9s personnellement. Tous avec r\u00e9servation directe disponible.",
+    ctaApts: "Voir tous les appartements",
+    ctaContact: "M'\u00e9crire directement",
+  },
+  ca: {
+    eyebrow: "Coneix el projecte",
+    h1: "Sobre Aromatik Apartments",
+    p1: "Aromatik Apartments \u00e9s una petita col\u00b7lecci\u00f3 d'apartaments boutique al cor del Barri Vell de Girona, gestionats personalment per l'Arnau.",
+    p2: "El nostre objectiu \u00e9s senzill: oferir apartaments c\u00f2modes, ben situats, amb comunicaci\u00f3 clara, acc\u00e9s f\u00e0cil per codi i el mateix servei de confian\u00e7a que trobar\u00edeu reservant a trav\u00e9s d'Airbnb.",
+    p3: "En reservar directament al nostre web obteniu el <strong>millor preu disponible</strong>, sense comissions de plataforma i amb la mateixa qualitat i atenci\u00f3 personalitzada que trobar\u00edeu a Airbnb.",
+    p4: "Allotgeu-vos al centre hist\u00f2ric de Girona, reserveu directament i gaudiu d'una manera de viatjar m\u00e9s personal.",
+    sectionEyebrow: "Els apartaments",
+    sectionH2: "Vuit apartaments al Barri Vell de Girona",
+    sectionP: "Tots gestionats personalment. Tots amb reserva directa disponible.",
+    ctaApts: "Veure tots els apartaments",
+    ctaContact: "Escriure'm directament",
+  },
+  de: {
+    eyebrow: "Das Projekt",
+    h1: "\u00dcber Aromatik Apartments",
+    p1: "Aromatik Apartments ist eine kleine Kollektion von Boutique-Apartments im Herzen des Barri Vell in Girona, pers\u00f6nlich gef\u00fchrt von Arnau.",
+    p2: "Unser Ziel ist einfach: komfortable, zentral gelegene Apartments mit klarer Kommunikation, einfachem Code-Zugang und dem gleichen vertrauensw\u00fcrdigen Service zu bieten, den Sie bei einer Buchung \u00fcber Airbnb finden w\u00fcrden.",
+    p3: "Bei einer Direktbuchung \u00fcber unsere Website erhalten Sie den <strong>besten verf\u00fcgbaren Preis</strong>, ohne Plattfomgeb\u00fchren und mit der gleichen Qualit\u00e4t und pers\u00f6nlichen Betreuung wie bei Airbnb.",
+    p4: "\u00dcbernachten Sie im historischen Herzen von Girona, buchen Sie direkt und genie\u00dfen Sie eine pers\u00f6nlichere Art zu reisen.",
+    sectionEyebrow: "Die Apartments",
+    sectionH2: "Acht Apartments im Barri Vell von Girona",
+    sectionP: "Alle pers\u00f6nlich gef\u00fchrt. Alle mit Direktbuchung verf\u00fcgbar.",
+    ctaApts: "Alle Apartments ansehen",
+    ctaContact: "Direkt an mich schreiben",
+  },
+  zh: {
+    eyebrow: "\u4e86\u89e3\u9879\u76ee",
+    h1: "\u5173\u4e8eAromatik Apartments",
+    p1: "Aromatik Apartments\u662f\u4f4d\u4e8e\u8d6b\u7f57\u7eb3Barri Vell\u6838\u5fc3\u5730\u5e26\u7684\u7cbe\u54c1\u516c\u5bd3\u5c0f\u96c6\u5408\uff0c\u7531Arnau\u4eb2\u81ea\u7ba1\u7406\u3002",
+    p2: "\u6211\u4eec\u7684\u76ee\u6807\u5f88\u7b80\u5355\uff1a\u63d0\u4f9b\u8212\u9002\u3001\u4f4d\u7f6e\u4f18\u8d8a\u7684\u516c\u5bd3\uff0c\u6c9f\u901a\u6e05\u6670\uff0c\u5bc6\u7801\u8fdb\u95e8\u65b9\u4fbf\uff0c\u670d\u52a1\u503c\u5f97\u4fe1\u8d56\uff0c\u4e0e\u901a\u8fc7Airbnb\u9884\u8ba2\u4e00\u6837\u53ef\u9760\u3002",
+    p3: "\u5728\u6211\u4eec\u7f51\u7ad9\u76f4\u63a5\u9884\u8ba2\uff0c\u60a8\u53ef\u4eab\u53d7<strong>\u6700\u4f18\u60e0\u4ef7\u683c</strong>\uff0c\u65e0\u9700\u652f\u4ed8\u5e73\u53f0\u624b\u7eed\u8d39\uff0c\u540c\u65f6\u4eab\u53d7\u4e0eAirbnb\u540c\u7b49\u7684\u54c1\u8d28\u548c\u8d34\u5fc3\u670d\u52a1\u3002",
+    p4: "\u4f4f\u5728\u8d6b\u7f57\u7eb3\u5386\u53f2\u4e2d\u5fc3\uff0c\u76f4\u63a5\u9884\u8ba2\uff0c\u4eab\u53d7\u66f4\u8d34\u8fd1\u751f\u6d3b\u7684\u65c5\u884c\u65b9\u5f0f\u3002",
+    sectionEyebrow: "\u516c\u5bd3",
+    sectionH2: "\u8d6b\u7f57\u7eb3Barri Vell\u7684\u516b\u5957\u516c\u5bd3",
+    sectionP: "\u5168\u90e8\u4eb2\u81ea\u7ba1\u7406\u3002\u5168\u90e8\u652f\u6301\u76f4\u63a5\u9884\u8ba2\u3002",
+    ctaApts: "\u67e5\u770b\u6240\u6709\u516c\u5bd3",
+    ctaContact: "\u76f4\u63a5\u8054\u7cfb\u6211",
+  },
+  ko: {
+    eyebrow: "\ud504\ub85c\uc81d\ud2b8 \uc18c\uac1c",
+    h1: "Aromatik Apartments \uc18c\uac1c",
+    p1: "Aromatik Apartments\ub294 \uc9c0\ub85c\ub098 Barri Vell \uc911\uc2ec\ubd80\uc5d0 \uc704\uce58\ud55c \uc18c\uaddc\ubaa8 \ubd80\ud2f0\ud06c \uc544\ud30c\ud2b8 \ucee4\ub809\uc158\uc73c\ub85c, Arnau\uac00 \uc9c1\uc811 \uad00\ub9ac\ud569\ub2c8\ub2e4.",
+    p2: "\uc800\ud76c\uc758 \ubaa9\ud45c\ub294 \uac04\ub2e8\ud569\ub2c8\ub2e4: \ud3b8\uc548\ud558\uace0 \uc88b\uc740 \uc704\uce58\uc758 \uc544\ud30c\ud2b8\ub97c \uba85\ud655\ud55c \uc18c\ud1b5, \uac04\ud3b8\ud55c \ucf54\ub4dc \uc785\uc7a5, \uadf8\ub9ac\uace0 Airbnb\uc5d0\uc11c\uc640 \uac19\uc740 \uc2e0\ub8b0\ud560 \uc218 \uc788\ub294 \uc11c\ube44\uc2a4\uc640 \ud568\uaed8 \uc81c\uacf5\ud558\ub294 \uac83\uc785\ub2c8\ub2e4.",
+    p3: "\uc800\ud76c \uc6f9\uc0ac\uc774\ud2b8\uc5d0\uc11c \uc9c1\uc811 \uc608\uc57d\ud558\uc2dc\uba74 <strong>\ucd5c\uc800\uac00</strong>\ub97c \uc81c\uacf5\ubc1b\uc73c\uc2e4 \uc218 \uc788\uc73c\uba70, \ud50c\ub7ab\ud3fc \uc218\uc218\ub8cc \uc5c6\uc774 Airbnb\uc640 \ub3d9\uc77c\ud55c \ud488\uc9c8\uacfc \uac1c\uc778\ud654\ub41c \uc11c\ube44\uc2a4\ub97c \ub204\ub9ac\uc2e4 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+    p4: "\uc9c0\ub85c\ub098 \uc5ed\uc0ac \uc911\uc2ec\uc9c0\uc5d0 \uba38\ubb34\ub974\uba70, \uc9c1\uc811 \uc608\uc57d\ud558\uace0, \ub354 \uac1c\uc778\uc801\uc778 \uc5ec\ud589\uc744 \uc990\uaca8\ubcf4\uc138\uc694.",
+    sectionEyebrow: "\uc544\ud30c\ud2b8",
+    sectionH2: "\uc9c0\ub85c\ub098 Barri Vell\uc758 8\uac1c \uc544\ud30c\ud2b8",
+    sectionP: "\ubaa8\ub450 \uc9c1\uc811 \uad00\ub9ac. \ubaa8\ub450 \uc9c1\uc811 \uc608\uc57d \uac00\ub2a5.",
+    ctaApts: "\ubaa8\ub4e0 \uc544\ud30c\ud2b8 \ubcf4\uae30",
+    ctaContact: "\uc9c1\uc811 \uc5f0\ub77d\ud558\uae30",
+  },
+  pt: {
+    eyebrow: "Conhe\u00e7a o projeto",
+    h1: "Sobre Aromatik Apartments",
+    p1: "Aromatik Apartments \u00e9 uma pequena cole\u00e7\u00e3o de apartamentos boutique no cora\u00e7\u00e3o do Barri Vell de Girona, geridos pessoalmente por Arnau.",
+    p2: "O nosso objetivo \u00e9 simples: oferecer apartamentos confort\u00e1veis, bem localizados, com comunica\u00e7\u00e3o clara, acesso f\u00e1cil por c\u00f3digo e o mesmo servi\u00e7o de confian\u00e7a que encontraria ao reservar atrav\u00e9s do Airbnb.",
+    p3: "Ao reservar diretamente no nosso site, obt\u00e9m o <strong>melhor pre\u00e7o dispon\u00edvel</strong>, sem comiss\u00f5es de plataforma e com a mesma qualidade e aten\u00e7\u00e3o personalizada que encontraria no Airbnb.",
+    p4: "Fique no cora\u00e7\u00e3o hist\u00f3rico de Girona, reserve diretamente e desfrute de uma forma mais pessoal de viajar.",
+    sectionEyebrow: "Os apartamentos",
+    sectionH2: "Oito apartamentos no Barri Vell de Girona",
+    sectionP: "Todos geridos pessoalmente. Todos com reserva direta dispon\u00edvel.",
+    ctaApts: "Ver todos os apartamentos",
+    ctaContact: "Escrever-me diretamente",
+  },
+  nl: {
+    eyebrow: "Het project",
+    h1: "Over Aromatik Apartments",
+    p1: "Aromatik Apartments is een kleine collectie boutique-appartementen in het hart van de Barri Vell van Girona, persoonlijk beheerd door Arnau.",
+    p2: "Ons doel is eenvoudig: comfortabele, goed gelegen appartementen bieden met duidelijke communicatie, gemakkelijke code-toegang en dezelfde betrouwbare service die u bij Airbnb zou vinden.",
+    p3: "Door rechtstreeks op onze website te boeken krijgt u de <strong>beste beschikbare prijs</strong>, zonder platformkosten en met dezelfde kwaliteit en persoonlijke aandacht als bij Airbnb.",
+    p4: "Verblijf in het historische centrum van Girona, boek rechtstreeks en geniet van een persoonlijkere manier van reizen.",
+    sectionEyebrow: "De appartementen",
+    sectionH2: "Acht appartementen in de Barri Vell van Girona",
+    sectionP: "Allemaal persoonlijk beheerd. Allemaal met directe reservering beschikbaar.",
+    ctaApts: "Alle appartementen bekijken",
+    ctaContact: "Rechtstreeks aan mij schrijven",
+  },
+};
+
+const c = copy[lang] ?? copy.en;
 ---
-<BaseLayout title={`${t.aboutTitle} — Aromatik Apartments`} lang={lang}>
+<BaseLayout title={`${t.aboutTitle} \u2014 Aromatik Apartments`} description={t.aboutSubtitle} lang={lang}>
   <HostCard />
   <ReviewsCarousel />
 
   <div class="inner-hero">
-    <h1>{t.aboutTitle}</h1>
-    <p>{t.aboutSubtitle}</p>
+    <span class="eyebrow">{c.eyebrow}</span>
+    <h1 style="margin-top:0.75rem">{c.h1}</h1>
   </div>
-  <section class="section">
-    <div class="container-sm">
-      <div class="prose">
-          <p>
-            Aromatik Apartments es una pequeña colección de apartamentos boutique en el corazón del Barri Vell de Girona,
-            gestionados personalmente por Arnau.
-          </p>
-          <p>
-            Nuestro objetivo es sencillo: ofrecer apartamentos cómodos, bien ubicados, con comunicación clara, acceso
-            fácil mediante código y el mismo servicio de confianza que encontrarías al reservar a través de Airbnb.
-          </p>
-          <p>
-            Al reservar directamente en nuestra web obtienes el <strong>mejor precio disponible</strong>, sin comisiones de plataforma y con la misma calidad y atención personalizada que encontrarías en Airbnb.
-          </p>
-          <p>
-            Alójate en el centro histórico de Girona, reserva directamente y disfruta de una forma más personal de viajar.
-          </p>
 
-        
+  <section class="section">
+    <div class="container">
+      <div class="about-grid about-grid--single">
+        <div class="prose">
+          <p>{c.p1}</p>
+          <p>{c.p2}</p>
+          <p set:html={c.p3} />
+          <p>{c.p4}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">{c.sectionEyebrow}</span>
+      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin:0.75rem 0 1rem;">{c.sectionH2}</h2>
+      <p style="color:var(--stone-600); margin-bottom:3rem; font-size:0.95rem;">{c.sectionP}</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href={`/${lang}/#apartamentos`} class="btn btn-dark">{c.ctaApts}</a>
+        <a href={`/${lang}/contacto`} class="btn btn-border">{c.ctaContact}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-grid--single { grid-template-columns: 1fr !important; max-width: 680px; margin: 0 auto; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--stone-700, #44403c); }
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+</style>
