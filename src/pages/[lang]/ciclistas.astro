@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HostCard from '../../components/HostCard.astro';
+import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
+import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+const langRoot = `/${lang}`;
+
+const copy: Record<string, any> = {
+  en: {
+    metaTitle: "Cycling Apartments in Girona — Aromatik Apartments",
+    metaDesc: "Girona is the world capital of cycling. Stay in the heart of the Barri Vell, 5 minutes from the best routes. Store your bike inside, washing machine available, 24h self check-in.",
+    eyebrow: "Girona, cycling capital",
+    h1: "Your base in Girona,\nwhere the pros train",
+    subtitle: "Girona is the winter quarters of the world's best cycling teams. Find out why, and use the Barri Vell as your starting point.",
+    perksEyebrow: "Everything you need",
+    perksTitle: "Built for cyclists",
+    perks: [
+      { icon: "🚲", title: "Bikes inside the apartment", desc: "No leaving it on the street. Store your bike inside. The lifts are wide and designed for it." },
+      { icon: "🛗", title: "Elevator in every building", desc: "No carrying your bike up stairs. You go up, your bike goes up. Simple and damage-free." },
+      { icon: "👕", title: "Washing machine available", desc: "Yesterday's bib shorts don't have to be tomorrow's. Washing machine in the larger apartments." },
+      { icon: "🔑", title: "24h self check-in", desc: "Arrive whenever you arrive. Door code, no waiting for anyone. Perfect if you come back late from a ride." },
+      { icon: "🍳", title: "Kitchen to refuel", desc: "Full kitchen to prepare the pasta the night before and breakfast the morning after. Performance starts at the apartment." },
+      { icon: "📍", title: "Direct route access", desc: "From the Barri Vell you roll straight out to Rocacorba, Les Gavarres or the Costa Brava. No car needed." },
+    ],
+    blockEyebrow: "The cycling mecca",
+    blockTitle: "Why Girona is different",
+    blockText1: "Girona has been the home of choice for the world's best cyclists for over two decades. Chris Froome, Tom Pidcock, Egan Bernal — they've all ridden these same roads. It's no coincidence.",
+    blockText2: "The climate is exceptional in spring and autumn. The roads are quiet with tarmac that many WorldTour teams envy. Rocacorba — a classic among the pros — is 40 minutes pedalling from the door. Les Gavarres offers more technical routes towards the Costa Brava.",
+    blockText3: "And at the end of the day, the Barri Vell is waiting with restaurants, terraces and the pleasure of walking through a car-free medieval city. Girona is one of those places that makes you want to come back every season.",
+    aptsEyebrow: "Our apartments",
+    aptsTitle: "Choose your base",
+    aptsSub: "Solo or in a group, we have the apartment that fits.",
+    ctaTitle: "When's your next ride?",
+    ctaSub: "Book directly and confirm availability instantly. No commission, direct support for any logistics questions.",
+    ctaBtn: "Check availability",
+    ctaBtn2: "Talk to Arnau",
+    allApts: "View all 8 apartments",
+    tag1: "For groups of cyclists", tag2: "The most complete", tag3: "For cycling couples",
+    tagline1: "Penthouse for 6 with washing machine, 3 bedrooms and balcony. Perfect when you come as a team.",
+    tagline2: "3 bedrooms, dishwasher, gas hob and balcony. Everything you need after a great day in the saddle.",
+    tagline3: "Cosy apartment with views of the Onyar. Ideal for two cyclists who want the best of the Barri Vell.",
+    guests: "Up to", people: "people", bedrooms: "bedrooms", viewApt: "View apartment →",
+  },
+  fr: {
+    metaTitle: "Appartements pour cyclistes à Gérone — Aromatik Apartments",
+    metaDesc: "Gérone est la capitale mondiale du cyclisme. Logez au cœur du Barri Vell à 5 minutes des meilleures routes. Vélo à l'intérieur, lave-linge disponible, self check-in 24h.",
+    eyebrow: "Gérone, capitale du vélo",
+    h1: "Votre base à Gérone,\nlà où s'entraînent les pros",
+    subtitle: "Gérone est le quartier général d'hiver des meilleures équipes du peloton mondial. Découvrez pourquoi, et utilisez le Barri Vell comme point de départ.",
+    perksEyebrow: "Tout ce dont vous avez besoin",
+    perksTitle: "Conçu pour les cyclistes",
+    perks: [
+      { icon: "🚲", title: "Vélos à l'intérieur", desc: "Pas question de laisser le vélo dans la rue. Vous le rangez dans l'appartement. Les ascenseurs sont larges." },
+      { icon: "🛗", title: "Ascenseur dans chaque immeuble", desc: "Pas besoin de monter le vélo à pied. Vous montez, le vélo monte. Simple et sans risque." },
+      { icon: "👕", title: "Lave-linge disponible", desc: "Le cuissard d'hier ne doit pas être celui de demain. Lave-linge dans les grands appartements." },
+      { icon: "🔑", title: "Self check-in 24h", desc: "Arrivez quand vous voulez. Code à la porte, sans attendre personne. Idéal si vous rentrez tard de sortie." },
+      { icon: "🍳", title: "Cuisine pour recharger", desc: "Cuisine complète pour préparer les pâtes la veille et le petit-déjeuner le lendemain. La performance commence à l'appartement." },
+      { icon: "📍", title: "Départ direct sur route", desc: "Depuis le Barri Vell, vous partez directement vers le Rocacorba, les Gavarres ou la Costa Brava. Sans voiture." },
+    ],
+    blockEyebrow: "La Mecque du cyclisme",
+    blockTitle: "Pourquoi Gérone est différente",
+    blockText1: "Gérone est le foyer de choix des meilleurs cyclistes du monde depuis plus de deux décennies. Chris Froome, Tom Pidcock, Egan Bernal — tous ont pédalé sur ces mêmes routes. Ce n'est pas un hasard.",
+    blockText2: "Le climat est exceptionnel au printemps et en automne. Les routes sont tranquilles avec un asphalte que beaucoup d'équipes WorldTour envient. Le Rocacorba — un classique chez les pros — est à 40 minutes de pédale depuis la porte.",
+    blockText3: "Et en fin de journée, le Barri Vell vous attend avec ses restaurants, ses terrasses et le plaisir de parcourir une cité médiévale sans voitures. Gérone est l'un de ces endroits qui donne envie de revenir chaque saison.",
+    aptsEyebrow: "Nos appartements",
+    aptsTitle: "Choisissez votre base",
+    aptsSub: "Seul ou en groupe, nous avons l'appartement qui vous convient.",
+    ctaTitle: "C'est quand votre prochaine sortie ?",
+    ctaSub: "Réservez directement et confirmez la disponibilité immédiatement. Sans commission, avec une aide personnalisée.",
+    ctaBtn: "Vérifier les disponibilités",
+    ctaBtn2: "Parler à Arnau",
+    allApts: "Voir les 8 appartements",
+    tag1: "Pour groupes de cyclistes", tag2: "Le plus complet", tag3: "Pour couples cyclistes",
+    tagline1: "Attique pour 6 avec lave-linge, 3 chambres et balcon. Parfait quand vous venez en équipe.",
+    tagline2: "3 chambres, lave-vaisselle, cuisinière à gaz et balcon. Tout ce qu'il faut après une grande journée en selle.",
+    tagline3: "Appartement cosy avec vue sur l'Onyar. Idéal pour deux cyclistes qui veulent le meilleur du Barri Vell.",
+    guests: "Jusqu'à", people: "personnes", bedrooms: "chambres", viewApt: "Voir l'appartement →",
+  },
+  ca: {
+    metaTitle: "Apartaments per a ciclistes a Girona — Aromatik Apartments",
+    metaDesc: "Girona és la capital mundial del ciclisme. Allotja't al cor del Barri Vell a 5 minuts de les millors rutes. Bici dins l'apartament, rentadora disponible, self check-in 24h.",
+    eyebrow: "Girona, capital del ciclisme",
+    h1: "La teva base a Girona,\non entrenen els pros",
+    subtitle: "Girona és el quarter d'hivern dels millors equips del pelotó mundial. Descobreix per què, i fes servir el Barri Vell com a punt de partida.",
+    perksEyebrow: "Tot el que necessites",
+    perksTitle: "Pensat per a ciclistes",
+    perks: [
+      { icon: "🚲", title: "Bicicletes dins l'apartament", desc: "Res de deixar-la al carrer. Guardes la bici dins l'apartament. Els ascensors són amples i pensats per a això." },
+      { icon: "🛗", title: "Ascensor a tots els edificis", desc: "No cal pujar la bici per escales. Pugeu vosaltres, puja la bici. Simple i sense riscos." },
+      { icon: "👕", title: "Rentadora disponible", desc: "El culot del dia no ha de ser el de l'endemà. Rentadora als apartaments més grans." },
+      { icon: "🔑", title: "Self check-in 24h", desc: "Arribes quan arribes. Codi a la porta, sense esperar ningú. Ideal si torneu tard de ruta." },
+      { icon: "🍳", title: "Cuina per recarregar", desc: "Cuina completa per preparar la pasta del dia anterior i l'esmorzar de l'endemà. Rendiment des de l'apartament." },
+      { icon: "📍", title: "Sortida directa a ruta", desc: "Des del Barri Vell arranques directament cap al Rocacorba, les Gavarres o la Costa Brava. Sense cotxe." },
+    ],
+    blockEyebrow: "La meca del ciclisme",
+    blockTitle: "Per què Girona és diferent",
+    blockText1: "Girona porta més de dues dècades sent la llar d'elecció per als millors ciclistes del món. Chris Froome, Tom Pidcock, Egan Bernal — tots han pedalet per aquestes mateixes carreteres. No és casualitat.",
+    blockText2: "El clima és excepcional durant la primavera i la tardor. Les carreteres, tranquil·les i amb un asfalt que molts equips de WorldTour envegen. El Rocacorba — un clàssic entre els pros — és a 40 minuts pedalant des de la porta.",
+    blockText3: "I al final del dia, el Barri Vell us espera amb restaurants, terrasses i el plaer de recórrer una ciutat medieval sense cotxes. Girona és un d'aquells llocs que fan voler tornar cada temporada.",
+    aptsEyebrow: "Els nostres apartaments",
+    aptsTitle: "Tria la teva base",
+    aptsSub: "Sol o en grup, tenim l'apartament que s'hi adapta.",
+    ctaTitle: "Quan és la teva propera sortida?",
+    ctaSub: "Reserva directament i confirma la disponibilitat a l'instant. Sense comissions, amb atenció directa per a qualsevol dubte de logística.",
+    ctaBtn: "Comprovar disponibilitat",
+    ctaBtn2: "Parlar amb Arnau",
+    allApts: "Veure els 8 apartaments",
+    tag1: "Per a grups de ciclistes", tag2: "El més complet", tag3: "Per a parelles ciclistes",
+    tagline1: "Àtic per a 6 amb rentadora, 3 habitacions i balcó. Perfecte quan veniu en equip.",
+    tagline2: "3 habitacions, rentavaixelles, cuina de gas i balcó. Tot el que necessiteu després d'un gran dia a la sella.",
+    tagline3: "Acollidor apartament amb vistes a l'Onyar. Ideal per a dos ciclistes que volen el millor del Barri Vell.",
+    guests: "Fins a", people: "persones", bedrooms: "habitacions", viewApt: "Veure apartament →",
+  },
+};
+
+const c = copy[lang] ?? copy['en'];
+
+const featuredApts = [
+  { slug: "bergamota",  guests: 6, bedrooms: 3, tag: c.tag1, desc: c.tagline1, photo: "/images/apartamentos/bergamota/foto-1.jpg",  name: "Bergamota" },
+  { slug: "arbol-de-te",guests: 6, bedrooms: 3, tag: c.tag2, desc: c.tagline2, photo: "/images/apartamentos/arbol-de-te/foto-1.jpg",name: "Arbre de te" },
+  { slug: "romani",     guests: 2, bedrooms: 1, tag: c.tag3, desc: c.tagline3, photo: "/images/apartamentos/romani/foto-1.jpg",     name: "Romaní" },
+];
+---
+<BaseLayout title={c.metaTitle} description={c.metaDesc} lang={lang}>
+
+  <section class="audience-hero audience-hero--ciclistas">
+    <div class="audience-hero-overlay"></div>
+    <div class="audience-hero-inner">
+      <span class="audience-eyebrow">{c.eyebrow}</span>
+      <h1 set:html={c.h1.replace('\n','<br/>')} />
+      <p>{c.subtitle}</p>
+      <div class="audience-hero-actions">
+        <a href="#apartamentos-ciclistas" class="btn btn-white">{lang==='fr'?'Voir les appartements':lang==='ca'?'Veure apartaments':'View apartments'}</a>
+        <a href={`${langRoot}/reservar#motor`} class="btn btn-outline-white">{lang==='fr'?'Réserver':'lang'==='ca'?'Reservar ara':'Book now'}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">{c.perksEyebrow}</span>
+        <h2 style="margin-top:0.75rem">{c.perksTitle}</h2>
+      </div>
+      <div class="audience-perks">
+        {c.perks.map((p: any) => (
+          <div class="audience-perk">
+            <div class="audience-perk-icon">{p.icon}</div>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
+    <div class="container" style="max-width:760px;">
+      <span class="eyebrow">{c.blockEyebrow}</span>
+      <h2 style="font-family:var(--serif);font-size:1.8rem;font-weight:400;margin:0.75rem 0 1.5rem;">{c.blockTitle}</h2>
+      <div class="prose">
+        <p>{c.blockText1}</p>
+        <p>{c.blockText2}</p>
+        <p>{c.blockText3}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="apartamentos-ciclistas" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">{c.aptsEyebrow}</span>
+        <h2 style="margin-top:0.75rem">{c.aptsTitle}</h2>
+        <p>{c.aptsSub}</p>
+      </div>
+      <div class="audience-apts">
+        {featuredApts.map(apt => (
+          <a href={`${langRoot}/apartamentos/${apt.slug}`} class="audience-apt-card">
+            <div class="audience-apt-img" style={`background-image:url('${apt.photo}')`}>
+              <span class="audience-apt-tag">{apt.tag}</span>
+            </div>
+            <div class="audience-apt-body">
+              <h3>{apt.name}</h3>
+              <p class="audience-apt-meta">{c.guests} {apt.guests} {c.people} · {apt.bedrooms} {c.bedrooms}</p>
+              <p class="audience-apt-desc">{apt.desc}</p>
+              <span class="audience-apt-link">{c.viewApt}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;">
+        <a href={`${langRoot}/#apartamentos`} class="btn btn-border">{c.allApts}</a>
+      </div>
+    </div>
+  </section>
+
+  <HostCard />
+  <ReviewsCarousel />
+
+  <section class="section bg-cream">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:0.75rem;">{c.ctaTitle}</h2>
+      <p style="color:var(--stone-600);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;">{c.ctaSub}</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href={`${langRoot}/reservar#motor`} class="btn btn-dark">{c.ctaBtn}</a>
+        <a href={`${langRoot}/contacto`} class="btn btn-border">{c.ctaBtn2}</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+<style>
+.audience-hero{position:relative;min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding-top:70px;}
+.audience-hero--ciclistas{background-image:url('/images/apartamentos/arbol-de-te/foto-1.jpg');background-size:cover;background-position:center;}
+.audience-hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.50);}
+.audience-hero-inner{position:relative;z-index:1;max-width:780px;padding:4rem 2rem;background:rgba(0,0,0,0.28);border-radius:20px;backdrop-filter:blur(2px);margin:0 1.5rem;}
+.audience-eyebrow{display:block;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:1rem;}
+.audience-hero-inner h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.6rem);font-weight:400;line-height:1.2;margin-bottom:1.25rem;}
+.audience-hero-inner p{font-size:1.05rem;color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto 2rem;line-height:1.7;}
+.audience-hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.audience-perks{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:1rem;}
+.audience-perk{padding:2rem 1.5rem;border:1px solid var(--stone-200);border-radius:16px;background:#fff;}
+.audience-perk-icon{font-size:2rem;margin-bottom:0.75rem;}
+.audience-perk h3{font-size:1rem;font-weight:600;margin-bottom:0.5rem;}
+.audience-perk p{font-size:0.875rem;color:var(--stone-600);line-height:1.7;}
+.audience-apts{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem;}
+.audience-apt-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--stone-200);text-decoration:none;color:inherit;transition:box-shadow 0.2s,transform 0.2s;display:flex;flex-direction:column;}
+.audience-apt-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.12);transform:translateY(-2px);}
+.audience-apt-img{height:200px;background-size:cover;background-position:center;position:relative;}
+.audience-apt-tag{position:absolute;top:0.75rem;left:0.75rem;background:rgba(0,0,0,0.6);color:#fff;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.7rem;border-radius:99px;backdrop-filter:blur(4px);}
+.audience-apt-body{padding:1.25rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column;}
+.audience-apt-body h3{font-size:1.1rem;font-weight:600;margin-bottom:0.25rem;}
+.audience-apt-meta{font-size:0.8rem;color:var(--stone-500);margin-bottom:0.75rem;}
+.audience-apt-desc{font-size:0.875rem;color:var(--stone-600);line-height:1.65;flex:1;}
+.audience-apt-link{display:inline-block;margin-top:1rem;font-size:0.85rem;font-weight:600;color:var(--gold);}
+@media(max-width:900px){.audience-perks,.audience-apts{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.audience-perks,.audience-apts{grid-template-columns:1fr;}.audience-hero-inner{padding:2.5rem 1.25rem;}}
+</style>
