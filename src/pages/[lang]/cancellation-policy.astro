@@ -1,13 +1,147 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Locale };
+const t = getT(lang);
+
+const copy: Record<string, any> = {
+  en: {
+    title: "Cancellation policy", subtitle: "Flexible and transparent — no surprises",
+    greenTitle: "More than 48 hours before", greenText: "Free cancellation. 100% refund of the amount paid.",
+    redTitle: "Less than 48 hours before", redText: "No refund. The full booking amount is retained.",
+    h2_how: "How to cancel your booking",
+    p_how: "To cancel your booking, contact us by email at hola@aromatik.apartments or by WhatsApp at +34 682 636 848, providing your booking number and stay dates.",
+    h2_mod: "Booking modifications",
+    p_mod: "Date changes are subject to availability. Please contact us as early as possible to discuss your case.",
+    h2_our: "Cancellations by us",
+    p_our: "In the unlikely event that Aromatik Apartments needs to cancel your booking, we will refund 100% of the amount paid and try to find you alternative accommodation of similar standard.",
+    h2_ext: "Bookings through external platforms",
+    p_ext: "For bookings made through Airbnb, Booking.com or other platforms, the cancellation conditions shown on that platform at the time of booking apply.",
+  },
+  fr: {
+    title: "Politique d’annulation", subtitle: "Flexible et transparente — sans mauvaises surprises",
+    greenTitle: "Plus de 48 heures avant", greenText: "Annulation gratuite. Remboursement à 100 % du montant payé.",
+    redTitle: "Moins de 48 heures avant", redText: "Aucun remboursement. Le montant total de la réservation est conservé.",
+    h2_how: "Comment annuler votre réservation",
+    p_how: "Pour annuler votre réservation, contactez-nous par e-mail à hola@aromatik.apartments ou par WhatsApp au +34 682 636 848, en indiquant votre numéro de réservation et les dates de votre séjour.",
+    h2_mod: "Modifications de réservation",
+    p_mod: "Les changements de dates sont soumis à disponibilité. Contactez-nous le plus tôt possible pour étudier votre situation.",
+    h2_our: "Annulations de notre part",
+    p_our: "Dans le cas improbable où Aromatik Apartments devrait annuler votre réservation, nous vous rembourserons 100 % du montant payé et essaierons de vous trouver un hébergement alternatif de niveau similaire.",
+    h2_ext: "Réservations via des plateformes externes",
+    p_ext: "Pour les réservations effectuées via Airbnb, Booking.com ou d’autres plateformes, les conditions d’annulation indiquées sur la plateforme au moment de la réservation s’appliquent.",
+  },
+  ca: {
+    title: "Política de cancel·lació", subtitle: "Flexible i transparent — sense sorpreses",
+    greenTitle: "Més de 48 hores abans", greenText: "Cancel·lació graüuïta. Reemborsament del 100 % de l’import pagat.",
+    redTitle: "Menys de 48 hores abans", redText: "Sense reemborsament. L’import total de la reserva queda retingut.",
+    h2_how: "Com cancel·lar la teva reserva",
+    p_how: "Per cancel·lar la teva reserva, contacta’ns per correu electrònic a hola@aromatik.apartments o per WhatsApp al +34 682 636 848, indicant el teu número de reserva i les dates de l’estada.",
+    h2_mod: "Modificacions de reserva",
+    p_mod: "Els canvis de data estan subjectes a disponibilitat. Contacta’ns amb la màxima antelació possible per estudiar el teu cas.",
+    h2_our: "Cancel·lacions per part nostra",
+    p_our: "En l’improbable cas que Aromatik Apartments hagués de cancel·lar la teva reserva, et reemborsaríeem el 100 % de l’import pagat i intentaríem trobar-te un allotjament alternatiu de característiques similars.",
+    h2_ext: "Reserves a través de plataformes externes",
+    p_ext: "En reserves realitzades a través d’Airbnb, Booking.com o altres plataformes, s’aplicaran les condicions de cancel·lació indicades en la plataforma corresponent en el moment de la reserva.",
+  },
+  de: {
+    title: "Stornierungsbedingungen", subtitle: "Flexibel und transparent — keine Überraschungen",
+    greenTitle: "Mehr als 48 Stunden vorher", greenText: "Kostenlose Stornierung. 100 % Rückerstattung des bezahlten Betrags.",
+    redTitle: "Weniger als 48 Stunden vorher", redText: "Keine Rückerstattung. Der gesamte Buchungsbetrag wird einbehalten.",
+    h2_how: "Wie Sie Ihre Buchung stornieren",
+    p_how: "Um Ihre Buchung zu stornieren, kontaktieren Sie uns per E-Mail an hola@aromatik.apartments oder per WhatsApp unter +34 682 636 848 und geben Sie Ihre Buchungsnummer und die Aufenthaltsdaten an.",
+    h2_mod: "Buchungsänderungen",
+    p_mod: "Datumsumstellung ist abhängig von der Verfügbarkeit. Bitte kontaktieren Sie uns so früh wie möglich, um Ihren Fall zu besprechen.",
+    h2_our: "Stornierungen unsererseits",
+    p_our: "Im unwahrscheinlichen Fall, dass Aromatik Apartments Ihre Buchung stornieren müsste, erstatten wir Ihnen 100 % des bezahlten Betrags und versuchen, Ihnen eine gleichwertige alternative Unterkunft zu finden.",
+    h2_ext: "Buchungen über externe Plattformen",
+    p_ext: "Bei Buchungen über Airbnb, Booking.com oder andere Plattformen gelten die zum Zeitpunkt der Buchung auf der jeweiligen Plattform angegebenen Stornierungsbedingungen.",
+  },
+  zh: {
+    title: "取消政策", subtitle: "灵活透明——没有惊喜",
+    greenTitle: "提前48小时以上", greenText: "免费取消。全额退款。",
+    redTitle: "提前48小时以内", redText: "不予退款。预订金额将被扣留。",
+    h2_how: "如何取消预订",
+    p_how: "如需取消预订，请发邮件至 hola@aromatik.apartments 或通过WhatsApp联系 +34 682 636 848，并提供预订编号及入住日期。",
+    h2_mod: "预订修改",
+    p_mod: "日期变更需视入住情况而定。请尽早联系我们以便处理您的请求。",
+    h2_our: "我方取消预订",
+    p_our: "如果Aromatik Apartments不得不取消您的预订，我们将全额退还已付金额并尽力安排同等标准的替代住宿。",
+    h2_ext: "通过外部平台预订",
+    p_ext: "通过Airbnb、Booking.com或其他平台预订的，适用预订时该平台所显示的取消条款。",
+  },
+  ko: {
+    title: "취소 정책", subtitle: "유연하고 투명하게 — 놀라움 없이",
+    greenTitle: "48시간 이상 전", greenText: "무료 취소. 결제 금액 100\% 환불.",
+    redTitle: "48시간 미만 전", redText: "환불 불가. 예약 금액 전액이 차감됩니다.",
+    h2_how: "예약 취소 방법",
+    p_how: "예약을 취소하려면 hola@aromatik.apartments로 이메일을 보내시거나 WhatsApp +34 682 636 848으로 연락하세요. 예약 번호와 체류 날짜를 함께 알려주세요.",
+    h2_mod: "예약 변경",
+    p_mod: "날짜 변경은 가용 여부에 따라 다릅니다. 가능한 한 에야로 연락해 주세요.",
+    h2_our: "저희측 취소",
+    p_our: "만일 Aromatik Apartments가 없는 상황에서 예약을 취소해야 한다면, 결제한 금액 100\%를 환불하고 동등한 수준의 대체 숫소를 찾아드리겠습니다.",
+    h2_ext: "외부 플랫폼 예약",
+    p_ext: "Airbnb, Booking.com 또는 다른 플랫폼을 통한 예약의 경우, 예약 시 해당 플랫폼에서 제시된 취소 조건이 적용됩니다.",
+  },
+  pt: {
+    title: "Política de cancelamento", subtitle: "Flexível e transparente — sem surpresas",
+    greenTitle: "Mais de 48 horas antes", greenText: "Cancelamento gratuito. Reembolso de 100 % do valor pago.",
+    redTitle: "Menos de 48 horas antes", redText: "Sem reembolso. O valor total da reserva fica retido.",
+    h2_how: "Como cancelar a sua reserva",
+    p_how: "Para cancelar a sua reserva, contacte-nos por e-mail para hola@aromatik.apartments ou por WhatsApp para +34 682 636 848, indicando o número da reserva e as datas da sua estada.",
+    h2_mod: "Modificações de reserva",
+    p_mod: "As alterações de datas estão sujeitas a disponibilidade. Contacte-nos com a maior antecedência possível para analisarmos o seu caso.",
+    h2_our: "Cancelamentos da nossa parte",
+    p_our: "No improvável caso de Aromatik Apartments ter de cancelar a sua reserva, reembolsaremos 100 % do valor pago e tentaremos encontrar-lhe alojamento alternativo de características semelhantes.",
+    h2_ext: "Reservas através de plataformas externas",
+    p_ext: "Em reservas efetuadas através do Airbnb, Booking.com ou outras plataformas, aplicam-se as condições de cancelamento indicadas na plataforma correspondente no momento da reserva.",
+  },
+  nl: {
+    title: "Annuleringsbeleid", subtitle: "Flexibel en transparant — geen verrassingen",
+    greenTitle: "Meer dan 48 uur van tevoren", greenText: "Gratis annulering. 100 % terugbetaling van het betaalde bedrag.",
+    redTitle: "Minder dan 48 uur van tevoren", redText: "Geen terugbetaling. Het volledige boekingsbedrag wordt ingehouden.",
+    h2_how: "Hoe u uw boeking annuleert",
+    p_how: "Om uw boeking te annuleren, neemt u contact met ons op via e-mail op hola@aromatik.apartments of via WhatsApp op +34 682 636 848, met vermelding van uw boekingsnummer en verblijfsdatums.",
+    h2_mod: "Boekingswijzigingen",
+    p_mod: "Datumwijzigingen zijn afhankelijk van beschikbaarheid. Neem zo vroeg mogelijk contact met ons op om uw situatie te bespreken.",
+    h2_our: "Annuleringen van onze kant",
+    p_our: "In het onwaarschijnlijke geval dat Aromatik Apartments uw boeking moet annuleren, vergoeden wij 100 % van het betaalde bedrag en proberen we u alternatieve accommodatie van vergelijkbare kwaliteit te vinden.",
+    h2_ext: "Boekingen via externe platforms",
+    p_ext: "Voor boekingen via Airbnb, Booking.com of andere platforms gelden de annuleringsvoorwaarden die op dat platform staan vermeld op het moment van boeking.",
+  },
+};
+const c = copy[lang] ?? copy.en;
 ---
-<BaseLayout title="Aromatik Apartments" lang={lang}>
-  <div style="margin-top:70px; text-align:center; padding:6rem 2rem;">
-    <script>window.location.replace(window.location.pathname.replace(/^\/[a-z]{2}\//, '/'));</script>
-  </div>
+<BaseLayout title={`${c.title} — Aromatik Apartments`} description={c.subtitle} lang={lang}>
+  <section class="legal-hero">
+    <h1>{c.title}</h1>
+    <p>{c.subtitle}</p>
+  </section>
+  <section class="section">
+    <div class="container legal-content">
+      <div class="cancel-cards">
+        <div class="cancel-card cancel-card-green">
+          <div class="cancel-card-icon">✓</div>
+          <h3>{c.greenTitle}</h3>
+          <p>{c.greenText}</p>
+        </div>
+        <div class="cancel-card cancel-card-red">
+          <div class="cancel-card-icon">✗</div>
+          <h3>{c.redTitle}</h3>
+          <p>{c.redText}</p>
+        </div>
+      </div>
+      <h2>{c.h2_how}</h2>
+      <p>{c.p_how}</p>
+      <h2>{c.h2_mod}</h2>
+      <p>{c.p_mod}</p>
+      <h2>{c.h2_our}</h2>
+      <p>{c.p_our}</p>
+      <h2>{c.h2_ext}</h2>
+      <p>{c.p_ext}</p>
+    </div>
+  </section>
 </BaseLayout>

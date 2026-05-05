@@ -1,13 +1,110 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Locale };
+const t = getT(lang);
+
+const copy: Record<string, any> = {
+  en: {
+    title: "Privacy policy", updated: "Last updated: January 2025",
+    h1: "Responsible party", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (Barcelona), Spain. Contact: hola@aromatik.apartments",
+    h2: "Data we collect", p2: "We collect the data you provide when filling out the contact form or making a booking: name, email address, phone number and any information included in your message.",
+    h3: "Purpose of processing", p3: "We use your data solely to respond to your enquiries, manage your booking and, if you have expressly consented, to send you information about our offers and apartments.",
+    h4: "Legal basis", p4: "The processing of your data is based on your explicit consent and/or the execution of the tourist rental contract.",
+    h5: "Data retention", p5: "We retain your data for as long as necessary for the purpose for which it was collected, and for the period required by applicable legal obligations.",
+    h6: "Your rights", p6: "You may exercise your rights of access, rectification, erasure, portability, restriction or objection by emailing hola@aromatik.apartments with the subject line 'GDPR Rights'.",
+    h7: "Cookies", p7: "This website uses essential technical cookies required for its operation. We do not use advertising or third-party tracking cookies.",
+  },
+  fr: {
+    title: "Politique de confidentialité", updated: "Dernière mise à jour : janvier 2025",
+    h1: "Responsable du traitement", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (Barcelone), Espagne. Contact : hola@aromatik.apartments",
+    h2: "Données que nous collectons", p2: "Nous collectons les données que vous nous fournissez en remplissant le formulaire de contact ou en effectuant une réservation : nom, adresse e-mail, numéro de téléphone et toute information incluse dans votre message.",
+    h3: "Finalité du traitement", p3: "Nous utilisons vos données uniquement pour répondre à vos demandes, gérer votre réservation et, si vous y avez expressément consenti, vous envoyer des informations sur nos offres et appartements.",
+    h4: "Base légale", p4: "Le traitement de vos données repose sur votre consentement explicite et/ou sur l'exécution du contrat de location touristique.",
+    h5: "Conservation des données", p5: "Nous conservons vos données aussi longtemps que nécessaire aux fins pour lesquelles elles ont été collectées, et pendant la durée requise par les obligations légales applicables.",
+    h6: "Vos droits", p6: "Vous pouvez exercer vos droits d'accès, de rectification, d'effacement, de portabilité, de limitation ou d'opposition en envoyant un e-mail à hola@aromatik.apartments avec l'objet « Droits RGPD ».",
+    h7: "Cookies", p7: "Ce site utilise des cookies techniques essentiels à son fonctionnement. Nous n'utilisons pas de cookies publicitaires ni de suivi tiers.",
+  },
+  ca: {
+    title: "Política de privacitat", updated: "Darrera actualització: gener 2025",
+    h1: "Responsable del tractament", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (Barcelona), Espanya. Contacte: hola@aromatik.apartments",
+    h2: "Dades que recopilem", p2: "Recopilem les dades que tu mateix ens proporciones en emplenar el formulari de contacte o fer una reserva: nom, correu electrònic, telèfon i qualsevol informació que incloguis en el teu missatge.",
+    h3: "Finalitat del tractament", p3: "Utilitzem les teves dades exclusivament per respondre a les teves consultes, gestionar la teva reserva i, si ho has acceptat expressament, enviar-te informació sobre les nostres ofertes i apartaments.",
+    h4: "Base legal", p4: "El tractament de les teves dades es basa en el teu consentiment explícit i/o en l'execució del contracte d'arrendament turístic.",
+    h5: "Conservació de dades", p5: "Conservem les teves dades mentre sigui necessari per a la finalitat per a la qual van ser recollides, i durant el temps que exigeixin les obligacions legals aplicables.",
+    h6: "Els teus drets", p6: "Pots exercir els teus drets d'accés, rectificació, supressió, portabilitat, limitació o oposició enviant un correu electrònic a hola@aromatik.apartments amb l'assumpte «Drets RGPD».",
+    h7: "Cookies", p7: "Aquest web utilitza cookies tècniques imprescindibles per al seu funcionament. No utilitzem cookies de publicitat ni de seguiment de tercers.",
+  },
+  de: {
+    title: "Datenschutzrichtlinie", updated: "Letzte Aktualisierung: Januar 2025",
+    h1: "Verantwortlicher", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (Barcelona), Spanien. Kontakt: hola@aromatik.apartments",
+    h2: "Daten, die wir erheben", p2: "Wir erheben die Daten, die Sie uns beim Ausfüllen des Kontaktformulars oder bei einer Buchung selbst mitteilen: Name, E-Mail-Adresse, Telefonnummer und alle Informationen in Ihrer Nachricht.",
+    h3: "Zweck der Verarbeitung", p3: "Wir verwenden Ihre Daten ausschließlich zur Beantwortung Ihrer Anfragen, zur Verwaltung Ihrer Buchung und — falls Sie ausdrücklich zugestimmt haben — zur Zusendung von Informationen über unsere Angebote und Apartments.",
+    h4: "Rechtsgrundlage", p4: "Die Verarbeitung Ihrer Daten basiert auf Ihrer ausdrücklichen Einwilligung und/oder der Durchführung des Tourismusmietvertrags.",
+    h5: "Datenspeicherung", p5: "Wir speichern Ihre Daten so lange, wie es für den Zweck, für den sie erhoben wurden, erforderlich ist, und für den Zeitraum, den die geltenden gesetzlichen Pflichten vorschreiben.",
+    h6: "Ihre Rechte", p6: "Sie können Ihre Rechte auf Auskunft, Berichtigung, Löschung, Datenübertragbarkeit, Einschränkung oder Widerspruch ausüben, indem Sie eine E-Mail an hola@aromatik.apartments mit dem Betreff 'DSGVO-Rechte' senden.",
+    h7: "Cookies", p7: "Diese Website verwendet technische Cookies, die für ihren Betrieb unbedingt erforderlich sind. Wir verwenden keine Werbe- oder Drittanbieter-Tracking-Cookies.",
+  },
+  zh: {
+    title: "隐私政策", updated: "最后更新：2025年1月",
+    h1: "数据控制方", p1: "Calderers 16 SL，地址：Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern（巴塞罗那），西班牙。联系方式：hola@aromatik.apartments",
+    h2: "我们收集的数据", p2: "我们收集您在填写联系表格或进行预订时提供的数据：姓名、电子邮件、电话及您在留言中包含的任何信息。",
+    h3: "处理目的", p3: "我们仅将您的数据用于回复咨询、管理您的预订，以及在您明确同意的情况下，向您发送我们的优惠和公寓信息。",
+    h4: "法律依据", p4: "您数据的处理基于您的明确同意和/或旅游租赁合同的履行。",
+    h5: "数据保留", p5: "我们将在收集数据目的所需的时间内保留您的数据，并遵守适用的法律义务规定的期限。",
+    h6: "您的权利", p6: "您可以通过发送电子邮件至 hola@aromatik.apartments（主题为 GDPR权利）来行使访问、更正、删除、转移、限制或反对等权利。",
+    h7: "Cookie", p7: "本网站使用网站正常运行所必需的技术性Cookie。我们不使用广告或第三方追踪Cookie。",
+  },
+  ko: {
+    title: "개인정보 처리방침", updated: "최종 업데이트: 2025년 1월",
+    h1: "데이터 처리 책임자", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (바르셀로나), 스페인. 연락처: hola@aromatik.apartments",
+    h2: "수집하는 데이터", p2: "문의 양식 작성 또는 예약 시 직접 제공하신 데이터를 수집합니다: 이름, 이메일 주소, 전화번호 및 메시지에 포함된 정보.",
+    h3: "처리 목적", p3: "귀하의 데이터는 문의 응답, 예약 관리 목적으로만 사용되며, 명시적으로 동의하신 경우 당사 제안 및 아파트 정보를 발송하는 데 사용됩니다.",
+    h4: "법적 근거", p4: "귀하의 데이터 처리는 귀하의 명시적 동의 및/또는 관광 임대 계약 이행에 근거합니다.",
+    h5: "데이터 보유", p5: "수집 목적에 필요한 기간 동안 귀하의 데이터를 보유하며, 적용 가능한 법적 의무에서 정한 기간을 준수합니다.",
+    h6: "귀하의 권리", p6: "hola@aromatik.apartments로 'GDPR 권리'를 제목으로 이메일을 보내 접근, 정정, 삭제, 이동, 제한 또는 반대 권리를 행사할 수 있습니다.",
+    h7: "쿠키", p7: "이 웹사이트는 운영에 필수적인 기술 쿠키를 사용합니다. 광고 또는 제3자 추적 쿠키는 사용하지 않습니다.",
+  },
+  pt: {
+    title: "Política de privacidade", updated: "Última atualização: janeiro de 2025",
+    h1: "Responsável pelo tratamento", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (Barcelona), Espanha. Contacto: hola@aromatik.apartments",
+    h2: "Dados que recolhemos", p2: "Recolhemos os dados que você mesmo nos fornece ao preencher o formulário de contacto ou ao efetuar uma reserva: nome, e-mail, telefone e qualquer informação incluída na sua mensagem.",
+    h3: "Finalidade do tratamento", p3: "Utilizamos os seus dados exclusivamente para responder às suas questões, gerir a sua reserva e, se tiver dado o seu consentimento expresso, enviar-lhe informações sobre as nossas ofertas e apartamentos.",
+    h4: "Base legal", p4: "O tratamento dos seus dados baseia-se no seu consentimento explícito e/ou na execução do contrato de arrendamento turístico.",
+    h5: "Conservação de dados", p5: "Conservamos os seus dados pelo tempo necessário para a finalidade para a qual foram recolhidos e durante o período exigido pelas obrigações legais aplicáveis.",
+    h6: "Os seus direitos", p6: "Pode exercer os seus direitos de acesso, retificação, eliminação, portabilidade, limitação ou oposição enviando um e-mail para hola@aromatik.apartments com o assunto «Direitos RGPD».",
+    h7: "Cookies", p7: "Este site utiliza cookies técnicos essenciais ao seu funcionamento. Não utilizamos cookies de publicidade nem de rastreamento de terceiros.",
+  },
+  nl: {
+    title: "Privacybeleid", updated: "Laatste update: januari 2025",
+    h1: "Verantwoordelijke verwerker", p1: "Calderers 16 SL, Av. Generalitat de Catalunya 19, 5-2, 08960 Sant Just Desvern (Barcelona), Spanje. Contact: hola@aromatik.apartments",
+    h2: "Gegevens die wij verzamelen", p2: "Wij verzamelen de gegevens die u zelf verstrekt bij het invullen van het contactformulier of het maken van een boeking: naam, e-mailadres, telefoonnummer en eventuele informatie in uw bericht.",
+    h3: "Doel van de verwerking", p3: "Wij gebruiken uw gegevens uitsluitend om op uw vragen te reageren, uw boeking te beheren en — als u daarmee uitdrukkelijk hebt ingestemd — u informatie te sturen over onze aanbiedingen en appartementen.",
+    h4: "Rechtsgrondslag", p4: "De verwerking van uw gegevens is gebaseerd op uw uitdrukkelijke toestemming en/of de uitvoering van het toeristische huurcontract.",
+    h5: "Bewaartermijn", p5: "Wij bewaren uw gegevens zo lang als nodig is voor het doel waarvoor ze zijn verzameld en gedurende de periode die de toepasselijke wettelijke verplichtingen vereisen.",
+    h6: "Uw rechten", p6: "U kunt uw rechten op inzage, rectificatie, verwijdering, overdraagbaarheid, beperking of bezwaar uitoefenen door een e-mail te sturen naar hola@aromatik.apartments met het onderwerp 'AVG-rechten'.",
+    h7: "Cookies", p7: "Deze website gebruikt technische cookies die essentieel zijn voor het functioneren ervan. Wij gebruiken geen reclame- of tracking-cookies van derden.",
+  },
+};
+const c = copy[lang] ?? copy.en;
 ---
-<BaseLayout title="Aromatik Apartments" lang={lang}>
-  <div style="margin-top:70px; text-align:center; padding:6rem 2rem;">
-    <script>window.location.replace(window.location.pathname.replace(/^\/[a-z]{2}\//, '/'));</script>
-  </div>
+<BaseLayout title={`${c.title} — Aromatik Apartments`} description={c.title} lang={lang}>
+  <section class="legal-hero">
+    <h1>{c.title}</h1>
+    <p>{c.updated}</p>
+  </section>
+  <section class="section">
+    <div class="container legal-content">
+      <h2>1. {c.h1}</h2><p>{c.p1}</p>
+      <h2>2. {c.h2}</h2><p>{c.p2}</p>
+      <h2>3. {c.h3}</h2><p>{c.p3}</p>
+      <h2>4. {c.h4}</h2><p>{c.p4}</p>
+      <h2>5. {c.h5}</h2><p>{c.p5}</p>
+      <h2>6. {c.h6}</h2><p>{c.p6}</p>
+      <h2>7. {c.h7}</h2><p>{c.p7}</p>
+    </div>
+  </section>
 </BaseLayout>

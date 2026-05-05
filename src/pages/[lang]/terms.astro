@@ -1,13 +1,133 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Locale };
+const t = getT(lang);
+
+const copy: Record<string, any> = {
+  en: {
+    title: "Terms and conditions", updated: "Last updated: January 2025",
+    s: [
+      { h: "1. Purpose", p: "These conditions govern the relationship between Aromatik Apartments (Calderers 16 SL) and the guest making a tourist accommodation booking in any of our apartments located in the Barri Vell of Girona." },
+      { h: "2. Booking process", p: "The booking is confirmed once the initial payment has been received under the conditions indicated at the time of booking. You will receive an email confirmation with all the details of your stay." },
+      { h: "3. Check-in and check-out", p: "Check-in is from 15:00 and check-out is by 11:00. If you need different times, contact us in advance and we will do our best to accommodate you." },
+      { h: "4. Maximum occupancy", p: "Each apartment has a maximum capacity stated on its listing. This capacity must not be exceeded under any circumstances." },
+      { h: "5. Cancellation policy", p: "Please refer to our <a href='/en/cancellation-policy'>specific cancellation policy</a> for the deadlines and conditions applicable to your booking." },
+      { h: "6. House rules", p: "The guest agrees to respect the <a href='/en/house-rules'>house rules</a> throughout their stay. Non-compliance may result in termination of the contract with no right to a refund." },
+      { h: "7. Liability", p: "Aromatik Apartments is not liable for damages caused by force majeure or by the improper use of the facilities by the guest." },
+      { h: "8. Applicable law", p: "These conditions are governed by Spanish law. Any dispute shall be submitted to the courts of Girona." },
+    ],
+  },
+  fr: {
+    title: "Conditions generales", updated: "Derniere mise a jour : janvier 2025",
+    s: [
+      { h: "1. Objet", p: "Les presentes conditions regissent la relation entre Aromatik Apartments (Calderers 16 SL) et le voyageur effectuant une reservation de logement touristique dans l'un de nos appartements situes dans le Barri Vell de Gerone." },
+      { h: "2. Processus de reservation", p: "La reservation est confirmee une fois le paiement initial recu selon les conditions indiquees au moment de la reservation. Vous recevrez une confirmation par e-mail avec tous les details de votre sejour." },
+      { h: "3. Arrivee et depart", p: "L'arrivee est a partir de 15h00 et le depart avant 11h00. Si vous avez besoin d'horaires differents, contactez-nous a l'avance et nous ferons notre possible pour nous adapter." },
+      { h: "4. Occupation maximale", p: "Chaque appartement a une capacite maximale indiquee dans sa fiche. Cette capacite ne doit en aucun cas etre depassee." },
+      { h: "5. Politique d'annulation", p: "Consultez notre <a href='/fr/cancellation-policy'>politique d'annulation specifique</a> pour connaitre les delais et conditions applicables a votre reservation." },
+      { h: "6. Reglement interieur", p: "Le voyageur s'engage a respecter le <a href='/fr/house-rules'>reglement interieur</a> pendant tout son sejour. Le non-respect peut entrainer la resiliation du contrat sans droit au remboursement." },
+      { h: "7. Responsabilite", p: "Aromatik Apartments n'est pas responsable des dommages causes par des cas de force majeure ou par une mauvaise utilisation des installations par le voyageur." },
+      { h: "8. Loi applicable", p: "Ces conditions sont regies par la legislation espagnole. Tout litige sera soumis aux tribunaux de Gerone." },
+    ],
+  },
+  ca: {
+    title: "Termes i condicions", updated: "Darrera actualitzacio: gener 2025",
+    s: [
+      { h: "1. Objecte", p: "Les presents condicions regulen la relacio entre Aromatik Apartments (Calderers 16 SL) i l'hoste que realitza una reserva d'allotjament turistic en qualsevol dels nostres apartaments situats al Barri Vell de Girona." },
+      { h: "2. Proces de reserva", p: "La reserva es considera confirmada un cop rebut el pagament inicial segons les condicions indicades en el moment de la reserva. Rebras una confirmacio per correu electronic amb tots els detalls de la teva estada." },
+      { h: "3. Check-in i check-out", p: "El check-in es a partir de les 15:00 i el check-out fins a les 11:00. Si necessites horaris diferents, contacta'ns amb antelacio i farem el possible per adaptar-nos." },
+      { h: "4. Ocupacio maxima", p: "Cada apartament te una capacitat maxima indicada a la seva fitxa. No es permet superar aquesta capacitat en cap cas." },
+      { h: "5. Politica de cancel·lacio", p: "Consulta la nostra <a href='/ca/cancellation-policy'>politica de cancel·lacio especifica</a> per coneixer els terminis i condicions aplicables a la teva reserva." },
+      { h: "6. Normes de la casa", p: "L'hoste es compromet a respectar les <a href='/ca/house-rules'>normes de la casa</a> durant tota la seva estada. L'incompliment pot suposar la rescissio del contracte sense dret a devolucio." },
+      { h: "7. Responsabilitat", p: "Aromatik Apartments no es responsabilitza dels danys produïts per causes de forca major o per l'us indegut de les instal·lacions per part de l'hoste." },
+      { h: "8. Legislacio aplicable", p: "Aquestes condicions es regeixen per la legislacio espanyola. Qualsevol controversia se sotmetra als jutjats i tribunals de Girona." },
+    ],
+  },
+  de: {
+    title: "Allgemeine Geschaeftsbedingungen", updated: "Letzte Aktualisierung: Januar 2025",
+    s: [
+      { h: "1. Gegenstand", p: "Diese Bedingungen regeln die Beziehung zwischen Aromatik Apartments (Calderers 16 SL) und dem Gast, der eine Buchung fur eine Tourismusunterkunft in einer unserer Wohnungen im Barri Vell von Girona vornimmt." },
+      { h: "2. Buchungsprozess", p: "Die Buchung gilt als bestatigt, sobald die Anfangszahlung gemass den zum Zeitpunkt der Buchung angegebenen Bedingungen eingegangen ist. Sie erhalten eine Bestatiguns-E-Mail mit allen Details Ihres Aufenthalts." },
+      { h: "3. Check-in und Check-out", p: "Der Check-in ist ab 15:00 Uhr und der Check-out bis 11:00 Uhr. Wenn Sie andere Zeiten benotigen, kontaktieren Sie uns im Voraus und wir werden unser Bestes tun, um uns anzupassen." },
+      { h: "4. Maximale Belegung", p: "Jede Wohnung hat eine in der Anzeige angegebene maximale Kapazitat. Diese darf unter keinen Umstanden uberschritten werden." },
+      { h: "5. Stornierungsbedingungen", p: "Bitte lesen Sie unsere <a href='/de/cancellation-policy'>spezifischen Stornierungsbedingungen</a> fur die fur Ihre Buchung geltenden Fristen und Bedingungen." },
+      { h: "6. Hausordnung", p: "Der Gast verpflichtet sich, die <a href='/de/house-rules'>Hausordnung</a> wahrend seines gesamten Aufenthalts zu respektieren. Bei Nichteinhaltung kann der Vertrag ohne Ruckerstattungsanspruch gekundigt werden." },
+      { h: "7. Haftung", p: "Aromatik Apartments haftet nicht fur Schaden, die durch hohere Gewalt oder durch unsachgemasse Nutzung der Einrichtungen durch den Gast entstehen." },
+      { h: "8. Anwendbares Recht", p: "Diese Bedingungen unterliegen dem spanischen Recht. Jeder Streit wird den Gerichten von Girona vorgelegt." },
+    ],
+  },
+  zh: {
+    title: "预订条款", updated: "最后更新：2025年1月",
+    s: [
+      { h: "1. 目的", p: "本条款规范Aromatik Apartments（Calderers 16 SL）与在赫罗纳Barri Vell任一公寓进行旅游住宿预订的房客之间的关系。" },
+      { h: "2. 预订流程", p: "预订在按预订时注明的条件收到首付款后即告确认。您将收到一封包含住宿全部细节的电子邮件确认函。" },
+      { h: "3. 入住与退房", p: "入住时间为15:00起，退房时间为11:00前。如需不同时间，请提前联系我们，我们将尽力配合。" },
+      { h: "4. 最大入住人数", p: "每套公寓在其房源页面上均注明了最大入住人数，任何情况下均不得超过该人数。" },
+      { h: "5. 取消政策", p: "请查阅我们的<a href='/zh/cancellation-policy'>具体取消政策</a>，了解适用于您预订的截止日期和条件。" },
+      { h: "6. 住宿须知", p: "房客承诺在整个住宿期间遵守<a href='/zh/house-rules'>住宿须知</a>。违反规定可能导致合同终止且不予退款。" },
+      { h: "7. 责任", p: "Aromatik Apartments对因不可抗力或房客不当使用设施造成的损失不承担责任。" },
+      { h: "8. 适用法律", p: "本条款受西班牙法律管辖，任何争议提交赫罗纳法院处理。" },
+    ],
+  },
+  ko: {
+    title: "이용 약관", updated: "최종 업데이트: 2025년 1월",
+    s: [
+      { h: "1. 목적", p: "본 약관은 Aromatik Apartments(Calderers 16 SL)와 지로나 Barri Vell에 위치한 당사 아파트 중 하나에 관광 숙박 예약을 하는 투숙객 간의 관계를 규율합니다." },
+      { h: "2. 예약 절차", p: "예약은 예약 시 명시된 조건에 따라 초기 결제금이 수령된 후 확정됩니다. 숙박에 관한 모든 세부 정보가 포함된 이메일 확인서를 받게 됩니다." },
+      { h: "3. 체크인 및 체크아웃", p: "체크인은 15:00부터, 체크아웃은 11:00까지입니다. 다른 시간이 필요하시면 미리 연락해 주시면 최대한 맞춰드리겠습니다." },
+      { h: "4. 최대 정원", p: "각 아파트는 숙소 정보에 최대 수용 인원이 명시되어 있습니다. 어떠한 경우에도 이 인원을 초과할 수 없습니다." },
+      { h: "5. 취소 정책", p: "예약에 적용되는 기한 및 조건은 당사의 <a href='/ko/cancellation-policy'>구체적인 취소 정책</a>을 참조하세요." },
+      { h: "6. 이용 규칙", p: "투숙객은 숙박 기간 내내 <a href='/ko/house-rules'>이용 규칙</a>을 준수할 것을 동의합니다. 위반 시 환불 없이 계약이 해지될 수 있습니다." },
+      { h: "7. 책임", p: "Aromatik Apartments는 불가항력이나 투숙객의 시설 부적절 사용으로 인한 손해에 대해 책임지지 않습니다." },
+      { h: "8. 준거법", p: "본 약관은 스페인 법률에 따릅니다. 모든 분쟁은 지로나 법원에 제출됩니다." },
+    ],
+  },
+  pt: {
+    title: "Termos e condicoes", updated: "Ultima atualizacao: janeiro de 2025",
+    s: [
+      { h: "1. Objeto", p: "As presentes condicoes regulam a relacao entre Aromatik Apartments (Calderers 16 SL) e o hospede que efetua uma reserva de alojamento turistico em qualquer um dos nossos apartamentos situados no Barri Vell de Girona." },
+      { h: "2. Processo de reserva", p: "A reserva considera-se confirmada apos recepcao do pagamento inicial de acordo com as condicoes indicadas no momento da reserva. Recebera uma confirmacao por e-mail com todos os detalhes da sua estada." },
+      { h: "3. Check-in e check-out", p: "O check-in e a partir das 15h00 e o check-out ate as 11h00. Se precisar de horarios diferentes, contacte-nos com antecedencia e faremos o possivel para nos adaptar." },
+      { h: "4. Ocupacao maxima", p: "Cada apartamento tem uma capacidade maxima indicada na sua ficha. Nao e permitido exceder essa capacidade em caso algum." },
+      { h: "5. Politica de cancelamento", p: "Consulte a nossa <a href='/pt/cancellation-policy'>politica de cancelamento especifica</a> para conhecer os prazos e condicoes aplicaveis a sua reserva." },
+      { h: "6. Regras da casa", p: "O hospede compromete-se a respeitar as <a href='/pt/house-rules'>regras da casa</a> durante toda a sua estada. O incumprimento pode implicar a rescisao do contrato sem direito a reembolso." },
+      { h: "7. Responsabilidade", p: "Aromatik Apartments nao se responsabiliza pelos danos causados por casos de forca maior ou pela utilizacao indevida das instalacoes por parte do hospede." },
+      { h: "8. Legislacao aplicavel", p: "Estas condicoes regem-se pela legislacao espanhola. Qualquer controversia sera submetida aos tribunais de Girona." },
+    ],
+  },
+  nl: {
+    title: "Algemene voorwaarden", updated: "Laatste update: januari 2025",
+    s: [
+      { h: "1. Doel", p: "Deze voorwaarden regelen de relatie tussen Aromatik Apartments (Calderers 16 SL) en de gast die een toeristische verblijfsboeking maakt in een van onze appartementen in de Barri Vell van Girona." },
+      { h: "2. Boekingsproces", p: "De boeking wordt bevestigd zodra de aanbetaling is ontvangen onder de voorwaarden die zijn aangegeven op het moment van boeking. U ontvangt een bevestigings-e-mail met alle details van uw verblijf." },
+      { h: "3. Check-in en check-out", p: "Check-in is vanaf 15:00 uur en check-out is voor 11:00 uur. Als u andere tijden nodig heeft, neem dan van tevoren contact met ons op en we zullen ons best doen om ons aan te passen." },
+      { h: "4. Maximale bezetting", p: "Elk appartement heeft een maximale capaciteit die in de advertentie is vermeld. Deze capaciteit mag in geen geval worden overschreden." },
+      { h: "5. Annuleringsbeleid", p: "Raadpleeg ons <a href='/nl/cancellation-policy'>specifieke annuleringsbeleid</a> voor de deadlines en voorwaarden die van toepassing zijn op uw boeking." },
+      { h: "6. Huisregels", p: "De gast stemt ermee in de <a href='/nl/house-rules'>huisregels</a> gedurende het gehele verblijf te respecteren. Niet-naleving kan leiden tot beeindiging van het contract zonder recht op terugbetaling." },
+      { h: "7. Aansprakelijkheid", p: "Aromatik Apartments is niet aansprakelijk voor schade veroorzaakt door overmacht of door onjuist gebruik van de faciliteiten door de gast." },
+      { h: "8. Toepasselijk recht", p: "Deze voorwaarden worden beheerst door Spaans recht. Elk geschil wordt voorgelegd aan de rechtbanken van Girona." },
+    ],
+  },
+};
+const c = copy[lang] ?? copy.en;
 ---
-<BaseLayout title="Aromatik Apartments" lang={lang}>
-  <div style="margin-top:70px; text-align:center; padding:6rem 2rem;">
-    <script>window.location.replace(window.location.pathname.replace(/^\/[a-z]{2}\//, '/'));</script>
-  </div>
+<BaseLayout title={`${c.title} — Aromatik Apartments`} description={c.title} lang={lang}>
+  <section class="legal-hero">
+    <h1>{c.title}</h1>
+    <p>{c.updated}</p>
+  </section>
+  <section class="section">
+    <div class="container legal-content">
+      {c.s.map((item: any) => (
+        <>
+          <h2>{item.h}</h2>
+          <p set:html={item.p} />
+        </>
+      ))}
+    </div>
+  </section>
 </BaseLayout>
