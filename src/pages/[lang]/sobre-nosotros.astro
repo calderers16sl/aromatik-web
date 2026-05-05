@@ -125,8 +125,8 @@ const copy: Record<string, {
 const c = copy[lang] ?? copy.en;
 ---
 <BaseLayout title={`${t.aboutTitle} \u2014 Aromatik Apartments`} description={t.aboutSubtitle} lang={lang}>
-  <HostCard />
-  <ReviewsCarousel />
+  <HostCard lang={lang} />
+  <ReviewsCarousel lang={lang} />
 
   <div class="inner-hero">
     <span class="eyebrow">{c.eyebrow}</span>

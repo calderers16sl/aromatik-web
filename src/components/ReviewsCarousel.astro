@@ -1,23 +1,75 @@
 ---
 // ReviewsCarousel.astro — Google Places embed
+const { lang = 'es' } = Astro.props;
+
+const copy: Record<string, any> = {
+  es: {
+    heading: 'Lo que dicen nuestros huéspedes',
+    mapTitle: 'Aromatik Apartments en Google Maps',
+    btn: 'Ver todas las reseñas en Google Maps →',
+  },
+  en: {
+    heading: 'What our guests say',
+    mapTitle: 'Aromatik Apartments on Google Maps',
+    btn: 'See all reviews on Google Maps →',
+  },
+  fr: {
+    heading: 'Ce que disent nos clients',
+    mapTitle: 'Aromatik Apartments sur Google Maps',
+    btn: 'Voir tous les avis sur Google Maps →',
+  },
+  ca: {
+    heading: 'El que diuen els nostres hostes',
+    mapTitle: 'Aromatik Apartments a Google Maps',
+    btn: 'Veure totes les ressenyes a Google Maps →',
+  },
+  de: {
+    heading: 'Was unsere Gäste sagen',
+    mapTitle: 'Aromatik Apartments auf Google Maps',
+    btn: 'Alle Bewertungen auf Google Maps ansehen →',
+  },
+  zh: {
+    heading: '客人的评价',
+    mapTitle: 'Aromatik Apartments 在谷歌地图',
+    btn: '查看谷歌地图上的所有评价 →',
+  },
+  ko: {
+    heading: '투숙객들의 후기',
+    mapTitle: 'Aromatik Apartments 구글 지도',
+    btn: 'Google 지도에서 모든 리뷰 보기 →',
+  },
+  pt: {
+    heading: 'O que nossos hóspedes dizem',
+    mapTitle: 'Aromatik Apartments no Google Maps',
+    btn: 'Ver todas as avaliações no Google Maps →',
+  },
+  nl: {
+    heading: 'Wat onze gasten zeggen',
+    mapTitle: 'Aromatik Apartments op Google Maps',
+    btn: 'Alle beoordelingen op Google Maps bekijken →',
+  },
+};
+
+const c = copy[lang] ?? copy.es;
+const mapSrc = `https://maps.google.com/maps?q=Aromatik+Apartments+Rambla+de+la+Llibertat+Girona&output=embed&hl=${lang}&z=16`;
 ---
 
 <section class="rc-section">
   <div class="container">
     <div class="section-header" style="margin-bottom:2rem">
       <span class="eyebrow">Google Reviews</span>
-      <h2 style="margin-top:0.75rem">Lo que dicen nuestros huéspedes</h2>
+      <h2 style="margin-top:0.75rem">{c.heading}</h2>
     </div>
     <div class="rc-embed-wrap">
       <iframe
-        src="https://maps.google.com/maps?q=Aromatik+Apartments+Rambla+de+la+Llibertat+Girona&output=embed&hl=es&z=16"
+        src={mapSrc}
         width="100%"
         height="100%"
         style="border:0;"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="Aromatik Apartments en Google Maps"
+        title={c.mapTitle}
       ></iframe>
     </div>
     <div style="text-align:center; margin-top:1.5rem">
@@ -26,7 +78,7 @@
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn-outline-dark"
-      >Ver todas las reseñas en Google Maps →</a>
+      >{c.btn}</a>
     </div>
   </div>
 </section>

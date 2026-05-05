@@ -1,5 +1,83 @@
 ---
 // HostCard.astro — Arnau's Airbnb host profile card
+const { lang = 'es' } = Astro.props;
+
+const copy: Record<string, any> = {
+  es: {
+    eyebrow: 'Tu anfitrión',
+    reviews: 'Evaluaciones',
+    rating: 'Valoración',
+    experience: 'Años de experiencia',
+    airbnb: 'Ver perfil en Airbnb',
+    role: 'Anfitrión · Aromatik Apartments',
+  },
+  en: {
+    eyebrow: 'Your host',
+    reviews: 'Reviews',
+    rating: 'Rating',
+    experience: 'Years of experience',
+    airbnb: 'View Airbnb profile',
+    role: 'Host · Aromatik Apartments',
+  },
+  fr: {
+    eyebrow: 'Votre hôte',
+    reviews: 'Avis',
+    rating: 'Note',
+    experience: 'Années d''expérience',
+    airbnb: 'Voir le profil Airbnb',
+    role: 'Hôte · Aromatik Apartments',
+  },
+  ca: {
+    eyebrow: 'El teu amfitrió',
+    reviews: 'Valoracions',
+    rating: 'Puntuació',
+    experience: 'Anys d''experiència',
+    airbnb: 'Veure perfil a Airbnb',
+    role: 'Amfitrió · Aromatik Apartments',
+  },
+  de: {
+    eyebrow: 'Ihr Gastgeber',
+    reviews: 'Bewertungen',
+    rating: 'Bewertung',
+    experience: 'Jahre Erfahrung',
+    airbnb: 'Airbnb-Profil ansehen',
+    role: 'Gastgeber · Aromatik Apartments',
+  },
+  zh: {
+    eyebrow: '您的房东',
+    reviews: '评价',
+    rating: '评分',
+    experience: '年经验',
+    airbnb: '查看Airbnb主页',
+    role: '房东 · Aromatik Apartments',
+  },
+  ko: {
+    eyebrow: '호스트',
+    reviews: '리뷰',
+    rating: '평점',
+    experience: '년 경험',
+    airbnb: '에어비앤비 프로필 보기',
+    role: '호스트 · Aromatik Apartments',
+  },
+  pt: {
+    eyebrow: 'Seu anfitrião',
+    reviews: 'Avaliações',
+    rating: 'Avaliação',
+    experience: 'Anos de experiência',
+    airbnb: 'Ver perfil no Airbnb',
+    role: 'Anfitrião · Aromatik Apartments',
+  },
+  nl: {
+    eyebrow: 'Uw gastheer',
+    reviews: 'Beoordelingen',
+    rating: 'Beoordeling',
+    experience: 'Jaar ervaring',
+    airbnb: 'Airbnb-profiel bekijken',
+    role: 'Gastheer · Aromatik Apartments',
+  },
+};
+
+const c = copy[lang] ?? copy.es;
 ---
 
 <section class="host-section" id="anfitrion">
@@ -8,7 +86,7 @@
       <div class="host-avatar-wrap">
         <img
           src="/images/arnau-profile.PNG"
-          alt="Arnau — Anfitrión de Aromatik Apartments"
+          alt="Arnau — Aromatik Apartments"
           class="host-avatar"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
         />
@@ -17,24 +95,24 @@
       </div>
 
       <div class="host-info">
-        <p class="host-eyebrow">Tu anfitrión</p>
+        <p class="host-eyebrow">{c.eyebrow}</p>
         <h3 class="host-name">Arnau</h3>
-        <p class="host-role">Anfitrión · Aromatik Apartments</p>
+        <p class="host-role">{c.role}</p>
 
         <div class="host-stats">
           <div class="host-stat">
             <span class="host-stat-num">2272</span>
-            <span class="host-stat-label">Evaluaciones</span>
+            <span class="host-stat-label">{c.reviews}</span>
           </div>
           <div class="host-stat-sep"></div>
           <div class="host-stat">
             <span class="host-stat-num">4,71 <span class="host-star">★</span></span>
-            <span class="host-stat-label">Valoración</span>
+            <span class="host-stat-label">{c.rating}</span>
           </div>
           <div class="host-stat-sep"></div>
           <div class="host-stat">
             <span class="host-stat-num">4</span>
-            <span class="host-stat-label">Años de experiencia</span>
+            <span class="host-stat-label">{c.experience}</span>
           </div>
         </div>
 
@@ -45,7 +123,7 @@
           class="host-airbnb-link"
         >
           <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1C7.716 1 1 7.716 1 16s6.716 15 15 15 15-6.716 15-15S24.284 1 16 1zm0 2c7.18 0 13 5.82 13 13S23.18 29 16 29 3 23.18 3 16 8.82 3 16 3zm-.002 4.5c-1.24 0-2.248 1.008-2.248 2.25S14.758 12 16 12s2.25-1.008 2.25-2.25S17.243 7.5 15.998 7.5zM13 13.5v1h1v7h-1v1h5v-1h-1v-8H13z"/></svg>
-          Ver perfil en Airbnb
+          {c.airbnb}
         </a>
       </div>
     </div>
