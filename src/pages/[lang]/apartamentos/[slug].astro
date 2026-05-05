@@ -57,7 +57,7 @@ const smoobuLang = ['es','en','fr','de','pt','nl','it'].includes(lang) ? lang : 
 const siteUrl = 'https://aromatik.apartments';
 const aptUrl = `${siteUrl}/${lang}/apartamentos/${apt.slug}`;
 const aptTitle = t.aptH1s[apt.slug] ?? `${t.aptLabel} ${apt.name}`;
-const aptDesc  = t.aptDescriptions[apt.slug] ?? apt.description;
+const aptDesc  = t.aptDescriptions[apt.slug] ?? apt.name;
 
 const apartmentSchema = JSON.stringify({
   '@context': 'https://schema.org',
