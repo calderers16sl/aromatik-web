@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HostCard from '../components/HostCard.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+
+const featuredApts = [
+  { name: "Bergamota", slug: "bergamota", guests: 6, bedrooms: 3, tag: "Para grupos de ciclistas", desc: "Ático para 6 personas con lavadora, 3 habitaciones y balcón. Perfecto cuando venís en equipo.", photo: "/images/apartamentos/bergamota/foto-1.jpg" },
+  { name: "Arbre de te", slug: "arbol-de-te", guests: 6, bedrooms: 3, tag: "El más completo", desc: "3 habitaciones, lavavajillas, cocina de gas y balcón. Todo lo que necesitáis después de un gran día en el sillín.", photo: "/images/apartamentos/arbol-de-te/foto-1.jpg" },
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, tag: "Para parejas ciclistas", desc: "Acogedor apartamento con vistas al Onyar. Ideal para dos ciclistas que quieren lo mejor del Barri Vell.", photo: "/images/apartamentos/romani/foto-1.jpg" },
+];
+---
+<BaseLayout
+  title="Apartamentos para ciclistas en Girona — Aromatik Apartments"
+  description="Girona es la capital mundial del ciclismo. Alójate en el corazón del Barri Vell a 5 minutos de los mejores accesos a ruta. Guarda tu bici dentro, lavadora en el apartamento, self check-in."
+  ogImage="/images/apartamentos/arbol-de-te/foto-1.jpg"
+>
+
+  <!-- HERO -->
+  <section class="audience-hero audience-hero--ciclistas">
+    <div class="audience-hero-overlay"></div>
+    <div class="audience-hero-inner">
+      <span class="audience-eyebrow">Girona, capital del ciclismo</span>
+      <h1>Tu base en Girona,<br/><em>donde entrenan los pros</em></h1>
+      <p>Girona es el cuartel de invierno de los mejores equipos del pelotón mundial. Descubre por qué, y usa el Barri Vell como tu punto de partida.</p>
+      <div class="audience-hero-actions">
+        <a href="#apartamentos-ciclistas" class="btn btn-white">Ver apartamentos</a>
+        <a href="/reservar#motor" class="btn btn-outline-white">Reservar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ AROMATIK PARA CICLISTAS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Todo lo que necesitas</span>
+        <h2 style="margin-top:0.75rem">Pensado para ciclistas</h2>
+      </div>
+      <div class="audience-perks">
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🚲</div>
+          <h3>Bicis dentro del apartamento</h3>
+          <p>Nada de dejarla en la calle. Guardas la bici dentro del apartamento. Los ascensores son amplios y diseñados para ello.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🛗</div>
+          <h3>Ascensor en todos los edificios</h3>
+          <p>No hay que cargar la bici por escaleras. Subís vosotros, sube la bici. Simple y sin riesgos.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">👕</div>
+          <h3>Lavadora disponible</h3>
+          <p>El culotte del día no tiene por qué ser el del día siguiente. Lavadora en los apartamentos más grandes, siempre disponible.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🔑</div>
+          <h3>Self check-in 24h</h3>
+          <p>Llegas cuando llegas. Código en la puerta, sin esperar a nadie. Ideal si volvéis tarde de ruta o llegáis en avión de noche.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🍳</div>
+          <h3>Cocina para recargar</h3>
+          <p>Cocina completa para preparar la pasta del día anterior y el desayuno del día siguiente. Rendimiento desde el apartamento.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">📍</div>
+          <h3>Salida directa a ruta</h3>
+          <p>Desde el Barri Vell arrancas directamente hacia el Rocacorba, les Gavarres o la Costa Brava. Sin coger el coche. Sin perder tiempo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIRONA CYCLING -->
+  <section class="section bg-cream">
+    <div class="container" style="max-width:760px;">
+      <span class="eyebrow">La meca del ciclismo</span>
+      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; margin:0.75rem 0 1.5rem;">Por qué Girona es diferente</h2>
+      <div class="prose">
+        <p>Girona lleva más de dos décadas siendo el hogar de elección para los mejores ciclistas del mundo. Chris Froome, Tom Pidcock, Egan Bernal — todos han pedalado por estas mismas carreteras. No es casualidad.</p>
+        <p>El clima es excepcional durante primavera y otoño. Las carreteras, tranquilas y con un asfalto que muchos equipos de WorldTour envidian. El Rocacorba —un clásico entre los pros— está a 40 minutos pedaleando desde la puerta. Las Gavarres os ofrecen rutas más técnicas hacia la Costa Brava.</p>
+        <p>Y al final del día, el Barri Vell os espera con restaurantes, terrazas y el placer de recorrer una ciudad medieval sin coches ni prisas. Girona es uno de esos sitios que te hacen querer volver cada temporada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APARTAMENTOS DESTACADOS -->
+  <section id="apartamentos-ciclistas" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Nuestros apartamentos</span>
+        <h2 style="margin-top:0.75rem">Elige tu base</h2>
+        <p>Solo o en grupo, tenemos el apartamento que encaja.</p>
+      </div>
+      <div class="audience-apts">
+        {featuredApts.map(apt => (
+          <a href={`/apartamentos/${apt.slug}`} class="audience-apt-card">
+            <div class="audience-apt-img" style={`background-image:url('${apt.photo}')`}>
+              <span class="audience-apt-tag">{apt.tag}</span>
+            </div>
+            <div class="audience-apt-body">
+              <h3>{apt.name}</h3>
+              <p class="audience-apt-meta">Hasta {apt.guests} personas · {apt.bedrooms} habitaciones</p>
+              <p class="audience-apt-desc">{apt.desc}</p>
+              <span class="audience-apt-link">Ver apartamento →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="/#apartamentos" class="btn btn-border">Ver los 8 apartamentos</a>
+      </div>
+    </div>
+  </section>
+
+  <HostCard />
+  <ReviewsCarousel />
+
+  <!-- CTA FINAL -->
+  <section class="section bg-cream">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin-bottom:0.75rem;">¿Cuándo es tu próxima salida?</h2>
+      <p style="color:var(--stone-600); margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto;">Reserva directamente y confirma la disponibilidad al instante. Sin comisiones, con atención directa si tienes alguna duda sobre la logística.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/reservar#motor" class="btn btn-dark">Comprobar disponibilidad</a>
+        <a href="/contacto" class="btn btn-border">Hablar con Arnau</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.audience-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  padding-top: 70px;
+  background: #1a2e3a;
+}
+.audience-hero--ciclistas {
+  background-image: url('/images/apartamentos/arbol-de-te/foto-1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.audience-hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.50); }
+.audience-hero-inner {
+  position: relative; z-index: 1; max-width: 780px; padding: 4rem 2rem;
+  background: rgba(0,0,0,0.28); border-radius: 20px; backdrop-filter: blur(2px); margin: 0 1.5rem;
+}
+.audience-eyebrow { display: block; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+.audience-hero-inner h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 400; line-height: 1.2; margin-bottom: 1.25rem; }
+.audience-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.85); max-width: 560px; margin: 0 auto 2rem; line-height: 1.7; }
+.audience-hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.audience-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
+.audience-perk { padding: 2rem 1.5rem; border: 1px solid var(--stone-200); border-radius: 16px; background: #fff; }
+.audience-perk-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.audience-perk h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.audience-perk p { font-size: 0.875rem; color: var(--stone-600); line-height: 1.7; }
+.audience-apts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+.audience-apt-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid var(--stone-200); text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+.audience-apt-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.12); transform: translateY(-2px); }
+.audience-apt-img { height: 200px; background-size: cover; background-position: center; position: relative; }
+.audience-apt-tag { position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 99px; backdrop-filter: blur(4px); }
+.audience-apt-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.audience-apt-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.audience-apt-meta { font-size: 0.8rem; color: var(--stone-500); margin-bottom: 0.75rem; }
+.audience-apt-desc { font-size: 0.875rem; color: var(--stone-600); line-height: 1.65; flex: 1; }
+.audience-apt-link { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--gold); }
+@media (max-width: 900px) { .audience-perks, .audience-apts { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .audience-perks, .audience-apts { grid-template-columns: 1fr; } .audience-hero-inner { padding: 2.5rem 1.25rem; } }
+</style>

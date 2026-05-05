@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HostCard from '../components/HostCard.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+
+const featuredApts = [
+  { name: "Bergamota", slug: "bergamota", guests: 6, bedrooms: 3, tag: "El más espacioso", desc: "Ático con 3 habitaciones, 2 baños y lavadora. El favorito de las familias que buscan comodidad sin renunciar a nada.", photo: "/images/apartamentos/bergamota/foto-1.jpg" },
+  { name: "Arbre de te", slug: "arbol-de-te", guests: 6, bedrooms: 3, tag: "Diseño y espacio", desc: "3 habitaciones, lavavajillas, cocina de gas, bañera y balcón privado. Todo lo que necesita una familia exigente.", photo: "/images/apartamentos/arbol-de-te/foto-1.jpg" },
+  { name: "Ylang-Ylang", slug: "ylang-ylang", guests: 4, bedrooms: 2, tag: "Vistas al río Onyar", desc: "Dos habitaciones con vistas al río y balcón. Perfecto para familias de 3 o 4 personas que quieren el centro de Girona.", photo: "/images/apartamentos/ylang-ylang/foto-1.jpg" },
+];
+---
+<BaseLayout
+  title="Apartamentos para familias en Girona — Aromatik Apartments"
+  description="Apartamentos espaciosos con 2 y 3 habitaciones en el casco antiguo de Girona. Pet friendly, cunas y tronas disponibles, ascensor amplio para cochecitos. Reserva directa al mejor precio."
+  ogImage="/images/apartamentos/bergamota/foto-1.jpg"
+>
+
+  <!-- HERO -->
+  <section class="audience-hero audience-hero--familias">
+    <div class="audience-hero-overlay"></div>
+    <div class="audience-hero-inner">
+      <span class="audience-eyebrow">Girona en familia</span>
+      <h1>El Barri Vell de Girona,<br/><em>sin renunciar a nada</em></h1>
+      <p>Apartamentos de 2 y 3 habitaciones en el corazón medieval de Girona. Espacio para todos, cocina equipada y todo lo que una familia necesita para sentirse como en casa.</p>
+      <div class="audience-hero-actions">
+        <a href="#apartamentos-familias" class="btn btn-white">Ver apartamentos</a>
+        <a href="/reservar#motor" class="btn btn-outline-white">Reservar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ AROMATIK PARA FAMILIAS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Pensado para vosotros</span>
+        <h2 style="margin-top:0.75rem">Por qué las familias eligen Aromatik</h2>
+      </div>
+      <div class="audience-perks">
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🛏️</div>
+          <h3>2 y 3 habitaciones</h3>
+          <p>Los niños duermen en su cuarto. Vosotros también descansáis. Nada de camas plegables ni sofás-cama de emergencia.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🍳</div>
+          <h3>Cocina completa</h3>
+          <p>Nevera, microondas, cafetera, tostadora y todo lo necesario para desayunar tranquilos sin depender de horarios de restaurante.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🛗</div>
+          <h3>Ascensor amplio</h3>
+          <p>Todos nuestros edificios tienen ascensor. Caben cochecitos, maletas grandes y hasta bicis. Sin escaleras ni malabarismos.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🐾</div>
+          <h3>Pet friendly</h3>
+          <p>Los peludos de la familia también son bienvenidos. Todos nuestros apartamentos admiten mascotas.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🪑</div>
+          <h3>Cuna y trona</h3>
+          <p>Disponibles bajo petición previa sin coste adicional. Solo avísanos al reservar y lo tendremos listo para vuestra llegada.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">📍</div>
+          <h3>En el centro histórico</h3>
+          <p>A pie de la Catedral, los Baños Árabes y el río Onyar. Girona entera es un parque histórico para explorar en familia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APARTAMENTOS DESTACADOS -->
+  <section id="apartamentos-familias" class="section bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Los más recomendados</span>
+        <h2 style="margin-top:0.75rem">Apartamentos para familias</h2>
+        <p>Seleccionamos los que mejor se adaptan a estancias en familia.</p>
+      </div>
+      <div class="audience-apts">
+        {featuredApts.map(apt => (
+          <a href={`/apartamentos/${apt.slug}`} class="audience-apt-card">
+            <div class="audience-apt-img" style={`background-image:url('${apt.photo}')`}>
+              <span class="audience-apt-tag">{apt.tag}</span>
+            </div>
+            <div class="audience-apt-body">
+              <h3>{apt.name}</h3>
+              <p class="audience-apt-meta">Hasta {apt.guests} personas · {apt.bedrooms} habitaciones</p>
+              <p class="audience-apt-desc">{apt.desc}</p>
+              <span class="audience-apt-link">Ver apartamento →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GIRONA EN FAMILIA -->
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <span class="eyebrow">La ciudad</span>
+      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; margin:0.75rem 0 1.5rem;">Girona: la ciudad que enamora a toda la familia</h2>
+      <div class="prose">
+        <p>Girona es una de las ciudades medievales mejor conservadas de Europa, y recorrerla con niños es una experiencia que no olvidarán. La muralla romana, los puentecitos sobre el Onyar, la Catedral y el laberinto de callejones del Call Jueu convierten cada paseo en una pequeña aventura.</p>
+        <p>Desde nuestros apartamentos llegaréis a todo en menos de 10 minutos a pie: parques, mercado, heladerías, y el paseo fluvial junto al río. Nada de coger el coche. Nada de atascos.</p>
+        <p>En verano, las piscinas municipales están a 15 minutos a pie. La Costa Brava queda a 40 minutos en coche. Y si os apetece, los Pirineos están a menos de una hora.</p>
+      </div>
+    </div>
+  </section>
+
+  <HostCard />
+  <ReviewsCarousel />
+
+  <!-- CTA FINAL -->
+  <section class="section bg-cream">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin-bottom:0.75rem;">¿Listos para vuestra escapada familiar?</h2>
+      <p style="color:var(--stone-600); margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto;">Reservad directamente y os garantizamos el mejor precio disponible. Sin comisiones, con atención personal.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/reservar#motor" class="btn btn-dark">Comprobar disponibilidad</a>
+        <a href="/contacto" class="btn btn-border">Preguntar antes de reservar</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ── Hero ── */
+.audience-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  padding-top: 70px;
+  background: #2a3a2a;
+}
+.audience-hero--familias {
+  background-image: url('/images/apartamentos/bergamota/foto-2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.audience-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.48);
+}
+.audience-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  padding: 4rem 2rem;
+  background: rgba(0,0,0,0.28);
+  border-radius: 20px;
+  backdrop-filter: blur(2px);
+  margin: 0 1.5rem;
+}
+.audience-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1rem;
+}
+.audience-hero-inner h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+.audience-hero-inner p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 560px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+.audience-hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Perks grid ── */
+.audience-perks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.audience-perk {
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--stone-200);
+  border-radius: 16px;
+  background: #fff;
+}
+.audience-perk-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.audience-perk h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.audience-perk p { font-size: 0.875rem; color: var(--stone-600); line-height: 1.7; }
+
+/* ── Featured apartments ── */
+.audience-apts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.audience-apt-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--stone-200);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.audience-apt-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.12); transform: translateY(-2px); }
+.audience-apt-img {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.audience-apt-tag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 99px;
+  backdrop-filter: blur(4px);
+}
+.audience-apt-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.audience-apt-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.audience-apt-meta { font-size: 0.8rem; color: var(--stone-500); margin-bottom: 0.75rem; }
+.audience-apt-desc { font-size: 0.875rem; color: var(--stone-600); line-height: 1.65; flex: 1; }
+.audience-apt-link { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--gold); }
+
+@media (max-width: 900px) {
+  .audience-perks { grid-template-columns: repeat(2, 1fr); }
+  .audience-apts { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .audience-perks { grid-template-columns: 1fr; }
+  .audience-apts { grid-template-columns: 1fr; }
+  .audience-hero-inner { padding: 2.5rem 1.25rem; }
+}
+</style>

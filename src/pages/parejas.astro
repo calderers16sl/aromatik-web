@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HostCard from '../components/HostCard.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+
+const featuredApts = [
+  { name: "Romaní", slug: "romani", guests: 2, bedrooms: 1, tag: "El favorito de parejas", desc: "Acogedor y con vistas al río Onyar. Luz natural, ambiente tranquilo y todo lo que necesitáis los dos.", photo: "/images/apartamentos/romani/foto-1.jpg" },
+  { name: "Lavanda", slug: "lavanda", guests: 2, bedrooms: 1, tag: "Tranquilidad y río", desc: "El más sereno de todos. Vistas al Onyar, decoración cuidada y el silencio que merece una escapada en pareja.", photo: "/images/apartamentos/lavanda/foto-1.jpg" },
+  { name: "Llimona", slug: "limon", guests: 2, bedrooms: 1, tag: "Balcón privado", desc: "Balcón para desayunar con vistas a la ciudad. Fresco, luminoso y perfecto para desconectar juntos.", photo: "/images/apartamentos/limon/foto-1.jpg" },
+];
+---
+<BaseLayout
+  title="Apartamentos románticos para parejas en Girona — Aromatik Apartments"
+  description="Escapada en pareja al corazón medieval de Girona. Apartamentos boutique con vistas al río Onyar y balcón privado. Ambiente íntimo, reserva directa al mejor precio."
+  ogImage="/images/apartamentos/romani/foto-1.jpg"
+>
+
+  <!-- HERO -->
+  <section class="audience-hero audience-hero--parejas">
+    <div class="audience-hero-overlay"></div>
+    <div class="audience-hero-inner">
+      <span class="audience-eyebrow">Escapada romántica en Girona</span>
+      <h1>Una ciudad medieval,<br/><em>solo vosotros dos</em></h1>
+      <p>Apartamentos íntimos con vistas al río Onyar en el corazón del Barri Vell. Porque las mejores escapadas empiezan por el sitio donde os quedáis.</p>
+      <div class="audience-hero-actions">
+        <a href="#apartamentos-parejas" class="btn btn-white">Ver apartamentos</a>
+        <a href="/reservar#motor" class="btn btn-outline-white">Reservar ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ AROMATIK PARA PAREJAS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Diseñado para dos</span>
+        <h2 style="margin-top:0.75rem">La escapada que os merecéis</h2>
+      </div>
+      <div class="audience-perks">
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🌊</div>
+          <h3>Vistas al río Onyar</h3>
+          <p>Las casas de colores reflejadas en el agua. Ese despertar con el sonido del río que no se olvida fácilmente.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🏛️</div>
+          <h3>En pleno casco antiguo</h3>
+          <p>Callejones medievales, la Catedral a cinco minutos, el Call Jueu para perderse. Girona es una ciudad de película. Literalmente.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🍷</div>
+          <h3>A pie de los mejores restaurantes</h3>
+          <p>El Barri Vell concentra algunos de los mejores restaurantes de Girona. Salis a cenar, volvéis andando. Sin taxi, sin reloj.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">☕</div>
+          <h3>Desayuno en casa</h3>
+          <p>Cafetera, tostadora, todo listo. El primer café del día en vuestro propio apartamento, con calma y sin prisa.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🔑</div>
+          <h3>Llegad cuando queráis</h3>
+          <p>Self check-in con código. Si el tren llega tarde o tenéis ganas de alargar la cena, no hay problema. El apartamento os espera.</p>
+        </div>
+        <div class="audience-perk">
+          <div class="audience-perk-icon">🐾</div>
+          <h3>Con vuestra mascota</h3>
+          <p>Si formáis tres, también sois bienvenidos. Todos nuestros apartamentos admiten mascotas sin recargo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APARTAMENTOS DESTACADOS -->
+  <section id="apartamentos-parejas" class="section bg-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Perfectos para dos</span>
+        <h2 style="margin-top:0.75rem">Nuestros apartamentos para parejas</h2>
+        <p>Íntimos, bien ubicados y con esa atmósfera que hace especial una escapada.</p>
+      </div>
+      <div class="audience-apts">
+        {featuredApts.map(apt => (
+          <a href={`/apartamentos/${apt.slug}`} class="audience-apt-card">
+            <div class="audience-apt-img" style={`background-image:url('${apt.photo}')`}>
+              <span class="audience-apt-tag">{apt.tag}</span>
+            </div>
+            <div class="audience-apt-body">
+              <h3>{apt.name}</h3>
+              <p class="audience-apt-meta">2 personas · 1 habitación</p>
+              <p class="audience-apt-desc">{apt.desc}</p>
+              <span class="audience-apt-link">Ver apartamento →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GIRONA EN PAREJA -->
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <span class="eyebrow">La ciudad</span>
+      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; margin:0.75rem 0 1.5rem;">Girona, el escenario perfecto</h2>
+      <div class="prose">
+        <p>Girona es una de esas ciudades que tienen algo difícil de explicar pero fácil de sentir. El barrio judío, la Catedral gótica, los puentes sobre el Onyar, las casas de colores que enamoraron al mundo en <em>Juego de Tronos</em>. Cada rincón tiene su historia y su encanto propio.</p>
+        <p>Desde el apartamento podéis llegar a todo a pie: los mercados del Mercat del Lleó, las terrazas del carrer de la Força, las librerías del Barri Vell. Por la noche, las calles se quedan casi vacías y la ciudad se vuelve todavía más mágica.</p>
+        <p>Si queréis salir de la ciudad, la Costa Brava está a 40 minutos en coche. Y si os quedáis, Girona tiene suficiente para llenar días enteros sin repetir.</p>
+      </div>
+    </div>
+  </section>
+
+  <HostCard />
+  <ReviewsCarousel />
+
+  <!-- CTA FINAL -->
+  <section class="section bg-cream">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin-bottom:0.75rem;">¿Cuándo es vuestra escapada?</h2>
+      <p style="color:var(--stone-600); margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto;">Reservad directamente y conseguid el mejor precio garantizado. Sin comisiones, con atención personal de Arnau.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="/reservar#motor" class="btn btn-dark">Comprobar disponibilidad</a>
+        <a href="/contacto" class="btn btn-border">Preguntar antes de reservar</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.audience-hero {
+  position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; color: #fff; overflow: hidden; padding-top: 70px; background: #2a1f2e;
+}
+.audience-hero--parejas {
+  background-image: url('/images/apartamentos/romani/foto-1.jpg');
+  background-size: cover; background-position: center;
+}
+.audience-hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.48); }
+.audience-hero-inner { position: relative; z-index: 1; max-width: 780px; padding: 4rem 2rem; background: rgba(0,0,0,0.28); border-radius: 20px; backdrop-filter: blur(2px); margin: 0 1.5rem; }
+.audience-eyebrow { display: block; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1rem; }
+.audience-hero-inner h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 400; line-height: 1.2; margin-bottom: 1.25rem; }
+.audience-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.85); max-width: 560px; margin: 0 auto 2rem; line-height: 1.7; }
+.audience-hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.audience-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem; }
+.audience-perk { padding: 2rem 1.5rem; border: 1px solid var(--stone-200); border-radius: 16px; background: #fff; }
+.audience-perk-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.audience-perk h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+.audience-perk p { font-size: 0.875rem; color: var(--stone-600); line-height: 1.7; }
+.audience-apts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem; }
+.audience-apt-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid var(--stone-200); text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+.audience-apt-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.12); transform: translateY(-2px); }
+.audience-apt-img { height: 200px; background-size: cover; background-position: center; position: relative; }
+.audience-apt-tag { position: absolute; top: 0.75rem; left: 0.75rem; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 99px; backdrop-filter: blur(4px); }
+.audience-apt-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.audience-apt-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.audience-apt-meta { font-size: 0.8rem; color: var(--stone-500); margin-bottom: 0.75rem; }
+.audience-apt-desc { font-size: 0.875rem; color: var(--stone-600); line-height: 1.65; flex: 1; }
+.audience-apt-link { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--gold); }
+@media (max-width: 900px) { .audience-perks, .audience-apts { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) { .audience-perks, .audience-apts { grid-template-columns: 1fr; } .audience-hero-inner { padding: 2.5rem 1.25rem; } }
+</style>
