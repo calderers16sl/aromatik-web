@@ -1095,6 +1095,7 @@ const ko: T = {
   aptBookTitle: "마음에 드시나요?",
   aptBookSubtitle: "이용 가능 날짜를 확인하고 직접 예약하세요.",
   aptBookCta: "이용 가능 날짜 확인", aptContactCta: "질문하기",
+  aptBookNote: "중개인 없음 · 즉시 확인",
   aptBookingTitle: (name) => `${name} 예약`,
   aptOtherTitle: "다른 아파트먼트",
   aptSwipeHint: "← 스와이프 →",
