@@ -211,12 +211,6 @@ const breadcrumbSchema = JSON.stringify({
       </div>
     </div>
 
-    <!-- Motor de reservas -->
-    <div class="booking-section" id="reservar-widget">
-      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
-      <BookingWidget smoobuId={apt.smoobuId} />
-    </div>
-
     <!-- Calendario de disponibilidad -->
     <div class="calendar-section">
       <h2 class="section-heading" style="font-family:var(--serif); font-size:1.8rem; font-weight:400; text-align:center; margin-bottom:1.5rem;">Disponibilidad</h2>
@@ -229,6 +223,12 @@ const breadcrumbSchema = JSON.stringify({
           src={`https://login.smoobu.com/es/cockpit/widget/show-calendar-iframe/${apt.smoobuId}/${apt.calendarToken}`}
           loading="lazy" title="Disponibilidad"></iframe>
       </div>
+    </div>
+
+    <!-- Motor de reservas -->
+    <div class="booking-section" id="reservar-widget">
+      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
+      <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
     <!-- Otros apartamentos -->

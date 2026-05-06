@@ -149,11 +149,6 @@ const breadcrumbSchema = JSON.stringify({
       </div>
     </div>
 
-    <div class="booking-section" id="reservar-widget">
-      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
-      <BookingWidget smoobuId={apt.smoobuId} />
-    </div>
-
     <div class="calendar-section">
       <h2 class="section-heading">{calendarTitle}</h2>
       <div class="smoobu-cal-wrap">
@@ -165,6 +160,11 @@ const breadcrumbSchema = JSON.stringify({
           src={`https://login.smoobu.com/${smoobuLang}/cockpit/widget/show-calendar-iframe/${apt.smoobuId}/${apt.calendarToken}`}
           loading="lazy" title={calendarTitle}></iframe>
       </div>
+    </div>
+
+    <div class="booking-section" id="reservar-widget">
+      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
+      <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
     <div class="otros-section">
