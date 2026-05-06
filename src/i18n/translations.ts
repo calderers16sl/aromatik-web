@@ -1352,7 +1352,14 @@ const pt: T = {
     'Self check-in': 'Self check-in',
     'Se admiten mascotas': 'Animais de estimação permitidos',
   },
-
+  aptBookSubtitle: "Consulta a disponibilidade e reserva diretamente.",
+  aptLocationText: "Centro histórico de Girona · Parque de estacionamento La Copa (gratuito, 10 min a pé)",
+  aptSize: (n: number) => `${n} m²`,
+  aptSwipeHint: "← deslize →",
+  bookTitle: "Reserva a tua estadia",
+  contactFormAptDefault: "Sem preferência",
+  contactUrgText: "O WhatsApp é a forma mais rápida de nos contactar. Resposta em minutos.",
+  faqCtaDesc: "Escreve-nos diretamente. Respondemos em menos de 1 hora.",
 };
 
 const nl: T = {
@@ -1506,7 +1513,14 @@ const nl: T = {
     'Self check-in': 'Zelf inchecken',
     'Se admiten mascotas': 'Huisdieren toegestaan',
   },
-
+  aptBookSubtitle: "Bekijk de beschikbaarheid en boek direct.",
+  aptLocationText: "Historische oude stad van Girona · Parkeerterrein La Copa (gratis, 10 min lopen)",
+  aptSize: (n: number) => `${n} m²`,
+  aptSwipeHint: "← veeg →",
+  bookTitle: "Boek je verblijf",
+  contactFormAptDefault: "Geen voorkeur",
+  contactUrgText: "WhatsApp is de snelste manier om ons te bereiken. Antwoord binnen enkele minuten.",
+  faqCtaDesc: "Schrijf ons direct. We reageren binnen 1 uur.",
 };
 
 export const translations: Record<Locale, T> = { es, en, fr, ca, de, zh, ko, pt, nl };
