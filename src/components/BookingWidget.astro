@@ -50,10 +50,53 @@ const targetId = smoobuId ? `smoobuFrame${smoobuId}` : "smoobuFrameAll";
       }
     }
 
-    function initSmoobu() {
+    // GA4 cross-domain linker: ask Google Tag to decorate the URL with the _gl param
+    // so the client_id and gclid travel from aromatik.apartments to {login,booking}.smoobu.com.
+    // REQUIREMENT: both `login.smoobu.com` AND `booking.smoobu.com` must be configured as
+    // cross-domain measurement domains in GA4 Admin -> Data Streams -> Configure your domains.
+    function getDecoratedUrl(targetUrl, callback) {
+      var done = false;
+      var finish = function(url) { if (done) return; done = true; callback(url); };
+
+      if (typeof window.gtag !== 'function') {
+        finish(targetUrl);
+        return;
+      }
+
+      // Create an invisible anchor and click it programmatically.
+      // Google Tag's linker plugin auto-decorates the href of <a> elements pointing to
+      // configured cross-domain destinations when a click event fires on them.
+      var a = null;
+      try {
+        a = document.createElement('a');
+        a.href = targetUrl;
+        a.style.position = 'absolute';
+        a.style.left = '-9999px';
+        a.style.top = '-9999px';
+        a.style.pointerEvents = 'none';
+        document.body.appendChild(a);
+
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          var decoratedHref = a.href;
+          if (a.parentNode) a.parentNode.removeChild(a);
+          finish(decoratedHref);
+        }, { once: true, capture: true });
+
+        a.click();
+      } catch (e) {
+        if (a && a.parentNode) a.parentNode.removeChild(a);
+      }
+
+      // Safety fallback: if the click handler didn't fire within 1.5s, proceed undecorated.
+      setTimeout(function() { finish(targetUrl); }, 1500);
+    }
+
+    function initSmoobuWithUrl(url) {
       if (typeof BookingToolIframe !== 'undefined') {
         BookingToolIframe.initialize({
-          url: iframeUrl,
+          url: url,
           baseUrl: "https://login.smoobu.com",
           target: "#" + targetId
         });
@@ -61,6 +104,15 @@ const targetId = smoobuId ? `smoobuFrame${smoobuId}` : "smoobuFrameAll";
         if (container) attachScrollFix(container);
       }
     }
+
+    function initSmoobu() {
+      // Decorate URL with GA4 cross-domain linker before initializing the widget,
+      // so the client_id and gclid travel through to the Smoobu iframe.
+      getDecoratedUrl(iframeUrl, function(decoratedUrl) {
+        initSmoobuWithUrl(decoratedUrl);
+      });
+    }
+
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initSmoobu);
     } else {
