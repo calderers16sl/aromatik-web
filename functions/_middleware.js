@@ -163,5 +163,8 @@ export async function onRequest({ request, next }) {
 
 function buildRedirectUrl(url, lang, pathname) {
   const suffix = pathname === '/' ? '' : pathname;
-  return new URL(`/${lang}${suffix}`, url).toString();
+  const newUrl = new URL(`/${lang}${suffix}`, url);
+  // Preserve query params (gclid, utm_*, etc.) through lang redirects
+  newUrl.search = url.search;
+  return newUrl.toString();
 }
