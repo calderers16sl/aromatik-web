@@ -503,6 +503,47 @@ const schemaOrg = JSON.stringify({
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQRPRS7D"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <!-- ─────────────────────────────────────────────────────────────────────
+       Smoobu booking confirmation listener
+       Smoobu iframe (booking.smoobu.com) posts a "purchase" message when a
+       reservation completes. We push it to dataLayer so GTM/GA4/Google Ads
+       fire the conversion event from the parent domain — where _gcl_aw, gclid
+       and client_id live — so the conversion is attributable to Google Ads.
+       Without this, the gtag inside the iframe has a different client_id
+       than the visitor on aromatik.apartments and the conversion is orphaned.
+       Reference: https://medium.com/geekculture/how-to-measure-purchases-with-gtag-js-from-iframe-309932c19b6
+  ──────────────────────────────────────────────────────────────────────── -->
+  <script>
+    (function() {
+      window.addEventListener('message', function(e) {
+        // Only accept messages from Smoobu's domains
+        if (e.origin !== 'https://booking.smoobu.com' &&
+            e.origin !== 'https://login.smoobu.com') return;
+        if (!e.data || typeof e.data !== 'object') return;
+        if (e.data.event !== 'purchase') return;
+
+        var d = e.data.data || {};
+        window.dataLayer = window.dataLayer || [];
+        // Clear any previous ecommerce object (recommended by GA4)
+        window.dataLayer.push({ ecommerce: null });
+        window.dataLayer.push({
+          event: 'purchase',
+          ecommerce: {
+            transaction_id: d.transaction_id || ('smoobu-' + Date.now()),
+            value:          Number(d.value)  || 1,
+            currency:       d.currency       || 'EUR',
+            items:          d.items          || [{
+              item_id:   d.transaction_id || 'smoobu-booking',
+              item_name: d.item_name      || 'Aromatik Apartments booking',
+              quantity:  1,
+              price:     Number(d.value) || 1
+            }]
+          }
+        });
+      }, false);
+    })();
+  </script>
+  <!-- End Smoobu booking confirmation listener -->
   <header class="header" id="header">
     <a href={langRoot || '/'} class="header-logo">Aromatik <em>Apartments</em></a>
 
