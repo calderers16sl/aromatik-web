@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+const t = getT(lang);
+const langRoot = `/${lang}`;
+---
+<BaseLayout title={`${t.bookConfirmedTitle} — Aromatik Apartments`} description={t.bookConfirmedSubtitle} lang={lang}>
+  <section class="confirmed-hero">
+    <div class="confirmed-icon">✓</div>
+    <span class="eyebrow">{t.bookConfirmedEyebrow}</span>
+    <h1>{t.bookConfirmedTitle}</h1>
+    <p>{t.bookConfirmedSubtitle}</p>
+  </section>
+
+  <section class="section confirmed-steps">
+    <div class="container">
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>{t.bookConfirmedStep1Title}</h3>
+          <p>{t.bookConfirmedStep1Text}</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>{t.bookConfirmedStep2Title}</h3>
+          <p>{t.bookConfirmedStep2Text}</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>{t.bookConfirmedStep3Title}</h3>
+          <p>{t.bookConfirmedStep3Text}</p>
+        </div>
+      </div>
+      <div class="confirmed-ctas">
+        <a href={`${langRoot}/`} class="btn btn-green">{t.bookConfirmedCta}</a>
+        <a href={`${langRoot}/house-rules`} class="btn btn-outline">{t.bookConfirmedRules}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

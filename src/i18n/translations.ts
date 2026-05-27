@@ -63,6 +63,11 @@ export interface T {
   aptDescriptions: Record<string, string>;
   aptH1s: Record<string, string>;
   amenityLabels: Record<string, string>;
+  bookConfirmedEyebrow: string; bookConfirmedTitle: string; bookConfirmedSubtitle: string;
+  bookConfirmedStep1Title: string; bookConfirmedStep1Text: string;
+  bookConfirmedStep2Title: string; bookConfirmedStep2Text: string;
+  bookConfirmedStep3Title: string; bookConfirmedStep3Text: string;
+  bookConfirmedCta: string; bookConfirmedRules: string;
 }
 
 const es: T = {
@@ -224,6 +229,18 @@ const es: T = {
     'Self check-in': 'Self check-in',
     'Se admiten mascotas': 'Se admiten mascotas',
   },
+
+  bookConfirmedEyebrow: "¡Reserva confirmada! 🎉",
+  bookConfirmedTitle: "¡Nos vemos en Girona!",
+  bookConfirmedSubtitle: "Tu reserva ha sido procesada con éxito. Recibirás un email de confirmación en breve con todos los detalles.",
+  bookConfirmedStep1Title: "Email de confirmación",
+  bookConfirmedStep1Text: "Revisa tu bandeja de entrada. Si no ves el email, comprueba la carpeta de spam.",
+  bookConfirmedStep2Title: "Instrucciones de llegada",
+  bookConfirmedStep2Text: "Te enviaremos las instrucciones de check-in y el código de acceso 48 horas antes de tu llegada.",
+  bookConfirmedStep3Title: "¿Tienes alguna pregunta?",
+  bookConfirmedStep3Text: "Escríbenos a hola@aromatik.apartments — estaremos encantados de ayudarte.",
+  bookConfirmedCta: "Volver al inicio",
+  bookConfirmedRules: "Ver normas de la casa",
 
 };
 
@@ -387,6 +404,18 @@ const en: T = {
     'Se admiten mascotas': 'Pets allowed',
   },
 
+  bookConfirmedEyebrow: "Booking confirmed! 🎉",
+  bookConfirmedTitle: "See you in Girona!",
+  bookConfirmedSubtitle: "Your booking has been successfully processed. You'll receive a confirmation email shortly with all the details.",
+  bookConfirmedStep1Title: "Confirmation email",
+  bookConfirmedStep1Text: "Check your inbox. If you don't see the email, check your spam folder.",
+  bookConfirmedStep2Title: "Arrival instructions",
+  bookConfirmedStep2Text: "We'll send you check-in instructions and the access code 48 hours before your arrival.",
+  bookConfirmedStep3Title: "Any questions?",
+  bookConfirmedStep3Text: "Write to us at hola@aromatik.apartments — we'll be happy to help.",
+  bookConfirmedCta: "Back to home",
+  bookConfirmedRules: "View house rules",
+
 };
 
 const fr: T = {
@@ -548,6 +577,18 @@ const fr: T = {
     'Self check-in': 'Check-in autonome',
     'Se admiten mascotas': 'Animaux acceptés',
   },
+
+  bookConfirmedEyebrow: "Réservation confirmée ! 🎉",
+  bookConfirmedTitle: "À bientôt à Gérone !",
+  bookConfirmedSubtitle: "Votre réservation a été traitée avec succès. Vous recevrez un email de confirmation sous peu avec tous les détails.",
+  bookConfirmedStep1Title: "Email de confirmation",
+  bookConfirmedStep1Text: "Vérifiez votre boîte de réception. Si vous ne voyez pas l'email, vérifiez vos spams.",
+  bookConfirmedStep2Title: "Instructions d'arrivée",
+  bookConfirmedStep2Text: "Nous vous enverrons les instructions d'enregistrement et le code d'accès 48 heures avant votre arrivée.",
+  bookConfirmedStep3Title: "Des questions ?",
+  bookConfirmedStep3Text: "Écrivez-nous à hola@aromatik.apartments — nous serons ravis de vous aider.",
+  bookConfirmedCta: "Retour à l'accueil",
+  bookConfirmedRules: "Voir le règlement intérieur",
 
 };
 
@@ -711,6 +752,18 @@ const ca: T = {
     'Se admiten mascotas': 'S\\\'admeten mascotes',
   },
 
+  bookConfirmedEyebrow: "Reserva confirmada! 🎉",
+  bookConfirmedTitle: "Ens veiem a Girona!",
+  bookConfirmedSubtitle: "La teva reserva s'ha processat amb èxit. Rebràs un email de confirmació en breu amb tots els detalls.",
+  bookConfirmedStep1Title: "Email de confirmació",
+  bookConfirmedStep1Text: "Revisa la teva safata d'entrada. Si no veus l'email, comprova la carpeta de correu brossa.",
+  bookConfirmedStep2Title: "Instruccions d'arribada",
+  bookConfirmedStep2Text: "T'enviarem les instruccions de check-in i el codi d'accés 48 hores abans de la teva arribada.",
+  bookConfirmedStep3Title: "Tens alguna pregunta?",
+  bookConfirmedStep3Text: "Escriu-nos a hola@aromatik.apartments — estarem encantats d'ajudar-te.",
+  bookConfirmedCta: "Tornar a l'inici",
+  bookConfirmedRules: "Veure normes de la casa",
+
 };
 
 const de: T = {
@@ -872,6 +925,18 @@ const de: T = {
     'Self check-in': 'Self-Check-in',
     'Se admiten mascotas': 'Haustiere erlaubt',
   },
+
+  bookConfirmedEyebrow: "Buchung bestätigt! 🎉",
+  bookConfirmedTitle: "Wir sehen uns in Girona!",
+  bookConfirmedSubtitle: "Ihre Buchung wurde erfolgreich bearbeitet. Sie erhalten in Kürze eine Bestätigungs-E-Mail mit allen Details.",
+  bookConfirmedStep1Title: "Bestätigungs-E-Mail",
+  bookConfirmedStep1Text: "Überprüfen Sie Ihren Posteingang. Falls Sie die E-Mail nicht sehen, prüfen Sie Ihren Spam-Ordner.",
+  bookConfirmedStep2Title: "Anreiseinformationen",
+  bookConfirmedStep2Text: "Wir senden Ihnen die Check-in-Anleitung und den Zugangscode 48 Stunden vor Ihrer Ankunft.",
+  bookConfirmedStep3Title: "Haben Sie Fragen?",
+  bookConfirmedStep3Text: "Schreiben Sie uns an hola@aromatik.apartments — wir helfen Ihnen gerne weiter.",
+  bookConfirmedCta: "Zurück zur Startseite",
+  bookConfirmedRules: "Hausregeln ansehen",
 
 };
 
@@ -1036,6 +1101,18 @@ const zh: T = {
     'Se admiten mascotas': '允许携带宠物',
   },
 
+  bookConfirmedEyebrow: "预订已确认！🎉",
+  bookConfirmedTitle: "赫罗纳见！",
+  bookConfirmedSubtitle: "您的预订已成功处理。您将很快收到一封包含所有详细信息的确认邮件。",
+  bookConfirmedStep1Title: "确认邮件",
+  bookConfirmedStep1Text: "请查看您的收件箱。如果没有看到邮件，请检查垃圾邮件文件夹。",
+  bookConfirmedStep2Title: "入住说明",
+  bookConfirmedStep2Text: "我们将在您抵达前48小时发送入住指南和门锁密码。",
+  bookConfirmedStep3Title: "有任何问题？",
+  bookConfirmedStep3Text: "请发邮件至 hola@aromatik.apartments — 我们很乐意为您提供帮助。",
+  bookConfirmedCta: "返回首页",
+  bookConfirmedRules: "查看入住规则",
+
 };
 
 const ko: T = {
@@ -1198,6 +1275,18 @@ const ko: T = {
     'Se admiten mascotas': '반려동물 허용',
   },
 
+  bookConfirmedEyebrow: "예약이 확정되었습니다! 🎉",
+  bookConfirmedTitle: "헤로나에서 만나요!",
+  bookConfirmedSubtitle: "예약이 성공적으로 처리되었습니다. 곧 모든 세부 정보가 담긴 확인 이메일을 받으실 것입니다.",
+  bookConfirmedStep1Title: "확인 이메일",
+  bookConfirmedStep1Text: "받은 편지함을 확인하세요. 이메일이 보이지 않으면 스팸 폴더를 확인하세요.",
+  bookConfirmedStep2Title: "도착 안내",
+  bookConfirmedStep2Text: "체크인 48시간 전에 체크인 안내와 출입 코드를 보내드립니다.",
+  bookConfirmedStep3Title: "궁금한 점이 있으신가요?",
+  bookConfirmedStep3Text: "hola@aromatik.apartments 로 이메일을 보내주세요 — 기꺼이 도와드리겠습니다.",
+  bookConfirmedCta: "홈으로 돌아가기",
+  bookConfirmedRules: "하우스 룰 보기",
+
 };
 
 
@@ -1353,14 +1442,18 @@ const pt: T = {
     'Self check-in': 'Self check-in',
     'Se admiten mascotas': 'Animais de estimação permitidos',
   },
-  aptBookSubtitle: "Consulta a disponibilidade e reserva diretamente.",
-  aptLocationText: "Centro histórico de Girona · Parque de estacionamento La Copa (gratuito, 10 min a pé)",
-  aptSize: (n: number) => `${n} m²`,
-  aptSwipeHint: "← deslize →",
-  bookTitle: "Reserva a tua estadia",
-  contactFormAptDefault: "Sem preferência",
-  contactUrgText: "O WhatsApp é a forma mais rápida de nos contactar. Resposta em minutos.",
-  faqCtaDesc: "Escreve-nos diretamente. Respondemos em menos de 1 hora.",
+  bookConfirmedEyebrow: "Reserva confirmada! 🎉",
+  bookConfirmedTitle: "Até Girona!",
+  bookConfirmedSubtitle: "A sua reserva foi processada com sucesso. Receberá em breve um email de confirmação com todos os detalhes.",
+  bookConfirmedStep1Title: "Email de confirmação",
+  bookConfirmedStep1Text: "Verifique a sua caixa de entrada. Se não encontrar o email, verifique a pasta de spam.",
+  bookConfirmedStep2Title: "Instruções de chegada",
+  bookConfirmedStep2Text: "Enviaremos as instruções de check-in e o código de acesso 48 horas antes da sua chegada.",
+  bookConfirmedStep3Title: "Tem alguma dúvida?",
+  bookConfirmedStep3Text: "Escreva-nos para hola@aromatik.apartments — teremos todo o prazer em ajudar.",
+  bookConfirmedCta: "Voltar ao início",
+  bookConfirmedRules: "Ver regras da casa",
+
 };
 
 const nl: T = {
@@ -1514,14 +1607,18 @@ const nl: T = {
     'Self check-in': 'Zelf inchecken',
     'Se admiten mascotas': 'Huisdieren toegestaan',
   },
-  aptBookSubtitle: "Bekijk de beschikbaarheid en boek direct.",
-  aptLocationText: "Historische oude stad van Girona · Parkeerterrein La Copa (gratis, 10 min lopen)",
-  aptSize: (n: number) => `${n} m²`,
-  aptSwipeHint: "← veeg →",
-  bookTitle: "Boek je verblijf",
-  contactFormAptDefault: "Geen voorkeur",
-  contactUrgText: "WhatsApp is de snelste manier om ons te bereiken. Antwoord binnen enkele minuten.",
-  faqCtaDesc: "Schrijf ons direct. We reageren binnen 1 uur.",
+  bookConfirmedEyebrow: "Boeking bevestigd! 🎉",
+  bookConfirmedTitle: "Tot ziens in Girona!",
+  bookConfirmedSubtitle: "Uw boeking is succesvol verwerkt. U ontvangt binnenkort een bevestigingsmail met alle details.",
+  bookConfirmedStep1Title: "Bevestigingsmail",
+  bookConfirmedStep1Text: "Controleer uw inbox. Als u de mail niet ziet, controleer dan uw spammap.",
+  bookConfirmedStep2Title: "Aankomstinstructies",
+  bookConfirmedStep2Text: "We sturen u 48 uur voor uw aankomst de check-ininstructies en de toegangscode.",
+  bookConfirmedStep3Title: "Heeft u vragen?",
+  bookConfirmedStep3Text: "Schrijf ons op hola@aromatik.apartments — wij helpen u graag verder.",
+  bookConfirmedCta: "Terug naar home",
+  bookConfirmedRules: "Huisregels bekijken",
+
 };
 
 export const translations: Record<Locale, T> = { es, en, fr, ca, de, zh, ko, pt, nl };
