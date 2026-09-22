@@ -1,9 +1,16 @@
 /**
- * Cloudflare Pages Middleware — Language Detection
- * Detects user language from Accept-Language header + CF-IPCountry
- * and redirects to the appropriate language prefix.
- * If the user has manually selected a language (cookie), that takes priority.
- * Cookie: aromatik_lang — functional cookie, no consent required.
+ * Cloudflare Pages Middleware — Canonical host + Language Detection
+ *
+ * 1. Canonical host: every request is forced to https://aromatik.apartments
+ *    (no "www.", no http). Search Console was splitting the home page across
+ *    http://, https:// and https://www.../es/ — one URL per page from now on.
+ * 2. Legacy "/es" prefix: Spanish is the default locale and has NO prefix.
+ *    /es, /es/, /es/contacto → 301 to the unprefixed path (remembering ES).
+ *    Also cleans the junk the old behaviour produced: /en/es → /en/.
+ * 3. Language detection: Accept-Language header + CF-IPCountry, redirecting
+ *    to the appropriate language prefix. If the user has manually selected a
+ *    language (cookie), that takes priority.
+ *    Cookie: aromatik_lang — functional cookie, no consent required.
  */
 
 const SUPPORTED_LANGS = ['en', 'fr', 'ca', 'de', 'zh', 'ko', 'pt', 'nl'];
@@ -92,11 +99,13 @@ function responseWithCookie(response, lang) {
 }
 
 /**
- * Build a redirect response, optionally with a cookie.
+ * Build a redirect response with a language cookie.
+ * status: 302 for language auto-detection (may change per visitor),
+ *         301 for permanent canonical fixes (e.g. stripping "/es").
  */
-function redirectWithCookie(dest, lang) {
+function redirectWithCookie(dest, lang, status = 302) {
   return new Response(null, {
-    status: 302,
+    status,
     headers: {
       'Location': dest,
       'Set-Cookie': `${COOKIE_NAME}=${lang}; Path=/; Max-Age=${COOKIE_TTL}; SameSite=Lax`,
@@ -108,6 +117,18 @@ export async function onRequest({ request, next }) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
+  // ── Canonical host: https + apex, never www ─────────────────────
+  // Runs before everything else (assets included) so no www URL survives.
+  // Preview deployments (*.pages.dev) are untouched: not www, already https.
+  const isWww = url.hostname.startsWith('www.');
+  const isHttp = url.protocol === 'http:';
+  if (isWww || isHttp) {
+    const canonical = new URL(url.toString());
+    canonical.protocol = 'https:';
+    if (isWww) canonical.hostname = url.hostname.slice(4);
+    return Response.redirect(canonical.toString(), 301);
+  }
+
   // ── Skip non-page requests ──────────────────────────────────────
   if (
     pathname.startsWith('/api/') ||
@@ -118,17 +139,39 @@ export async function onRequest({ request, next }) {
     return next();
   }
 
+  // ── Legacy "/es" prefix → unprefixed path (301) ──────────────────
+  // ES is the default locale and is served without prefix. Before this rule
+  // existed, "/es/" was not recognised as a locale and got the detected
+  // language prepended (→ "/en/es"), which then served the home as a 200.
+  // Whoever types /es/... explicitly wants Spanish → remember it in the cookie
+  // so the follow-up request to the unprefixed URL is not auto-redirected.
+  if (pathname === '/es' || pathname.startsWith('/es/')) {
+    const dest = new URL(pathname.slice(3) || '/', url);
+    dest.search = url.search;
+    return redirectWithCookie(dest.toString(), DEFAULT_LANG, 301);
+  }
+
   // ── Skip pages that only exist in Spanish ───────────────────────
   if (SKIP_PATHS.has(pathname)) {
     return next();
   }
 
   // ── Already on a localized path ─────────────────────────────────
-  // Set cookie so that if the user later hits a non-prefixed URL we remember.
   const activeLang = SUPPORTED_LANGS.find(
     l => pathname === `/${l}` || pathname.startsWith(`/${l}/`)
   );
   if (activeLang) {
+    // Clean up junk produced by the old "/es" bug and already indexed by
+    // Google: /en/es → /en/, /en/es/contacto → /en/contacto (301).
+    const rest = pathname.slice(activeLang.length + 1); // '' | '/' | '/es' | '/es/...' | '/contacto'
+    if (rest === '/es' || rest.startsWith('/es/')) {
+      const tail = rest.slice(3); // '' | '/' | '/contacto'
+      const dest = new URL(tail ? `/${activeLang}${tail}` : `/${activeLang}/`, url);
+      dest.search = url.search;
+      return Response.redirect(dest.toString(), 301);
+    }
+
+    // Set cookie so that if the user later hits a non-prefixed URL we remember.
     const existingCookie = getLangCookie(request.headers.get('cookie'));
     if (!existingCookie) {
       // First localized page visit — persist language in cookie
