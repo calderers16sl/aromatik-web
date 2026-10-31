@@ -38,7 +38,7 @@ export interface T {
   bookBenefit1: string; bookBenefit2: string; bookBenefit3: string; bookBenefit4: string;
   contactEyebrow: string; contactTitle: string; contactSubtitle: string;
   contactHeading: string; contactIntro: string;
-  contactWaLabel: string; contactEmailLabel: string;
+  contactWaLabel: string; contactPhoneLabel: string; contactEmailLabel: string;
   contactLocLabel: string; contactLocValue: string;
   contactHoursLabel: string; contactHoursValue: string;
   contactUrgTitle: string; contactUrgText: string;
@@ -141,7 +141,7 @@ const es: T = {
   contactSubtitle: "Tratas directamente con el equipo de Aromatik Apartments. Sin centralitas, sin bots.",
   contactHeading: "Habla con nosotros",
   contactIntro: "Escríbenos por WhatsApp o correo electrónico. Respondemos en menos de 1 hora, las 24 horas del día.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "Email",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Teléfono", contactEmailLabel: "Email",
   contactLocLabel: "Ubicación", contactLocValue: "Barri Vell, Girona, Catalunya",
   contactHoursLabel: "Horario de atención", contactHoursValue: "Lunes – Domingo, 24 horas",
   contactUrgTitle: "¿Urgencia?",
@@ -316,7 +316,7 @@ const en: T = {
   contactSubtitle: "You deal directly with the Aromatik Apartments team. No call centres, no bots.",
   contactHeading: "Talk to us",
   contactIntro: "Write to us via WhatsApp or email. We reply within 1 hour, 24 hours a day.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "Email",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Phone", contactEmailLabel: "Email",
   contactLocLabel: "Location", contactLocValue: "Barri Vell, Girona, Catalonia",
   contactHoursLabel: "Opening hours", contactHoursValue: "Monday – Sunday, 24 hours",
   contactUrgTitle: "Urgent?",
@@ -491,7 +491,7 @@ const fr: T = {
   contactSubtitle: "Vous traitez directement avec l'équipe d'Aromatik Apartments. Sans centres d'appels, sans robots.",
   contactHeading: "Parlez-nous",
   contactIntro: "Écrivez-nous via WhatsApp ou e-mail. Nous répondons en moins d'1 heure, 24h/24.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "E-mail",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Téléphone", contactEmailLabel: "E-mail",
   contactLocLabel: "Emplacement", contactLocValue: "Barri Vell, Gérone, Catalogne",
   contactHoursLabel: "Horaires d'assistance", contactHoursValue: "Lundi – Dimanche, 24h/24",
   contactUrgTitle: "Urgent ?",
@@ -666,7 +666,7 @@ const ca: T = {
   contactSubtitle: "Tractes directament amb l'equip d'Aromatik Apartments. Sense centraletes, sense bots.",
   contactHeading: "Parla amb nosaltres",
   contactIntro: "Escriu-nos per WhatsApp o correu electrònic. Responem en menys d'1 hora, les 24 hores del dia.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "Correu electrònic",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Telèfon", contactEmailLabel: "Correu electrònic",
   contactLocLabel: "Ubicació", contactLocValue: "Barri Vell, Girona, Catalunya",
   contactHoursLabel: "Horari d'atenció", contactHoursValue: "Dilluns – Diumenge, 24 hores",
   contactUrgTitle: "Urgència?",
@@ -841,7 +841,7 @@ const de: T = {
   contactSubtitle: "Sie haben direkten Kontakt mit dem Aromatik Apartments Team. Kein Callcenter, keine Bots.",
   contactHeading: "Sprechen Sie mit uns",
   contactIntro: "Schreiben Sie uns per WhatsApp oder E-Mail. Wir antworten in weniger als 1 Stunde, 24 Stunden am Tag.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "E-Mail",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Telefon", contactEmailLabel: "E-Mail",
   contactLocLabel: "Standort", contactLocValue: "Barri Vell, Girona, Katalonien",
   contactHoursLabel: "Öffnungszeiten", contactHoursValue: "Montag – Sonntag, 24 Stunden",
   contactUrgTitle: "Dringend?",
@@ -1016,7 +1016,7 @@ const zh: T = {
   contactSubtitle: "直接与Aromatik Apartments团队联系。无呼叫中心，无机器人。",
   contactHeading: "与我们交流",
   contactIntro: "通过WhatsApp或电子邮件联系我们。全天24小时，1小时内回复。",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "电子邮件",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "电话", contactEmailLabel: "电子邮件",
   contactLocLabel: "位置", contactLocValue: "Barri Vell，赫罗纳，加泰罗尼亚",
   contactHoursLabel: "服务时间", contactHoursValue: "周一至周日，24小时",
   contactUrgTitle: "紧急情况？",
@@ -1192,7 +1192,7 @@ const ko: T = {
   contactSubtitle: "Aromatik Apartments 팀과 직접 소통하세요. 콜센터 없음, 봇 없음.",
   contactHeading: "저희에게 연락하세요",
   contactIntro: "WhatsApp 또는 이메일로 연락해 주세요. 하루 24시간, 1시간 이내 답변.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "이메일",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "전화", contactEmailLabel: "이메일",
   contactLocLabel: "위치", contactLocValue: "Barri Vell, 헤로나, 카탈루냐",
   contactHoursLabel: "운영 시간", contactHoursValue: "월요일 – 일요일, 24시간",
   contactUrgTitle: "급하신가요?",
@@ -1362,7 +1362,7 @@ const pt: T = {
   contactSubtitle: "Trata diretamente com a equipa Aromatik Apartments. Sem centrais telefónicas, sem bots.",
   contactHeading: "Fale connosco",
   contactIntro: "Escreva-nos por WhatsApp ou e-mail. Respondemos em menos de 1 hora, 24 horas por dia.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "E-mail",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Telefone", contactEmailLabel: "E-mail",
   contactLocLabel: "Localização", contactLocValue: "Barri Vell, Girona, Catalunha",
   contactHoursLabel: "Horário de atendimento", contactHoursValue: "Segunda – Domingo, 24 horas",
   contactUrgTitle: "Urgente?", contactUrgText: "O WhatsApp é a forma mais rápida de nos contactar. Resposta em minutos.",
@@ -1529,7 +1529,7 @@ const nl: T = {
   contactSubtitle: "U heeft direct contact met het Aromatik Apartments team. Geen callcenter, geen bots.",
   contactHeading: "Praat met ons",
   contactIntro: "Schrijf ons via WhatsApp of e-mail. Wij reageren binnen 1 uur, 24 uur per dag.",
-  contactWaLabel: "WhatsApp", contactEmailLabel: "E-mail",
+  contactWaLabel: "WhatsApp", contactPhoneLabel: "Telefoon", contactEmailLabel: "E-mail",
   contactLocLabel: "Locatie", contactLocValue: "Barri Vell, Girona, Catalonië",
   contactHoursLabel: "Openingstijden", contactHoursValue: "Maandag – Zondag, 24 uur",
   contactUrgTitle: "Dringend?", contactUrgText: "WhatsApp is de snelste manier om ons te bereiken. Reactie binnen enkele minuten.",
