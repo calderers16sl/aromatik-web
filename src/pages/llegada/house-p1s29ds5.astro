@@ -1,0 +1,12 @@
+---
+// Página privada: solo se llega por el enlace del mensaje de Smoobu (2 días antes).
+// noindex + fuera del sitemap (astro.config.mjs). No añadir a robots.txt: lo haría público.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LlegadaHouse from '../../components/LlegadaHouse.astro';
+import { llegadaHouseContent } from '../../i18n/llegadaHouse';
+const c = llegadaHouseContent.es;
+---
+<BaseLayout title={c.metaTitle} description={c.intro} lang="es" ogImage="/images/aromatik-house/llegada/aerea-casa.jpg">
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+  <LlegadaHouse lang="es" />
+</BaseLayout>

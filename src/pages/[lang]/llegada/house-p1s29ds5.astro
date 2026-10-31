@@ -1,0 +1,18 @@
+---
+// Página privada: solo se llega por el enlace del mensaje de Smoobu (2 días antes).
+// noindex + fuera del sitemap (astro.config.mjs). No añadir a robots.txt: lo haría público.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LlegadaHouse from '../../../components/LlegadaHouse.astro';
+import { NON_DEFAULT_LOCALES, type Locale } from '../../../i18n/translations';
+import { llegadaHouseContent } from '../../../i18n/llegadaHouse';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+const c = llegadaHouseContent[lang];
+---
+<BaseLayout title={c.metaTitle} description={c.intro} lang={lang} ogImage="/images/aromatik-house/llegada/aerea-casa.jpg">
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+  <LlegadaHouse lang={lang} />
+</BaseLayout>
