@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HousePage from '../../components/HousePage.astro';
+import HouseSchema from '../../components/HouseSchema.astro';
+import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import { houseContent } from '../../i18n/house';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Locale };
+const c = houseContent[lang];
+---
+<BaseLayout title={c.metaTitle} description={c.metaDescription} lang={lang} ogImage="/images/aromatik-house/og-house.jpg">
+  <HouseSchema slot="head" lang={lang} />
+  <HousePage lang={lang} />
+</BaseLayout>

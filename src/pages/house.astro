@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HousePage from '../components/HousePage.astro';
+import HouseSchema from '../components/HouseSchema.astro';
+import { houseContent } from '../i18n/house';
+const c = houseContent.es;
+---
+<BaseLayout title={c.metaTitle} description={c.metaDescription} lang="es" ogImage="/images/aromatik-house/og-house.jpg">
+  <HouseSchema slot="head" lang="es" />
+  <HousePage lang="es" />
+</BaseLayout>

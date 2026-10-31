@@ -1,0 +1,40 @@
+---
+// Bloque de la home que presenta Aromatik House.
+import { houseContent } from '../i18n/house';
+
+interface Props { lang?: string }
+const lang = Astro.props.lang ?? 'es';
+const c = houseContent[lang] ?? houseContent.es;
+const langRoot = lang === 'es' ? '' : '/' + lang;
+const href = langRoot + '/house';
+---
+<section class="ht">
+  <a href={href} class="ht-card">
+    <img src="/images/aromatik-house/dron/dron-2-1000.jpg" srcset="/images/aromatik-house/dron/dron-2-1000.jpg 1000w, /images/aromatik-house/dron/dron-2.jpg 2000w"
+      sizes="(max-width: 767px) 100vw, 55vw" alt={c.aerialAlts[0]} loading="lazy" width="2000" height="1500" />
+    <div class="ht-body">
+      <span class="ht-eyebrow">{c.homeEyebrow}</span>
+      <h2>{c.homeTitle}</h2>
+      <p>{c.homeText}</p>
+      <span class="ht-cta">{c.homeCta} →</span>
+    </div>
+  </a>
+</section>
+
+<style>
+.ht { max-width: 1200px; margin: 0 auto; padding: 0 2rem 6rem; }
+.ht-card { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: box-shadow 0.2s; }
+.ht-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.08); }
+.ht-card img { width: 100%; height: 100%; min-height: 320px; object-fit: cover; display: block; }
+.ht-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; }
+.ht-eyebrow { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); font-weight: 500; }
+.ht-body h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.2; }
+.ht-body p { font-size: 1rem; line-height: 1.65; color: var(--stone-600); }
+.ht-cta { margin-top: 0.5rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+@media (max-width: 767px) {
+  .ht { padding: 0 1rem 4rem; }
+  .ht-card { grid-template-columns: 1fr; }
+  .ht-card img { min-height: 0; height: 240px; }
+  .ht-body { padding: 1.5rem 1.25rem; }
+}
+</style>

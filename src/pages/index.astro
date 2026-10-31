@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getT } from '../i18n/translations';
 import ReviewsCarousel from '../components/ReviewsCarousel.astro';
 import HostCard from '../components/HostCard.astro';
+import HouseTeaser from '../components/HouseTeaser.astro';
 
 const lang = 'es';
 const t = getT(lang);
@@ -88,6 +89,8 @@ const apartments = [
       </div>
     </div>
   </section>
+
+  <HouseTeaser />
 
   <HostCard />
   <ReviewsCarousel />

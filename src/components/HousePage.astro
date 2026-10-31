@@ -1,0 +1,376 @@
+---
+// Página de Aromatik House (/house y /{lang}/house). Textos en src/i18n/house.ts.
+import BookingWidget from './BookingWidget.astro';
+import HostCard from './HostCard.astro';
+import { houseContent, HOUSE, HOUSE_DISTANCES } from '../i18n/house';
+
+interface Props { lang: string }
+const { lang } = Astro.props;
+const c = houseContent[lang] ?? houseContent.es;
+const langRoot = lang === 'es' ? '' : `/${lang}`;
+const rating = ['en', 'zh', 'ko'].includes(lang) ? HOUSE.rating.en : HOUSE.rating.es;
+const smoobuLang = ['es', 'en', 'fr', 'de', 'pt', 'nl'].includes(lang) ? lang : 'en';
+
+const img = '/images/aromatik-house';
+const photos = Array.from({ length: HOUSE.photos }, (_: unknown, i: number) => `${img}/fotos/foto-${i + 1}.jpg`);
+// Selección para la cuadrícula: fachada, porche, salón, cocina, dormitorio, jardín, piscina, vistas
+const featured = [1, 2, 16, 7, 28, 40, 50, 8];
+
+const placeLabel = (p: { place?: string; key?: string }) => {
+  const extra = p.key ? c.placeKeys[p.key as keyof typeof c.placeKeys] : '';
+  if (!p.place) return extra;
+  return extra ? `${p.place} · ${extra}` : p.place;
+};
+const groups = [
+  { title: c.groupVillages, rows: HOUSE_DISTANCES.villages },
+  { title: c.groupBeaches, rows: HOUSE_DISTANCES.beaches },
+  { title: c.groupCities, rows: HOUSE_DISTANCES.cities },
+];
+---
+<section class="h-hero">
+  <video class="h-hero-video" autoplay muted loop playsinline preload="metadata"
+    poster={`${img}/dron/dron-casa-poster.jpg`} aria-label={c.videoLabel}>
+    <source src={`${img}/dron/dron-casa-960.mp4`} type="video/mp4" media="(max-width: 767px)" />
+    <source src={`${img}/dron/dron-casa-1920.mp4`} type="video/mp4" />
+  </video>
+  <div class="h-hero-shade"></div>
+  <div class="h-hero-inner">
+    <div class="h-hero-text">
+      <span class="h-eyebrow h-eyebrow-light">{c.eyebrow}</span>
+      <h1>Aromatik House</h1>
+      <p>{c.tagline}</p>
+    </div>
+    <div class="h-hero-ctas">
+      <a href="#reservar-widget" class="h-btn h-btn-white js-scroll-reservar">{c.ctaBook}</a>
+      <a href="#fotos" class="h-btn h-btn-ghost">{c.ctaPhotos}</a>
+    </div>
+  </div>
+</section>
+
+<div class="h-facts">
+  <ul>
+    {c.facts.map((f) => <li>{f}</li>)}
+    <li class="h-fact-rating">★ {rating} · {HOUSE.reviews} {c.ratingLabel}</li>
+  </ul>
+</div>
+
+<section id="fotos" class="h-section">
+  <div class="h-wrap">
+    <div class="h-head-row">
+      <div class="h-head">
+        <span class="h-eyebrow">{c.aerialEyebrow}</span>
+        <h2>{c.aerialTitle}</h2>
+      </div>
+      <p class="h-head-aside">{c.aerialText}</p>
+    </div>
+    <div class="h-aerial">
+      {[2, 1, 3].map((n, i) => (
+        <img src={`${img}/dron/dron-${n}.jpg`} srcset={`${img}/dron/dron-${n}-1000.jpg 1000w, ${img}/dron/dron-${n}.jpg 2000w`}
+          sizes={i === 0 ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 33vw'}
+          alt={c.aerialAlts[i]} loading="lazy" width="2000" height="1500" class={i === 0 ? 'h-aerial-main' : ''} />
+      ))}
+    </div>
+    <div class="h-gallery">
+      {featured.map((n) => (
+        <button type="button" class="h-thumb js-lb" data-index={n - 1} aria-label={`${c.photoAlt} ${n}`}>
+          <img src={photos[n - 1]} alt={`${c.photoAlt} ${n}`} loading="lazy" width="1200" height="800" />
+        </button>
+      ))}
+    </div>
+    <button type="button" class="h-btn h-btn-outline h-gallery-all js-lb" data-index="0">{c.galleryAll}</button>
+  </div>
+</section>
+
+<section class="h-section h-section-white">
+  <div class="h-wrap h-about">
+    <div class="h-about-main">
+      <h2>{c.aboutTitle}</h2>
+      {c.about.map((p) => <p class="h-about-p">{p}</p>)}
+      <h3 class="h-sub">{c.amenitiesTitle}</h3>
+      <ul class="h-amenities">
+        {c.amenities.map((a) => <li><span aria-hidden="true">✓</span>{a}</li>)}
+      </ul>
+      <p class="h-note">{c.amenitiesNote}</p>
+    </div>
+    <aside class="h-book-card">
+      <p class="h-book-title">{c.bookCardTitle}</p>
+      <p class="h-book-sub">{c.bookCardSub}</p>
+      <a href="#reservar-widget" class="h-btn h-btn-green js-scroll-reservar">{c.ctaBook}</a>
+      <a href={`${langRoot}/contacto`} class="h-btn h-btn-outline">{c.contactCta}</a>
+    </aside>
+  </div>
+</section>
+
+<section class="h-section">
+  <div class="h-wrap">
+    <div class="h-head h-head-narrow">
+      <span class="h-eyebrow">{c.zoneEyebrow}</span>
+      <h2>{c.zoneTitle}</h2>
+      <p>{c.zoneText}</p>
+    </div>
+    <div class="h-zone">
+      <figure class="h-map">
+        <svg viewBox="0 0 520 560" role="img" aria-label={c.mapAria}>
+          <rect width="520" height="560" fill="#F1ECE2" />
+          <path d="M368.7,0 L378.2,50.9 L406.5,76.4 L387.6,101.8 L374.4,152.7 L376.3,203.6 L380,254.5 L400.9,280 L425.5,318.2 L423.5,356.4 L400.9,394.5 L372.5,458.2 L346,491.3 L312,560 L520,560 L520,0 Z" fill="#DCE6E4" stroke="#B9CBC8" stroke-width="2" stroke-linejoin="round" />
+          <ellipse cx="438" cy="82" rx="5" ry="3" fill="#F1ECE2" stroke="#B9CBC8" />
+          <ellipse cx="447" cy="88" rx="3" ry="2" fill="#F1ECE2" stroke="#B9CBC8" />
+          <path d="M0,128 C80,120 160,98 241,106 S340,132 376,140" fill="none" stroke="#C5D6D3" stroke-width="3" stroke-linecap="round" />
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M0,300 L73,307 L170,262 L279,276 L392,321 L346,491 M242,96 L279,276 L372,234 M242,96 L374,70" stroke="#E2DDD8" stroke-width="7" />
+            <path d="M0,300 L73,307 L170,262 L279,276 L392,321 L346,491 M242,96 L279,276 L372,234 M242,96 L374,70" stroke="#FFFFFF" stroke-width="3.5" />
+          </g>
+          <circle cx="157" cy="242" r="58" fill="#2C5F2E" fill-opacity="0.12" stroke="#2C5F2E" stroke-width="1.5" stroke-dasharray="5 5" />
+          <g transform="translate(145 228)" fill="#2C5F2E">
+            <path d="M12 0 L24 10 L21 10 L21 24 L3 24 L3 10 L0 10 Z" />
+            <rect x="9.5" y="15" width="5" height="9" fill="#FFFFFF" />
+          </g>
+          <text x="157" y="318" text-anchor="middle" font-size="13" font-weight="500" fill="#224A23">Aromatik House</text>
+          <g fill="#3A3530">
+            <circle cx="170" cy="262" r="4.5" /><circle cx="132" cy="204" r="4" /><circle cx="73" cy="307" r="4" />
+            <circle cx="279" cy="276" r="4.5" /><circle cx="242" cy="96" r="4" /><circle cx="392" cy="321" r="4.5" />
+          </g>
+          <g fill="#FFFFFF" stroke="#3E6E74" stroke-width="2">
+            <circle cx="374" cy="70" r="4" /><circle cx="372" cy="234" r="4" /><circle cx="405" cy="284" r="4" />
+            <circle cx="412" cy="364" r="4" /><circle cx="346" cy="491" r="4" />
+          </g>
+          <g font-size="13" fill="#3A3530">
+            <text x="180" y="276" font-weight="500">Peratallada</text>
+            <text x="124" y="200" text-anchor="end">Ullastret</text>
+            <text x="73" y="328" text-anchor="middle">La Bisbal d’Empordà</text>
+            <text x="279" y="300" text-anchor="middle" font-weight="500">Pals</text>
+            <text x="242" y="84" text-anchor="middle">Torroella de Montgrí</text>
+            <text x="384" y="344" text-anchor="end" font-weight="500">Begur</text>
+          </g>
+          <g font-size="12.5" fill="#2F5B60" font-style="italic">
+            <text x="364" y="66" text-anchor="end">L’Estartit</text>
+            <text x="442" y="108" text-anchor="middle">Illes Medes</text>
+            <text x="362" y="238" text-anchor="end">Platja de Pals</text>
+            <text x="396" y="270" text-anchor="end">Sa Riera</text>
+            <text x="402" y="384" text-anchor="end">Aiguablava</text>
+            <text x="336" y="495" text-anchor="end">Calella de Palafrugell</text>
+            <text x="470" y="440" text-anchor="middle" transform="rotate(-90 470 440)" font-size="13" letter-spacing="3">MEDITERRÀNIA</text>
+          </g>
+          <g font-size="12" fill="#6B6560">
+            <text x="10" y="290">← Girona · 35 min</text>
+            <path d="M20 538 L134.5 538 M20 533 L20 543 M134.5 533 L134.5 543" stroke="#6B6560" stroke-width="1.5" />
+            <text x="77" y="530" text-anchor="middle">5 km</text>
+            <path d="M490 22 L496 40 L490 36 L484 40 Z" />
+            <text x="490" y="56" text-anchor="middle" font-weight="500">N</text>
+          </g>
+        </svg>
+        <figcaption>
+          <span><i class="h-key h-key-zone"></i>{c.legendZone}</span>
+          <span><i class="h-key h-key-village"></i>{c.legendVillages}</span>
+          <span><i class="h-key h-key-beach"></i>{c.legendBeaches}</span>
+        </figcaption>
+      </figure>
+      <div class="h-distances">
+        {groups.map((g) => (
+          <div>
+            <h3>{g.title}</h3>
+            <ul>
+              {g.rows.map((r) => <li><span>{placeLabel(r)}</span><span class="h-min">{r.min}</span></li>)}
+            </ul>
+          </div>
+        ))}
+        <p class="h-note">{c.distancesNote}</p>
+      </div>
+    </div>
+    <div class="h-zone-band">
+      <figure>
+        <video autoplay muted loop playsinline preload="none" poster={`${img}/dron/dron-paisaje-poster.jpg`} aria-label={c.videoZoneLabel}>
+          <source src={`${img}/dron/dron-paisaje-1280.mp4`} type="video/mp4" />
+        </video>
+        <figcaption>{c.videoZoneCaption}</figcaption>
+      </figure>
+      <aside class="h-private">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+        <h3>{c.privateTitle}</h3>
+        <p>{c.privateText}</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="h-section h-section-white">
+  <div class="h-wrap h-rules-wrap">
+    <h2>{c.rulesTitle}</h2>
+    <ul class="h-rules">
+      {c.rules.map((r) => <li>{r}</li>)}
+    </ul>
+    <p class="h-note">{c.regLabel}: {HOUSE.registration}</p>
+  </div>
+</section>
+
+<section class="h-section h-booking" id="reservar-widget">
+  <div class="h-wrap">
+    <h2 class="h-center">{c.bookTitle}</h2>
+    <BookingWidget smoobuId={HOUSE.smoobuId} lang={smoobuLang} />
+  </div>
+</section>
+
+<HostCard lang={lang} />
+
+<div id="h-lightbox" class="h-lightbox" role="dialog" aria-modal="true" aria-label="Aromatik House">
+  <button class="h-lb-close" id="hLbClose" aria-label={c.close}>✕</button>
+  <button class="h-lb-nav h-lb-prev" id="hLbPrev" aria-label="←">&#10094;</button>
+  <button class="h-lb-nav h-lb-next" id="hLbNext" aria-label="→">&#10095;</button>
+  <div class="h-lb-content">
+    <img id="hLbImg" src="" alt="" />
+    <p id="hLbCount"></p>
+  </div>
+</div>
+
+<style>
+.h-hero { position: relative; margin-top: 70px; height: min(calc(100svh - 70px), 760px); min-height: 520px; overflow: hidden; background: var(--stone-800); color: var(--white); }
+.h-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.h-hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,24,22,0.1) 0%, rgba(26,24,22,0) 35%, rgba(26,24,22,0.68) 100%); }
+.h-hero-inner { position: absolute; left: 0; right: 0; bottom: 0; max-width: 1160px; margin: 0 auto; padding: 0 1.5rem 3.5rem; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem 2rem; }
+.h-hero-text { display: flex; flex-direction: column; gap: 0.85rem; max-width: 640px; }
+.h-hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2.75rem, 7vw, 5rem); line-height: 1.02; }
+.h-hero-text p { font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.55; color: rgba(255,255,255,0.92); }
+.h-hero-ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.h-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--stone-600); font-weight: 500; }
+.h-eyebrow-light { color: rgba(255,255,255,0.85); }
+
+.h-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.6rem; border-radius: var(--radius); font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, border-color 0.2s; text-align: center; }
+.h-btn-white { background: var(--white); color: var(--green-hover); }
+.h-btn-white:hover { background: var(--cream); }
+.h-btn-ghost { border: 1px solid rgba(255,255,255,0.7); color: var(--white); }
+.h-btn-ghost:hover { background: rgba(255,255,255,0.12); }
+.h-btn-green { background: var(--green); color: var(--white); border: none; }
+.h-btn-green:hover { background: var(--green-hover); }
+.h-btn-outline { background: var(--white); border: 1px solid var(--stone-200); color: var(--black); }
+.h-btn-outline:hover { border-color: var(--stone-400); }
+
+.h-facts { background: var(--white); border-bottom: 1px solid var(--stone-200); }
+.h-facts ul { list-style: none; max-width: 1160px; margin: 0 auto; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.6rem 2.25rem; font-size: 0.95rem; color: var(--stone-800); }
+.h-fact-rating { font-weight: 500; color: var(--black); }
+
+.h-section { padding: 5rem 0; background: var(--cream); }
+.h-section-white { background: var(--white); }
+.h-wrap { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
+.h-head { display: flex; flex-direction: column; gap: 0.75rem; }
+.h-head-narrow { max-width: 720px; margin-bottom: 3rem; }
+.h-head-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; margin-bottom: 2rem; }
+.h-head-row .h-head { max-width: 620px; }
+.h-head-aside { max-width: 380px; font-size: 1rem; line-height: 1.6; color: var(--stone-800); }
+.h-section h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.15; }
+.h-head p { font-size: 1.05rem; line-height: 1.65; color: var(--stone-800); }
+.h-center { text-align: center; margin-bottom: 2rem; }
+.h-note { font-size: 0.82rem; color: var(--stone-600); margin-top: 1rem; }
+
+.h-aerial { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: 280px 280px; gap: 0.75rem; }
+.h-aerial img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+.h-aerial .h-aerial-main { grid-column: span 2; grid-row: span 2; }
+.h-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
+.h-thumb { padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3 / 2; }
+.h-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+.h-thumb:hover img { transform: scale(1.03); }
+.h-gallery-all { margin-top: 1.25rem; }
+@media (max-width: 767px) {
+  .h-aerial { grid-template-columns: 1fr; grid-template-rows: none; }
+  .h-aerial img { height: 240px; }
+  .h-aerial .h-aerial-main { grid-column: auto; grid-row: auto; height: 280px; }
+  .h-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .h-gallery-all { width: 100%; }
+}
+
+.h-about { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
+.h-about-main h2 { margin-bottom: 1.25rem; }
+.h-about-p { font-size: 1.05rem; line-height: 1.8; color: var(--stone-800); margin-bottom: 1rem; }
+.h-sub { font-size: 0.72rem; font-weight: 600; color: var(--stone-500); letter-spacing: 0.15em; text-transform: uppercase; margin: 2.25rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--stone-200); }
+.h-amenities { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+.h-amenities li { display: flex; gap: 0.6rem; align-items: center; font-size: 0.9rem; color: var(--stone-800); padding: 0.55rem 0.75rem; background: var(--stone-50); border-radius: 8px; }
+.h-amenities span { color: var(--green); font-weight: 700; }
+.h-book-card { position: sticky; top: 90px; background: var(--white); border: 1px solid var(--stone-200); border-radius: 16px; padding: 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 0.75rem; }
+.h-book-title { font-family: var(--serif); font-size: 1.3rem; }
+.h-book-sub { font-size: 0.85rem; color: var(--stone-600); margin-bottom: 0.5rem; }
+@media (max-width: 900px) {
+  .h-about { grid-template-columns: 1fr; }
+  .h-book-card { position: static; order: -1; }
+  .h-amenities { grid-template-columns: 1fr; }
+}
+
+.h-zone { display: flex; flex-wrap: wrap; gap: 3rem; align-items: flex-start; }
+.h-map { margin: 0; flex: 1 1 480px; min-width: 0; background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); overflow: hidden; }
+.h-map svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.h-map figcaption { display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; padding: 1rem 1.25rem; border-top: 1px solid var(--stone-200); font-size: 0.82rem; color: var(--stone-600); }
+.h-map figcaption span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.h-key { display: inline-block; border-radius: 50%; box-sizing: border-box; }
+.h-key-zone { width: 14px; height: 14px; background: rgba(44,95,46,0.15); border: 1.5px dashed var(--green); }
+.h-key-village { width: 9px; height: 9px; background: var(--stone-800); }
+.h-key-beach { width: 10px; height: 10px; background: var(--white); border: 2px solid #3E6E74; }
+.h-distances { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 2rem; }
+.h-distances h3 { font-family: var(--serif); font-weight: 400; font-size: 1.35rem; margin-bottom: 0.5rem; }
+.h-distances ul { list-style: none; padding: 0; }
+.h-distances li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--stone-200); font-size: 0.95rem; }
+.h-min { color: var(--stone-600); white-space: nowrap; }
+.h-zone-band { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 3rem; }
+.h-zone-band figure { margin: 0; flex: 2 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.h-zone-band video { width: 100%; height: 300px; object-fit: cover; border-radius: var(--radius-lg); display: block; background: var(--stone-200); }
+.h-zone-band figcaption { font-size: 0.82rem; color: var(--stone-600); }
+.h-private { flex: 1 1 300px; min-width: 0; background: var(--green); color: var(--white); border-radius: var(--radius-lg); padding: 2rem; display: flex; flex-direction: column; gap: 0.85rem; justify-content: center; }
+.h-private h3 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; line-height: 1.25; }
+.h-private p { font-size: 0.95rem; line-height: 1.6; color: rgba(255,255,255,0.88); }
+
+.h-rules-wrap { max-width: 820px; }
+.h-rules-wrap h2 { margin-bottom: 1.5rem; }
+.h-rules { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem 2rem; }
+.h-rules li { padding: 0.75rem 0; border-bottom: 1px solid var(--stone-200); font-size: 0.95rem; color: var(--stone-800); }
+@media (max-width: 640px) { .h-rules { grid-template-columns: 1fr; } }
+.h-booking, #fotos { scroll-margin-top: 80px; }
+
+@media (max-width: 640px) {
+  .h-section { padding: 3.5rem 0; }
+  .h-wrap, .h-hero-inner, .h-facts ul { padding-left: 1rem; padding-right: 1rem; }
+  .h-hero-inner { padding-bottom: 2rem; }
+  .h-hero-ctas, .h-hero-ctas .h-btn { width: 100%; }
+  .h-facts ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem 1rem; font-size: 0.88rem; }
+  .h-fact-rating { grid-column: span 2; }
+  .h-zone { gap: 2rem; }
+  .h-zone-band video { height: 220px; }
+  .h-private { padding: 1.5rem 1.25rem; }
+}
+
+.h-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 1000; align-items: center; justify-content: center; }
+.h-lightbox.active { display: flex; }
+.h-lb-content { display: flex; flex-direction: column; align-items: center; max-width: 92vw; }
+.h-lb-content img { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 4px; }
+.h-lb-content p { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin-top: 12px; letter-spacing: 0.06em; }
+.h-lb-close, .h-lb-nav { position: fixed; background: rgba(255,255,255,0.2); border: none; color: #fff; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1001; }
+.h-lb-close { top: 18px; right: 20px; width: 44px; height: 44px; font-size: 1.3rem; }
+.h-lb-nav { top: 50%; transform: translateY(-50%); width: 50px; height: 50px; font-size: 1.3rem; }
+.h-lb-prev { left: 14px; } .h-lb-next { right: 14px; }
+.h-lb-close:hover, .h-lb-nav:hover { background: rgba(255,255,255,0.3); }
+</style>
+
+<script define:vars={{ photos, photoAlt: c.photoAlt }}>
+  // Respeta "reducir movimiento": sin reproducción automática de los vídeos
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.h-hero-video, .h-zone-band video').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+  }
+  const lb = document.getElementById('h-lightbox'), lbImg = document.getElementById('hLbImg'), lbCnt = document.getElementById('hLbCount');
+  let cur = 0;
+  function show() { lbImg.src = photos[cur]; lbImg.alt = `${photoAlt} ${cur + 1}`; lbCnt.textContent = `${cur + 1} / ${photos.length}`; }
+  function open(i) { cur = i; show(); lb.classList.add('active'); document.body.style.overflow = 'hidden'; document.getElementById('hLbClose').focus(); }
+  function close() { lb.classList.remove('active'); document.body.style.overflow = ''; }
+  const next = () => { cur = (cur + 1) % photos.length; show(); };
+  const prev = () => { cur = (cur - 1 + photos.length) % photos.length; show(); };
+  document.querySelectorAll('.js-lb').forEach(b => b.addEventListener('click', () => open(parseInt(b.dataset.index || '0'))));
+  document.getElementById('hLbClose').addEventListener('click', close);
+  document.getElementById('hLbNext').addEventListener('click', next);
+  document.getElementById('hLbPrev').addEventListener('click', prev);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') prev();
+  });
+  let tx = 0;
+  lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); } }, { passive: true });
+  document.querySelectorAll('.js-scroll-reservar').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); document.getElementById('reservar-widget')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+</script>

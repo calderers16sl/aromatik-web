@@ -153,6 +153,7 @@ const schemaOrg = JSON.stringify({
     .header-nav { display: flex; align-items: center; gap: 2rem; }
     .header-nav a { font-size: 0.825rem; font-weight: 400; color: var(--stone-600); letter-spacing: 0.02em; transition: color 0.2s; }
     .header-nav a:hover { color: var(--black); }
+    @media (min-width: 769px) and (max-width: 1440px) { .header-nav { gap: 1.25rem; } }
     .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 0.55rem 1.4rem; border-radius: var(--radius); font-size: 0.75rem !important; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500 !important; transition: background 0.2s !important; }
     .nav-divider { display: none; }
     .nav-audience { font-size: 0.8rem !important; color: var(--stone-500) !important; }
@@ -548,6 +549,7 @@ const schemaOrg = JSON.stringify({
     <!-- Nav páginas (desktop: inline | móvil: dropdown vía hamburguesa) -->
     <nav class="header-nav" id="nav">
       <a href={`${langRoot}/#apartamentos`}>{t.navApartments}</a>
+      <a href={`${langRoot}/house`}>Aromatik House</a>
       <a href={`${langRoot}/informacion-importante`}>{t.navImportantInfo}</a>
       <a href={`${langRoot}/cancellation-policy`}>{t.navCancellation}</a>
       <a href={`${langRoot}/sobre-nosotros`}>{t.navAbout}</a>
@@ -609,6 +611,7 @@ const schemaOrg = JSON.stringify({
           ].map(([slug, name]) => (
             <li><a href={`${langRoot}/apartamentos/${slug}`}>{name}</a></li>
           ))}
+          <li><a href={`${langRoot}/house`}>Aromatik House</a></li>
         </ul>
       </div>
       <div class="footer-col">
