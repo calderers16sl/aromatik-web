@@ -1,0 +1,183 @@
+---
+// Página de guía (Girona o zona de Aromatik House) en ES/EN/FR/DE/CA.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideRich from './GuideRich.astro';
+import { guides, GUIDE_LOCALES, GUIDE_PAGES, APARTMENT_CARDS, type GuideKey, type GuideLocale } from '../i18n/guides';
+
+interface Props { lang: GuideLocale; kind: GuideKey }
+const { lang, kind } = Astro.props;
+const set = guides[lang];
+const doc = set[kind];
+const ui = set.ui;
+const page = GUIDE_PAGES[kind];
+const langRoot = lang === 'es' ? '' : '/' + lang;
+const siteUrl = 'https://aromatik.apartments';
+const url = siteUrl + langRoot + page.path;
+const isHouse = kind === 'houseZona';
+
+const crumbs = isHouse
+  ? [
+      { name: ui.home, href: langRoot + '/' },
+      { name: 'Aromatik House', href: langRoot + '/house' },
+      { name: doc.breadcrumb, href: langRoot + page.path },
+    ]
+  : [
+      { name: ui.home, href: langRoot + '/' },
+      { name: ui.guidesLabel, href: langRoot + '/guia' },
+      { name: doc.breadcrumb, href: langRoot + page.path },
+    ];
+
+const ctaHref = isHouse ? langRoot + '/house#reservar-widget' : langRoot + '/reservar#motor';
+const secondary = isHouse
+  ? { text: 'Aromatik House', href: langRoot + '/house' }
+  : { text: ui.contact, href: langRoot + '/contacto' };
+
+const otherGuides = (['queVer', 'aparcar', 'tempsDeFlors', 'houseZona'] as GuideKey[])
+  .filter((k) => k !== kind)
+  .map((k) => ({ title: set.index.cards[k].title, href: langRoot + GUIDE_PAGES[k].path }));
+
+const related = page.related.map((slug) => ({ slug, ...APARTMENT_CARDS[slug] }));
+
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': crumbs.map((c, i) => ({ '@type': 'ListItem', 'position': i + 1, 'name': c.name, 'item': siteUrl + c.href })),
+});
+const articleSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': doc.h1,
+  'description': doc.metaDescription,
+  'inLanguage': lang,
+  'image': siteUrl + page.ogImage,
+  'datePublished': '2026-11-01',
+  'dateModified': '2026-11-01',
+  'author': { '@type': 'Organization', 'name': 'Aromatik Apartments', 'url': siteUrl },
+  'publisher': { '@type': 'Organization', 'name': 'Aromatik Apartments', 'url': siteUrl },
+  'mainEntityOfPage': url,
+});
+---
+<BaseLayout title={doc.metaTitle} description={doc.metaDescription} lang={lang} ogImage={page.ogImage} locales={GUIDE_LOCALES} titleSuffix={false}>
+  <script is:inline type="application/ld+json" slot="head" set:html={breadcrumbSchema} />
+  <script is:inline type="application/ld+json" slot="head" set:html={articleSchema} />
+
+  <header class="g-head">
+    <div class="g-wrap">
+      <nav class="g-crumbs" aria-label="breadcrumb">
+        <ol>
+          {crumbs.map((c, i) => (
+            <li>{i < crumbs.length - 1 ? <a href={c.href}>{c.name}</a> : <span aria-current="page">{c.name}</span>}</li>
+          ))}
+        </ol>
+      </nav>
+      <span class="g-eyebrow">{doc.eyebrow}</span>
+      <h1>{doc.h1}</h1>
+      <p class="g-lead"><GuideRich text={doc.lead} langRoot={langRoot} /></p>
+    </div>
+  </header>
+
+  <img class="g-banner" src={page.image} alt="" width="1600" height="1066" />
+
+  <article class="g-body">
+    {doc.sections.map((s) => (
+      <section>
+        <h2>{s.h2}</h2>
+        {s.paragraphs?.map((p) => <p><GuideRich text={p} langRoot={langRoot} /></p>)}
+        {s.items && (
+          <dl class="g-items">
+            {s.items.map((it) => (
+              <div>
+                <dt>{it.title}</dt>
+                <dd><GuideRich text={it.text} langRoot={langRoot} /></dd>
+              </div>
+            ))}
+          </dl>
+        )}
+      </section>
+    ))}
+  </article>
+
+  {related.length > 0 && (
+    <section class="g-related">
+      <div class="g-wrap-wide">
+        <h2>{ui.relatedTitle}</h2>
+        <div class="g-cards">
+          {related.map((a) => (
+            <a href={`${langRoot}/apartamentos/${a.slug}`} class="g-card">
+              <img src={`/images/apartamentos/${a.slug}/foto-1.jpg`} alt={lang === 'ca' ? a.nameCa : a.name} loading="lazy" width="1200" height="800" />
+              <span class="g-card-body">
+                <strong>{lang === 'ca' ? a.nameCa : a.name}</strong>
+                <span>{ui.upTo} {a.guests} {ui.people}</span>
+                <span class="g-card-link">{ui.viewApartment} →</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="g-cta">
+    <div class="g-wrap">
+      <h2>{doc.ctaTitle}</h2>
+      <p>{doc.ctaText}</p>
+      <div class="g-cta-actions">
+        <a href={ctaHref} class="btn btn-green">{doc.ctaButton}</a>
+        <a href={secondary.href} class="btn btn-border">{secondary.text}</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="g-more" aria-label={ui.guidesLabel}>
+    <div class="g-wrap">
+      <a href={langRoot + '/guia'} class="g-more-title">{ui.guidesLabel}</a>
+      <ul>
+        {otherGuides.map((g) => <li><a href={g.href}>{g.title}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+</BaseLayout>
+
+<style>
+.g-wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+.g-wrap-wide { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+.g-head { margin-top: 70px; background: var(--cream); padding: 3rem 0 2.5rem; }
+.g-crumbs ol { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.8rem; color: var(--stone-600); margin-bottom: 1.5rem; }
+.g-crumbs li + li::before { content: "›"; margin-right: 0.35rem; color: var(--stone-400); }
+.g-crumbs a { color: var(--stone-600); text-decoration: underline; text-underline-offset: 2px; }
+.g-eyebrow { display: block; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--stone-600); margin-bottom: 0.75rem; }
+.g-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.5vw, 2.9rem); line-height: 1.15; margin-bottom: 1.25rem; }
+.g-lead { font-size: 1.1rem; line-height: 1.75; color: var(--stone-800); }
+.g-banner { display: block; width: 100%; height: clamp(220px, 34vw, 420px); object-fit: cover; }
+.g-body { max-width: 760px; margin: 0 auto; padding: 1rem 1.5rem 3rem; }
+.g-body h2 { font-family: var(--serif); font-weight: 400; font-size: 1.65rem; line-height: 1.25; margin: 2.75rem 0 1rem; }
+.g-body p { font-size: 1.02rem; line-height: 1.85; color: var(--stone-800); }
+.g-body p + p { margin-top: 1rem; }
+.g-body :global(a), .g-lead :global(a) { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.g-items { display: grid; gap: 0.75rem; margin-top: 1rem; }
+.g-items div { background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); padding: 1rem 1.25rem; }
+.g-items dt { font-weight: 500; margin-bottom: 0.3rem; }
+.g-items dd { margin: 0; font-size: 0.98rem; line-height: 1.75; color: var(--stone-800); }
+.g-related { padding: 3.5rem 0; background: var(--stone-50); }
+.g-related h2 { font-family: var(--serif); font-weight: 400; font-size: 1.65rem; margin-bottom: 1.5rem; }
+.g-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.g-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: box-shadow 0.2s; }
+.g-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.g-card img { width: 100%; aspect-ratio: 3 / 2; height: auto; object-fit: cover; display: block; }
+.g-card-body { padding: 1rem 1.15rem 1.25rem; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.88rem; color: var(--stone-600); }
+.g-card-body strong { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; color: var(--black); }
+.g-card-link { color: var(--green); font-weight: 500; margin-top: 0.25rem; }
+.g-cta { padding: 4rem 0; text-align: center; background: var(--cream); }
+.g-cta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.5vw, 2.2rem); margin-bottom: 0.85rem; }
+.g-cta p { color: var(--stone-600); line-height: 1.7; margin-bottom: 1.75rem; }
+.g-cta-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.g-more { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--stone-200); }
+.g-more-title { font-family: var(--serif); font-size: 1.25rem; color: var(--black); }
+.g-more ul { list-style: none; padding: 0; margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.g-more ul a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 767px) {
+  .g-cards { grid-template-columns: 1fr; }
+  .g-wrap, .g-wrap-wide, .g-body { padding-left: 1rem; padding-right: 1rem; }
+  .g-head { padding: 2rem 0 1.75rem; }
+}
+</style>

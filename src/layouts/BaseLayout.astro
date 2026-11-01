@@ -1,14 +1,21 @@
 ---
 import { getT, LOCALES, LOCALE_LABELS, type Locale } from '../i18n/translations';
+import { guideLangRoot, guideUi } from '../i18n/guides';
 
 export interface Props {
   title: string;
   description?: string;
   lang?: string;
   ogImage?: string;
+  /** Languages this page exists in (default: all 9). Limits hreflang + the language switcher. */
+  locales?: Locale[];
+  /** false = use the title exactly as given (no " | Aromatik Apartments" suffix). */
+  titleSuffix?: boolean;
 }
 
 const { title, ogImage } = Astro.props;
+const pageLocales = Astro.props.locales ?? LOCALES;
+const fullTitle = (Astro.props.titleSuffix === false || title.includes("Aromatik")) ? title : `${title} | Aromatik Apartments`;
 const resolvedOgImage = ogImage ?? '/images/hero-girona.jpg';
 const lang = (Astro.props.lang ?? Astro.currentLocale ?? 'es') as Locale;
 const t = getT(lang);
@@ -95,24 +102,24 @@ const schemaOrg = JSON.stringify({
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title.includes("Aromatik") ? title : `${title} | Aromatik Apartments`}</title>
+  <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href={canonicalURL} />
-  {LOCALES.map(l => (
+  {pageLocales.map(l => (
     <link rel="alternate" hreflang={l} href={`${siteUrl}${getLangUrl(l)}`} />
   ))}
   <link rel="alternate" hreflang="x-default" href={`${siteUrl}${rawPath}`} />
   <meta property="og:site_name" content="Aromatik Apartments" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content={title.includes("Aromatik") ? title : `${title} | Aromatik Apartments`} />
+  <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:image" content={`${siteUrl}${resolvedOgImage}`} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="800" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title.includes("Aromatik") ? title : `${title} | Aromatik Apartments`} />
+  <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={`${siteUrl}${resolvedOgImage}`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -572,7 +579,7 @@ const schemaOrg = JSON.stringify({
           </svg>
         </button>
         <div class="lang-dropdown" role="menu">
-          {LOCALES.map(l => (
+          {pageLocales.map(l => (
             <a href={getLangUrl(l)} class={l === lang ? 'lang-active' : ''} role="menuitem"
                hreflang={l} data-lang={l}>{LOCALE_LABELS[l]}</a>
           ))}
@@ -622,6 +629,7 @@ const schemaOrg = JSON.stringify({
           <li><a href={`${langRoot}/reservar#motor`}>{t.footerBooking}</a></li>
           <li><a href={`${langRoot}/informacion-importante`}>{t.footerImportantInfo}</a></li>
           <li><a href={`${langRoot}/cancellation-policy`}>{t.footerCancellation}</a></li>
+          <li><a href={guideLangRoot(lang) + '/guia'}>{guideUi(lang).guidesLabel}</a></li>
         </ul>
       </div>
       <div class="footer-col">

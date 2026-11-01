@@ -86,8 +86,8 @@ export interface HouseContent {
 
 export const houseContent: Record<string, HouseContent> = {
   es: {
-    metaTitle: 'Aromatik House · Casa de campo con piscina privada en Peratallada',
-    metaDescription: 'Casa de campo para 5 personas en el Empordà, a 5 minutos de Peratallada: piscina privada todo el año, jardín de 6.500 m², barbacoa y vistas al valle. Admite mascotas. Reserva directa.',
+    metaTitle: 'Casa con piscina privada en Peratallada | Aromatik House',
+    metaDescription: 'Casa con piscina privada en Peratallada (Empordà) para 5 personas: jardín de 6.500 m², barbacoa, chimenea y mascotas. Reserva directa, sin fianza.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'Una casa de campo con piscina privada en lo alto de una colina, entre campos y olivos.',
     videoLabel: 'Vuelo de dron sobre Aromatik House y los campos que la rodean',
@@ -140,8 +140,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: 'Descubre la casa',
   },
   en: {
-    metaTitle: 'Aromatik House · Countryside house with private pool near Peratallada',
-    metaDescription: 'Countryside house for 5 in the Empordà, 5 minutes from Peratallada: year-round private pool, 6,500 m² garden, barbecue and valley views. Pets welcome. Book direct.',
+    metaTitle: 'House with Private Pool in Peratallada | Aromatik House',
+    metaDescription: 'House with a private pool in Peratallada (Empordà) for 5: 6,500 m² garden, barbecue, fireplace, pets welcome. Book direct, no deposit.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'A countryside house with a private pool on a hilltop, among fields and olive trees.',
     videoLabel: 'Drone flight over Aromatik House and the surrounding fields',
@@ -194,8 +194,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: 'Discover the house',
   },
   ca: {
-    metaTitle: 'Aromatik House · Casa de camp amb piscina privada a Peratallada',
-    metaDescription: 'Casa de camp per a 5 persones a l’Empordà, a 5 minuts de Peratallada: piscina privada tot l’any, jardí de 6.500 m², barbacoa i vistes a la vall. S’hi admeten mascotes. Reserva directa.',
+    metaTitle: 'Casa amb piscina privada a Peratallada | Aromatik House',
+    metaDescription: 'Casa amb piscina privada a Peratallada (Empordà) per a 5 persones: jardí de 6.500 m², barbacoa, llar de foc i mascotes. Reserva directa, sense fiança.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'Una casa de camp amb piscina privada dalt d’un turó, entre camps i oliveres.',
     videoLabel: 'Vol de dron sobre Aromatik House i els camps del voltant',
@@ -248,8 +248,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: 'Descobreix la casa',
   },
   fr: {
-    metaTitle: 'Aromatik House · Maison de campagne avec piscine privée près de Peratallada',
-    metaDescription: 'Maison de campagne pour 5 personnes dans l’Empordà, à 5 minutes de Peratallada : piscine privée toute l’année, jardin de 6 500 m², barbecue et vue sur la vallée. Animaux acceptés. Réservation directe.',
+    metaTitle: 'Maison avec piscine privée à Peratallada | Aromatik House',
+    metaDescription: 'Maison avec piscine privée à Peratallada (Empordà) pour 5 : jardin de 6 500 m², barbecue, cheminée, animaux acceptés. Réservation directe, sans caution.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'Une maison de campagne avec piscine privée au sommet d’une colline, entre champs et oliviers.',
     videoLabel: 'Vol de drone au-dessus d’Aromatik House et des champs alentour',
@@ -302,8 +302,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: 'Découvrir la maison',
   },
   de: {
-    metaTitle: 'Aromatik House · Landhaus mit privatem Pool bei Peratallada',
-    metaDescription: 'Landhaus für 5 Personen im Empordà, 5 Minuten von Peratallada: ganzjährig privater Pool, 6.500 m² Garten, Grill und Talblick. Haustiere willkommen. Direkt buchen.',
+    metaTitle: 'Haus mit privatem Pool in Peratallada | Aromatik House',
+    metaDescription: 'Haus mit privatem Pool in Peratallada (Empordà) für 5 Personen: 6.500 m² Garten, Grill, Kamin, Haustiere willkommen. Direkt buchen, keine Kaution.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'Ein Landhaus mit privatem Pool auf einem Hügel, zwischen Feldern und Olivenbäumen.',
     videoLabel: 'Drohnenflug über das Aromatik House und die umliegenden Felder',
@@ -356,8 +356,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: 'Das Haus entdecken',
   },
   zh: {
-    metaTitle: 'Aromatik House · Peratallada 附近带私人泳池的乡村小屋',
-    metaDescription: '位于 Empordà 的 5 人乡村小屋，距 Peratallada 5 分钟：全年开放的私人泳池、6,500 平方米花园、烧烤和山谷景观。可携带宠物。官网直订。',
+    metaTitle: 'Peratallada 带私人泳池的乡村小屋 | Aromatik House',
+    metaDescription: '位于 Peratallada（Empordà）的 5 人乡村小屋，带私人泳池：6,500 平方米花园、烧烤、壁炉，可携带宠物。官网直订，无押金。',
     eyebrow: 'Peratallada · Empordà',
     tagline: '坐落在山丘顶上、被田野和橄榄树环绕的乡村小屋，带私人泳池。',
     videoLabel: '无人机飞越 Aromatik House 及周围田野',
@@ -410,8 +410,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: '了解房子',
   },
   ko: {
-    metaTitle: 'Aromatik House · Peratallada 근처 개인 수영장이 있는 시골집',
-    metaDescription: 'Empordà의 5인용 시골집, Peratallada에서 5분: 연중 이용 가능한 개인 수영장, 6,500㎡ 정원, 바비큐, 계곡 전망. 반려동물 동반 가능. 직접 예약.',
+    metaTitle: 'Peratallada 개인 수영장이 있는 시골집 | Aromatik House',
+    metaDescription: 'Peratallada(Empordà)의 개인 수영장이 있는 5인용 시골집: 6,500㎡ 정원, 바비큐, 벽난로, 반려동물 동반 가능. 직접 예약, 보증금 없음.',
     eyebrow: 'Peratallada · Empordà',
     tagline: '들판과 올리브 나무 사이 언덕 위에 자리한, 개인 수영장이 있는 시골집.',
     videoLabel: 'Aromatik House와 주변 들판 위를 나는 드론 영상',
@@ -464,8 +464,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: '집 둘러보기',
   },
   pt: {
-    metaTitle: 'Aromatik House · Casa de campo com piscina privada perto de Peratallada',
-    metaDescription: 'Casa de campo para 5 pessoas no Empordà, a 5 minutos de Peratallada: piscina privada todo o ano, jardim de 6.500 m², churrasqueira e vista para o vale. Aceita animais. Reserva direta.',
+    metaTitle: 'Casa com piscina privada em Peratallada | Aromatik House',
+    metaDescription: 'Casa com piscina privada em Peratallada (Empordà) para 5 pessoas: jardim de 6.500 m², churrasqueira, lareira e animais. Reserva direta, sem caução.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'Uma casa de campo com piscina privada no alto de uma colina, entre campos e oliveiras.',
     videoLabel: 'Voo de drone sobre a Aromatik House e os campos à volta',
@@ -518,8 +518,8 @@ export const houseContent: Record<string, HouseContent> = {
     homeCta: 'Descobrir a casa',
   },
   nl: {
-    metaTitle: 'Aromatik House · Landhuis met privézwembad bij Peratallada',
-    metaDescription: 'Landhuis voor 5 personen in de Empordà, 5 minuten van Peratallada: privézwembad het hele jaar, tuin van 6.500 m², barbecue en uitzicht over het dal. Huisdieren welkom. Direct boeken.',
+    metaTitle: 'Huis met privézwembad in Peratallada | Aromatik House',
+    metaDescription: 'Huis met privézwembad in Peratallada (Empordà) voor 5 personen: tuin van 6.500 m², barbecue, open haard, huisdieren welkom. Direct boeken, geen borg.',
     eyebrow: 'Peratallada · Empordà',
     tagline: 'Een landhuis met privézwembad op een heuveltop, tussen velden en olijfbomen.',
     videoLabel: 'Dronevlucht over Aromatik House en de velden eromheen',

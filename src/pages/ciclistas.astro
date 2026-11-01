@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HostCard from '../components/HostCard.astro';
 import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+import CyclingRoutes from '../components/CyclingRoutes.astro';
 
 const featuredApts = [
   { name: "Bergamota", slug: "bergamota", guests: 6, bedrooms: 3, tag: "Para grupos de ciclistas", desc: "Ático para 6 personas con lavadora, 3 habitaciones y balcón. Perfecto cuando venís en equipo.", photo: "/images/apartamentos/bergamota/foto-1.jpg" },
@@ -83,6 +84,8 @@ const featuredApts = [
       </div>
     </div>
   </section>
+
+  <CyclingRoutes lang="es" />
 
   <!-- APARTAMENTOS DESTACADOS -->
   <section id="apartamentos-ciclistas" class="section">

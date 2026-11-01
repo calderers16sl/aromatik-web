@@ -4,6 +4,7 @@ import BookingWidget from '../../../components/BookingWidget.astro';
 import HostCard from '../../../components/HostCard.astro';
 import ReviewsCarousel from '../../../components/ReviewsCarousel.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../../i18n/translations';
+import { guideLangRoot, guideUi } from '../../../i18n/guides';
 
 export function getStaticPaths() {
   const APARTMENTS = [
@@ -59,6 +60,22 @@ const aptUrl = `${siteUrl}/${lang}/apartamentos/${apt.slug}`;
 const aptTitle = t.aptH1s[apt.slug] ?? `${t.aptLabel} ${apt.name}`;
 const aptDesc  = t.aptDescriptions[apt.slug] ?? apt.name;
 
+// <title> corto (≤60): «Apartamento X en Girona…». El H1 sigue siendo aptTitle.
+const titleName = lang === 'ca' ? apt.nameCa : apt.name;
+const seoTitles: Record<string, string> = {
+  en: titleName + ' Apartment in Girona Old Town | Aromatik',
+  ca: 'Apartament ' + titleName + ' a Girona, Barri Vell | Aromatik',
+  fr: 'Appartement ' + titleName + ' à Girona, Barri Vell | Aromatik',
+  de: 'Apartment ' + titleName + ' in Girona, Altstadt | Aromatik',
+  pt: 'Apartamento ' + titleName + ' em Girona, Barri Vell | Aromatik',
+  nl: 'Appartement ' + titleName + ' in Girona, Barri Vell | Aromatik',
+  zh: titleName + ' 公寓 · 赫罗纳老城 | Aromatik',
+  ko: titleName + ' 아파트 · 지로나 구시가지 | Aromatik',
+};
+const seoTitle = seoTitles[lang] ?? aptTitle + ' | Aromatik';
+const guideHref = guideLangRoot(lang) + '/guia/que-ver-en-girona';
+const guideLabel = guideUi(lang).girona;
+
 const apartmentSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Apartment',
@@ -85,7 +102,7 @@ const breadcrumbSchema = JSON.stringify({
   ]
 });
 ---
-<BaseLayout title={`${aptTitle} | Aromatik`} description={aptDesc} lang={lang} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
+<BaseLayout title={seoTitle} description={aptDesc} lang={lang} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
   <script type="application/ld+json" set:html={apartmentSchema} slot="head" />
   <script type="application/ld+json" set:html={breadcrumbSchema} slot="head" />
 
@@ -123,6 +140,7 @@ const breadcrumbSchema = JSON.stringify({
         </div>
         <div class="apt-divider"></div>
         <p class="apt-description">{aptDesc}</p>
+        <p class="apt-guide-link"><a href={guideHref}>{guideLabel} →</a></p>
         <div class="apt-section">
           <h2 class="apt-section-title">{t.aptServicesTitle}</h2>
           <ul class="apt-amenities">
@@ -244,6 +262,8 @@ const breadcrumbSchema = JSON.stringify({
   .apt-stats { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
   .stat-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: #fafaf9; border: 1px solid #e7e5e4; color: #44403c; font-size: 0.82rem; padding: 0.35rem 0.85rem; border-radius: 9999px; white-space: nowrap; }
   .apt-divider { border: none; border-top: 1px solid #e7e5e4; margin: 1.25rem 0; }
+  .apt-guide-link { margin: -1rem 0 2rem; }
+  .apt-guide-link a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
   .apt-description { font-size: 1.05rem; color: #57534e; line-height: 1.85; margin-bottom: 2rem; }
   .apt-section { margin-bottom: 2rem; }
   .apt-section-title { font-size: 0.72rem; font-weight: 600; color: #9c9490; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e7e5e4; }

@@ -1,0 +1,10 @@
+---
+import GuidePage from '../../components/GuidePage.astro';
+import { GIRONA_GUIDE_SLUGS } from '../../i18n/guides';
+
+export function getStaticPaths() {
+  return Object.keys(GIRONA_GUIDE_SLUGS).map((slug) => ({ params: { slug } }));
+}
+const { slug } = Astro.params as { slug: string };
+---
+<GuidePage lang="es" kind={GIRONA_GUIDE_SLUGS[slug]} />

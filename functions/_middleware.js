@@ -40,6 +40,21 @@ const COUNTRY_LANG = {
 // Pages that exist ONLY in default (es) and should never be redirected
 const SKIP_PATHS = new Set(['/aviso-legal', '/aviso-legal/']);
 
+// Pages that exist only in some languages (guides): ES + these. Visitors in
+// any other language get the English version instead of a 404.
+const PARTIAL_PREFIXES = ['/guia', '/house/zona'];
+const PARTIAL_LANGS = ['en', 'fr', 'de', 'ca'];
+
+function isPartialPath(pathname) {
+  return PARTIAL_PREFIXES.some(p => pathname === p || pathname.startsWith(`${p}/`));
+}
+
+/** Language to redirect to for this path: unsupported ones fall back to English. */
+function langForPath(lang, pathname) {
+  if (isPartialPath(pathname) && !PARTIAL_LANGS.includes(lang)) return 'en';
+  return lang;
+}
+
 /**
  * Parse Accept-Language header and return best matching supported locale.
  * e.g. "fr-CH,fr;q=0.9,en;q=0.8" → 'fr'
@@ -171,6 +186,13 @@ export async function onRequest({ request, next }) {
       return Response.redirect(dest.toString(), 301);
     }
 
+    // Guide pages that don't exist in this language → English version (302).
+    if (isPartialPath(rest) && !PARTIAL_LANGS.includes(activeLang)) {
+      const dest = new URL(`/en${rest}`, url);
+      dest.search = url.search;
+      return Response.redirect(dest.toString(), 302);
+    }
+
     // Set cookie so that if the user later hits a non-prefixed URL we remember.
     const existingCookie = getLangCookie(request.headers.get('cookie'));
     if (!existingCookie) {
@@ -185,7 +207,7 @@ export async function onRequest({ request, next }) {
   const cookieLang = getLangCookie(request.headers.get('cookie'));
   if (cookieLang !== null) {
     if (cookieLang === DEFAULT_LANG) return next();
-    const dest = buildRedirectUrl(url, cookieLang, pathname);
+    const dest = buildRedirectUrl(url, langForPath(cookieLang, pathname), pathname);
     return Response.redirect(dest, 302);
   }
 
@@ -195,7 +217,7 @@ export async function onRequest({ request, next }) {
   const detectedLang = acceptLang ?? countryLang ?? DEFAULT_LANG;
 
   if (detectedLang !== DEFAULT_LANG) {
-    const dest = buildRedirectUrl(url, detectedLang, pathname);
+    const dest = buildRedirectUrl(url, langForPath(detectedLang, pathname), pathname);
     return redirectWithCookie(dest, detectedLang);
   }
 

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { guideUi } from '../../i18n/guides';
 import BookingWidget from '../../components/BookingWidget.astro';
 import HostCard from '../../components/HostCard.astro';
 import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
@@ -8,7 +9,6 @@ import { getT } from '../../i18n/translations';
 export function getStaticPaths() {
   const apartments = [
     { name: "Ylang-Ylang", nameCa: "Ylang-Ylang", slug: "ylang-ylang", address: "Rambla de la Llibertat, 11", guests: 4, bedrooms: 2, bathrooms: 1.5, size: 70, smoobuId: 1397576, calendarToken: "2641959c015aaf85db8ec4e813438dcadf921f96e17d463fc63dbc8ea38833e1",
-      seoTitle: "Apartamento Ylang-Ylang — vistas al Onyar en el Barri Vell de Girona | Aromatik",
       seoDescription: "Apartamento boutique para 4 personas con vistas al río Onyar en el casco antiguo de Girona. Balcón, WiFi, AC, self check-in. Reserva directa al mejor precio.",
       h1: "Apartamento Ylang-Ylang — vistas al Onyar, Barri Vell de Girona",
       description: "Ylang-Ylang es uno de esos apartamentos que te sitúan directamente en Girona: luz, vistas al río y el movimiento tranquilo del Barri Vell bajo el balcón. Buena opción para parejas que quieren espacio extra, familias pequeñas o estancias en las que apetece tener algo más que una habitación de hotel.",
@@ -16,7 +16,6 @@ export function getStaticPaths() {
       emoji: "🌸",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
     { name: "Romaní", nameCa: "Romaní", slug: "romani", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 45, smoobuId: 1033021, calendarToken: "605d06bb5d83bab6cbbbef4a2419e21638f0130f656f6a75260e26a91acd7e0c",
-      seoTitle: "Apartamento Romaní con vistas al río Onyar — Barri Vell de Girona | Aromatik",
       seoDescription: "Acogedor apartamento para parejas con vistas al río Onyar en el casco antiguo de Girona. WiFi, AC, cocina equipada. Reserva directa sin comisiones.",
       h1: "Apartamento Romaní — vistas al Onyar en el Barri Vell de Girona",
       description: "Acogedor apartamento con vistas al río Onyar. Un dormitorio con todo el confort en el casco antiguo de Girona, ideal para parejas.",
@@ -24,7 +23,6 @@ export function getStaticPaths() {
       emoji: "🌿",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg'] },
     { name: "Ciprés", nameCa: "Xiprer", slug: "cipres", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 35, smoobuId: 1035631, calendarToken: "02a1c68c3613eade7b8644c46938685f606ed811ad15a88e1f3185c1f316b1f1",
-      seoTitle: "Apartamento Ciprés con balcón — Casco Antiguo de Girona | Aromatik",
       seoDescription: "Luminoso apartamento con balcón en el corazón del Barri Vell de Girona. Para 2 personas, WiFi, cocina equipada. Reserva directa al mejor precio.",
       h1: "Apartamento Ciprés — balcón en el Casco Antiguo de Girona",
       description: "Apartamento con balcón en el corazón del Casco Antiguo. Un dormitorio luminoso, cocina equipada y acceso directo al centro histórico de Girona.",
@@ -32,7 +30,6 @@ export function getStaticPaths() {
       emoji: "🌲",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg'] },
     { name: "Lavanda", nameCa: "Lavanda", slug: "lavanda", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 50, smoobuId: 1033339, calendarToken: "c4b41ccacd97b4eef671774013b7a17a1d3b5b47fd243acb327a048279cbe0a9",
-      seoTitle: "Apartamento Lavanda con vistas al río Onyar | Aromatik Girona",
       seoDescription: "Tranquilo apartamento para parejas con vistas al Onyar en el Barri Vell de Girona. Pet friendly, WiFi, cocina. Reserva directa, mejor precio garantizado.",
       h1: "Apartamento Lavanda — vistas al Onyar en el Barri Vell de Girona",
       description: "Tranquilo apartamento con vistas al río Onyar. Perfecto para parejas que buscan un refugio de calma en pleno centro histórico de Girona.",
@@ -40,7 +37,6 @@ export function getStaticPaths() {
       emoji: "💜",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg'] },
     { name: "Limón", nameCa: "Llimona", slug: "limon", address: "Rambla de la Llibertat, 11", guests: 2, bedrooms: 1, bathrooms: 1, size: 30, smoobuId: 1037266, calendarToken: "11826c74a49500f30c292467e92eab13c859ab324b89c373f0781a2fb26a24cf",
-      seoTitle: "Apartamento Limón con balcón — Barri Vell de Girona | Aromatik",
       seoDescription: "Fresco apartamento con balcón en el casco histórico de Girona. Para 2 personas, pet friendly, WiFi, cafetera expreso. Reserva directa sin intermediarios.",
       h1: "Apartamento Limón — balcón en el Barri Vell de Girona",
       description: "Fresco y luminoso apartamento con vistas a la ciudad. Un dormitorio en el casco histórico de Girona, perfecto para parejas y viajeros con mascotas.",
@@ -48,7 +44,6 @@ export function getStaticPaths() {
       emoji: "🍋",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
     { name: "Bergamota", nameCa: "Bergamota", slug: "bergamota", address: "Rambla de la Llibertat, 11", guests: 6, bedrooms: 3, bathrooms: 2, size: 120, smoobuId: 1034422, calendarToken: "dbe995d003fd83567fb2ebc64c143de86b5d0fc7eddc7429ae6f488d288fe631",
-      seoTitle: "Apartamento Bergamota — ático para 6 personas en Girona | Aromatik",
       seoDescription: "Espectacular ático para 6 personas con vistas al río Onyar. 3 dormitorios, 2 baños, bañera, lavadora y balcón en el Barri Vell de Girona. Reserva directa.",
       h1: "Apartamento Bergamota — ático para 6 personas en el Barri Vell de Girona",
       description: "Espectacular ático con vistas al río en el casco antiguo. Tres dormitorios, dos baños completos, bañera, cocina de alta gama con Nespresso y balcón privado.",
@@ -56,7 +51,6 @@ export function getStaticPaths() {
       emoji: "🍊",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg'] },
     { name: "Árbol de té", nameCa: "Arbre de te", slug: "arbol-de-te", address: "Rambla de la Llibertat, 26", guests: 6, bedrooms: 3, bathrooms: 2, size: 130, smoobuId: 1315321, calendarToken: "d661c9850fefe6da5f3ed44a982d8ce0308e92ee6ae2196922e0b7aed644bdd7",
-      seoTitle: "Apartamento Árbol de Té — ático de diseño en Girona | Aromatik",
       seoDescription: "Lujoso ático de diseño para 6 personas en el centro histórico de Girona. 3 dormitorios, lavavajillas, bañera, balcón privado. Reserva directa al mejor precio.",
       h1: "Apartamento Árbol de Té — ático de diseño en el Barri Vell de Girona",
       description: "Lujoso ático de diseño en el centro de Girona. Tres dormitorios, dos baños, cocina completa y todo el equipamiento para grupos o familias que quieren lo mejor del Barri Vell.",
@@ -64,7 +58,6 @@ export function getStaticPaths() {
       emoji: "🌱",
       photos: ['foto-1.jpg','foto-2.jpg','foto-3.jpg','foto-4.jpg','foto-5.jpg','foto-6.jpg','foto-7.jpg','foto-8.jpg','foto-9.jpg','foto-10.jpg','foto-11.jpg','foto-12.jpg','foto-13.jpg','foto-14.jpg','foto-15.jpg','foto-16.jpg','foto-17.jpg','foto-18.jpg','foto-19.jpg','foto-20.jpg','foto-21.jpg','foto-22.jpg','foto-23.jpg'] },
     { name: "Geranio", nameCa: "Gerani", slug: "geranio", address: "Rambla de la Llibertat, 26", guests: 2, bedrooms: 1, bathrooms: 1, size: 40, smoobuId: 1599430, calendarToken: "c6d294659c74f77593b64288e7f746b97fa0cadb210355c2a65c1f316720dbda",
-      seoTitle: "Apartamento Geranio con balcón — Barri Vell de Girona | Aromatik",
       seoDescription: "Alegre apartamento con balcón en el corazón del casco antiguo de Girona. Para 2 personas, pet friendly, lavadora, WiFi. Reserva directa sin comisiones.",
       h1: "Apartamento Geranio — balcón en el Barri Vell de Girona",
       description: "Alegre apartamento en el barrio viejo de Girona. Un dormitorio con todo lo necesario para una estancia cómoda en el corazón del casco antiguo.",
@@ -124,7 +117,7 @@ const breadcrumbSchema = JSON.stringify({
   ]
 });
 ---
-<BaseLayout title={apt.seoTitle ?? `Apartamento ${apt.name} — Barri Vell de Girona | Aromatik`} description={apt.seoDescription ?? apt.description} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
+<BaseLayout title={'Apartamento ' + apt.name + ' en Girona, Barri Vell | Aromatik'} description={apt.seoDescription ?? apt.description} ogImage={`/images/apartamentos/${apt.slug}/foto-1.jpg`}>
   <script type="application/ld+json" set:html={apartmentSchema} slot="head" />
   <script type="application/ld+json" set:html={breadcrumbSchema} slot="head" />
 
@@ -183,6 +176,7 @@ const breadcrumbSchema = JSON.stringify({
         <div class="apt-divider"></div>
 
         <p class="apt-description">{apt.description}</p>
+        <p class="apt-guide-link"><a href="/guia/que-ver-en-girona">{guideUi('es').girona} →</a></p>
 
         <div class="apt-section">
           <h2 class="apt-section-title">{t.aptServicesTitle}</h2>
@@ -380,6 +374,8 @@ const breadcrumbSchema = JSON.stringify({
     margin: 1.25rem 0;
   }
 
+  .apt-guide-link { margin: -1rem 0 2rem; }
+  .apt-guide-link a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
   .apt-description {
     font-size: 1.05rem;
     color: #57534e;

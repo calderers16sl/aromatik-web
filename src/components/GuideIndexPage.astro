@@ -1,0 +1,97 @@
+---
+// Índice /guia en ES/EN/FR/DE/CA.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { guides, GUIDE_LOCALES, GUIDE_PAGES, type GuideKey, type GuideLocale } from '../i18n/guides';
+
+interface Props { lang: GuideLocale }
+const { lang } = Astro.props;
+const set = guides[lang];
+const doc = set.index;
+const langRoot = lang === 'es' ? '' : '/' + lang;
+const siteUrl = 'https://aromatik.apartments';
+
+const keys: GuideKey[] = ['queVer', 'aparcar', 'tempsDeFlors', 'houseZona'];
+const cards = keys.map((k) => ({ ...doc.cards[k], href: langRoot + GUIDE_PAGES[k].path, image: GUIDE_PAGES[k].ogImage }));
+
+const crumbs = [
+  { name: set.ui.home, href: langRoot + '/' },
+  { name: doc.breadcrumb, href: langRoot + '/guia' },
+];
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': crumbs.map((c, i) => ({ '@type': 'ListItem', 'position': i + 1, 'name': c.name, 'item': siteUrl + c.href })),
+});
+const articleSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': doc.h1,
+  'description': doc.metaDescription,
+  'inLanguage': lang,
+  'image': siteUrl + '/images/guias/og-girona.jpg',
+  'datePublished': '2026-11-01',
+  'dateModified': '2026-11-01',
+  'author': { '@type': 'Organization', 'name': 'Aromatik Apartments', 'url': siteUrl },
+  'publisher': { '@type': 'Organization', 'name': 'Aromatik Apartments', 'url': siteUrl },
+  'mainEntityOfPage': siteUrl + langRoot + '/guia',
+});
+---
+<BaseLayout title={doc.metaTitle} description={doc.metaDescription} lang={lang} ogImage="/images/guias/og-girona.jpg" locales={GUIDE_LOCALES} titleSuffix={false}>
+  <script is:inline type="application/ld+json" slot="head" set:html={breadcrumbSchema} />
+  <script is:inline type="application/ld+json" slot="head" set:html={articleSchema} />
+
+  <header class="gi-head">
+    <div class="gi-wrap">
+      <nav class="gi-crumbs" aria-label="breadcrumb">
+        <ol>
+          <li><a href={crumbs[0].href}>{crumbs[0].name}</a></li>
+          <li><span aria-current="page">{crumbs[1].name}</span></li>
+        </ol>
+      </nav>
+      <span class="gi-eyebrow">{doc.eyebrow}</span>
+      <h1>{doc.h1}</h1>
+      <p>{doc.lead}</p>
+    </div>
+  </header>
+
+  <section class="gi-list">
+    <div class="gi-wrap">
+      <div class="gi-cards">
+        {cards.map((c) => (
+          <a href={c.href} class="gi-card">
+            <img src={c.image} alt="" loading="lazy" width="1200" height="800" />
+            <span class="gi-card-body">
+              <h2>{c.title}</h2>
+              <p>{c.text}</p>
+              <span class="gi-card-link">{doc.readMore} →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.gi-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+.gi-head { margin-top: 70px; background: var(--cream); padding: 3rem 0 2.75rem; }
+.gi-crumbs ol { list-style: none; padding: 0; display: flex; gap: 0.35rem; font-size: 0.8rem; color: var(--stone-600); margin-bottom: 1.5rem; }
+.gi-crumbs li + li::before { content: "›"; margin-right: 0.35rem; color: var(--stone-400); }
+.gi-crumbs a { color: var(--stone-600); text-decoration: underline; text-underline-offset: 2px; }
+.gi-eyebrow { display: block; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--stone-600); margin-bottom: 0.75rem; }
+.gi-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; margin-bottom: 1rem; }
+.gi-head p { max-width: 680px; font-size: 1.1rem; line-height: 1.75; color: var(--stone-800); }
+.gi-list { padding: 3.5rem 0 5rem; }
+.gi-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.gi-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: box-shadow 0.2s; }
+.gi-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.gi-card img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; display: block; }
+.gi-card-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.gi-card h2 { font-family: var(--serif); font-weight: 400; font-size: 1.45rem; line-height: 1.25; }
+.gi-card p { font-size: 0.95rem; line-height: 1.7; color: var(--stone-600); }
+.gi-card-link { color: var(--green); font-weight: 500; font-size: 0.9rem; }
+@media (max-width: 767px) {
+  .gi-cards { grid-template-columns: 1fr; }
+  .gi-wrap { padding: 0 1rem; }
+}
+</style>

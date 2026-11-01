@@ -1,0 +1,9 @@
+---
+// Texto de guía con enlaces internos [texto](/ruta) → <a>, con prefijo de idioma.
+import { richText } from '../i18n/guides';
+
+interface Props { text: string; langRoot: string }
+const { text, langRoot } = Astro.props;
+const parts = richText(text, langRoot);
+---
+{parts.map((p) => (p.href ? <a href={p.href}>{p.text}</a> : p.text))}

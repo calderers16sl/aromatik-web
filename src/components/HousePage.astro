@@ -3,12 +3,15 @@
 import BookingWidget from './BookingWidget.astro';
 import HostCard from './HostCard.astro';
 import { houseContent, HOUSE, HOUSE_DISTANCES } from '../i18n/house';
+import { guideLangRoot, guideUi } from '../i18n/guides';
 
 interface Props { lang: string }
 const { lang } = Astro.props;
 const c = houseContent[lang] ?? houseContent.es;
 const langRoot = lang === 'es' ? '' : `/${lang}`;
 const rating = ['en', 'zh', 'ko'].includes(lang) ? HOUSE.rating.en : HOUSE.rating.es;
+const zonaHref = guideLangRoot(lang) + '/house/zona';
+const zonaLabel = guideUi(lang).zoneLink;
 const smoobuLang = ['es', 'en', 'fr', 'de', 'pt', 'nl'].includes(lang) ? lang : 'en';
 
 const img = '/images/aromatik-house';
@@ -101,12 +104,13 @@ const groups = [
   </div>
 </section>
 
-<section class="h-section">
+<section class="h-section" id="zona">
   <div class="h-wrap">
     <div class="h-head h-head-narrow">
       <span class="h-eyebrow">{c.zoneEyebrow}</span>
       <h2>{c.zoneTitle}</h2>
       <p>{c.zoneText}</p>
+      <a href={zonaHref} class="h-zone-link">{zonaLabel} →</a>
     </div>
     <div class="h-zone">
       <figure class="h-map">
@@ -320,7 +324,8 @@ const groups = [
 .h-rules { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem 2rem; }
 .h-rules li { padding: 0.75rem 0; border-bottom: 1px solid var(--stone-200); font-size: 0.95rem; color: var(--stone-800); }
 @media (max-width: 640px) { .h-rules { grid-template-columns: 1fr; } }
-.h-booking, #fotos { scroll-margin-top: 80px; }
+.h-booking, #fotos, #zona { scroll-margin-top: 80px; }
+.h-zone-link { align-self: flex-start; color: var(--green); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 
 @media (max-width: 640px) {
   .h-section { padding: 3.5rem 0; }

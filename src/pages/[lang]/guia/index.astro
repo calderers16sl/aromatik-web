@@ -1,0 +1,10 @@
+---
+import GuideIndexPage from '../../../components/GuideIndexPage.astro';
+import { GUIDE_NON_DEFAULT, type GuideLocale } from '../../../i18n/guides';
+
+export function getStaticPaths() {
+  return GUIDE_NON_DEFAULT.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: GuideLocale };
+---
+<GuideIndexPage lang={lang} />

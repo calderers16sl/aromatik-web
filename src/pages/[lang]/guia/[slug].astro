@@ -1,0 +1,10 @@
+---
+import GuidePage from '../../../components/GuidePage.astro';
+import { GIRONA_GUIDE_SLUGS, GUIDE_NON_DEFAULT, type GuideLocale } from '../../../i18n/guides';
+
+export function getStaticPaths() {
+  return GUIDE_NON_DEFAULT.flatMap((lang) => Object.keys(GIRONA_GUIDE_SLUGS).map((slug) => ({ params: { lang, slug } })));
+}
+const { lang, slug } = Astro.params as { lang: GuideLocale; slug: string };
+---
+<GuidePage lang={lang} kind={GIRONA_GUIDE_SLUGS[slug]} />
