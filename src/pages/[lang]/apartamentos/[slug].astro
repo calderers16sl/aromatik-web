@@ -122,8 +122,8 @@ const breadcrumbSchema = JSON.stringify({
         ))}
       </div>
       <div class="c-counter" id="cCounter" aria-live="polite">1 / {apt.photos.length}</div>
-      <button class="c-btn c-prev" id="cPrev" aria-label="←">&#10094;</button>
-      <button class="c-btn c-next" id="cNext" aria-label="→">&#10095;</button>
+      <button class="c-btn c-prev" id="cPrev" aria-label="←"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg></button>
+      <button class="c-btn c-next" id="cNext" aria-label="→"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4.5 2.5 8 6 4.5 9.5"/></svg></button>
       <div class="c-hint" id="cHint" aria-hidden="true"><span>{t.aptSwipeHint}</span></div>
     </div>
   )}
@@ -133,14 +133,14 @@ const breadcrumbSchema = JSON.stringify({
       <div class="apt-main">
         <h1 class="apt-title">{aptTitle}</h1>
         <div class="apt-stats">
-          <span class="stat-badge">👥 {t.aptGuests(apt.guests)}</span>
-          <span class="stat-badge">🛏 {t.aptBeds(apt.bedrooms)}</span>
-          <span class="stat-badge">🚿 {t.aptBath(apt.bathrooms)}</span>
-          <span class="stat-badge">📐 {t.aptSize(apt.size)}</span>
+          <span class="stat-badge">{t.aptGuests(apt.guests)}</span>
+          <span class="stat-badge">{t.aptBeds(apt.bedrooms)}</span>
+          <span class="stat-badge">{t.aptBath(apt.bathrooms)}</span>
+          <span class="stat-badge">{t.aptSize(apt.size)}</span>
         </div>
         <div class="apt-divider"></div>
         <p class="apt-description">{aptDesc}</p>
-        <p class="apt-guide-link"><a href={guideHref}>{guideLabel} →</a></p>
+        <p class="apt-guide-link"><a href={guideHref}>{guideLabel}</a></p>
         <div class="apt-section">
           <h2 class="apt-section-title">{t.aptServicesTitle}</h2>
           <ul class="apt-amenities">
@@ -193,14 +193,14 @@ const breadcrumbSchema = JSON.stringify({
           const photoNums = Array.from({ length: count }, (_: unknown, i: number) => i + 1);
           return (
             <a href={`/${lang}/apartamentos/${a.slug}`} class="apt-card">
-              <div class="apt-card-img" style="background-color:#e7e5e4">
+              <div class="apt-card-img" style="background-color:var(--stone-200)">
                 {photoNums.map((n: number, i: number) => (
                   <img src={`/images/apartamentos/${a.slug}/foto-${n}.jpg`} alt={`${a.name}`} class={i > 0 ? 'c-hidden' : ''} loading="lazy" />
                 ))}
                 {count > 1 && (
                   <>
-                    <button class="apt-card-prev" aria-label="‹">&#8249;</button>
-                    <button class="apt-card-next" aria-label="›">&#8250;</button>
+                    <button class="apt-card-prev" aria-label="‹"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg></button>
+                    <button class="apt-card-next" aria-label="›"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4.5 2.5 8 6 4.5 9.5"/></svg></button>
                     <div class="apt-card-dots">
                       {photoNums.map((_: number, i: number) => (
                         <span class={`apt-card-dot${i === 0 ? ' c-active' : ''}`}></span>
@@ -211,7 +211,7 @@ const breadcrumbSchema = JSON.stringify({
               </div>
               <div class="apt-card-body">
                 <h3>{a.nameCa}</h3>
-                <p class="apt-meta">{t.aptGuests(a.guests)} · {t.aptBeds(a.bedrooms)} · {a.size} m²</p>
+                <p class="apt-meta">{t.aptGuests(a.guests)}, {t.aptBeds(a.bedrooms)}, {a.size} m²</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>
             </a>
@@ -241,76 +241,80 @@ const breadcrumbSchema = JSON.stringify({
 <style>
   .apt-container { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
   @media (max-width: 640px) { .apt-container { padding: 2rem 1rem; } }
-  .carousel-wrap { position: relative; width: 100%; height: min(72vw, 520px); background: #1c1917; overflow: hidden; user-select: none; }
+  .carousel-wrap { position: relative; width: 100%; height: min(72vw, 520px); background: var(--black); overflow: hidden; user-select: none; }
   .carousel-track { display: flex; height: 100%; overflow-x: scroll; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; }
   .carousel-track:active { cursor: grabbing; }
   .carousel-track::-webkit-scrollbar { display: none; }
   .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
   .c-img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
-  .c-counter { position: absolute; bottom: 16px; right: 16px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.8rem; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; pointer-events: none; }
-  .c-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.45); color: rgba(255,255,255,0.9); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; pointer-events: none; animation: fadeHint 3s ease forwards; }
+  .c-counter { position: absolute; bottom: 16px; right: 16px; background: color-mix(in srgb, var(--black) 60%, transparent); color: var(--white); font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; pointer-events: none; }
+  .c-hint { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: color-mix(in srgb, var(--black) 45%, transparent); color: color-mix(in srgb, var(--white) 90%, transparent); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; pointer-events: none; animation: fadeHint 3s ease forwards; }
   @keyframes fadeHint { 0%,60% { opacity:1; } 100% { opacity:0; } }
-  .c-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.25); border: none; color: #fff; font-size: 1.2rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, opacity 0.2s; z-index: 10; opacity: 0; }
-  .carousel-wrap:hover .c-btn { opacity: 1; }
-  .c-btn:hover { background: rgba(255,255,255,0.35); }
+  .c-btn { position: absolute; top: 50%; transform: translateY(-50%); background: color-mix(in srgb, var(--black) 45%, transparent); border: none; color: var(--white); font-size: 1.2rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, opacity 0.2s; z-index: 10; }
+  @media (hover: hover) { .carousel-wrap:not(:hover):not(:focus-within) .c-btn { opacity: 0.6; } }
+  .c-btn:hover { background: color-mix(in srgb, var(--black) 62%, transparent); }
+  .c-btn svg { width: 16px; height: 16px; }
+  .carousel-wrap :focus-visible, .lightbox :focus-visible { outline: 2px solid var(--focus-on-dark); outline-offset: 2px; box-shadow: 0 0 0 5px var(--focus); }
+  @media (prefers-reduced-motion: reduce) { .c-hint { animation: none; opacity: 0; } }
   .c-prev { left: 12px; } .c-next { right: 12px; }
-  @media (hover: none) { .c-btn { opacity: 0.5; } }
-  .apt-layout { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
-  @media (max-width: 900px) { .apt-layout { grid-template-columns: 1fr; } .apt-sidebar { order: -1; } }
-  .apt-title { font-family: var(--serif, Georgia, serif); font-size: 2.4rem; font-weight: 400; color: #1c1917; margin-bottom: 1rem; line-height: 1.2; }
+  .apt-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 3rem; align-items: start; }
+  @media (max-width: 900px) { .apt-layout { grid-template-columns: minmax(0, 1fr); } .apt-sidebar { order: -1; } }
+  .apt-title { font-family: var(--serif); font-size: 2.4rem; font-weight: 400; color: var(--black); margin-bottom: 1rem; line-height: 1.2; }
   @media (max-width: 640px) { .apt-title { font-size: 1.85rem; } }
   .apt-stats { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-  .stat-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: #fafaf9; border: 1px solid #e7e5e4; color: #44403c; font-size: 0.82rem; padding: 0.35rem 0.85rem; border-radius: 9999px; white-space: nowrap; }
-  .apt-divider { border: none; border-top: 1px solid #e7e5e4; margin: 1.25rem 0; }
+  .stat-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--cream); border: 1px solid var(--stone-200); color: var(--stone-800); font-size: 0.875rem; padding: 0.35rem 0.85rem; border-radius: 9999px; white-space: nowrap; }
+  .apt-divider { border: none; border-top: 1px solid var(--stone-200); margin: 1.25rem 0; }
   .apt-guide-link { margin: -1rem 0 2rem; }
   .apt-guide-link a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
-  .apt-description { font-size: 1.05rem; color: #57534e; line-height: 1.85; margin-bottom: 2rem; }
+  .apt-description { font-size: 1.05rem; color: var(--stone-600); line-height: 1.85; margin-bottom: 2rem; }
   .apt-section { margin-bottom: 2rem; }
-  .apt-section-title { font-size: 0.72rem; font-weight: 600; color: #9c9490; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e7e5e4; }
+  .apt-section-title { margin-top: 2.5rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--black); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--stone-200); }
   .apt-amenities { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; list-style: none; padding: 0; margin: 0; }
   @media (max-width: 480px) { .apt-amenities { grid-template-columns: 1fr; } }
-  .amenity-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; color: #57534e; padding: 0.5rem 0.75rem; background: #fafaf9; border: 1px solid #f0efed; border-radius: 8px; }
-  .amenity-check { color: #d0b050; font-weight: 700; flex-shrink: 0; }
-  .booking-card { position: sticky; top: 88px; background: #fff; border: 1.5px solid #e7e5e4; border-radius: 16px; padding: 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+  .amenity-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; color: var(--stone-600); padding: 0.5rem 0.75rem; background: var(--cream); border: 1px solid var(--line-soft); border-radius: 8px; }
+  .amenity-check { color: var(--gold-ink); font-weight: 700; flex-shrink: 0; }
+  .booking-card { position: sticky; top: 88px; background: var(--white); border: 1.5px solid var(--stone-200); border-radius: 16px; padding: 1.75rem; box-shadow: 0 4px 24px color-mix(in srgb, var(--black) 7%, transparent); }
   .booking-card-header { margin-bottom: 1.25rem; }
-  .booking-card-title { font-family: var(--serif, Georgia, serif); font-size: 1.2rem; font-weight: 400; color: #1c1917; margin: 0 0 0.3rem; }
-  .booking-card-sub { font-size: 0.83rem; color: #78716c; margin: 0; }
-  .btn-reservar { display: block; width: 100%; text-align: center; background: #d0b050; color: #fff; padding: 0.875rem 1.5rem; border-radius: 8px; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; margin-bottom: 0.75rem; }
-  .btn-reservar:hover { background: #b89a40; }
-  .btn-contactar { display: block; width: 100%; text-align: center; border: 1.5px solid #e7e5e4; color: #44403c; padding: 0.875rem 1.5rem; border-radius: 8px; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s; margin-bottom: 1rem; }
-  .btn-contactar:hover { border-color: #a8a29e; }
-  .booking-note { font-size: 0.72rem; color: #a8a29e; text-align: center; margin: 0; }
-  .booking-section { scroll-margin-top: 90px; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid #e7e5e4; }
-  .section-heading { font-family: var(--serif, Georgia, serif); font-size: 1.75rem; font-weight: 400; text-align: center; color: #1c1917; margin-bottom: 2rem; }
+  .booking-card-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--black); margin: 0 0 0.3rem; }
+  .booking-card-sub { font-size: 0.875rem; color: var(--stone-600); margin: 0; }
+  .btn-reservar { display: block; width: 100%; text-align: center; background: var(--gold); color: var(--black); padding: 0.875rem 1.5rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; text-decoration: none; transition: background 0.2s; margin-bottom: 0.75rem; }
+  .btn-reservar:hover { background: var(--gold-hover); }
+  .btn-contactar { display: block; width: 100%; text-align: center; border: 1.5px solid var(--stone-200); color: var(--stone-800); padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.95rem; text-decoration: none; transition: border-color 0.2s; margin-bottom: 1rem; }
+  .btn-contactar:hover { border-color: var(--stone-400); }
+  .booking-note { font-size: 0.8rem; color: var(--stone-600); text-align: center; margin: 0; }
+  .booking-section { scroll-margin-top: 90px; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--stone-200); }
+  .section-heading { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; text-align: center; color: var(--black); margin-bottom: 2rem; }
   .calendar-section { margin-top: 3rem; }
   .smoobu-cal-wrap { overflow-x: auto; display: flex; justify-content: center; }
-  .otros-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid #e7e5e4; }
+  .otros-section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--stone-200); }
   .apts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
-  .apt-card { display: block; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; border: 1px solid #e7e5e4; transition: box-shadow 0.2s; background: #fff; }
-  .apt-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.10); }
-  .apt-card-img { position: relative; height: 180px; overflow: hidden; background: #e7e5e4; }
+  .apt-card { display: block; text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; border: 1px solid var(--stone-200); transition: box-shadow 0.2s; background: var(--white); }
+  .apt-card:hover { box-shadow: 0 4px 20px color-mix(in srgb, var(--black) 10%, transparent); }
+  .apt-card-img { position: relative; height: 180px; overflow: hidden; background: var(--stone-200); }
   .apt-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .apt-card-img img.c-hidden { display: none; }
-  .apt-card-prev, .apt-card-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.7); border: none; font-size: 1.2rem; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; opacity: 0; transition: opacity 0.2s; }
-  .apt-card:hover .apt-card-prev, .apt-card:hover .apt-card-next { opacity: 1; }
+  .apt-card-prev, .apt-card-next { position: absolute; top: 50%; transform: translateY(-50%); background: color-mix(in srgb, var(--white) 70%, transparent); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: opacity 0.2s; }
+  .apt-card-prev, .apt-card-next { opacity: 0; }
+  .apt-card:hover .apt-card-prev, .apt-card:hover .apt-card-next, .apt-card:focus-within .apt-card-prev, .apt-card:focus-within .apt-card-next { opacity: 1; }
+  @media (hover: none) { .apt-card-prev, .apt-card-next { display: none; } }
   .apt-card-prev { left: 6px; } .apt-card-next { right: 6px; }
   .apt-card-dots { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; }
-  .apt-card-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); }
-  .apt-card-dot.c-active { background: #fff; }
+  .apt-card-dot { width: 6px; height: 6px; border-radius: 50%; background: color-mix(in srgb, var(--white) 50%, transparent); }
+  .apt-card-dot.c-active { background: var(--white); }
   .apt-card-body { padding: 0.875rem 1rem; }
-  .apt-card-body h3 { font-family: var(--serif, Georgia, serif); font-size: 1rem; font-weight: 400; color: #1c1917; margin: 0 0 0.25rem; }
-  .apt-meta { font-size: 0.75rem; color: #78716c; margin: 0 0 0.5rem; }
-  .apt-link { font-size: 0.75rem; color: #d0b050; font-weight: 500; }
-  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 1000; align-items: center; justify-content: center; touch-action: pan-x; }
+  .apt-card-body h3 { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--black); margin: 0 0 0.25rem; }
+  .apt-meta { font-size: 0.8rem; color: var(--stone-600); margin: 0 0 0.5rem; }
+  .apt-link { font-size: 0.875rem; color: var(--gold-ink); font-weight: 500; }
+  .lightbox { display: none; position: fixed; inset: 0; background: color-mix(in srgb, var(--black) 93%, transparent); z-index: 1000; align-items: center; justify-content: center; touch-action: pan-x; }
   .lightbox.active { display: flex; }
   .lb-content { display: flex; flex-direction: column; align-items: center; max-width: 92vw; max-height: 92vh; }
   .lb-content img { max-width: 92vw; max-height: 82vh; object-fit: contain; border-radius: 4px; }
-  .lb-counter-text { color: rgba(255,255,255,0.65); font-size: 0.82rem; margin-top: 12px; letter-spacing: 0.06em; }
-  .lb-close { position: fixed; top: 18px; right: 20px; background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 1.3rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1001; }
-  .lb-close:hover { background: rgba(255,255,255,0.3); }
-  .lb-prev, .lb-next { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); border: none; color: #fff; font-size: 1.3rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1001; }
+  .lb-counter-text { color: color-mix(in srgb, var(--white) 65%, transparent); font-size: 0.82rem; margin-top: 12px; }
+  .lb-close { position: fixed; top: 18px; right: 20px; background: color-mix(in srgb, var(--white) 20%, transparent); border: none; color: var(--white); font-size: 1.3rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1001; }
+  .lb-close:hover { background: color-mix(in srgb, var(--white) 30%, transparent); }
+  .lb-prev, .lb-next { position: fixed; top: 50%; transform: translateY(-50%); background: color-mix(in srgb, var(--white) 20%, transparent); border: none; color: var(--white); font-size: 1.3rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 1001; }
   .lb-prev { left: 14px; } .lb-next { right: 14px; }
-  .lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.3); }
+  .lb-prev:hover, .lb-next:hover { background: color-mix(in srgb, var(--white) 30%, transparent); }
 </style>
 
 <script define:vars={{ photos: apt.photos, slug: apt.slug, aptName: apt.name }}>

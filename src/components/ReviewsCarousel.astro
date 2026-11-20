@@ -6,47 +6,47 @@ const copy: Record<string, any> = {
   es: {
     heading: 'Lo que dicen nuestros huéspedes',
     mapTitle: 'Aromatik Apartments en Google Maps',
-    btn: 'Ver todas las reseñas en Google Maps →',
+    btn: 'Ver todas las reseñas en Google Maps',
   },
   en: {
     heading: 'What our guests say',
     mapTitle: 'Aromatik Apartments on Google Maps',
-    btn: 'See all reviews on Google Maps →',
+    btn: 'See all reviews on Google Maps',
   },
   fr: {
     heading: 'Ce que disent nos clients',
     mapTitle: 'Aromatik Apartments sur Google Maps',
-    btn: 'Voir tous les avis sur Google Maps →',
+    btn: 'Voir tous les avis sur Google Maps',
   },
   ca: {
     heading: 'El que diuen els nostres hostes',
     mapTitle: 'Aromatik Apartments a Google Maps',
-    btn: 'Veure totes les ressenyes a Google Maps →',
+    btn: 'Veure totes les ressenyes a Google Maps',
   },
   de: {
     heading: 'Was unsere Gäste sagen',
     mapTitle: 'Aromatik Apartments auf Google Maps',
-    btn: 'Alle Bewertungen auf Google Maps ansehen →',
+    btn: 'Alle Bewertungen auf Google Maps ansehen',
   },
   zh: {
     heading: '客人的评价',
     mapTitle: 'Aromatik Apartments 在谷歌地图',
-    btn: '查看谷歌地图上的所有评价 →',
+    btn: '查看谷歌地图上的所有评价',
   },
   ko: {
     heading: '투숙객들의 후기',
     mapTitle: 'Aromatik Apartments 구글 지도',
-    btn: 'Google 지도에서 모든 리뷰 보기 →',
+    btn: 'Google 지도에서 모든 리뷰 보기',
   },
   pt: {
     heading: 'O que nossos hóspedes dizem',
     mapTitle: 'Aromatik Apartments no Google Maps',
-    btn: 'Ver todas as avaliações no Google Maps →',
+    btn: 'Ver todas as avaliações no Google Maps',
   },
   nl: {
     heading: 'Wat onze gasten zeggen',
     mapTitle: 'Aromatik Apartments op Google Maps',
-    btn: 'Alle beoordelingen op Google Maps bekijken →',
+    btn: 'Alle beoordelingen op Google Maps bekijken',
   },
 };
 
@@ -57,8 +57,7 @@ const mapSrc = `https://maps.google.com/maps?q=Aromatik+Apartments+Rambla+de+la+
 <section class="rc-section">
   <div class="container">
     <div class="section-header" style="margin-bottom:2rem">
-      <span class="eyebrow">Google Reviews</span>
-      <h2 style="margin-top:0.75rem">{c.heading}</h2>
+      <h2>{c.heading}</h2>
     </div>
     <div class="rc-embed-wrap">
       <iframe
@@ -85,14 +84,14 @@ const mapSrc = `https://maps.google.com/maps?q=Aromatik+Apartments+Rambla+de+la+
 
 <style>
   .rc-section {
-    background: var(--cream, #f8f4ef);
+    background: var(--cream);
     padding: 5rem 0;
   }
   .rc-embed-wrap {
     border-radius: 16px;
     overflow: hidden;
     height: 480px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-    border: 1px solid var(--stone-200, #e5e7eb);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--stone-200);
   }
 </style>
