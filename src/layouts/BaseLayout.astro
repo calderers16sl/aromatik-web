@@ -129,6 +129,7 @@ const schemaOrg = JSON.stringify({
   <style is:global>
     /* Hallmark · checked: 2026-11-20 · genre: editorial (inferred)
      * floor: 10 FAIL open (40 x5 the brand wordmark gold, kept as the logo; 26a x2 and 50 x2 static misses, the rules live in this global block; 44b x1 on the video hero, judged visible) · fixed: 16 (6a, 7a, 10a, 26a, 27, 30a, 34, 40, 48, 49a, 50, 54, 62, 63, 67, 75) · structural: 9 printed (3, 44b, 44c, 58, 59, 77, 78, 79, F15)
+     * finish-review: subagent · 5 findings · 3 resolved (map labels, nav size, dangling dot), 2 passed to the owner (card names, twin sections)
      * built: the project · redesign: polish · v2.0.0 */
     /* Hallmark · waive 7b · surface: absolute, white paper under the owner's own photographs · the brand keeps its white and sand palette */
     /* Hallmark · dropped the section eyebrows (aptsEyebrow, faqEyebrow, seoBarriEyebrow, seoCyclingEyebrow, "Antes de llegar", homeEyebrow, aerialEyebrow, zoneEyebrow, host eyebrow, "Google Reviews") and heroEyebrow · 54 names them */
@@ -192,7 +193,7 @@ const schemaOrg = JSON.stringify({
     @media (min-width: 1261px) and (max-width: 1440px) { .header-nav { gap: 1rem; } .header { padding: 0 1.5rem; } }
     .nav-cta { background: var(--gold) !important; color: var(--black) !important; padding: 0.6rem 1.3rem; border-radius: var(--radius); font-size: 0.875rem !important; letter-spacing: 0 !important; font-weight: 500 !important; white-space: nowrap; transition: background 0.2s !important; }
     .nav-divider { display: none; }
-    .nav-audience { font-size: 0.8rem !important; color: var(--stone-600) !important; }
+    .nav-audience { color: var(--stone-600) !important; }
     .nav-audience:hover { color: var(--gold-ink) !important; }
     @media (max-width: 1260px) {
       .nav-divider {
@@ -208,7 +209,6 @@ const schemaOrg = JSON.stringify({
         border-top: 1px solid var(--line-soft);
         border-bottom: none;
       }
-      .nav-audience { font-size: 0.9rem !important; }
     }
     .nav-cta:hover { background: var(--gold-hover) !important; }
     /* Header controls: agrupa lang-switcher + hamburguesa */
@@ -290,7 +290,7 @@ const schemaOrg = JSON.stringify({
     /* ── HERO ── */
     .hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); overflow: hidden; padding-top: 70px; }
     .hero-bg { position: absolute; inset: 0; background-color: var(--green-hover); color: var(--white); background-image: url("/images/hero-girona.jpg"); background-size: cover; background-position: center; }
-    .hero-overlay { position: absolute; inset: 0; background: color-mix(in srgb, var(--black) 52%, transparent); }
+    .hero-overlay { position: absolute; inset: 0; background: color-mix(in srgb, var(--black) 58%, transparent); }
     .hero-inner { position: relative; z-index: 1; max-width: 860px; padding: 4rem 2rem; }
     @media (max-width: 480px) { .hero-inner { padding: 3rem 1.25rem; } .hero-actions .btn { padding-inline: 1rem; font-size: 0.9rem; } }
     .hero h1 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 400; line-height: 1.2; margin-bottom: 1.5rem; }
