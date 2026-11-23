@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
-import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
-import HostCard from '../../components/HostCard.astro';
+import GuestRatings from '../../components/GuestRatings.astro';
 import HouseTeaser from '../../components/HouseTeaser.astro';
 
 export function getStaticPaths() {
@@ -31,16 +30,13 @@ const apartments = [
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
-      <div class="hero-badges">
-        <span class="hero-badge">Cyclist friendly</span>
-        <span class="hero-badge">Pet friendly</span>
-      </div>
-      <h1 set:html={t.heroTitle.replace('\n','<br>')} />
+      <h1 set:html={t.heroTitle.replace('\n',' <br>')} />
       <div class="hero-actions">
-        <a href="#apartamentos" class="btn btn-white" id="heroCta1Btn">{t.heroCta1}</a>
         <a href={`${langRoot}/reservar#motor`} class="btn btn-green">{t.navBook}</a>
+        <a href="#apartamentos" class="btn btn-outline-white" id="heroCta1Btn">{t.heroCta1}</a>
         <a href="#anfitrion" class="btn btn-outline-white" id="heroScrollBtn">{t.heroCta2}</a>
       </div>
+      <p class="hero-note">Cyclist friendly, pet friendly</p>
     </div>
   </section>
 
@@ -80,7 +76,7 @@ const apartments = [
                 )}
               </div>
               <div class="apt-card-body">
-                <h3>{apt.nameCa}</h3>
+                <h3>{apt.name}</h3>
                 <p class="apt-meta">{t.aptsGuests(apt.guests)}, {t.aptsBedroom(apt.bedrooms)}</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>
@@ -93,10 +89,34 @@ const apartments = [
 
   <HouseTeaser lang={lang} />
 
-  <HostCard lang={lang} />
-  <ReviewsCarousel lang={lang} />
+  <GuestRatings lang={lang} />
 
   <section class="section">
+    <div class="container home-place-grid">
+      <div class="home-place-col">
+        <h2>{t.seoBarriTitle}</h2>
+        <p>{t.seoBarriText}</p>
+        <ul class="home-facts">
+          <li><strong>{t.seoBarriFeat1Title}</strong><span>{t.seoBarriFeat1Sub}</span></li>
+          <li><strong>{t.seoBarriFeat2Title}</strong><span>{t.seoBarriFeat2Sub}</span></li>
+          <li><strong>{t.seoBarriFeat3Title}</strong><span>{t.seoBarriFeat3Sub}</span></li>
+          <li><strong>{t.seoBarriFeat4Title}</strong><span>{t.seoBarriFeat4Sub}</span></li>
+        </ul>
+      </div>
+      <div class="home-place-col">
+        <h2>{t.seoCyclingTitle}</h2>
+        <p>{t.seoCyclingText}</p>
+        <ul class="home-facts">
+          <li><strong>{t.seoCyclingFeat1Title}</strong><span>{t.seoCyclingFeat1Sub}</span></li>
+          <li><strong>{t.seoCyclingFeat2Title}</strong><span>{t.seoCyclingFeat2Sub}</span></li>
+          <li><strong>{t.seoCyclingFeat3Title}</strong><span>{t.seoCyclingFeat3Sub}</span></li>
+          <li><strong>{t.seoCyclingFeat4Title}</strong><span>{t.seoCyclingFeat4Sub}</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-cream">
     <div class="container">
       <div class="section-header">
         <h2>{t.faqTitle}</h2>
@@ -109,60 +129,18 @@ const apartments = [
           </div>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section seo-barri-vell">
-    <div class="container">
-      <div class="seo-grid">
-        <div class="seo-text">
-          <h2>{t.seoBarriTitle}</h2>
-          <p>{t.seoBarriText}</p>
-        </div>
-        <div class="seo-features">
-          <div class="seo-feature-item"><div><strong>{t.seoBarriFeat1Title}</strong><span>{t.seoBarriFeat1Sub}</span></div></div>
-          <div class="seo-feature-item"><div><strong>{t.seoBarriFeat2Title}</strong><span>{t.seoBarriFeat2Sub}</span></div></div>
-          <div class="seo-feature-item"><div><strong>{t.seoBarriFeat3Title}</strong><span>{t.seoBarriFeat3Sub}</span></div></div>
-          <div class="seo-feature-item"><div><strong>{t.seoBarriFeat4Title}</strong><span>{t.seoBarriFeat4Sub}</span></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section seo-cycling">
-    <div class="container">
-      <div class="seo-grid reverse">
-        <div class="seo-features">
-          <div class="seo-feature-item"><div><strong>{t.seoCyclingFeat1Title}</strong><span>{t.seoCyclingFeat1Sub}</span></div></div>
-          <div class="seo-feature-item"><div><strong>{t.seoCyclingFeat2Title}</strong><span>{t.seoCyclingFeat2Sub}</span></div></div>
-          <div class="seo-feature-item"><div><strong>{t.seoCyclingFeat3Title}</strong><span>{t.seoCyclingFeat3Sub}</span></div></div>
-          <div class="seo-feature-item"><div><strong>{t.seoCyclingFeat4Title}</strong><span>{t.seoCyclingFeat4Sub}</span></div></div>
-        </div>
-        <div class="seo-text">
-          <h2>{t.seoCyclingTitle}</h2>
-          <p>{t.seoCyclingText}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section bg-cream info-banner-section">
-    <div class="container">
-      <div class="info-banner">
-        <div class="info-banner-text">
-          <h2>{t.infoIndexTitle}</h2>
+      <div class="faq-after">
+        <div>
+          <h3>{t.infoIndexTitle}</h3>
           <p>{t.infoIndexText}</p>
+          <a href={`${langRoot}/informacion-importante`} class="btn btn-outline-dark">{t.infoIndexBtn}</a>
         </div>
-        <a href={`${langRoot}/informacion-importante`} class="btn btn-outline-dark">{t.infoIndexBtn}</a>
+        <div>
+          <h3>{t.faqCtaTitle}</h3>
+          <p>{t.faqCtaDesc}</p>
+          <a href={`${langRoot}/contacto`} class="btn btn-dark">{t.faqCtaBtn}</a>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="section faq-cta-section">
-    <div class="container" style="text-align:center;">
-      <h3 style="font-family:var(--serif); font-size:1.6rem; font-weight:400; margin-bottom:0.75rem;">{t.faqCtaTitle}</h3>
-      <p style="color:var(--stone-600); font-size:0.9rem; margin-bottom:1.5rem;">{t.faqCtaDesc}</p>
-      <a href={`/${lang}/contacto`} class="btn btn-dark">{t.faqCtaBtn}</a>
     </div>
   </section>
 

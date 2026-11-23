@@ -339,7 +339,7 @@ export const guidesCa: GuideSet = {
         h2: 'Reserva amb molta antelació',
         paragraphs: [
           'És una de les setmanes amb més demanda de l’any a Girona. Els allotjaments del centre es reserven amb mesos d’antelació, així que tan bon punt sàpigues les dates, reserva. Si ho fas directament al nostre web, t’estalvies les comissions d’intermediaris.',
-          'Si vens en grup o en família, els nostres apartaments més grans, [Bergamota](/apartamentos/bergamota) i [Arbre de te](/apartamentos/arbol-de-te), són per a fins a 6 persones: són els primers que es reserven per a aquestes dates. Per a parelles tenim diversos apartaments amb vistes a l’Onyar.',
+          'Si vens en grup o en família, els nostres apartaments més grans, [Bergamota](/apartamentos/bergamota) i [Árbol de té](/apartamentos/arbol-de-te), són per a fins a 6 persones: són els primers que es reserven per a aquestes dates. Per a parelles tenim diversos apartaments amb vistes a l’Onyar.',
         ],
       },
       {

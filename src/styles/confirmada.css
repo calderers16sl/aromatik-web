@@ -1,0 +1,11 @@
+/* Hallmark · checked: 2026-11-23 · genre: editorial · stamp, tokens and waivers live in src/layouts/BaseLayout.astro · redesign: polish · v2.0.0 */
+/* Página de reserva confirmada (ES y versiones por idioma). */
+.confirmed-hero { text-align: center; padding: 5rem 1.5rem 3rem; background: var(--cream); margin-top: var(--header-h); }
+.confirmed-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; margin: 0 0 1rem; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+.confirmed-hero p { color: var(--stone-600); max-width: 560px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7; }
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1.5rem; margin-bottom: 3rem; list-style: none; padding: 0; counter-reset: paso; }
+.step-card { counter-increment: paso; background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); padding: 2rem; }
+.step-card::before { content: counter(paso); display: block; font-family: var(--serif); font-size: 2rem; line-height: 1; color: var(--gold-ink); margin-bottom: 1rem; font-variant-numeric: tabular-nums; }
+.step-card h2 { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin: 0 0 0.5rem; }
+.step-card p { color: var(--stone-600); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.confirmed-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }

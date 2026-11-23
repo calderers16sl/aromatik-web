@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HostCard from '../../components/HostCard.astro';
-import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
-import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import '../../styles/audience.css';
+import GuestRatings from '../../components/GuestRatings.astro';
+import { NON_DEFAULT_LOCALES, getT, type Locale } from '../../i18n/translations';
 
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Locale };
 const langRoot = `/${lang}`;
+const t = getT(lang);
 
 const copy: Record<string, any> = {
   en: {
@@ -20,12 +21,12 @@ const copy: Record<string, any> = {
     perksTitle: "Why families choose Aromatik",
     perksEyebrow: "Designed for you",
     perks: [
-      { icon: "🛏️", title: "2 and 3 bedrooms", desc: "Kids sleep in their own room. So do you. No fold-out beds or emergency sofas." },
-      { icon: "🍳", title: "Full kitchen", desc: "Fridge, microwave, coffee maker, toaster and everything you need for a relaxed breakfast at your own pace." },
-      { icon: "🛗", title: "Wide elevator", desc: "All our buildings have a lift. Prams, big suitcases and even bikes fit comfortably. No stairs, no juggling." },
-      { icon: "🐾", title: "Pet friendly", desc: "The furry members of the family are welcome too. All our apartments accept pets." },
-      { icon: "🪑", title: "Cot and high chair", desc: "Available on request at no extra cost. Just let us know when booking and we'll have it ready for your arrival." },
-      { icon: "📍", title: "In the historic centre", desc: "Five minutes from the Cathedral, the Arab Baths and the river Onyar. Girona is a living history park for the whole family." },
+      { title: "2 and 3 bedrooms", desc: "Kids sleep in their own room. So do you. No fold-out beds or emergency sofas." },
+      { title: "Full kitchen", desc: "Fridge, microwave, coffee maker, toaster and everything you need for a relaxed breakfast at your own pace." },
+      { title: "Wide elevator", desc: "All our buildings have a lift. Prams, big suitcases and even bikes fit comfortably. No stairs, no juggling." },
+      { title: "Pet friendly", desc: "The furry members of the family are welcome too. All our apartments accept pets." },
+      { title: "Cot and high chair", desc: "Available on request at no extra cost. Just let us know when booking and we'll have it ready for your arrival." },
+      { title: "In the historic centre", desc: "Five minutes from the Cathedral, the Arab Baths and the river Onyar. Girona is a living history park for the whole family." },
     ],
     aptsEyebrow: "Most recommended",
     aptsTitle: "Apartments for families",
@@ -44,7 +45,7 @@ const copy: Record<string, any> = {
     tagline2: "3 bedrooms, dishwasher, gas hob, bathtub and private balcony. Everything a demanding family needs.",
     tagline3: "Two bedrooms with river views and a balcony. Perfect for families of 3 or 4 who want the heart of Girona.",
     guests: "Up to", people: "people", bedrooms: "bedrooms",
-    viewApt: "View apartment →",
+    viewApt: "View apartment",
   },
   fr: {
     metaTitle: "Appartements pour familles à Gérone — Aromatik Apartments",
@@ -55,12 +56,12 @@ const copy: Record<string, any> = {
     perksTitle: "Pourquoi les familles choisissent Aromatik",
     perksEyebrow: "Pensé pour vous",
     perks: [
-      { icon: "🛏️", title: "2 et 3 chambres", desc: "Les enfants dorment dans leur chambre. Vous aussi. Pas de lits pliants ni de canapés de fortune." },
-      { icon: "🍳", title: "Cuisine complète", desc: "Réfrigérateur, micro-ondes, cafetière, grille-pain et tout le nécessaire pour un petit-déjeuner tranquille." },
-      { icon: "🛗", title: "Ascenseur spacieux", desc: "Tous nos immeubles ont un ascenseur. Poussettes, grandes valises et vélos y entrent confortablement." },
-      { icon: "🐾", title: "Animaux bienvenus", desc: "Les membres poilus de la famille sont les bienvenus. Tous nos appartements acceptent les animaux." },
-      { icon: "🪑", title: "Lit bébé et chaise haute", desc: "Disponibles sur demande sans supplément. Signalez-le simplement lors de votre réservation." },
-      { icon: "📍", title: "En plein centre historique", desc: "À cinq minutes de la Cathédrale, des Bains Arabes et de l'Onyar. Gérone est un parc historique vivant." },
+      { title: "2 et 3 chambres", desc: "Les enfants dorment dans leur chambre. Vous aussi. Pas de lits pliants ni de canapés de fortune." },
+      { title: "Cuisine complète", desc: "Réfrigérateur, micro-ondes, cafetière, grille-pain et tout le nécessaire pour un petit-déjeuner tranquille." },
+      { title: "Ascenseur spacieux", desc: "Tous nos immeubles ont un ascenseur. Poussettes, grandes valises et vélos y entrent confortablement." },
+      { title: "Animaux bienvenus", desc: "Les membres poilus de la famille sont les bienvenus. Tous nos appartements acceptent les animaux." },
+      { title: "Lit bébé et chaise haute", desc: "Disponibles sur demande sans supplément. Signalez-le simplement lors de votre réservation." },
+      { title: "En plein centre historique", desc: "À cinq minutes de la Cathédrale, des Bains Arabes et de l'Onyar. Gérone est un parc historique vivant." },
     ],
     aptsEyebrow: "Les plus recommandés",
     aptsTitle: "Appartements pour familles",
@@ -79,7 +80,7 @@ const copy: Record<string, any> = {
     tagline2: "3 chambres, lave-vaisselle, cuisinière à gaz, baignoire et balcon privé. Tout ce qu'une famille exigeante peut vouloir.",
     tagline3: "Deux chambres avec vue sur la rivière et balcon. Parfait pour les familles de 3 ou 4 personnes.",
     guests: "Jusqu'à", people: "personnes", bedrooms: "chambres",
-    viewApt: "Voir l'appartement →",
+    viewApt: "Voir l'appartement",
   },
   ca: {
     metaTitle: "Apartaments per a famílies a Girona — Aromatik Apartments",
@@ -90,12 +91,12 @@ const copy: Record<string, any> = {
     perksTitle: "Per què les famílies trien Aromatik",
     perksEyebrow: "Pensat per a vosaltres",
     perks: [
-      { icon: "🛏️", title: "2 i 3 habitacions", desc: "Els nens dormen al seu quart. Vosaltres també descanseu. Res de llits plegables ni sofàs d'emergència." },
-      { icon: "🍳", title: "Cuina completa", desc: "Nevera, microones, cafetera, torradora i tot el necessari per esmorzar amb calma sense dependre d'horaris." },
-      { icon: "🛗", title: "Ascensor ampli", desc: "Tots els nostres edificis tenen ascensor. Hi caben cotxets, maletes grans i fins i tot bicicletes." },
-      { icon: "🐾", title: "Pet friendly", desc: "Els membres peluts de la família també hi són benvinguts. Tots els nostres apartaments accepten mascotes." },
-      { icon: "🪑", title: "Bressol i trona", desc: "Disponibles sota petició prèvia sense cost addicional. Avisa'ns en fer la reserva i ho tindrem llest." },
-      { icon: "📍", title: "Al centre històric", desc: "A cinc minuts de la Catedral, els Banys Àrabs i el riu Onyar. Girona és un parc històric per explorar en família." },
+      { title: "2 i 3 habitacions", desc: "Els nens dormen al seu quart. Vosaltres també descanseu. Res de llits plegables ni sofàs d'emergència." },
+      { title: "Cuina completa", desc: "Nevera, microones, cafetera, torradora i tot el necessari per esmorzar amb calma sense dependre d'horaris." },
+      { title: "Ascensor ampli", desc: "Tots els nostres edificis tenen ascensor. Hi caben cotxets, maletes grans i fins i tot bicicletes." },
+      { title: "Pet friendly", desc: "Els membres peluts de la família també hi són benvinguts. Tots els nostres apartaments accepten mascotes." },
+      { title: "Bressol i trona", desc: "Disponibles sota petició prèvia sense cost addicional. Avisa'ns en fer la reserva i ho tindrem llest." },
+      { title: "Al centre històric", desc: "A cinc minuts de la Catedral, els Banys Àrabs i el riu Onyar. Girona és un parc històric per explorar en família." },
     ],
     aptsEyebrow: "Els més recomanats",
     aptsTitle: "Apartaments per a famílies",
@@ -114,7 +115,7 @@ const copy: Record<string, any> = {
     tagline2: "3 habitacions, rentavaixelles, cuina de gas, banyera i balcó privat. Tot el que una família exigent necessita.",
     tagline3: "Dues habitacions amb vistes al riu i balcó. Perfecte per a famílies de 3 o 4 persones.",
     guests: "Fins a", people: "persones", bedrooms: "habitacions",
-    viewApt: "Veure apartament →",
+    viewApt: "Veure apartament",
   },
 };
 
@@ -123,7 +124,7 @@ const c = copy[lang] ?? copy['en'];
 
 const featuredApts = [
   { slug: "bergamota", guests: 6, bedrooms: 3, tag: c.tag1, desc: c.tagline1, photo: "/images/apartamentos/bergamota/foto-1.jpg", name: "Bergamota" },
-  { slug: "arbol-de-te", guests: 6, bedrooms: 3, tag: c.tag2, desc: c.tagline2, photo: "/images/apartamentos/arbol-de-te/foto-1.jpg", name: "Arbre de te" },
+  { slug: "arbol-de-te", guests: 6, bedrooms: 3, tag: c.tag2, desc: c.tagline2, photo: "/images/apartamentos/arbol-de-te/foto-1.jpg", name: "Árbol de té" },
   { slug: "ylang-ylang", guests: 4, bedrooms: 2, tag: c.tag3, desc: c.tagline3, photo: "/images/apartamentos/ylang-ylang/foto-1.jpg", name: "Ylang-Ylang" },
 ];
 ---
@@ -132,12 +133,11 @@ const featuredApts = [
   <section class="audience-hero audience-hero--familias">
     <div class="audience-hero-overlay"></div>
     <div class="audience-hero-inner">
-      <span class="audience-eyebrow">{c.eyebrow}</span>
-      <h1 set:html={c.h1.replace('\n','<br/>')} />
+      <h1 set:html={c.h1.replace('\n',' <br/>')} />
       <p>{c.subtitle}</p>
       <div class="audience-hero-actions">
-        <a href="#apartamentos-familias" class="btn btn-white">{lang === 'fr' ? 'Voir les appartements' : lang === 'ca' ? 'Veure apartaments' : 'View apartments'}</a>
-        <a href={`${langRoot}/reservar#motor`} class="btn btn-outline-white">{lang === 'fr' ? 'Réserver maintenant' : lang === 'ca' ? 'Reservar ara' : 'Book now'}</a>
+        <a href={`${langRoot}/reservar#motor`} class="btn btn-green">{t.navBook}</a>
+        <a href="#apartamentos-familias" class="btn btn-outline-white">{t.heroCta1}</a>
       </div>
     </div>
   </section>
@@ -145,13 +145,11 @@ const featuredApts = [
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">{c.perksEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{c.perksTitle}</h2>
+        <h2>{c.perksTitle}</h2>
       </div>
       <div class="audience-perks">
         {c.perks.map((p: any) => (
           <div class="audience-perk">
-            <div class="audience-perk-icon">{p.icon}</div>
             <h3>{p.title}</h3>
             <p>{p.desc}</p>
           </div>
@@ -163,8 +161,7 @@ const featuredApts = [
   <section id="apartamentos-familias" class="section bg-cream">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">{c.aptsEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{c.aptsTitle}</h2>
+        <h2>{c.aptsTitle}</h2>
         <p>{c.aptsSub}</p>
       </div>
       <div class="audience-apts">
@@ -175,7 +172,7 @@ const featuredApts = [
             </div>
             <div class="audience-apt-body">
               <h3>{apt.name}</h3>
-              <p class="audience-apt-meta">{c.guests} {apt.guests} {c.people} · {apt.bedrooms} {c.bedrooms}</p>
+              <p class="audience-apt-meta">{t.aptsGuests(apt.guests)}, {t.aptsBedroom(apt.bedrooms)}</p>
               <p class="audience-apt-desc">{apt.desc}</p>
               <span class="audience-apt-link">{c.viewApt}</span>
             </div>
@@ -186,9 +183,8 @@ const featuredApts = [
   </section>
 
   <section class="section">
-    <div class="container" style="max-width:760px;">
-      <span class="eyebrow">{c.cityEyebrow}</span>
-      <h2 style="font-family:var(--serif); font-size:1.8rem; font-weight:400; margin:0.75rem 0 1.5rem;">{c.cityTitle}</h2>
+    <div class="container-sm">
+      <h2 class="audience-h2">{c.cityTitle}</h2>
       <div class="prose">
         <p>{c.cityText1}</p>
         <p>{c.cityText2}</p>
@@ -197,15 +193,14 @@ const featuredApts = [
     </div>
   </section>
 
-  <HostCard lang={lang} />
-  <ReviewsCarousel lang={lang} />
+  <GuestRatings lang={lang} />
 
-  <section class="section bg-cream">
-    <div class="container" style="text-align:center;">
-      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin-bottom:0.75rem;">{c.ctaTitle}</h2>
-      <p style="color:var(--stone-600); margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto;">{c.ctaSub}</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-        <a href={`${langRoot}/reservar#motor`} class="btn btn-dark">{c.ctaBtn}</a>
+  <section class="section">
+    <div class="container audience-cta">
+      <h2>{c.ctaTitle}</h2>
+      <p>{c.ctaSub}</p>
+      <div class="audience-cta-actions">
+        <a href={`${langRoot}/reservar#motor`} class="btn btn-green">{c.ctaBtn}</a>
         <a href={`${langRoot}/contacto`} class="btn btn-border">{c.ctaBtn2}</a>
       </div>
     </div>
@@ -213,29 +208,5 @@ const featuredApts = [
 
 </BaseLayout>
 <style>
-.audience-hero { position:relative; min-height:80vh; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; overflow:hidden; padding-top:70px; }
-.audience-hero--familias { background-image:url('/images/apartamentos/bergamota/foto-2.jpg'); background-size:cover; background-position:center; }
-.audience-hero-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.48); }
-.audience-hero-inner { position:relative; z-index:1; max-width:780px; padding:4rem 2rem; background:rgba(0,0,0,0.28); border-radius:20px; backdrop-filter:blur(2px); margin:0 1.5rem; }
-.audience-eyebrow { display:block; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:1rem; }
-.audience-hero-inner h1 { font-family:var(--serif); font-size:clamp(2rem,5vw,3.6rem); font-weight:400; line-height:1.2; margin-bottom:1.25rem; }
-.audience-hero-inner p { font-size:1.05rem; color:rgba(255,255,255,0.85); max-width:560px; margin:0 auto 2rem; line-height:1.7; }
-.audience-hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-.audience-perks { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:1rem; }
-.audience-perk { padding:2rem 1.5rem; border:1px solid var(--stone-200); border-radius:16px; background:#fff; }
-.audience-perk-icon { font-size:2rem; margin-bottom:0.75rem; }
-.audience-perk h3 { font-size:1rem; font-weight:600; margin-bottom:0.5rem; }
-.audience-perk p { font-size:0.875rem; color:var(--stone-600); line-height:1.7; }
-.audience-apts { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:1rem; }
-.audience-apt-card { background:#fff; border-radius:16px; overflow:hidden; border:1px solid var(--stone-200); text-decoration:none; color:inherit; transition:box-shadow 0.2s,transform 0.2s; display:flex; flex-direction:column; }
-.audience-apt-card:hover { box-shadow:0 8px 32px rgba(0,0,0,0.12); transform:translateY(-2px); }
-.audience-apt-img { height:200px; background-size:cover; background-position:center; position:relative; }
-.audience-apt-tag { position:absolute; top:0.75rem; left:0.75rem; background:rgba(0,0,0,0.6); color:#fff; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.3rem 0.7rem; border-radius:99px; backdrop-filter:blur(4px); }
-.audience-apt-body { padding:1.25rem 1.5rem 1.5rem; flex:1; display:flex; flex-direction:column; }
-.audience-apt-body h3 { font-size:1.1rem; font-weight:600; margin-bottom:0.25rem; }
-.audience-apt-meta { font-size:0.8rem; color:var(--stone-500); margin-bottom:0.75rem; }
-.audience-apt-desc { font-size:0.875rem; color:var(--stone-600); line-height:1.65; flex:1; }
-.audience-apt-link { display:inline-block; margin-top:1rem; font-size:0.85rem; font-weight:600; color:var(--gold); }
-@media (max-width:900px) { .audience-perks,.audience-apts { grid-template-columns:repeat(2,1fr); } }
-@media (max-width:580px) { .audience-perks,.audience-apts { grid-template-columns:1fr; } .audience-hero-inner { padding:2.5rem 1.25rem; } }
+.audience-hero--familias { background-image: url('/images/apartamentos/bergamota/foto-2.jpg'); }
 </style>

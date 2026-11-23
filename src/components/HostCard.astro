@@ -1,6 +1,8 @@
 ---
 // HostCard.astro — Arnau's Airbnb host profile card
+import { RATINGS, HOST_YEARS, fmtScore, fmtCount } from '../i18n/ratings';
 const { lang = 'es' } = Astro.props;
+const airbnb = RATINGS[0];
 
 const copy: Record<string, any> = {
   es: {
@@ -9,7 +11,7 @@ const copy: Record<string, any> = {
     rating: 'Valoración',
     experience: 'Años de experiencia',
     airbnb: 'Ver perfil en Airbnb',
-    role: 'Anfitrión · Aromatik Apartments',
+    role: 'Anfitrión, Aromatik Apartments',
   },
   en: {
     eyebrow: 'Your host',
@@ -17,7 +19,7 @@ const copy: Record<string, any> = {
     rating: 'Rating',
     experience: 'Years of experience',
     airbnb: 'View Airbnb profile',
-    role: 'Host · Aromatik Apartments',
+    role: 'Host, Aromatik Apartments',
   },
   fr: {
     eyebrow: 'Votre hôte',
@@ -25,7 +27,7 @@ const copy: Record<string, any> = {
     rating: 'Note',
     experience: 'Années d\'expérience',
     airbnb: 'Voir le profil Airbnb',
-    role: 'Hôte · Aromatik Apartments',
+    role: 'Hôte, Aromatik Apartments',
   },
   ca: {
     eyebrow: 'El teu amfitrió',
@@ -33,7 +35,7 @@ const copy: Record<string, any> = {
     rating: 'Puntuació',
     experience: 'Anys d\'experiència',
     airbnb: 'Veure perfil a Airbnb',
-    role: 'Amfitrió · Aromatik Apartments',
+    role: 'Amfitrió, Aromatik Apartments',
   },
   de: {
     eyebrow: 'Ihr Gastgeber',
@@ -41,7 +43,7 @@ const copy: Record<string, any> = {
     rating: 'Bewertung',
     experience: 'Jahre Erfahrung',
     airbnb: 'Airbnb-Profil ansehen',
-    role: 'Gastgeber · Aromatik Apartments',
+    role: 'Gastgeber, Aromatik Apartments',
   },
   zh: {
     eyebrow: '您的房东',
@@ -49,7 +51,7 @@ const copy: Record<string, any> = {
     rating: '评分',
     experience: '年经验',
     airbnb: '查看Airbnb主页',
-    role: '房东 · Aromatik Apartments',
+    role: '房东, Aromatik Apartments',
   },
   ko: {
     eyebrow: '호스트',
@@ -57,7 +59,7 @@ const copy: Record<string, any> = {
     rating: '평점',
     experience: '년 경험',
     airbnb: '에어비앤비 프로필 보기',
-    role: '호스트 · Aromatik Apartments',
+    role: '호스트, Aromatik Apartments',
   },
   pt: {
     eyebrow: 'Seu anfitrião',
@@ -65,7 +67,7 @@ const copy: Record<string, any> = {
     rating: 'Avaliação',
     experience: 'Anos de experiência',
     airbnb: 'Ver perfil no Airbnb',
-    role: 'Anfitrião · Aromatik Apartments',
+    role: 'Anfitrião, Aromatik Apartments',
   },
   nl: {
     eyebrow: 'Uw gastheer',
@@ -73,7 +75,7 @@ const copy: Record<string, any> = {
     rating: 'Beoordeling',
     experience: 'Jaar ervaring',
     airbnb: 'Airbnb-profiel bekijken',
-    role: 'Gastheer · Aromatik Apartments',
+    role: 'Gastheer, Aromatik Apartments',
   },
 };
 
@@ -100,17 +102,17 @@ const c = copy[lang] ?? copy.es;
 
         <div class="host-stats">
           <div class="host-stat">
-            <span class="host-stat-num">2272</span>
+            <span class="host-stat-num">{fmtCount(lang, airbnb.count)}</span>
             <span class="host-stat-label">{c.reviews}</span>
           </div>
           <div class="host-stat-sep"></div>
           <div class="host-stat">
-            <span class="host-stat-num">4,71 <span class="host-star">★</span></span>
+            <span class="host-stat-num">{fmtScore(lang, airbnb)} <span class="host-star">★</span></span>
             <span class="host-stat-label">{c.rating}</span>
           </div>
           <div class="host-stat-sep"></div>
           <div class="host-stat">
-            <span class="host-stat-num">4</span>
+            <span class="host-stat-num">{HOST_YEARS}</span>
             <span class="host-stat-label">{c.experience}</span>
           </div>
         </div>
@@ -273,5 +275,9 @@ const c = copy[lang] ?? copy.es;
     .host-stats { justify-content: center; }
     .host-role { text-align: center; }
     .host-airbnb-link { margin: 0 auto; }
+  }
+  @media (max-width: 640px) {
+    .host-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+    .host-stat-sep { display: none; }
   }
 </style>

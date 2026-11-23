@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HostCard from '../../components/HostCard.astro';
-import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
+import GuestRatings from '../../components/GuestRatings.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -125,12 +124,8 @@ const copy: Record<string, {
 const c = copy[lang] ?? copy.en;
 ---
 <BaseLayout title={`${t.aboutTitle} \u2014 Aromatik Apartments`} description={t.aboutSubtitle} lang={lang}>
-  <HostCard lang={lang} />
-  <ReviewsCarousel lang={lang} />
-
   <div class="inner-hero">
-    <span class="eyebrow">{c.eyebrow}</span>
-    <h1 style="margin-top:0.75rem">{c.h1}</h1>
+    <h1>{c.h1}</h1>
   </div>
 
   <section class="section">
@@ -146,12 +141,13 @@ const c = copy[lang] ?? copy.en;
     </div>
   </section>
 
-  <section class="section bg-cream">
-    <div class="container" style="text-align:center;">
-      <span class="eyebrow">{c.sectionEyebrow}</span>
-      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin:0.75rem 0 1rem;">{c.sectionH2}</h2>
-      <p style="color:var(--stone-600); margin-bottom:3rem; font-size:0.95rem;">{c.sectionP}</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+  <GuestRatings lang={lang} />
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>{c.sectionH2}</h2>
+      <p>{c.sectionP}</p>
+      <div class="cta-band-actions">
         <a href={`/${lang}/#apartamentos`} class="btn btn-dark">{c.ctaApts}</a>
         <a href={`/${lang}/contacto`} class="btn btn-border">{c.ctaContact}</a>
       </div>
@@ -160,10 +156,10 @@ const c = copy[lang] ?? copy.en;
 </BaseLayout>
 
 <style>
-  .about-grid--single { grid-template-columns: 1fr !important; max-width: 680px; margin: 0 auto; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--stone-700, #44403c); }
+  .about-grid--single { grid-template-columns: minmax(0, 1fr) !important; max-width: 680px; margin: 0 auto; }
+  .about-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; align-items: start; }
+  .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--stone-800); }
   @media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
   }
 </style>

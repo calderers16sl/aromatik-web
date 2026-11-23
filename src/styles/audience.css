@@ -1,0 +1,46 @@
+/* Hallmark · checked: 2026-11-23 · genre: editorial · stamp, tokens and waivers live in src/layouts/BaseLayout.astro · redesign: polish · v2.0.0 */
+/* Landings por audiencia (/ciclistas, /familias, /parejas y sus versiones por idioma).
+ * Un solo juego de reglas para las seis páginas; cada página solo declara la foto de su hero.
+ * Los tokens (colores, tipos, radios, sombras) viven en BaseLayout.astro. */
+.audience-hero { position: relative; min-height: 80svh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); overflow: hidden; padding-top: var(--header-h); background-color: var(--stone-800); background-size: cover; background-position: center; }
+.audience-hero-overlay { position: absolute; inset: 0; background: color-mix(in srgb, var(--black) 58%, transparent); }
+.audience-hero-inner { position: relative; z-index: 1; max-width: 780px; padding: 4rem 2rem; }
+.audience-hero-inner h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 400; line-height: 1.2; margin-bottom: 1.25rem; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+.audience-hero-inner p { font-size: 1.05rem; color: var(--white); max-width: 560px; margin: 0 auto 2rem; line-height: 1.7; }
+.audience-hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.audience-hero :focus-visible { outline-color: var(--focus-on-dark); }
+
+.audience-perks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.audience-perk { padding: 1.75rem 1.5rem; border: 1px solid var(--stone-200); border-radius: var(--radius-lg); background: var(--white); }
+.audience-perk h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; margin-bottom: 0.5rem; }
+.audience-perk p { font-size: 0.9rem; color: var(--stone-600); line-height: 1.7; }
+
+.audience-h2 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 400; line-height: 1.2; margin-bottom: 2rem; text-align: center; }
+.audience-h2 + .prose { margin-inline: auto; }
+
+.audience-apts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.audience-apt-card { background: var(--white); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--stone-200); color: inherit; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+.audience-apt-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.audience-apt-img { height: 200px; background-color: var(--stone-200); background-size: cover; background-position: center; position: relative; }
+.audience-apt-tag { position: absolute; top: 0.75rem; left: 0.75rem; background: color-mix(in srgb, var(--black) 72%, transparent); color: var(--white); font-size: 0.8rem; padding: 0.3rem 0.75rem; border-radius: 99px; }
+.audience-apt-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.audience-apt-body h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.25rem; }
+.audience-apt-meta { font-size: 0.85rem; color: var(--stone-600); margin-bottom: 0.75rem; }
+.audience-apt-desc { font-size: 0.9rem; color: var(--stone-600); line-height: 1.65; flex: 1; }
+.audience-apt-link { display: inline-block; margin-top: 1rem; font-size: 0.9rem; font-weight: 500; color: var(--gold-ink); text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+.audience-more { text-align: center; margin-top: 2.5rem; }
+
+.audience-cta { text-align: center; }
+.audience-cta h2 { font-family: var(--serif); font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 400; margin-bottom: 0.75rem; }
+.audience-cta p { color: var(--stone-600); margin: 0 auto 2rem; max-width: 500px; }
+.audience-cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 900px) { .audience-perks, .audience-apts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 580px) {
+  .audience-perks, .audience-apts { grid-template-columns: minmax(0, 1fr); }
+  .audience-hero-inner { padding: 2.5rem 1.25rem; }
+  .audience-hero-inner h1 br { display: none; }
+  .audience-hero-actions { flex-direction: column; align-items: center; }
+  .audience-hero-actions .btn { width: 100%; max-width: 300px; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) { .audience-apt-card { transition: none; } .audience-apt-card:hover { transform: none; } }

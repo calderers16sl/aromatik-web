@@ -6,7 +6,6 @@ const t = getT('es');
 ---
 <BaseLayout title={`${t.bookTitle} — Aromatik Apartments`} description={t.metaDescription} lang="es">
   <section class="reservar-hero">
-    <span class="eyebrow">{t.bookEyebrow}</span>
     <h1>{t.bookTitle}</h1>
     <p>{t.bookSubtitle}</p>
   </section>
@@ -17,9 +16,9 @@ const t = getT('es');
   </section>
 </BaseLayout>
 <style is:global>
-.reservar-hero { text-align: center; padding: 5rem 1.5rem 3rem; background: var(--cream); margin-top: 70px; }
+.reservar-hero { text-align: center; padding: 5rem 1.5rem 3rem; background: var(--cream); margin-top: var(--header-h); }
 .reservar-hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; margin: 0.5rem 0 1rem; }
-.reservar-hero p { color: var(--stone-500); max-width: 500px; margin: 0 auto; }
+.reservar-hero p { color: var(--stone-600); max-width: 500px; margin: 0 auto; }
 </style>
 
 <script is:inline>

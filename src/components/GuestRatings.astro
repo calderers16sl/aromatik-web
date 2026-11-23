@@ -1,0 +1,75 @@
+---
+// Valoraciones de los huéspedes: la nota real de cada plataforma, con enlace a sus reseñas.
+// Sustituye al antiguo ReviewsCarousel (un iframe de Google Maps bajo un título que prometía opiniones).
+// Los números viven en src/i18n/ratings.ts.
+import { RATINGS, RATINGS_CHECKED, HOST_YEARS, fmtScore, fmtCount } from '../i18n/ratings';
+
+const { lang = 'es' } = Astro.props;
+
+const copy: Record<string, { heading: string; count: (n: string) => string; read: (p: string) => string; asOf: (d: string) => string; host: (n: number) => string }> = {
+  es: { heading: 'Lo que dicen nuestros huéspedes', count: (n) => `${n} reseñas`, read: (p) => `Leer las reseñas en ${p}`, asOf: (d) => `Puntuaciones de ${d}`, host: (n) => `Tu anfitrión, ${n} años de experiencia` },
+  en: { heading: 'What our guests say', count: (n) => `${n} reviews`, read: (p) => `Read the reviews on ${p}`, asOf: (d) => `Scores as of ${d}`, host: (n) => `Your host, ${n} years of experience` },
+  fr: { heading: 'Ce que disent nos clients', count: (n) => `${n} avis`, read: (p) => `Lire les avis sur ${p}`, asOf: (d) => `Notes de ${d}`, host: (n) => `Votre hôte, ${n} ans d'expérience` },
+  ca: { heading: 'El que diuen els nostres hostes', count: (n) => `${n} ressenyes`, read: (p) => `Llegir les ressenyes a ${p}`, asOf: (d) => `Puntuacions de ${d}`, host: (n) => `El teu amfitrió, ${n} anys d'experiència` },
+  de: { heading: 'Was unsere Gäste sagen', count: (n) => `${n} Bewertungen`, read: (p) => `Bewertungen auf ${p} lesen`, asOf: (d) => `Stand: ${d}`, host: (n) => `Ihr Gastgeber, ${n} Jahre Erfahrung` },
+  zh: { heading: '客人的评价', count: (n) => `${n} 条评价`, read: (p) => `在 ${p} 查看评价`, asOf: (d) => `数据截至${d}`, host: (n) => `您的房东，${n}年经验` },
+  ko: { heading: '투숙객들의 후기', count: (n) => `리뷰 ${n}개`, read: (p) => `${p}에서 리뷰 보기`, asOf: (d) => `${d} 기준`, host: (n) => `호스트, ${n}년 경험` },
+  pt: { heading: 'O que nossos hóspedes dizem', count: (n) => `${n} avaliações`, read: (p) => `Ler as avaliações em ${p}`, asOf: (d) => `Pontuações de ${d}`, host: (n) => `Seu anfitrião, ${n} anos de experiência` },
+  nl: { heading: 'Wat onze gasten zeggen', count: (n) => `${n} beoordelingen`, read: (p) => `Lees de beoordelingen op ${p}`, asOf: (d) => `Scores van ${d}`, host: (n) => `Uw gastheer, ${n} jaar ervaring` },
+};
+
+const c = copy[lang] ?? copy.es;
+const checked = new Intl.DateTimeFormat(lang, { month: 'long', year: 'numeric' })
+  .format(new Date(Date.UTC(RATINGS_CHECKED.year, RATINGS_CHECKED.month - 1, 15)));
+---
+
+<section class="gr-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>{c.heading}</h2>
+    </div>
+    <ul class="gr-list">
+      {RATINGS.map((r) => (
+        <li>
+          <a href={r.url} target="_blank" rel="noopener noreferrer" class="gr-item">
+            <span class="gr-score">{fmtScore(lang, r)}<span class="gr-scale">/{r.scale}</span></span>
+            <strong class="gr-platform">{r.platform}</strong>
+            <span class="gr-count">{c.count(fmtCount(lang, r.count))}</span>
+            <span class="gr-read">{c.read(r.platform)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="gr-note">{c.asOf(checked)}</p>
+    <div class="gr-host" id="anfitrion">
+      <img src="/images/arnau-profile.PNG" alt="" width="64" height="64" loading="lazy" />
+      <p><strong>Arnau</strong><span>{c.host(HOST_YEARS)}</span></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gr-section { background: var(--cream); padding: 6rem 0; }
+  .gr-section .section-header { margin-bottom: 2.5rem; }
+  .gr-list { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 960px; margin: 0 auto; }
+  .gr-list li + li { border-left: 1px solid var(--stone-200); }
+  .gr-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.5rem 1.5rem; text-align: center; color: inherit; }
+  .gr-score { font-family: var(--serif); font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1; font-variant-numeric: tabular-nums; color: var(--black); }
+  .gr-scale { font-family: var(--sans); font-size: 1rem; color: var(--stone-600); margin-left: 0.2rem; }
+  .gr-platform { font-size: 1.05rem; font-weight: 500; margin-top: 0.6rem; }
+  .gr-count { font-size: 0.9rem; color: var(--stone-600); }
+  .gr-read { font-size: 0.9rem; font-weight: 500; color: var(--gold-ink); text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; margin-top: 0.5rem; }
+  .gr-item:hover .gr-read { color: var(--black); }
+  .gr-note { text-align: center; font-size: 0.8rem; color: var(--stone-600); margin-top: 2rem; }
+  .gr-host { display: flex; align-items: center; justify-content: center; gap: 1rem; max-width: 960px; margin: 2.5rem auto 0; padding-top: 2.5rem; border-top: 1px solid var(--stone-200); scroll-margin-top: calc(var(--header-h) + 2rem); }
+  .gr-host img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+  .gr-host p { display: flex; flex-direction: column; gap: 0.1rem; }
+  .gr-host strong { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; }
+  .gr-host span { font-size: 0.9rem; color: var(--stone-600); }
+  @media (max-width: 700px) {
+    .gr-section { padding: 4rem 0; }
+    .gr-list { grid-template-columns: minmax(0, 1fr); max-width: 420px; }
+    .gr-list li + li { border-left: none; border-top: 1px solid var(--stone-200); }
+    .gr-item { padding: 1.5rem 0.5rem; }
+  }
+</style>

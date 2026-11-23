@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BookingWidget from '../../../components/BookingWidget.astro';
-import HostCard from '../../../components/HostCard.astro';
-import ReviewsCarousel from '../../../components/ReviewsCarousel.astro';
+import GuestRatings from '../../../components/GuestRatings.astro';
 import { getT, NON_DEFAULT_LOCALES, type Locale } from '../../../i18n/translations';
 import { guideLangRoot, guideUi } from '../../../i18n/guides';
 
@@ -61,7 +60,7 @@ const aptTitle = t.aptH1s[apt.slug] ?? `${t.aptLabel} ${apt.name}`;
 const aptDesc  = t.aptDescriptions[apt.slug] ?? apt.name;
 
 // <title> corto (≤60): «Apartamento X en Girona…». El H1 sigue siendo aptTitle.
-const titleName = lang === 'ca' ? apt.nameCa : apt.name;
+const titleName = apt.name;
 const seoTitles: Record<string, string> = {
   en: titleName + ' Apartment in Girona Old Town | Aromatik',
   ca: 'Apartament ' + titleName + ' a Girona, Barri Vell | Aromatik',
@@ -181,7 +180,7 @@ const breadcrumbSchema = JSON.stringify({
     </div>
 
     <div class="booking-section" id="reservar-widget">
-      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
+      <h2 class="section-heading">{t.aptBookingTitle(apt.name)}</h2>
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
@@ -210,7 +209,7 @@ const breadcrumbSchema = JSON.stringify({
                 )}
               </div>
               <div class="apt-card-body">
-                <h3>{a.nameCa}</h3>
+                <h3>{a.name}</h3>
                 <p class="apt-meta">{t.aptGuests(a.guests)}, {t.aptBeds(a.bedrooms)}, {a.size} m²</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>
@@ -221,8 +220,7 @@ const breadcrumbSchema = JSON.stringify({
     </div>
   </div>
 
-  <HostCard lang={lang} />
-  <ReviewsCarousel lang={lang} />
+  <GuestRatings lang={lang} />
 
   {hasPhotos && (
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label={aptTitle}>
@@ -265,7 +263,7 @@ const breadcrumbSchema = JSON.stringify({
   .stat-badge { display: inline-flex; align-items: center; gap: 0.35rem; background: var(--cream); border: 1px solid var(--stone-200); color: var(--stone-800); font-size: 0.875rem; padding: 0.35rem 0.85rem; border-radius: 9999px; white-space: nowrap; }
   .apt-divider { border: none; border-top: 1px solid var(--stone-200); margin: 1.25rem 0; }
   .apt-guide-link { margin: -1rem 0 2rem; }
-  .apt-guide-link a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
+  .apt-guide-link a { color: var(--gold-ink); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
   .apt-description { font-size: 1.05rem; color: var(--stone-600); line-height: 1.85; margin-bottom: 2rem; }
   .apt-section { margin-bottom: 2rem; }
   .apt-section-title { margin-top: 2.5rem; font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--black); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--stone-200); }

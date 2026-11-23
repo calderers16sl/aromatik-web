@@ -9,7 +9,6 @@ const c = isGuideLocale(lang) ? guides[lang].cycling : null;
 {c && (
   <section class="section cr">
     <div class="container cr-wrap">
-      <span class="eyebrow">{c.eyebrow}</span>
       <h2>{c.h2}</h2>
       <p class="cr-intro">{c.intro}</p>
       <ol class="cr-list">
@@ -27,13 +26,12 @@ const c = isGuideLocale(lang) ? guides[lang].cycling : null;
 
 <style>
 .cr-wrap { max-width: 900px; }
-.cr h2 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; margin: 0.75rem 0 1rem; }
-.cr-intro { color: var(--stone-600); line-height: 1.8; margin-bottom: 2rem; max-width: 680px; }
-.cr-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; counter-reset: ruta; }
-.cr-list li { counter-increment: ruta; position: relative; background: #fff; border: 1px solid var(--stone-200); border-radius: 16px; padding: 1.5rem 1.5rem 1.5rem 3.75rem; }
-.cr-list li::before { content: counter(ruta); position: absolute; left: 1.25rem; top: 1.4rem; width: 28px; height: 28px; border-radius: 50%; background: var(--black); color: #fff; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
-.cr-list h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.cr h2 { font-family: var(--serif); font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 400; line-height: 1.2; margin: 0 0 1rem; text-align: center; }
+.cr-intro { color: var(--stone-600); line-height: 1.8; margin: 0 auto 2.5rem; max-width: 680px; text-align: center; }
+.cr-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.cr-list li { background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); padding: 1.5rem; }
+.cr-list h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.4rem; }
 .cr-list p { font-size: 0.9rem; color: var(--stone-600); line-height: 1.7; }
-.cr-note { margin-top: 1.5rem; font-size: 0.82rem; color: var(--stone-500); }
-@media (max-width: 700px) { .cr-list { grid-template-columns: 1fr; } }
+.cr-note { margin-top: 1.5rem; font-size: 0.85rem; color: var(--stone-600); text-align: center; }
+@media (max-width: 700px) { .cr-list { grid-template-columns: minmax(0, 1fr); } }
 </style>

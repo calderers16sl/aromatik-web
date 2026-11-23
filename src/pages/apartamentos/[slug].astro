@@ -2,8 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { guideUi } from '../../i18n/guides';
 import BookingWidget from '../../components/BookingWidget.astro';
-import HostCard from '../../components/HostCard.astro';
-import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
+import GuestRatings from '../../components/GuestRatings.astro';
 import { getT } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -213,7 +212,7 @@ const breadcrumbSchema = JSON.stringify({
 
     <!-- Motor de reservas -->
     <div class="booking-section" id="reservar-widget">
-      <h2 class="section-heading">{t.aptBookingTitle(apt.nameCa)}</h2>
+      <h2 class="section-heading">{t.aptBookingTitle(apt.name)}</h2>
       <BookingWidget smoobuId={apt.smoobuId} />
     </div>
 
@@ -248,7 +247,7 @@ const breadcrumbSchema = JSON.stringify({
                 )}
               </div>
               <div class="apt-card-body">
-                <h3>{a.nameCa}</h3>
+                <h3>{a.name}</h3>
                 <p class="apt-meta">{a.guests} pers., {a.bedrooms} dorm., {a.size} m²</p>
                 <span class="apt-link">{t.aptsViewBtn}</span>
               </div>
@@ -259,8 +258,7 @@ const breadcrumbSchema = JSON.stringify({
     </div>
   </div>
 
-  <HostCard />
-  <ReviewsCarousel />
+  <GuestRatings />
 
   <!-- ═══════════════════════════════════════
        LIGHTBOX (pantalla completa al click)
@@ -369,7 +367,7 @@ const breadcrumbSchema = JSON.stringify({
   }
 
   .apt-guide-link { margin: -1rem 0 2rem; }
-  .apt-guide-link a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
+  .apt-guide-link a { color: var(--gold-ink); text-decoration: underline; text-underline-offset: 3px; font-size: 0.95rem; }
   .apt-description {
     font-size: 1.05rem;
     color: var(--stone-600);

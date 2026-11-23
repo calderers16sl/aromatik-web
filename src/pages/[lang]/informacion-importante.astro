@@ -9,80 +9,6 @@ const { lang } = Astro.params as { lang: Locale };
 const content = getInfoContent(lang);
 const langRoot = `/${lang}`;
 
-const ICONS: Record<string, string> = {
-  // ES
-  'Entrada y salida': '🕐',
-  'Respeto por los demás huéspedes': '🤝',
-  'No se permiten fiestas ni eventos': '🚫',
-  'Horario de silencio': '🔇',
-  'No fumar': '🚭',
-  'Número de huéspedes': '👥',
-  'Acceso al apartamento': '🔑',
-  'Cuidado del apartamento': '🏠',
-  'Limpieza': '✨',
-  'Basura': '♻️',
-  'Toallas y ropa de cama': '🛏️',
-  'Aire acondicionado, calefacción y luces': '🌡️',
-  'Bicicletas': '🚲',
-  'Mascotas': '🐾',
-  'Seguridad': '🔒',
-  'Cancelación': '📋',
-  'Si algo no va bien, dímelo durante la estancia': '💬',
-  // EN
-  'Check-in and check-out': '🕐',
-  'Respect for other guests': '🤝',
-  'No parties or events': '🚫',
-  'Quiet hours': '🔇',
-  'No smoking': '🚭',
-  'Number of guests': '👥',
-  'Apartment access': '🔑',
-  'Apartment care': '🏠',
-  'Cleaning': '✨',
-  'Rubbish': '♻️',
-  'Towels and bed linen': '🛏️',
-  'Air conditioning, heating and lights': '🌡️',
-  'Bicycles': '🚲',
-  'Pets': '🐾',
-  'Security': '🔒',
-  'Cancellation': '📋',
-  'If something is wrong, tell me during your stay': '💬',
-  // FR
-  'Entrée et sortie': '🕐',
-  'Respect des autres voyageurs': '🤝',
-  'Pas de fêtes ni d\'événements': '🚫',
-  'Heures de silence': '🔇',
-  'Non-fumeur': '🚭',
-  'Nombre de voyageurs': '👥',
-  'Accès à l\'appartement': '🔑',
-  'Soin de l\'appartement': '🏠',
-  'Nettoyage': '✨',
-  'Déchets': '♻️',
-  'Serviettes et linge de lit': '🛏️',
-  'Climatisation, chauffage et lumières': '🌡️',
-  'Vélos': '🚲',
-  'Animaux': '🐾',
-  'Sécurité': '🔒',
-  'Annulation': '📋',
-  'Si quelque chose ne va pas, dites-le moi pendant le séjour': '💬',
-  // DE
-  'Check-in und Check-out': '🕐',
-  'Rücksicht auf andere Gäste': '🤝',
-  'Keine Partys oder Veranstaltungen': '🚫',
-  'Ruhezeiten': '🔇',
-  'Nichtrauchen': '🚭',
-  'Anzahl der Gäste': '👥',
-  'Zugang zur Wohnung': '🔑',
-  'Pflege der Wohnung': '🏠',
-  'Reinigung': '✨',
-  'Müll': '♻️',
-  'Handtücher und Bettwäsche': '🛏️',
-  'Klimaanlage, Heizung und Lichter': '🌡️',
-  'Fahrräder': '🚲',
-  'Haustiere': '🐾',
-  'Sicherheit': '🔒',
-  'Stornierung': '📋',
-  'Wenn etwas nicht stimmt, sagen Sie es mir während des Aufenthalts': '💬',
-};
 ---
 <BaseLayout
   title={content.metaTitle}
@@ -91,7 +17,6 @@ const ICONS: Record<string, string> = {
 >
   <!-- HERO -->
   <div class="inner-hero">
-    <span class="eyebrow">Aromatik Apartments · Girona</span>
     <h1>{content.pageTitle}</h1>
     <p class="hero-sub">{content.heroText}</p>
   </div>
@@ -114,7 +39,6 @@ const ICONS: Record<string, string> = {
       <div class="rules-grid">
         {content.sections.map((section) => (
           <div class="rule-card">
-            <div class="rule-icon">{ICONS[section.title] ?? '📌'}</div>
             <div class="rule-body">
               <h2>{section.title}</h2>
               <p>{section.text}</p>
@@ -153,15 +77,7 @@ const ICONS: Record<string, string> = {
     background: var(--cream);
     text-align: center;
     padding: 7rem 2rem 4rem;
-    border-bottom: 1px solid #e7e0d8;
-  }
-  .inner-hero .eyebrow {
-    display: inline-block;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #9e9689;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--stone-200);
   }
   .inner-hero h1 {
     font-family: var(--serif);
@@ -173,7 +89,7 @@ const ICONS: Record<string, string> = {
   }
   .hero-sub {
     font-size: 1rem;
-    color: #6b6560;
+    color: var(--stone-600);
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.8;
@@ -183,13 +99,13 @@ const ICONS: Record<string, string> = {
   .container-rules { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
   .section { padding: 3.5rem 0; }
 
-  .section-intro { background: var(--white); border-bottom: 1px solid #e7e0d8; }
+  .section-intro { background: var(--white); border-bottom: 1px solid var(--stone-200); }
   .intro-card {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
     background: var(--cream);
-    border: 1px solid #e7e0d8;
+    border: 1px solid var(--stone-200);
     border-radius: 12px;
     padding: 2rem;
   }
@@ -199,7 +115,7 @@ const ICONS: Record<string, string> = {
     height: 48px;
     border-radius: 50%;
     background: var(--gold);
-    color: var(--white);
+    color: var(--black);
     font-family: var(--serif);
     font-size: 1.4rem;
     display: flex;
@@ -209,14 +125,14 @@ const ICONS: Record<string, string> = {
   .intro-text p {
     margin: 0;
     font-size: 0.95rem;
-    color: #3a3631;
+    color: var(--stone-800);
     line-height: 1.8;
   }
 
   .section-rules { background: var(--white); }
   .rules-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
   .rule-card {
@@ -224,18 +140,12 @@ const ICONS: Record<string, string> = {
     gap: 1rem;
     align-items: flex-start;
     background: var(--cream);
-    border: 1px solid #e7e0d8;
+    border: 1px solid var(--stone-200);
     border-radius: 10px;
     padding: 1.4rem 1.5rem;
     transition: box-shadow 0.2s;
   }
-  .rule-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-  .rule-icon {
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    line-height: 1;
-    margin-top: 2px;
-  }
+  .rule-card:hover { box-shadow: var(--shadow-sm); }
   .rule-body h2 {
     font-family: var(--serif);
     font-size: 1rem;
@@ -247,14 +157,14 @@ const ICONS: Record<string, string> = {
   .rule-body p {
     margin: 0;
     font-size: 0.88rem;
-    color: #6b6560;
+    color: var(--stone-600);
     line-height: 1.75;
   }
 
   .section-thanks {
     background: var(--cream);
-    border-top: 1px solid #e7e0d8;
-    border-bottom: 1px solid #e7e0d8;
+    border-top: 1px solid var(--stone-200);
+    border-bottom: 1px solid var(--stone-200);
   }
   .thanks-card { text-align: center; padding: 1rem 0; }
   .thanks-card h2 {
@@ -266,7 +176,7 @@ const ICONS: Record<string, string> = {
   }
   .thanks-card p {
     font-size: 0.95rem;
-    color: #6b6560;
+    color: var(--stone-600);
     line-height: 1.8;
     max-width: 560px;
     margin: 0 auto 0.5rem;
@@ -274,7 +184,7 @@ const ICONS: Record<string, string> = {
   .signature {
     font-family: var(--serif);
     font-size: 1rem !important;
-    color: var(--gold) !important;
+    color: var(--gold-ink) !important;
     margin-top: 1.5rem !important;
     font-style: italic;
   }
@@ -283,7 +193,7 @@ const ICONS: Record<string, string> = {
   .info-cta-box {
     text-align: center;
     padding: 2.5rem;
-    border: 1px solid #e7e0d8;
+    border: 1px solid var(--stone-200);
     border-radius: 12px;
     background: var(--cream);
   }
@@ -296,13 +206,13 @@ const ICONS: Record<string, string> = {
   }
   .info-cta-box p {
     font-size: 0.93rem;
-    color: #6b6560;
+    color: var(--stone-600);
     margin: 0 0 1.5rem;
     line-height: 1.7;
   }
 
   @media (max-width: 700px) {
-    .rules-grid { grid-template-columns: 1fr; }
+    .rules-grid { grid-template-columns: minmax(0, 1fr); }
     .intro-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
     .info-cta-box { padding: 1.75rem 1.25rem; }
     .section { padding: 2.5rem 0; }

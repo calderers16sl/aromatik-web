@@ -70,7 +70,6 @@ const articleSchema = JSON.stringify({
           ))}
         </ol>
       </nav>
-      <span class="g-eyebrow">{doc.eyebrow}</span>
       <h1>{doc.h1}</h1>
       <p class="g-lead"><GuideRich text={doc.lead} langRoot={langRoot} /></p>
     </div>
@@ -104,11 +103,11 @@ const articleSchema = JSON.stringify({
         <div class="g-cards">
           {related.map((a) => (
             <a href={`${langRoot}/apartamentos/${a.slug}`} class="g-card">
-              <img src={`/images/apartamentos/${a.slug}/foto-1.jpg`} alt={lang === 'ca' ? a.nameCa : a.name} loading="lazy" width="1200" height="800" />
+              <img src={`/images/apartamentos/${a.slug}/foto-1.jpg`} alt={a.name} loading="lazy" width="1200" height="800" />
               <span class="g-card-body">
-                <strong>{lang === 'ca' ? a.nameCa : a.name}</strong>
+                <strong>{a.name}</strong>
                 <span>{ui.upTo} {a.guests} {ui.people}</span>
-                <span class="g-card-link">{ui.viewApartment} →</span>
+                <span class="g-card-link">{ui.viewApartment}</span>
               </span>
             </a>
           ))}
@@ -141,11 +140,10 @@ const articleSchema = JSON.stringify({
 <style>
 .g-wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
 .g-wrap-wide { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
-.g-head { margin-top: 70px; background: var(--cream); padding: 3rem 0 2.5rem; }
+.g-head { margin-top: var(--header-h); background: var(--cream); padding: 3rem 0 2.5rem; }
 .g-crumbs ol { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; font-size: 0.8rem; color: var(--stone-600); margin-bottom: 1.5rem; }
 .g-crumbs li + li::before { content: "›"; margin-right: 0.35rem; color: var(--stone-400); }
 .g-crumbs a { color: var(--stone-600); text-decoration: underline; text-underline-offset: 2px; }
-.g-eyebrow { display: block; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--stone-600); margin-bottom: 0.75rem; }
 .g-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.5vw, 2.9rem); line-height: 1.15; margin-bottom: 1.25rem; }
 .g-lead { font-size: 1.1rem; line-height: 1.75; color: var(--stone-800); }
 .g-banner { display: block; width: 100%; height: clamp(220px, 34vw, 420px); object-fit: cover; }
@@ -153,7 +151,7 @@ const articleSchema = JSON.stringify({
 .g-body h2 { font-family: var(--serif); font-weight: 400; font-size: 1.65rem; line-height: 1.25; margin: 2.75rem 0 1rem; }
 .g-body p { font-size: 1.02rem; line-height: 1.85; color: var(--stone-800); }
 .g-body p + p { margin-top: 1rem; }
-.g-body :global(a), .g-lead :global(a) { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.g-body :global(a), .g-lead :global(a) { color: var(--gold-ink); text-decoration: underline; text-underline-offset: 3px; }
 .g-items { display: grid; gap: 0.75rem; margin-top: 1rem; }
 .g-items div { background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); padding: 1rem 1.25rem; }
 .g-items dt { font-weight: 500; margin-bottom: 0.3rem; }
@@ -162,11 +160,11 @@ const articleSchema = JSON.stringify({
 .g-related h2 { font-family: var(--serif); font-weight: 400; font-size: 1.65rem; margin-bottom: 1.5rem; }
 .g-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
 .g-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--stone-200); border-radius: var(--radius-lg); overflow: hidden; color: inherit; transition: box-shadow 0.2s; }
-.g-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.g-card:hover { box-shadow: var(--shadow-md); }
 .g-card img { width: 100%; aspect-ratio: 3 / 2; height: auto; object-fit: cover; display: block; }
 .g-card-body { padding: 1rem 1.15rem 1.25rem; display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.88rem; color: var(--stone-600); }
 .g-card-body strong { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; color: var(--black); }
-.g-card-link { color: var(--green); font-weight: 500; margin-top: 0.25rem; }
+.g-card-link { color: var(--gold-ink); font-weight: 500; margin-top: 0.25rem; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 .g-cta { padding: 4rem 0; text-align: center; background: var(--cream); }
 .g-cta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.7rem, 3.5vw, 2.2rem); margin-bottom: 0.85rem; }
 .g-cta p { color: var(--stone-600); line-height: 1.7; margin-bottom: 1.75rem; }
@@ -174,9 +172,9 @@ const articleSchema = JSON.stringify({
 .g-more { padding: 2.5rem 0 3.5rem; border-top: 1px solid var(--stone-200); }
 .g-more-title { font-family: var(--serif); font-size: 1.25rem; color: var(--black); }
 .g-more ul { list-style: none; padding: 0; margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
-.g-more ul a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.g-more ul a { color: var(--gold-ink); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 767px) {
-  .g-cards { grid-template-columns: 1fr; }
+  .g-cards { grid-template-columns: minmax(0, 1fr); }
   .g-wrap, .g-wrap-wide, .g-body { padding-left: 1rem; padding-right: 1rem; }
   .g-head { padding: 2rem 0 1.75rem; }
 }

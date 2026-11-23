@@ -1,18 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HostCard from '../components/HostCard.astro';
-import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+import GuestRatings from '../components/GuestRatings.astro';
 ---
 <BaseLayout
   title="Sobre Aromatik Apartments — Apartamentos boutique en el Barri Vell de Girona"
   description="Aromatik Apartments es una pequeña colección de apartamentos boutique en el Barri Vell de Girona, gestionados personalmente por Arnau. Reserva directamente al mejor precio disponible."
 >
-  <HostCard />
-  <ReviewsCarousel />
-
   <div class="inner-hero">
-    <span class="eyebrow">Conoce el proyecto</span>
-    <h1 style="margin-top:0.75rem">Sobre Aromatik Apartments</h1>
+    <h1>Sobre Aromatik Apartments</h1>
   </div>
 
   <section class="section">
@@ -35,17 +30,17 @@ import ReviewsCarousel from '../components/ReviewsCarousel.astro';
           </p>
 
         </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <section class="section bg-cream">
-    <div class="container" style="text-align:center;">
-      <span class="eyebrow">Los apartamentos</span>
-      <h2 style="font-family:var(--serif); font-size:2rem; font-weight:400; margin:0.75rem 0 1rem;">Ocho apartamentos en el Barri Vell de Girona</h2>
-      <p style="color:var(--stone-600); margin-bottom:3rem; font-size:0.95rem;">Todos gestionados personalmente. Todos con reserva directa disponible.</p>
-      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+  <GuestRatings />
+
+  <section class="section">
+    <div class="container cta-band">
+      <h2>Ocho apartamentos en el Barri Vell de Girona</h2>
+      <p>Todos gestionados personalmente. Todos con reserva directa disponible.</p>
+      <div class="cta-band-actions">
         <a href="/#apartamentos" class="btn btn-dark">Ver todos los apartamentos</a>
         <a href="/contacto" class="btn btn-border">Escribirme directamente</a>
       </div>
@@ -54,17 +49,17 @@ import ReviewsCarousel from '../components/ReviewsCarousel.astro';
 </BaseLayout>
 
 <style>
-  .about-grid--single { grid-template-columns: 1fr !important; max-width: 680px; margin: 0 auto; }
+  .about-grid--single { grid-template-columns: minmax(0, 1fr) !important; max-width: 680px; margin: 0 auto; }
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 4rem;
     align-items: start;
   }
-  .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--stone-700, #44403c); }
+  .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: var(--stone-800); }
   @media (max-width: 768px) {
-    .about-grid--single { grid-template-columns: 1fr !important; max-width: 680px; margin: 0 auto; }
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid--single { grid-template-columns: minmax(0, 1fr) !important; max-width: 680px; margin: 0 auto; }
+  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
     .about-sidebar { order: -1; }
   }
 </style>

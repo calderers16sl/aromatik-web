@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HostCard from '../../components/HostCard.astro';
-import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
-import { NON_DEFAULT_LOCALES, type Locale } from '../../i18n/translations';
+import '../../styles/audience.css';
+import GuestRatings from '../../components/GuestRatings.astro';
+import { NON_DEFAULT_LOCALES, getT, type Locale } from '../../i18n/translations';
 
 export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map(lang => ({ params: { lang } }));
 }
 const { lang } = Astro.params as { lang: Locale };
 const langRoot = `/${lang}`;
+const t = getT(lang);
 
 const copy: Record<string, any> = {
   en: {
@@ -20,12 +21,12 @@ const copy: Record<string, any> = {
     perksEyebrow: "Designed for two",
     perksTitle: "The getaway you deserve",
     perks: [
-      { icon: "🌊", title: "Views of the Onyar river", desc: "The colourful houses reflected in the water. That morning wake-up with the sound of the river that stays with you." },
-      { icon: "🏛️", title: "In the heart of the old town", desc: "Medieval lanes, the Cathedral five minutes away, the Jewish Quarter to get lost in. Girona is a cinematic city. Literally." },
-      { icon: "🍷", title: "Walking distance from the best restaurants", desc: "The Barri Vell has some of Girona's finest restaurants. Dinner out, walk back home. No taxi, no curfew." },
-      { icon: "☕", title: "Breakfast at home", desc: "Coffee maker, toaster, everything ready. The first coffee of the day in your own apartment, unhurried." },
-      { icon: "🔑", title: "Arrive whenever you like", desc: "Self check-in with a door code. If the train runs late or you want to linger over dinner, no problem." },
-      { icon: "🐾", title: "With your pet", desc: "If there are three of you, you're all welcome. All our apartments accept pets at no extra charge." },
+      { title: "Views of the Onyar river", desc: "The colourful houses reflected in the water. That morning wake-up with the sound of the river that stays with you." },
+      { title: "In the heart of the old town", desc: "Medieval lanes, the Cathedral five minutes away, the Jewish Quarter to get lost in. Girona is a cinematic city. Literally." },
+      { title: "Walking distance from the best restaurants", desc: "The Barri Vell has some of Girona's finest restaurants. Dinner out, walk back home. No taxi, no curfew." },
+      { title: "Breakfast at home", desc: "Coffee maker, toaster, everything ready. The first coffee of the day in your own apartment, unhurried." },
+      { title: "Arrive whenever you like", desc: "Self check-in with a door code. If the train runs late or you want to linger over dinner, no problem." },
+      { title: "With your pet", desc: "If there are three of you, you're all welcome. All our apartments accept pets at no extra charge." },
     ],
     aptsEyebrow: "Perfect for two",
     aptsTitle: "Our apartments for couples",
@@ -43,7 +44,7 @@ const copy: Record<string, any> = {
     tagline1: "Cosy and with views of the Onyar river. Natural light, tranquil atmosphere and everything the two of you need.",
     tagline2: "The most peaceful of all. River views, careful décor and the quiet that a couples' retreat deserves.",
     tagline3: "Balcony for breakfast with city views. Fresh, bright and perfect for switching off together.",
-    people: "2 people", bedrooms: "1 bedroom", viewApt: "View apartment →",
+    people: "2 people", bedrooms: "1 bedroom", viewApt: "View apartment",
   },
   fr: {
     metaTitle: "Appartements romantiques pour couples à Gérone — Aromatik Apartments",
@@ -54,12 +55,12 @@ const copy: Record<string, any> = {
     perksEyebrow: "Conçu pour deux",
     perksTitle: "L'escapade que vous méritez",
     perks: [
-      { icon: "🌊", title: "Vue sur l'Onyar", desc: "Les maisons colorées se reflétant dans l'eau. Ce réveil avec le bruit de la rivière qui ne s'oublie pas facilement." },
-      { icon: "🏛️", title: "En plein cœur historique", desc: "Ruelles médiévales, la Cathédrale à cinq minutes, le Quartier Juif pour se perdre. Gérone est une ville de cinéma. Littéralement." },
-      { icon: "🍷", title: "À pied des meilleurs restaurants", desc: "Le Barri Vell concentre quelques-uns des meilleurs restaurants de Gérone. Dîner dehors, rentrer à pied. Pas de taxi, pas d'horloge." },
-      { icon: "☕", title: "Petit-déjeuner à la maison", desc: "Cafetière, grille-pain, tout est prêt. Le premier café de la journée dans votre appartement, sans se presser." },
-      { icon: "🔑", title: "Arrivez quand vous voulez", desc: "Self check-in avec code. Si le train est en retard ou si vous voulez prolonger le dîner, aucun problème." },
-      { icon: "🐾", title: "Avec votre animal", desc: "Si vous êtes trois, vous êtes tous les bienvenus. Tous nos appartements acceptent les animaux sans supplément." },
+      { title: "Vue sur l'Onyar", desc: "Les maisons colorées se reflétant dans l'eau. Ce réveil avec le bruit de la rivière qui ne s'oublie pas facilement." },
+      { title: "En plein cœur historique", desc: "Ruelles médiévales, la Cathédrale à cinq minutes, le Quartier Juif pour se perdre. Gérone est une ville de cinéma. Littéralement." },
+      { title: "À pied des meilleurs restaurants", desc: "Le Barri Vell concentre quelques-uns des meilleurs restaurants de Gérone. Dîner dehors, rentrer à pied. Pas de taxi, pas d'horloge." },
+      { title: "Petit-déjeuner à la maison", desc: "Cafetière, grille-pain, tout est prêt. Le premier café de la journée dans votre appartement, sans se presser." },
+      { title: "Arrivez quand vous voulez", desc: "Self check-in avec code. Si le train est en retard ou si vous voulez prolonger le dîner, aucun problème." },
+      { title: "Avec votre animal", desc: "Si vous êtes trois, vous êtes tous les bienvenus. Tous nos appartements acceptent les animaux sans supplément." },
     ],
     aptsEyebrow: "Parfaits pour deux",
     aptsTitle: "Nos appartements pour couples",
@@ -77,7 +78,7 @@ const copy: Record<string, any> = {
     tagline1: "Cosy et avec vue sur l'Onyar. Lumière naturelle, ambiance tranquille et tout ce dont vous avez besoin à deux.",
     tagline2: "Le plus serein de tous. Vue sur l'Onyar, décoration soignée et le calme que mérite une escapade en couple.",
     tagline3: "Balcon pour petit-déjeuner avec vue sur la ville. Frais, lumineux et parfait pour décrocher ensemble.",
-    people: "2 personnes", bedrooms: "1 chambre", viewApt: "Voir l'appartement →",
+    people: "2 personnes", bedrooms: "1 chambre", viewApt: "Voir l'appartement",
   },
   ca: {
     metaTitle: "Apartaments romàntics per a parelles a Girona — Aromatik Apartments",
@@ -88,12 +89,12 @@ const copy: Record<string, any> = {
     perksEyebrow: "Dissenyat per a dos",
     perksTitle: "L'escapada que us mereixeu",
     perks: [
-      { icon: "🌊", title: "Vistes al riu Onyar", desc: "Les cases de colors reflectides en l'aigua. Aquell despertar amb el so del riu que no s'oblida fàcilment." },
-      { icon: "🏛️", title: "Al cor del casc antic", desc: "Carrerons medievals, la Catedral a cinc minuts, el Call Jueu per perdre-s'hi. Girona és una ciutat de pel·lícula. Literalment." },
-      { icon: "🍷", title: "A peu dels millors restaurants", desc: "El Barri Vell concentra alguns dels millors restaurants de Girona. Sopeu fora, torneu caminant. Sense taxi, sense rellotge." },
-      { icon: "☕", title: "Esmorzar a casa", desc: "Cafetera, torradora, tot llest. El primer cafè del dia al vostre propi apartament, sense pressa." },
-      { icon: "🔑", title: "Arribeu quan vulgueu", desc: "Self check-in amb codi. Si el tren arriba tard o teniu ganes d'allargar el sopar, cap problema." },
-      { icon: "🐾", title: "Amb la vostra mascota", desc: "Si sou tres, tots sou benvinguts. Tots els nostres apartaments accepten mascotes sense recàrrec." },
+      { title: "Vistes al riu Onyar", desc: "Les cases de colors reflectides en l'aigua. Aquell despertar amb el so del riu que no s'oblida fàcilment." },
+      { title: "Al cor del casc antic", desc: "Carrerons medievals, la Catedral a cinc minuts, el Call Jueu per perdre-s'hi. Girona és una ciutat de pel·lícula. Literalment." },
+      { title: "A peu dels millors restaurants", desc: "El Barri Vell concentra alguns dels millors restaurants de Girona. Sopeu fora, torneu caminant. Sense taxi, sense rellotge." },
+      { title: "Esmorzar a casa", desc: "Cafetera, torradora, tot llest. El primer cafè del dia al vostre propi apartament, sense pressa." },
+      { title: "Arribeu quan vulgueu", desc: "Self check-in amb codi. Si el tren arriba tard o teniu ganes d'allargar el sopar, cap problema." },
+      { title: "Amb la vostra mascota", desc: "Si sou tres, tots sou benvinguts. Tots els nostres apartaments accepten mascotes sense recàrrec." },
     ],
     aptsEyebrow: "Perfectes per a dos",
     aptsTitle: "Els nostres apartaments per a parelles",
@@ -111,7 +112,7 @@ const copy: Record<string, any> = {
     tagline1: "Acollidor i amb vistes a l'Onyar. Llum natural, ambient tranquil i tot el que necessiteu els dos.",
     tagline2: "El més serè de tots. Vistes a l'Onyar, decoració curada i el silenci que mereix una escapada en parella.",
     tagline3: "Balcó per esmorzar amb vistes a la ciutat. Fresc, lluminós i perfecte per desconnectar junts.",
-    people: "2 persones", bedrooms: "1 habitació", viewApt: "Veure apartament →",
+    people: "2 persones", bedrooms: "1 habitació", viewApt: "Veure apartament",
   },
 };
 
@@ -120,7 +121,7 @@ const c = copy[lang] ?? copy['en'];
 const featuredApts = [
   { slug: "romani",  tag: c.tag1, desc: c.tagline1, photo: "/images/apartamentos/romani/foto-1.jpg",  name: "Romaní" },
   { slug: "lavanda", tag: c.tag2, desc: c.tagline2, photo: "/images/apartamentos/lavanda/foto-1.jpg", name: "Lavanda" },
-  { slug: "limon",   tag: c.tag3, desc: c.tagline3, photo: "/images/apartamentos/limon/foto-1.jpg",   name: "Llimona" },
+  { slug: "limon",   tag: c.tag3, desc: c.tagline3, photo: "/images/apartamentos/limon/foto-1.jpg",   name: "Limón" },
 ];
 ---
 <BaseLayout title={c.metaTitle} description={c.metaDesc} lang={lang}>
@@ -128,12 +129,11 @@ const featuredApts = [
   <section class="audience-hero audience-hero--parejas">
     <div class="audience-hero-overlay"></div>
     <div class="audience-hero-inner">
-      <span class="audience-eyebrow">{c.eyebrow}</span>
-      <h1 set:html={c.h1.replace('\n','<br/>')} />
+      <h1 set:html={c.h1.replace('\n',' <br/>')} />
       <p>{c.subtitle}</p>
       <div class="audience-hero-actions">
-        <a href="#apartamentos-parejas" class="btn btn-white">{lang==='fr'?'Voir les appartements':lang==='ca'?'Veure apartaments':'View apartments'}</a>
-        <a href={`${langRoot}/reservar#motor`} class="btn btn-outline-white">{lang==='fr'?'Réserver':lang==='ca'?'Reservar ara':'Book now'}</a>
+        <a href={`${langRoot}/reservar#motor`} class="btn btn-green">{t.navBook}</a>
+        <a href="#apartamentos-parejas" class="btn btn-outline-white">{t.heroCta1}</a>
       </div>
     </div>
   </section>
@@ -141,13 +141,11 @@ const featuredApts = [
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">{c.perksEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{c.perksTitle}</h2>
+        <h2>{c.perksTitle}</h2>
       </div>
       <div class="audience-perks">
         {c.perks.map((p: any) => (
           <div class="audience-perk">
-            <div class="audience-perk-icon">{p.icon}</div>
             <h3>{p.title}</h3>
             <p>{p.desc}</p>
           </div>
@@ -159,8 +157,7 @@ const featuredApts = [
   <section id="apartamentos-parejas" class="section bg-cream">
     <div class="container">
       <div class="section-header">
-        <span class="eyebrow">{c.aptsEyebrow}</span>
-        <h2 style="margin-top:0.75rem">{c.aptsTitle}</h2>
+        <h2>{c.aptsTitle}</h2>
         <p>{c.aptsSub}</p>
       </div>
       <div class="audience-apts">
@@ -171,7 +168,7 @@ const featuredApts = [
             </div>
             <div class="audience-apt-body">
               <h3>{apt.name}</h3>
-              <p class="audience-apt-meta">{c.people} · {c.bedrooms}</p>
+              <p class="audience-apt-meta">{c.people}, {c.bedrooms}</p>
               <p class="audience-apt-desc">{apt.desc}</p>
               <span class="audience-apt-link">{c.viewApt}</span>
             </div>
@@ -182,9 +179,8 @@ const featuredApts = [
   </section>
 
   <section class="section">
-    <div class="container" style="max-width:760px;">
-      <span class="eyebrow">{c.cityEyebrow}</span>
-      <h2 style="font-family:var(--serif);font-size:1.8rem;font-weight:400;margin:0.75rem 0 1.5rem;">{c.cityTitle}</h2>
+    <div class="container-sm">
+      <h2 class="audience-h2">{c.cityTitle}</h2>
       <div class="prose">
         <p>{c.cityText1}</p>
         <p>{c.cityText2}</p>
@@ -193,15 +189,14 @@ const featuredApts = [
     </div>
   </section>
 
-  <HostCard lang={lang} />
-  <ReviewsCarousel lang={lang} />
+  <GuestRatings lang={lang} />
 
-  <section class="section bg-cream">
-    <div class="container" style="text-align:center;">
-      <h2 style="font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:0.75rem;">{c.ctaTitle}</h2>
-      <p style="color:var(--stone-600);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;">{c.ctaSub}</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href={`${langRoot}/reservar#motor`} class="btn btn-dark">{c.ctaBtn}</a>
+  <section class="section">
+    <div class="container audience-cta">
+      <h2>{c.ctaTitle}</h2>
+      <p>{c.ctaSub}</p>
+      <div class="audience-cta-actions">
+        <a href={`${langRoot}/reservar#motor`} class="btn btn-green">{c.ctaBtn}</a>
         <a href={`${langRoot}/contacto`} class="btn btn-border">{c.ctaBtn2}</a>
       </div>
     </div>
@@ -209,29 +204,5 @@ const featuredApts = [
 
 </BaseLayout>
 <style>
-.audience-hero{position:relative;min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;padding-top:70px;}
-.audience-hero--parejas{background-image:url('/images/apartamentos/romani/foto-1.jpg');background-size:cover;background-position:center;}
-.audience-hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.48);}
-.audience-hero-inner{position:relative;z-index:1;max-width:780px;padding:4rem 2rem;background:rgba(0,0,0,0.28);border-radius:20px;backdrop-filter:blur(2px);margin:0 1.5rem;}
-.audience-eyebrow{display:block;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:1rem;}
-.audience-hero-inner h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.6rem);font-weight:400;line-height:1.2;margin-bottom:1.25rem;}
-.audience-hero-inner p{font-size:1.05rem;color:rgba(255,255,255,0.85);max-width:560px;margin:0 auto 2rem;line-height:1.7;}
-.audience-hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-.audience-perks{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:1rem;}
-.audience-perk{padding:2rem 1.5rem;border:1px solid var(--stone-200);border-radius:16px;background:#fff;}
-.audience-perk-icon{font-size:2rem;margin-bottom:0.75rem;}
-.audience-perk h3{font-size:1rem;font-weight:600;margin-bottom:0.5rem;}
-.audience-perk p{font-size:0.875rem;color:var(--stone-600);line-height:1.7;}
-.audience-apts{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem;}
-.audience-apt-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--stone-200);text-decoration:none;color:inherit;transition:box-shadow 0.2s,transform 0.2s;display:flex;flex-direction:column;}
-.audience-apt-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.12);transform:translateY(-2px);}
-.audience-apt-img{height:200px;background-size:cover;background-position:center;position:relative;}
-.audience-apt-tag{position:absolute;top:0.75rem;left:0.75rem;background:rgba(0,0,0,0.6);color:#fff;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.7rem;border-radius:99px;backdrop-filter:blur(4px);}
-.audience-apt-body{padding:1.25rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column;}
-.audience-apt-body h3{font-size:1.1rem;font-weight:600;margin-bottom:0.25rem;}
-.audience-apt-meta{font-size:0.8rem;color:var(--stone-500);margin-bottom:0.75rem;}
-.audience-apt-desc{font-size:0.875rem;color:var(--stone-600);line-height:1.65;flex:1;}
-.audience-apt-link{display:inline-block;margin-top:1rem;font-size:0.85rem;font-weight:600;color:var(--gold);}
-@media(max-width:900px){.audience-perks,.audience-apts{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:580px){.audience-perks,.audience-apts{grid-template-columns:1fr;}.audience-hero-inner{padding:2.5rem 1.25rem;}}
+.audience-hero--parejas { background-image: url('/images/apartamentos/romani/foto-1.jpg'); }
 </style>
