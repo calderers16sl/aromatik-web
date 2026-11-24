@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/audience.css';
 import GuestRatings from '../components/GuestRatings.astro';
 import CyclingRoutes from '../components/CyclingRoutes.astro';
+import CyclistFaq from '../components/CyclistFaq.astro';
 
 const featuredApts = [
   { name: "Bergamota", slug: "bergamota", guests: 6, bedrooms: 3, tag: "Para grupos de ciclistas", desc: "Ático para 6 personas con lavadora, 3 habitaciones y balcón. Perfecto cuando venís en equipo.", photo: "/images/apartamentos/bergamota/foto-1.jpg" },
@@ -12,7 +13,7 @@ const featuredApts = [
 ---
 <BaseLayout
   title="Apartamentos para ciclistas en Girona — Aromatik Apartments"
-  description="Girona es la capital mundial del ciclismo. Alójate en el corazón del Barri Vell a 5 minutos de los mejores accesos a ruta. Guarda tu bici dentro, lavadora en el apartamento, self check-in."
+  description="Apartamentos para ciclistas en el Barri Vell de Girona: bici dentro del apartamento, ascensor, lavadora, self check-in 24 h y rutas desde la puerta."
   ogImage="/images/apartamentos/arbol-de-te/foto-1.jpg"
 >
 
@@ -20,8 +21,8 @@ const featuredApts = [
   <section class="audience-hero audience-hero--ciclistas">
     <div class="audience-hero-overlay"></div>
     <div class="audience-hero-inner">
-      <h1>Tu base en Girona, <br/>donde entrenan los pros</h1>
-      <p>Girona es el cuartel de invierno de los mejores equipos del pelotón mundial. Descubre por qué, y usa el Barri Vell como tu punto de partida.</p>
+      <h1>Apartamentos para ciclistas <br/>en Girona</h1>
+      <p>En el Barri Vell, donde entrenan los pros: la bici se queda dentro del apartamento, hay ascensor en los dos edificios y las rutas salen desde la puerta.</p>
       <div class="audience-hero-actions">
         <a href="/reservar#motor" class="btn btn-green">Reservar ahora</a>
         <a href="#apartamentos-ciclistas" class="btn btn-outline-white">Ver apartamentos</a>
@@ -38,15 +39,15 @@ const featuredApts = [
       <div class="audience-perks">
         <div class="audience-perk">
           <h3>Bicis dentro del apartamento</h3>
-          <p>Nada de dejarla en la calle. Guardas la bici dentro del apartamento. Los ascensores son amplios y diseñados para ello.</p>
+          <p>La bici no se queda en la calle. Caben 4 bicis en Bergamota y en Árbol de té, y 2 en cada uno de los otros apartamentos. La caja o la maleta también se queda dentro.</p>
         </div>
         <div class="audience-perk">
-          <h3>Ascensor en todos los edificios</h3>
-          <p>No hay que cargar la bici por escaleras. Subís vosotros, sube la bici. Simple y sin riesgos.</p>
+          <h3>Ascensor en los dos edificios</h3>
+          <p>Rambla de la Llibertat 11 y 26 tienen ascensor y la bici cabe dentro. No hay que subirla por las escaleras.</p>
         </div>
         <div class="audience-perk">
-          <h3>Lavadora disponible</h3>
-          <p>El culotte del día no tiene por qué ser el del día siguiente. Lavadora en los apartamentos más grandes, siempre disponible.</p>
+          <h3>Lavadora</h3>
+          <p>El culotte de hoy no tiene por qué ser el de mañana. Bergamota, Árbol de té y Geranio tienen lavadora en el apartamento.</p>
         </div>
         <div class="audience-perk">
           <h3>Self check-in 24h</h3>
@@ -77,6 +78,8 @@ const featuredApts = [
   </section>
 
   <CyclingRoutes lang="es" />
+
+  <CyclistFaq lang="es" />
 
   <!-- APARTAMENTOS DESTACADOS -->
   <section id="apartamentos-ciclistas" class="section">

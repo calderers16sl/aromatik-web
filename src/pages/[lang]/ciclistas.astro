@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/audience.css';
 import GuestRatings from '../../components/GuestRatings.astro';
 import CyclingRoutes from '../../components/CyclingRoutes.astro';
+import CyclistFaq from '../../components/CyclistFaq.astro';
 import { NON_DEFAULT_LOCALES, getT, type Locale } from '../../i18n/translations';
 
 export function getStaticPaths() {
@@ -15,24 +16,24 @@ const t = getT(lang);
 const copy: Record<string, any> = {
   en: {
     metaTitle: "Cycling Apartments in Girona — Aromatik Apartments",
-    metaDesc: "Girona is the world capital of cycling. Stay in the heart of the Barri Vell, 5 minutes from the best routes. Store your bike inside, washing machine available, 24h self check-in.",
+    metaDesc: "Apartments for cyclists in Girona's old town: bike inside the apartment, lift in both buildings, washing machine, 24h self check-in and rides from the door.",
     eyebrow: "Girona, cycling capital",
-    h1: "Your base in Girona,\nwhere the pros train",
-    subtitle: "Girona is the winter quarters of the world's best cycling teams. Find out why, and use the Barri Vell as your starting point.",
+    h1: "Apartments for cyclists\nin Girona",
+    subtitle: "In the Barri Vell, where the pros train: your bike stays inside the apartment, both buildings have a lift and the rides start at the door.",
     perksEyebrow: "Everything you need",
     perksTitle: "Built for cyclists",
     perks: [
-      { title: "Bikes inside the apartment", desc: "No leaving it on the street. Store your bike inside. The lifts are wide and designed for it." },
-      { title: "Elevator in every building", desc: "No carrying your bike up stairs. You go up, your bike goes up. Simple and damage-free." },
-      { title: "Washing machine available", desc: "Yesterday's bib shorts don't have to be tomorrow's. Washing machine in the larger apartments." },
+      { title: "Bikes inside the apartment", desc: "No leaving it in the street. Four bikes fit in Bergamota and in Árbol de té, and two in each of the other apartments. Your bike box or bag stays inside too." },
+      { title: "A lift in both buildings", desc: "Rambla de la Llibertat 11 and 26 both have a lift, and a bike fits inside. No carrying it up the stairs." },
+      { title: "Washing machine", desc: "Today's bib shorts don't have to be tomorrow's. Bergamota, Árbol de té and Geranio have a washing machine in the apartment." },
       { title: "24h self check-in", desc: "Arrive whenever you arrive. Door code, no waiting for anyone. Perfect if you come back late from a ride." },
       { title: "Kitchen to refuel", desc: "Full kitchen to prepare the pasta the night before and breakfast the morning after. Performance starts at the apartment." },
       { title: "Direct route access", desc: "From the Barri Vell you roll straight out to Rocacorba, Les Gavarres or the Costa Brava. No car needed." },
     ],
     blockEyebrow: "The cycling mecca",
     blockTitle: "Why Girona is different",
-    blockText1: "Girona has been the home of choice for the world's best cyclists for over two decades. Chris Froome, Tom Pidcock, Egan Bernal — they've all ridden these same roads. It's no coincidence.",
-    blockText2: "The climate is exceptional in spring and autumn. The roads are quiet with tarmac that many WorldTour teams envy. Rocacorba — a classic among the pros — is 40 minutes pedalling from the door. Les Gavarres offers more technical routes towards the Costa Brava.",
+    blockText1: "Girona has been the home of choice for the world's best cyclists for over two decades. Chris Froome, Tom Pidcock, Egan Bernal: they have all ridden these same roads. It's no coincidence.",
+    blockText2: "The climate is exceptional in spring and autumn. The roads are quiet with tarmac that many WorldTour teams envy. Rocacorba, a classic among the pros, is 40 minutes pedalling from the door. Les Gavarres offers more technical routes towards the Costa Brava.",
     blockText3: "And at the end of the day, the Barri Vell is waiting with restaurants, terraces and the pleasure of walking through a car-free medieval city. Girona is one of those places that makes you want to come back every season.",
     aptsEyebrow: "Our apartments",
     aptsTitle: "Choose your base",
@@ -50,24 +51,24 @@ const copy: Record<string, any> = {
   },
   fr: {
     metaTitle: "Appartements pour cyclistes à Gérone — Aromatik Apartments",
-    metaDesc: "Gérone est la capitale mondiale du cyclisme. Logez au cœur du Barri Vell à 5 minutes des meilleures routes. Vélo à l'intérieur, lave-linge disponible, self check-in 24h.",
+    metaDesc: "Appartements pour cyclistes dans le Barri Vell de Gérone : vélo dans l'appartement, ascenseur, lave-linge, self check-in 24h et sorties depuis la porte.",
     eyebrow: "Gérone, capitale du vélo",
-    h1: "Votre base à Gérone,\nlà où s'entraînent les pros",
-    subtitle: "Gérone est le quartier général d'hiver des meilleures équipes du peloton mondial. Découvrez pourquoi, et utilisez le Barri Vell comme point de départ.",
+    h1: "Appartements pour cyclistes\nà Gérone",
+    subtitle: "Dans le Barri Vell, là où s'entraînent les pros : le vélo reste dans l'appartement, les deux immeubles ont un ascenseur et les sorties partent de la porte.",
     perksEyebrow: "Tout ce dont vous avez besoin",
     perksTitle: "Conçu pour les cyclistes",
     perks: [
-      { title: "Vélos à l'intérieur", desc: "Pas question de laisser le vélo dans la rue. Vous le rangez dans l'appartement. Les ascenseurs sont larges." },
-      { title: "Ascenseur dans chaque immeuble", desc: "Pas besoin de monter le vélo à pied. Vous montez, le vélo monte. Simple et sans risque." },
-      { title: "Lave-linge disponible", desc: "Le cuissard d'hier ne doit pas être celui de demain. Lave-linge dans les grands appartements." },
+      { title: "Vélos dans l'appartement", desc: "Pas question de laisser le vélo dans la rue. Quatre vélos tiennent dans Bergamota et dans Árbol de té, deux dans chacun des autres appartements. La housse ou la valise du vélo reste aussi à l'intérieur." },
+      { title: "Ascenseur dans les deux immeubles", desc: "Rambla de la Llibertat 11 et 26 ont un ascenseur et le vélo y entre. Pas besoin de le monter par l'escalier." },
+      { title: "Lave-linge", desc: "Le cuissard d'aujourd'hui n'a pas à être celui de demain. Bergamota, Árbol de té et Geranio ont un lave-linge dans l'appartement." },
       { title: "Self check-in 24h", desc: "Arrivez quand vous voulez. Code à la porte, sans attendre personne. Idéal si vous rentrez tard de sortie." },
       { title: "Cuisine pour recharger", desc: "Cuisine complète pour préparer les pâtes la veille et le petit-déjeuner le lendemain. La performance commence à l'appartement." },
       { title: "Départ direct sur route", desc: "Depuis le Barri Vell, vous partez directement vers le Rocacorba, les Gavarres ou la Costa Brava. Sans voiture." },
     ],
     blockEyebrow: "La Mecque du cyclisme",
     blockTitle: "Pourquoi Gérone est différente",
-    blockText1: "Gérone est le foyer de choix des meilleurs cyclistes du monde depuis plus de deux décennies. Chris Froome, Tom Pidcock, Egan Bernal — tous ont pédalé sur ces mêmes routes. Ce n'est pas un hasard.",
-    blockText2: "Le climat est exceptionnel au printemps et en automne. Les routes sont tranquilles avec un asphalte que beaucoup d'équipes WorldTour envient. Le Rocacorba — un classique chez les pros — est à 40 minutes de pédale depuis la porte.",
+    blockText1: "Gérone est le foyer de choix des meilleurs cyclistes du monde depuis plus de deux décennies. Chris Froome, Tom Pidcock, Egan Bernal : tous ont pédalé sur ces mêmes routes. Ce n'est pas un hasard.",
+    blockText2: "Le climat est exceptionnel au printemps et en automne. Les routes sont tranquilles avec un asphalte que beaucoup d'équipes WorldTour envient. Le Rocacorba, un classique chez les pros, est à 40 minutes de pédale depuis la porte.",
     blockText3: "Et en fin de journée, le Barri Vell vous attend avec ses restaurants, ses terrasses et le plaisir de parcourir une cité médiévale sans voitures. Gérone est l'un de ces endroits qui donne envie de revenir chaque saison.",
     aptsEyebrow: "Nos appartements",
     aptsTitle: "Choisissez votre base",
@@ -85,24 +86,24 @@ const copy: Record<string, any> = {
   },
   ca: {
     metaTitle: "Apartaments per a ciclistes a Girona — Aromatik Apartments",
-    metaDesc: "Girona és la capital mundial del ciclisme. Allotja't al cor del Barri Vell a 5 minuts de les millors rutes. Bici dins l'apartament, rentadora disponible, self check-in 24h.",
+    metaDesc: "Apartaments per a ciclistes al Barri Vell de Girona: bici dins l'apartament, ascensor, rentadora, self check-in 24 h i rutes des de la porta.",
     eyebrow: "Girona, capital del ciclisme",
-    h1: "La teva base a Girona,\non entrenen els pros",
-    subtitle: "Girona és el quarter d'hivern dels millors equips del pelotó mundial. Descobreix per què, i fes servir el Barri Vell com a punt de partida.",
+    h1: "Apartaments per a ciclistes\na Girona",
+    subtitle: "Al Barri Vell, on entrenen els pros: la bici es queda dins l'apartament, hi ha ascensor als dos edificis i les rutes surten de la porta.",
     perksEyebrow: "Tot el que necessites",
     perksTitle: "Pensat per a ciclistes",
     perks: [
-      { title: "Bicicletes dins l'apartament", desc: "Res de deixar-la al carrer. Guardes la bici dins l'apartament. Els ascensors són amples i pensats per a això." },
-      { title: "Ascensor a tots els edificis", desc: "No cal pujar la bici per escales. Pugeu vosaltres, puja la bici. Simple i sense riscos." },
-      { title: "Rentadora disponible", desc: "El culot del dia no ha de ser el de l'endemà. Rentadora als apartaments més grans." },
+      { title: "Bicis dins l'apartament", desc: "La bici no es queda al carrer. Hi caben 4 bicis a Bergamota i a Árbol de té, i 2 a cadascun dels altres apartaments. La caixa o la maleta també es queda dins." },
+      { title: "Ascensor als dos edificis", desc: "Rambla de la Llibertat 11 i 26 tenen ascensor i la bici hi cap. No cal pujar-la per les escales." },
+      { title: "Rentadora", desc: "El culot d'avui no ha de ser el de demà. Bergamota, Árbol de té i Geranio tenen rentadora a l'apartament." },
       { title: "Self check-in 24h", desc: "Arribes quan arribes. Codi a la porta, sense esperar ningú. Ideal si torneu tard de ruta." },
       { title: "Cuina per recarregar", desc: "Cuina completa per preparar la pasta del dia anterior i l'esmorzar de l'endemà. Rendiment des de l'apartament." },
       { title: "Sortida directa a ruta", desc: "Des del Barri Vell arranques directament cap al Rocacorba, les Gavarres o la Costa Brava. Sense cotxe." },
     ],
     blockEyebrow: "La meca del ciclisme",
     blockTitle: "Per què Girona és diferent",
-    blockText1: "Girona porta més de dues dècades sent la llar d'elecció per als millors ciclistes del món. Chris Froome, Tom Pidcock, Egan Bernal — tots han pedalet per aquestes mateixes carreteres. No és casualitat.",
-    blockText2: "El clima és excepcional durant la primavera i la tardor. Les carreteres, tranquil·les i amb un asfalt que molts equips de WorldTour envegen. El Rocacorba — un clàssic entre els pros — és a 40 minuts pedalant des de la porta.",
+    blockText1: "Girona porta més de dues dècades sent la llar d'elecció per als millors ciclistes del món. Chris Froome, Tom Pidcock, Egan Bernal: tots han pedalat per aquestes mateixes carreteres. No és casualitat.",
+    blockText2: "El clima és excepcional durant la primavera i la tardor. Les carreteres, tranquil·les i amb un asfalt que molts equips de WorldTour envegen. El Rocacorba, un clàssic entre els pros, és a 40 minuts pedalant des de la porta.",
     blockText3: "I al final del dia, el Barri Vell us espera amb restaurants, terrasses i el plaer de recórrer una ciutat medieval sense cotxes. Girona és un d'aquells llocs que fan voler tornar cada temporada.",
     aptsEyebrow: "Els nostres apartaments",
     aptsTitle: "Tria la teva base",
@@ -117,6 +118,41 @@ const copy: Record<string, any> = {
     tagline2: "3 habitacions, rentavaixelles, cuina de gas i balcó. Tot el que necessiteu després d'un gran dia a la sella.",
     tagline3: "Acollidor apartament amb vistes a l'Onyar. Ideal per a dos ciclistes que volen el millor del Barri Vell.",
     guests: "Fins a", people: "persones", bedrooms: "habitacions", viewApt: "Veure apartament",
+  },
+  de: {
+    metaTitle: "Apartments für Radsportler in Girona — Aromatik Apartments",
+    metaDesc: "Apartments für Radsportler in der Altstadt von Girona: Rad im Apartment, Aufzug, Waschmaschine, Self-Check-in rund um die Uhr und Touren ab der Haustür.",
+    eyebrow: "Girona, Hauptstadt des Radsports",
+    h1: "Apartments für Radsportler\nin Girona",
+    subtitle: "Im Barri Vell, wo die Profis trainieren: Das Rad bleibt im Apartment, beide Häuser haben einen Aufzug und die Touren starten vor der Tür.",
+    perksEyebrow: "Alles, was Sie brauchen",
+    perksTitle: "Für Radsportler gemacht",
+    perks: [
+      { title: "Räder im Apartment", desc: "Das Rad bleibt nicht auf der Straße. In Bergamota und Árbol de té passen vier Räder, in jedes der anderen Apartments zwei. Auch Radkoffer oder Radkarton bleiben im Apartment." },
+      { title: "Aufzug in beiden Häusern", desc: "Rambla de la Llibertat 11 und 26 haben einen Aufzug, in den ein Rad passt. Kein Tragen über die Treppe." },
+      { title: "Waschmaschine", desc: "Die Trägerhose von heute muss nicht die von morgen sein. Bergamota, Árbol de té und Geranio haben eine Waschmaschine im Apartment." },
+      { title: "Self-Check-in rund um die Uhr", desc: "Sie kommen an, wann Sie ankommen. Türcode, kein Warten. Ideal, wenn Sie spät von der Tour zurückkehren." },
+      { title: "Küche zum Auftanken", desc: "Voll ausgestattete Küche für die Pasta am Vorabend und das Frühstück am Morgen danach." },
+      { title: "Direkt auf die Strecke", desc: "Vom Barri Vell rollen Sie direkt los Richtung Rocacorba, Les Gavarres oder Costa Brava. Ohne Auto." },
+    ],
+    blockEyebrow: "Das Mekka des Radsports",
+    blockTitle: "Warum Girona anders ist",
+    blockText1: "Girona ist seit mehr als zwei Jahrzehnten die Wahlheimat der besten Radprofis der Welt. Chris Froome, Tom Pidcock, Egan Bernal: Sie alle sind auf diesen Straßen gefahren. Das ist kein Zufall.",
+    blockText2: "Das Klima ist im Frühjahr und Herbst hervorragend. Die Straßen sind ruhig, mit einem Asphalt, um den viele WorldTour-Teams Girona beneiden. Der Rocacorba, ein Klassiker unter den Profis, liegt 40 Minuten mit dem Rad von der Haustür entfernt.",
+    blockText3: "Und am Ende des Tages wartet das Barri Vell mit Restaurants, Terrassen und dem Vergnügen, durch eine autofreie mittelalterliche Stadt zu schlendern. Girona ist einer dieser Orte, an die man jede Saison zurückkehren möchte.",
+    aptsEyebrow: "Unsere Apartments",
+    aptsTitle: "Wählen Sie Ihre Basis",
+    aptsSub: "Allein oder in der Gruppe: Wir haben das passende Apartment.",
+    ctaTitle: "Wann ist Ihre nächste Ausfahrt?",
+    ctaSub: "Buchen Sie direkt und sehen Sie die Verfügbarkeit sofort. Ohne Provision, mit direktem Kontakt bei Fragen zur Logistik.",
+    ctaBtn: "Verfügbarkeit prüfen",
+    ctaBtn2: "Mit Arnau sprechen",
+    allApts: "Alle 8 Apartments ansehen",
+    tag1: "Für Radgruppen", tag2: "Das komplette Paket", tag3: "Für zwei Radsportler",
+    tagline1: "Penthouse für 6 Personen mit Waschmaschine, 3 Schlafzimmern und Balkon. Ideal, wenn Sie als Team anreisen.",
+    tagline2: "3 Schlafzimmer, Geschirrspüler, Gasherd und Balkon. Alles, was Sie nach einem großen Tag im Sattel brauchen.",
+    tagline3: "Gemütliches Apartment mit Blick auf den Onyar. Ideal für zwei Radsportler, die das Beste des Barri Vell wollen.",
+    guests: "Bis zu", people: "Personen", bedrooms: "Schlafzimmer", viewApt: "Apartment ansehen",
   },
 };
 
@@ -170,6 +206,8 @@ const featuredApts = [
   </section>
 
   <CyclingRoutes lang={lang} />
+
+  <CyclistFaq lang={lang} />
 
   <section id="apartamentos-ciclistas" class="section">
     <div class="container">

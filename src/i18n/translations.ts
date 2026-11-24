@@ -194,6 +194,8 @@ const es: T = {
     'geranio': "Apartamento Geranio con balcón en el Barri Vell de Girona",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Caben 2 bicis dentro del apartamento",
+    "Caben 4 bicis dentro del apartamento": "Caben 4 bicis dentro del apartamento",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Smart TV con Netflix',
     'Smart TV': 'Smart TV',
@@ -370,6 +372,8 @@ const en: T = {
     'geranio': "Geranio Apartment with a balcony in the Barri Vell of Girona",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Room for 2 bikes inside the apartment",
+    "Caben 4 bicis dentro del apartamento": "Room for 4 bikes inside the apartment",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Smart TV with Netflix',
     'Smart TV': 'Smart TV',
@@ -546,6 +550,8 @@ const fr: T = {
     'geranio': "Appartement Geranio avec balcon dans le Barri Vell de Gérone",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Place pour 2 vélos dans l'appartement",
+    "Caben 4 bicis dentro del apartamento": "Place pour 4 vélos dans l'appartement",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Smart TV avec Netflix',
     'Smart TV': 'Smart TV',
@@ -722,6 +728,8 @@ const ca: T = {
     'geranio': "Apartament Geranio amb balcó al Barri Vell de Girona",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Hi caben 2 bicis dins l'apartament",
+    "Caben 4 bicis dentro del apartamento": "Hi caben 4 bicis dins l'apartament",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Smart TV amb Netflix',
     'Smart TV': 'Smart TV',
@@ -898,6 +906,8 @@ const de: T = {
     'geranio': "Apartment Geranio mit Balkon im Barri Vell von Girona",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Platz für 2 Fahrräder im Apartment",
+    "Caben 4 bicis dentro del apartamento": "Platz für 4 Fahrräder im Apartment",
     'WiFi': 'WLAN',
     'Smart TV con Netflix': 'Smart TV mit Netflix',
     'Smart TV': 'Smart TV',
@@ -1075,6 +1085,8 @@ const zh: T = {
     'geranio': "Geranio公寓：赫罗纳旧城区，带阳台",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "公寓内可放2辆自行车",
+    "Caben 4 bicis dentro del apartamento": "公寓内可放4辆自行车",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': '带Netflix的智能电视',
     'Smart TV': '智能电视',
@@ -1251,6 +1263,8 @@ const ko: T = {
     'geranio': "Geranio 아파트, 헤로나 바리 벨의 발코니 있는 숙소",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "아파트 안에 자전거 2대 보관 가능",
+    "Caben 4 bicis dentro del apartamento": "아파트 안에 자전거 4대 보관 가능",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Netflix 스마트 TV',
     'Smart TV': '스마트 TV',
@@ -1421,6 +1435,8 @@ const pt: T = {
     'geranio': "Apartamento Geranio com varanda no Barri Vell de Girona",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Espaço para 2 bicicletas dentro do apartamento",
+    "Caben 4 bicis dentro del apartamento": "Espaço para 4 bicicletas dentro do apartamento",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Smart TV com Netflix',
     'Smart TV': 'Smart TV',
@@ -1588,6 +1604,8 @@ const nl: T = {
     'geranio': "Appartement Geranio met balkon in de Barri Vell van Girona",
   },
   amenityLabels: {
+    "Caben 2 bicis dentro del apartamento": "Plaats voor 2 fietsen in het appartement",
+    "Caben 4 bicis dentro del apartamento": "Plaats voor 4 fietsen in het appartement",
     'WiFi': 'WiFi',
     'Smart TV con Netflix': 'Smart TV met Netflix',
     'Smart TV': 'Smart TV',

@@ -375,13 +375,13 @@ export const guidesCa: GuideSet = {
     h2: 'Rutes en bici des de Girona',
     intro: 'Algunes de les sortides clàssiques que fan els nostres hostes ciclistes, totes sortint del Barri Vell sense agafar el cotxe.',
     routes: [
-      { title: 'Els Àngels', text: 'La pujada al santuari dels Àngels per la carretera de les Gavarres és el port de referència per entrenar des de Girona: regular, amb bon asfalt i vistes sobre la ciutat i l’Empordà.' },
-      { title: 'Rocacorba', text: 'El port mític al nord de Banyoles. Llarg i molt dur en el tram final, és el que fan servir els professionals per mesurar la seva forma. S’hi arriba per carreteres secundàries tranquil·les.' },
+      { title: 'Els Àngels', text: 'La pujada al santuari dels Àngels per la carretera de les Gavarres és el port de referència per entrenar des de Girona: regular, amb bon asfalt i vistes sobre la ciutat i l’Empordà. Uns 11 km de pujada al 4 % de mitjana.' },
+      { title: 'Rocacorba', text: 'El port mític al nord de Banyoles. Llarg i molt dur en el tram final, és el que fan servir els professionals per mesurar la seva forma. S’hi arriba per carreteres secundàries tranquil·les. Uns 14 km de pujada des de Banyoles, amb una mitjana propera al 6 %.' },
       { title: 'L’estany de Banyoles', text: 'Una sortida plana fins a Banyoles amb volta a l’estany: perfecta per rodar suau o per a un dia de recuperació.' },
-      { title: 'Via verda del Carrilet cap a Olot', text: 'Un antic traçat de tren convertit en via verda que remunta suaument cap a la Garrotxa. Ideal per a gravel, bicis de passeig i famílies.' },
-      { title: 'Via verda cap a Sant Feliu de Guíxols', text: 'L’altra via verda del Carrilet baixa des de Girona fins a la Costa Brava travessant la vall del Ter i els peus de les Gavarres.' },
+      { title: 'Via verda del Carrilet cap a Olot', text: 'Un antic traçat de tren convertit en via verda que remunta suaument cap a la Garrotxa. Ideal per a gravel, bicis de passeig i famílies. Uns 57 km entre Girona i Olot.' },
+      { title: 'Via verda cap a Sant Feliu de Guíxols', text: 'L’altra via verda del Carrilet baixa des de Girona fins a la Costa Brava travessant la vall del Ter i els peus de les Gavarres. Uns 40 km fins al mar.' },
       { title: 'Costa Brava per les Gavarres', text: 'Travessa les Gavarres cap a la costa i torna per la carretera de revolts entre Sant Feliu de Guíxols i Tossa de Mar: una de les més boniques de la Mediterrània per anar en bici.' },
     ],
-    note: 'Les distàncies i els desnivells depenen de la variant que triïs: planifica la ruta amb la teva aplicació habitual i consulta l’estat de les vies verdes abans de sortir.',
+    note: 'Les xifres són aproximades i depenen de la variant que triïs: planifica la ruta amb la teva aplicació habitual i consulta l’estat de les vies verdes abans de sortir.',
   },
 };

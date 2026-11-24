@@ -1,0 +1,106 @@
+---
+// Preguntas de ciclistas para /ciclistas, con su FAQPage en JSON-LD.
+// Datos dados por el propietario el 24 nov 2026: ascensor en los dos edificios, 4 bicis en Bergamota y
+// Árbol de té y 2 en el resto, lavadora en Bergamota, Árbol de té y Geranio, la caja de la bici se queda dentro.
+// Taller más cercano comprobado el 24 nov 2026: Muc-Off Performance Lab by Velodrom, Carrer de l'Argenteria 9.
+// Idiomas: es, en, fr, de, ca; el resto ve el inglés, igual que el resto de la página.
+import { isGuideLocale } from '../i18n/guides';
+interface Props { lang?: string }
+const { lang = 'es' } = Astro.props;
+
+type Faq = { h2: string; items: { q: string; a: string }[] };
+const copy: Record<string, Faq> = {
+  es: {
+    h2: "Preguntas de ciclistas",
+    items: [
+      { q: "¿Puedo guardar la bici dentro del apartamento?", a: "Sí. La bici se guarda dentro del apartamento, no en la calle. Caben 4 bicis en Bergamota y en Árbol de té, y 2 en cada uno de los otros seis apartamentos." },
+      { q: "¿Hay ascensor para subir la bici?", a: "Sí. Los dos edificios, Rambla de la Llibertat 11 y 26, tienen ascensor y la bici cabe dentro." },
+      { q: "¿Dónde dejo la caja o la maleta de la bici?", a: "Dentro del apartamento, durante toda la estancia." },
+      { q: "¿Qué apartamentos tienen lavadora?", a: "Bergamota, Árbol de té y Geranio tienen lavadora en el apartamento." },
+      { q: "¿Dónde puedo lavar o reparar la bici?", a: "El taller más cercano es el Muc-Off Performance Lab by Velodrom, en Carrer de l'Argenteria 9, a unos 150 metros de los apartamentos. Tiene lavado de bicis y taller. Consulta su horario antes de ir." },
+      { q: "¿Qué apartamento me conviene?", a: "Para grupos, Bergamota y Árbol de té: hasta 6 personas y 4 bicis cada uno. Para dos ciclistas, Romaní, Ciprés, Lavanda, Limón o Geranio. Ylang-Ylang aloja hasta 4 personas y 2 bicis." },
+      { q: "¿A qué hora puedo llegar?", a: "La entrada es a partir de las 15:00 y es autónoma, con código, a cualquier hora del día o de la noche." },
+      { q: "¿Se puede salir en bici desde el apartamento?", a: "Sí. Los apartamentos están en la Rambla de la Llibertat, en el Barri Vell de Girona, y las salidas clásicas (Els Àngels, Rocacorba, Banyoles y las vías verdes) empiezan pedaleando desde la puerta." },
+    ],
+  },
+  en: {
+    h2: "Cyclists' questions",
+    items: [
+      { q: "Can I keep my bike inside the apartment?", a: "Yes. Bikes are kept inside the apartment, not in the street. Four bikes fit in Bergamota and in Árbol de té, and two in each of the other six apartments." },
+      { q: "Is there a lift for the bike?", a: "Yes. Both buildings, Rambla de la Llibertat 11 and 26, have a lift and a bike fits inside." },
+      { q: "Where do I leave my bike box or bike bag?", a: "Inside the apartment, for the whole stay." },
+      { q: "Which apartments have a washing machine?", a: "Bergamota, Árbol de té and Geranio have a washing machine in the apartment." },
+      { q: "Where can I wash or repair my bike?", a: "The nearest workshop is the Muc-Off Performance Lab by Velodrom at Carrer de l'Argenteria 9, about 150 metres from the apartments. It offers bike washing and servicing. Check its opening hours before you go." },
+      { q: "Which apartment should I choose?", a: "For groups, Bergamota and Árbol de té: up to 6 people and 4 bikes each. For two riders, Romaní, Ciprés, Lavanda, Limón or Geranio. Ylang-Ylang sleeps up to 4 people and takes 2 bikes." },
+      { q: "What time can I arrive?", a: "Check-in is from 15:00 and it is self check-in with a door code, at any hour of the day or night." },
+      { q: "Can I ride straight from the apartment?", a: "Yes. The apartments are on the Rambla de la Llibertat, in the Barri Vell (old town) of Girona, and the classic rides (Els Àngels, Rocacorba, Banyoles and the greenways) start from the door." },
+    ],
+  },
+  fr: {
+    h2: "Questions de cyclistes",
+    items: [
+      { q: "Puis-je garder mon vélo dans l'appartement ?", a: "Oui. Le vélo se range dans l'appartement, pas dans la rue. Quatre vélos tiennent dans Bergamota et dans Árbol de té, et deux dans chacun des six autres appartements." },
+      { q: "Y a-t-il un ascenseur pour monter le vélo ?", a: "Oui. Les deux immeubles, Rambla de la Llibertat 11 et 26, ont un ascenseur et le vélo y entre." },
+      { q: "Où laisser la housse ou la valise du vélo ?", a: "Dans l'appartement, pendant tout le séjour." },
+      { q: "Quels appartements ont un lave-linge ?", a: "Bergamota, Árbol de té et Geranio ont un lave-linge dans l'appartement." },
+      { q: "Où laver ou faire réparer mon vélo ?", a: "L'atelier le plus proche est le Muc-Off Performance Lab by Velodrom, Carrer de l'Argenteria 9, à environ 150 mètres des appartements. Il propose le lavage et l'entretien des vélos. Vérifiez ses horaires avant d'y aller." },
+      { q: "Quel appartement choisir ?", a: "Pour les groupes, Bergamota et Árbol de té : jusqu'à 6 personnes et 4 vélos chacun. Pour deux cyclistes, Romaní, Ciprés, Lavanda, Limón ou Geranio. Ylang-Ylang accueille jusqu'à 4 personnes et 2 vélos." },
+      { q: "À quelle heure puis-je arriver ?", a: "L'arrivée se fait à partir de 15h00, en autonomie avec un code, à toute heure du jour ou de la nuit." },
+      { q: "Peut-on partir à vélo depuis l'appartement ?", a: "Oui. Les appartements sont sur la Rambla de la Llibertat, dans le Barri Vell de Gérone, et les sorties classiques (Els Àngels, Rocacorba, Banyoles et les voies vertes) partent de la porte." },
+    ],
+  },
+  de: {
+    h2: "Fragen von Radsportlern",
+    items: [
+      { q: "Kann ich mein Rad im Apartment abstellen?", a: "Ja. Das Rad steht im Apartment, nicht auf der Straße. In Bergamota und Árbol de té passen vier Räder, in jedes der anderen sechs Apartments zwei." },
+      { q: "Gibt es einen Aufzug für das Rad?", a: "Ja. Beide Häuser, Rambla de la Llibertat 11 und 26, haben einen Aufzug, in den ein Rad passt." },
+      { q: "Wohin mit Radkoffer oder Radkarton?", a: "Ins Apartment, für den gesamten Aufenthalt." },
+      { q: "Welche Apartments haben eine Waschmaschine?", a: "Bergamota, Árbol de té und Geranio haben eine Waschmaschine im Apartment." },
+      { q: "Wo kann ich mein Rad waschen oder reparieren lassen?", a: "Die nächste Werkstatt ist das Muc-Off Performance Lab by Velodrom, Carrer de l'Argenteria 9, etwa 150 Meter von den Apartments entfernt. Dort gibt es Radwäsche und Service. Bitte prüfen Sie vorher die Öffnungszeiten." },
+      { q: "Welches Apartment passt zu mir?", a: "Für Gruppen Bergamota und Árbol de té: jeweils bis zu 6 Personen und 4 Räder. Für zwei Radsportler Romaní, Ciprés, Lavanda, Limón oder Geranio. Ylang-Ylang bietet Platz für bis zu 4 Personen und 2 Räder." },
+      { q: "Wann kann ich anreisen?", a: "Der Check-in ist ab 15:00 Uhr möglich, selbstständig per Türcode, zu jeder Tages- und Nachtzeit." },
+      { q: "Kann ich direkt vom Apartment losfahren?", a: "Ja. Die Apartments liegen an der Rambla de la Llibertat im Barri Vell, der Altstadt von Girona, und die klassischen Touren (Els Àngels, Rocacorba, Banyoles und die Vías Verdes) beginnen vor der Haustür." },
+    ],
+  },
+  ca: {
+    h2: "Preguntes de ciclistes",
+    items: [
+      { q: "Puc guardar la bici dins l'apartament?", a: "Sí. La bici es guarda dins l'apartament, no al carrer. Hi caben 4 bicis a Bergamota i a Árbol de té, i 2 a cadascun dels altres sis apartaments." },
+      { q: "Hi ha ascensor per pujar la bici?", a: "Sí. Els dos edificis, Rambla de la Llibertat 11 i 26, tenen ascensor i la bici hi cap." },
+      { q: "On deixo la caixa o la maleta de la bici?", a: "Dins l'apartament, durant tota l'estada." },
+      { q: "Quins apartaments tenen rentadora?", a: "Bergamota, Árbol de té i Geranio tenen rentadora a l'apartament." },
+      { q: "On puc rentar o reparar la bici?", a: "El taller més proper és el Muc-Off Performance Lab by Velodrom, al Carrer de l'Argenteria 9, a uns 150 metres dels apartaments. Té rentat de bicis i taller. Consulta'n l'horari abans d'anar-hi." },
+      { q: "Quin apartament em convé?", a: "Per a grups, Bergamota i Árbol de té: fins a 6 persones i 4 bicis cadascun. Per a dos ciclistes, Romaní, Ciprés, Lavanda, Limón o Geranio. Ylang-Ylang allotja fins a 4 persones i 2 bicis." },
+      { q: "A quina hora puc arribar?", a: "L'entrada és a partir de les 15:00 i és autònoma, amb codi, a qualsevol hora del dia o de la nit." },
+      { q: "Es pot sortir en bici des de l'apartament?", a: "Sí. Els apartaments són a la Rambla de la Llibertat, al Barri Vell de Girona, i les sortides clàssiques (els Àngels, Rocacorba, Banyoles i les vies verdes) comencen pedalant des de la porta." },
+    ],
+  },
+};
+// Con rutas delante (idiomas de las guías) el fondo es crema; sin ellas, blanco, para no repetir crema.
+const c = copy[lang] ?? copy.en;
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": c.items.map((i) => ({
+    "@type": "Question",
+    "name": i.q,
+    "acceptedAnswer": { "@type": "Answer", "text": i.a },
+  })),
+});
+---
+<section id="preguntas-ciclistas" class={isGuideLocale(lang) ? "section bg-cream" : "section"}>
+  <div class="container">
+    <div class="section-header">
+      <h2>{c.h2}</h2>
+    </div>
+    <div class="faq-list">
+      {c.items.map((i) => (
+        <div class="faq-item">
+          <h3 class="faq-q">{i.q}</h3>
+          <p class="faq-a">{i.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<script type="application/ld+json" set:html={faqSchema} />

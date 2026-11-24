@@ -375,13 +375,13 @@ export const guidesEn: GuideSet = {
     h2: 'Cycling routes from Girona',
     intro: 'Some of the classic rides our cycling guests do, all starting from the Barri Vell without needing the car.',
     routes: [
-      { title: 'Els Àngels', text: 'The climb to the Els Àngels sanctuary along the Gavarres road is the go-to climb for training from Girona: steady, with good tarmac and views over the city and the Empordà.' },
-      { title: 'Rocacorba', text: 'The legendary climb north of Banyoles. Long and very tough in its final section, it is the one the pros use to test their form. You get there on quiet back roads.' },
+      { title: 'Els Àngels', text: 'The climb to the Els Àngels sanctuary along the Gavarres road is the go-to climb for training from Girona: steady, with good tarmac and views over the city and the Empordà. About 11 km of climbing at an average of 4%.' },
+      { title: 'Rocacorba', text: 'The legendary climb north of Banyoles. Long and very tough in its final section, it is the one the pros use to test their form. You get there on quiet back roads. About 14 km of climbing from Banyoles, at an average close to 6%.' },
       { title: 'Lake Banyoles', text: 'A flat ride out to Banyoles with a loop around the lake: perfect for an easy spin or a recovery day.' },
-      { title: 'Carrilet greenway towards Olot', text: 'An old railway line turned greenway that climbs gently towards the Garrotxa. Ideal for gravel, leisure bikes and families.' },
-      { title: 'Greenway towards Sant Feliu de Guíxols', text: 'The other Carrilet greenway runs down from Girona to the Costa Brava through the Ter valley and the foothills of Les Gavarres.' },
+      { title: 'Carrilet greenway towards Olot', text: 'An old railway line turned greenway that climbs gently towards the Garrotxa. Ideal for gravel, leisure bikes and families. About 57 km between Girona and Olot.' },
+      { title: 'Greenway towards Sant Feliu de Guíxols', text: 'The other Carrilet greenway runs down from Girona to the Costa Brava through the Ter valley and the foothills of Les Gavarres. About 40 km to the sea.' },
       { title: 'Costa Brava via Les Gavarres', text: 'Cross Les Gavarres to the coast and come back on the winding road between Sant Feliu de Guíxols and Tossa de Mar: one of the most beautiful rides in the Mediterranean.' },
     ],
-    note: 'Distances and elevation depend on the variant you choose: plan your route with your usual app and check the condition of the greenways before setting off.',
+    note: 'The figures are approximate and depend on the variant you choose: plan your route with your usual app and check the condition of the greenways before setting off.',
   },
 };
